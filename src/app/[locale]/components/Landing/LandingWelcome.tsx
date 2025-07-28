@@ -8,7 +8,7 @@ export default function LandWelcome() {
   const t = useTranslations('LandingWelcome')
 
   return (
-    <section className='flex flex-col items-center justify-center bg-background py-24 text-primary'>
+    <section className='flex flex-col items-center justify-center bg-background  py-24 text-primary'>
       <h1 className='text-center text-7xl font-extrabold leading-tight'>
         <span className='bg-span-bg bg-clip-text text-transparent'>
           {t('Cascais')}

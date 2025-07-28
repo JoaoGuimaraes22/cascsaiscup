@@ -1,8 +1,16 @@
 // components/LandingComments.tsx
 import { useTranslations } from 'next-intl'
+import { FaStar } from 'react-icons/fa'
 
 export default function LandingComments() {
   const t = useTranslations('LandingComments')
+  const renderStars = () => (
+    <div className='mt-2 flex justify-center gap-1 text-yellow-400'>
+      {[...Array(5)].map((_, i) => (
+        <FaStar key={i} className='h-7 w-7' />
+      ))}
+    </div>
+  )
 
   return (
     <section className='bg-background-secondary py-20 max-lg:py-10'>
@@ -14,6 +22,7 @@ export default function LandingComments() {
           <p className='text-text-secondary max-lg:max-w-[500px]'>
             {t('We_love_author_1')}
           </p>
+          {renderStars()}
         </div>
         <div className='text-center'>
           <h2 className='mb-3  text-xl font-semibold'>
@@ -22,6 +31,7 @@ export default function LandingComments() {
           <p className='text-text-secondary max-lg:max-w-[500px]'>
             {t('We_love_author_2')}
           </p>
+          {renderStars()}
         </div>
         <div className='text-center'>
           <h2 className='mb-3  text-xl font-semibold'>
@@ -30,6 +40,7 @@ export default function LandingComments() {
           <p className='text-text-secondary max-lg:max-w-[500px]'>
             {t('We_love_author_3')}
           </p>
+          {renderStars()}
         </div>
       </div>
     </section>

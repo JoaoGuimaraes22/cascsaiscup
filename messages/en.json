@@ -1,35 +1,20 @@
 {
-  "Support": "Support",
-  "Other": "Other",
-  "Theme": "Theme",
-  "An": "A",
-  "Booster": "Booster",
-  "to_Your_NextJS_Apps": "to Your NextJS Apps",
-  "An_approachable_performant_and_versatile_boilerplate_for_building_SSR_applications": "An approachable, performant and versatile boilerplate for building SSR applications.",
-  "Use_Template": "Use Template",
-  "Learn_More": "Learn More!",
-  "Approachable": "Approachable",
-  "Add_components_without_sending_additional_client_side_JavaScript_Built_on_the_latest_React_features": "Add components without sending additional client-side JavaScript. Built on the latest React features.",
-  "Automatic_Image_Font_and_Script_Optimizations_for_improved_UX_and_Core_Web_Vitals": "Automatic Image, Font, and Script Optimizations for improved UX and Core Web Vitals.",
-  "Versatile": "Versatile",
-  "A_rich_incredibly_adoptable_template_that_scales_between_a_small_showcase_website_and_a_full_size_app": "A rich, incredibly adoptable template that scales between a small showcase website and a full-size app.",
-  "This_is_a_simple_about_page_just_to_show_how_you_can_use_the_internationalization_in_different_pages": "This is a simple about page just to show how you can use the internationalization in different pages",
-  "Performant": "Performant",
-
   "About": "About",
   "Hall_of_Fame": "Hall of Fame",
   "Program": "Program",
   "Registration": "Registration",
+
   "LandingWelcome": {
     "Cascais": "Cascais Volley Cup 2026",
     "9_13_July": "9 - 13 July",
     "5_days_40_teams_500_athletes_120_games": "5 Days • 40 Teams • 500 Athletes • 120 Games",
     "Program": "Program"
   },
+
   "LandingComments": {
-    "We_love_cascais_cup_1": "The energy, the beach, the game — we love it all.",
-    "We_love_cascais_cup_2": "Where summer meets passion — Cascais VolleyCup.",
-    "We_love_cascais_cup_3": "Our favorite time of the year? Cascais VolleyCup.",
+    "We_love_cascais_cup_1": "“The energy, the beach, the game — we love it all.”",
+    "We_love_cascais_cup_2": "“Where summer meets passion — Cascais VolleyCup.”",
+    "We_love_cascais_cup_3": "“Our favorite time of the year? Cascais VolleyCup.”",
     "We_love_author_1": "Monaco Volley",
     "We_love_author_2": "Madrid Volley",
     "We_love_author_3": "Paris Volley"
@@ -128,6 +113,42 @@
     },
     "Section4": {
       "Title": "Contacts"
+    }
+  },
+  "HallOfFame": {
+    "title": "Hall of Fame of Cascais Volley Cup",
+    "description": "At Cascais Volley Cup we hosted hundreds of international volleyball teams. In over 40 years we welcomed boys and girls of any level, from all continents, who had the chance to enjoy the magic of Portugal in the beautiful city of Cascais. What follows is just a partial list of the most celebrated participants so far.",
+    "teams": "Teams",
+    "winners": "Winners"
+  },
+  "ProgramPage": {
+    "Program": "Program",
+    "Dates": "July 9th–13th, 2025",
+    "Location": "Cascais / Portugal",
+    "intro_location": "Summer Volleyball Tournament in Cascais / Portugal",
+    "intro_title": "Cascais Volley Cup",
+    "intro_paragraph_1": "Welcome to the most exciting youth volleyball tournament in Europe! Cascais Volley Cup brings together international teams for an unforgettable week by the sea.",
+    "intro_paragraph_2": "On this page you’ll find all information about the upcoming edition, taking place each July — a new summer tradition built on passion, sport, and community.",
+    "ProgramDetails": {
+      "title": "Technical Details",
+      "categories": {
+        "title": "Categories",
+        "b19": "B19 (boys from 1st Jan 2007)",
+        "g19": "G19 (girls from 1st Jan 2007)",
+        "b17": "B17 (boys from 1st Jan 2009)",
+        "g17": "G17 (girls from 1st Jan 2009)"
+      },
+      "where": {
+        "title": "Where",
+        "description": "Cascais is a beautiful town in Portugal, perfectly located between Lisbon and Sintra, and just one hour from the airport."
+      },
+      "when": {
+        "title": "When",
+        "dates": "July 9th–13th, 2025",
+        "note": "Summer",
+        "previous": "Previous: July 9th–13th, 2026",
+        "next": "Next edition: July 9th–13th, 2025"
+      }
     }
   }
 }
