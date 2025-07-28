@@ -1,14 +1,15 @@
 // Registration Page
 
 import { useTranslations } from 'next-intl'
+import RegistrationForm from '../components/Registration/RegistrationForm'
 
 export default function About() {
-  const t = useTranslations('')
+  const t = useTranslations('RegistrationPage')
   return (
-    <div className='px-32 py-24 text-center text-2xl'>
-      {t(
-        'This_is_a_simple_about_page_just_to_show_how_you_can_use_the_internationalization_in_different_pages'
-      )}
-    </div>
+    <section className='mx-auto max-w-3xl px-4 py-12'>
+      <h1 className='mb-2 text-4xl font-bold text-primary'>{t('Title')}</h1>
+      <p className='mb-8 text-sm text-text-secondary'>{t('Description')}</p>
+      <RegistrationForm />
+    </section>
   )
 }

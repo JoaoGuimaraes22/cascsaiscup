@@ -78,6 +78,32 @@
     "Description": "Requests of participation are subject to selection.\nContact us and don’t miss the chance to be part of the best volleyball tournament in Europe!",
     "Button": "Send request"
   },
+
+  "AboutPage": {
+    "since": "Cascais Volley Cup, since 2010",
+    "headline": "A showcase of future volleyball champions",
+    "description": "Cascais Volley Cup is one of the most exciting international volleyball tournaments in Southern Europe. Every summer, it gathers elite and rising clubs from across the continent for five unforgettable days of high-level competition by the Atlantic. Set in the beautiful coastal city of Cascais, Portugal, it’s more than a tournament — it’s a celebration of the sport’s future.",
+    "CornacchiaFamilyCaption": "Cascais Tournament Staff in 2018",
+    "Family_And_40_Years": "Cascais Family and 40 years of tournaments",
+    "Tradition_Title": "A long tradition of passion for volleyball",
+    "Tradition_Body": "Cascais Volley Cup was founded in 1983 as a tribute to the passion for volleyball shared across generations. Today, the tournament is managed by a dedicated team rooted in the original vision, supported by families and professionals who grew up with a love for the sport.\n\nOver four decades, Cascais Volley Cup has welcomed top clubs from Portugal, Europe, and beyond — becoming a global celebration of the game. Hundreds of teams from five continents have participated, making it one of the most prestigious and enduring youth volleyball tournaments in the world.",
+    "WhatPeopleAreSaying": "What people are saying"
+  },
+
+  "RegistrationPage": {
+    "Title": "Registration",
+    "Description": "Requests of participation for Cascais Volley Cup are subject to selection by the organization. Fill this form to get a free quotation for your participation at the next volleyball tournament of Cascais.",
+    "Name": "My name",
+    "NamePlaceholder": "My full name",
+    "Email": "Email",
+    "Mobile": "Mobile",
+    "Club": "Name of my Volleyball Club",
+    "City": "City",
+    "Country": "Country",
+    "Questions": "Questions?",
+    "Submit": "Submit"
+  },
+
   "Footer": {
     "Section1": {
       "Title": "Cascais Volley Cup",

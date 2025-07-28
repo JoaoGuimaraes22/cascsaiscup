@@ -1,14 +1,17 @@
 // About Page
 
 import { useTranslations } from 'next-intl'
+import AboutHero from '../components/About/AboutHero'
+import AboutTradition from '../components/About/AboutTradition'
+import AboutTestimonials from '../components/About/AboutTestimonials'
 
 export default function About() {
-  const t = useTranslations('')
+  const t = useTranslations('AboutPage')
   return (
-    <div className='px-32 py-24 text-center text-2xl'>
-      {t(
-        'This_is_a_simple_about_page_just_to_show_how_you_can_use_the_internationalization_in_different_pages'
-      )}
-    </div>
+    <main className='bg-background px-4 text-primary md:px-8 lg:px-16'>
+      <AboutHero />
+      <AboutTradition />
+      <AboutTestimonials />
+    </main>
   )
 }
