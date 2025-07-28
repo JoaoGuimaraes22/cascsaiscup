@@ -1,4 +1,4 @@
-// About Page
+// Program Page
 
 import { useTranslations } from 'next-intl'
 

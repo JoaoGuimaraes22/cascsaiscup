@@ -1,4 +1,4 @@
-// About Page
+// Registration Page
 
 import { useTranslations } from 'next-intl'
 

@@ -1,4 +1,4 @@
-// About Page
+// Hall of Fame page
 
 import { useTranslations } from 'next-intl'
 

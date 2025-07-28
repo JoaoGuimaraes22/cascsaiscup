@@ -1,4 +1,4 @@
-// About Page
+// News page
 
 import { useTranslations } from 'next-intl'
 

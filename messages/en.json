@@ -1,5 +1,4 @@
 {
-  "About": "About",
   "Support": "Support",
   "Other": "Other",
   "Theme": "Theme",
@@ -15,5 +14,94 @@
   "Versatile": "Versatile",
   "A_rich_incredibly_adoptable_template_that_scales_between_a_small_showcase_website_and_a_full_size_app": "A rich, incredibly adoptable template that scales between a small showcase website and a full-size app.",
   "This_is_a_simple_about_page_just_to_show_how_you_can_use_the_internationalization_in_different_pages": "This is a simple about page just to show how you can use the internationalization in different pages",
-  "Performant": "Performant"
+  "Performant": "Performant",
+
+  "About": "About",
+  "Hall_of_Fame": "Hall of Fame",
+  "Program": "Program",
+  "Registration": "Registration",
+  "LandingWelcome": {
+    "Cascais": "Cascais Volley Cup 2026",
+    "9_13_July": "9 - 13 July",
+    "5_days_40_teams_500_athletes_120_games": "5 Days • 40 Teams • 500 Athletes • 120 Games",
+    "Program": "Program"
+  },
+  "LandingComments": {
+    "We_love_cascais_cup_1": "The energy, the beach, the game — we love it all.",
+    "We_love_cascais_cup_2": "Where summer meets passion — Cascais VolleyCup.",
+    "We_love_cascais_cup_3": "Our favorite time of the year? Cascais VolleyCup.",
+    "We_love_author_1": "Monaco Volley",
+    "We_love_author_2": "Madrid Volley",
+    "We_love_author_3": "Paris Volley"
+  },
+
+  "LandingNews": {
+    "Latest_news": "Latest news",
+    "More_news": "More news →"
+  },
+
+  "LandingLocation": {
+    "Tagline": "The international volleyball event by the sea",
+    "Title": "Welcome to Cascais",
+    "Intro": "Just outside Lisbon, Cascais blends sun, sport, and stunning ocean views.",
+    "Description": "Known for its beautiful coastline and vibrant energy, Cascais offers a perfect setting for international volleyball. From thrilling matches to unforgettable moments on the beach, this is more than a tournament — it's a celebration of youth, culture, and competition.",
+    "Button": "See Location",
+    "ImageAlt": "Cascais tournament opening ceremony"
+  },
+
+  "LandingReferences": {
+    "What_they_say": "What they say",
+    "MoreReferences": "More References"
+  },
+
+  "LandingOffer": {
+    "Title": "What do we offer?",
+    "Card1": {
+      "Title": "An opportunity for talents",
+      "Description": "The participation of an extraordinary amount of National selections and top teams makes Cascais VolleyCup the perfect tournament to challenge young volleyball players.",
+      "Button": "Hall of Fame"
+    },
+    "Card2": {
+      "Title": "A strong tradition",
+      "Description": "Cascais VolleyCup is one of the fastest growing volleyball tournaments in Europe, combining sun, sand, and serious competition.",
+      "Button": "About"
+    },
+    "Card3": {
+      "Title": "Lifetime international experience",
+      "Description": "Thousands of players have participated over the years — from every continent. Some go on to become legends in World Cups, European Cups and Olympics.",
+      "Button": "Participants"
+    }
+  },
+  "LandingRegister": {
+    "Subtitle": "Do you want to join the tournament?",
+    "Title": "Register now!",
+    "Description": "Requests of participation are subject to selection.\nContact us and don’t miss the chance to be part of the best volleyball tournament in Europe!",
+    "Button": "Send request"
+  },
+  "Footer": {
+    "Section1": {
+      "Title": "Cascais Volley Cup",
+      "About": "About",
+      "HallOfFame": "Hall of Fame",
+      "Location": "Location",
+      "Merchandise": "Merchandise"
+    },
+    "Section2": {
+      "Title": "The Tournament",
+      "Program": "Program of the Tournament",
+      "Registration": "Registration",
+      "Regulation": "Regulation",
+      "WinterCup": "Winter Cup"
+    },
+    "Section3": {
+      "Title": "Information",
+      "Services": "Services",
+      "News": "News",
+      "Partners": "Official Partners",
+      "PressKits": "Press Kits"
+    },
+    "Section4": {
+      "Title": "Contacts"
+    }
+  }
 }
