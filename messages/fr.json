@@ -1,19 +1,170 @@
 {
-  "About": "À propos",
-  "Support": "Support",
-  "Other": "Autre",
-  "Theme": "Thème",
-  "An": "Un",
-  "Booster": "Booster",
-  "to_Your_NextJS_Apps": "pour vos applications NextJS",
-  "An_approachable_performant_and_versatile_boilerplate_for_building_SSR_applications": "Un modèle facile d'accès, performant et polyvalent pour construire des applications SSR.",
-  "Use_Template": "Utiliser le modèle",
-  "Learn_More": "En savoir plus !",
-  "Approachable": "Accessible",
-  "Add_components_without_sending_additional_client_side_JavaScript_Built_on_the_latest_React_features": "Ajoutez des composants sans envoyer de JavaScript supplémentaire côté client. Basé sur les dernières fonctionnalités de React.",
-  "Automatic_Image_Font_and_Script_Optimizations_for_improved_UX_and_Core_Web_Vitals": "Optimisations automatiques des images, des polices et des scripts pour améliorer l'UX et les Core Web Vitals.",
-  "Versatile": "Polyvalent",
-  "A_rich_incredibly_adoptable_template_that_scales_between_a_small_showcase_website_and_a_full_size_app": "Un modèle incroyablement riche et adaptable qui s'étend d'un petit site vitrine à une application de pleine taille.",
-  "This_is_a_simple_about_page_just_to_show_how_you_can_use_the_internationalization_in_different_pages": "Ceci est une simple page à propos, juste pour montrer comment vous pouvez utiliser l'internationalisation sur différentes pages",
-  "Performant": "Performant"
+  "Header": {
+    "About": "À propos",
+    "Hall_of_Fame": "Temple de la renommée",
+    "Program": "Programme",
+    "Photos": "Photos",
+    "Registration": "Inscription"
+  },
+
+  "LandingPage": {
+    "LandingWelcome": {
+      "Cascais": "Cascais Volley Cup 2026",
+      "9_13_July": "9–13 juillet",
+      "5_days_40_teams_500_athletes_120_games": "5 jours • 40 équipes • 500 athlètes • 120 matchs",
+      "Program": "Programme"
+    },
+    "LandingComments": {
+      "We_love_cascais_cup_1": "« L’énergie, la plage, le jeu — on adore tout. »",
+      "We_love_cascais_cup_2": "« Là où l’été rencontre la passion — Cascais VolleyCup. »",
+      "We_love_cascais_cup_3": "« Notre moment préféré de l’année ? Le Cascais VolleyCup. »",
+      "We_love_author_1": "Monaco Volley",
+      "We_love_author_2": "Madrid Volley",
+      "We_love_author_3": "Paris Volley"
+    },
+    "LandingNews": {
+      "Latest_news": "Dernières nouvelles",
+      "More_news": "Plus de nouvelles →"
+    },
+    "LandingLocation": {
+      "Tagline": "L'événement international de volley-ball au bord de la mer",
+      "Title": "Bienvenue à Cascais",
+      "Intro": "Aux portes de Lisbonne, Cascais conjugue soleil, sport et vues spectaculaires sur l’océan.",
+      "Description": "Réputée pour son magnifique littoral et son énergie vibrante, Cascais offre un cadre idéal pour le volley international. Des matchs palpitants aux moments inoubliables sur la plage, ce tournoi est bien plus qu’un simple événement — c’est une célébration de la jeunesse, de la culture et de la compétition.",
+      "Button": "Voir l’emplacement",
+      "ImageAlt": "Cérémonie d’ouverture du tournoi de Cascais"
+    },
+    "LandingReferences": {
+      "What_they_say": "Ce qu’ils disent",
+      "MoreReferences": "Plus de témoignages"
+    },
+    "LandingOffer": {
+      "Title": "Que proposons-nous ?",
+      "Card1": {
+        "Title": "Une opportunité pour les talents",
+        "Description": "La participation exceptionnelle de sélections nationales et d’équipes de haut niveau fait du Cascais VolleyCup le tournoi idéal pour défier les jeunes volleyeurs.",
+        "Button": "Temple de la renommée"
+      },
+      "Card2": {
+        "Title": "Une forte tradition",
+        "Description": "Le Cascais VolleyCup est l’un des tournois de volley les plus dynamiques d’Europe, alliant soleil, sable et compétition intense.",
+        "Button": "À propos"
+      },
+      "Card3": {
+        "Title": "Une expérience internationale inoubliable",
+        "Description": "Des milliers de joueurs ont participé au fil des années — venant de tous les continents. Certains sont devenus des légendes des Coupes du Monde, des Coupes d’Europe et des Jeux Olympiques.",
+        "Button": "Participants"
+      }
+    },
+    "LandingRegister": {
+      "Subtitle": "Vous souhaitez participer au tournoi ?",
+      "Title": "Inscrivez-vous maintenant !",
+      "Description": "Les demandes de participation sont soumises à sélection.\nContactez-nous et ne ratez pas l’occasion de faire partie du meilleur tournoi de volley d’Europe !",
+      "Button": "Envoyer la demande"
+    }
+  },
+
+  "AboutPage": {
+    "since": "Cascais Volley Cup, depuis 2010",
+    "headline": "Un tremplin pour les futurs champions de volley",
+    "description": "Le Cascais Volley Cup est l’un des tournois internationaux de volley les plus palpitants du sud de l’Europe. Chaque été, il réunit des clubs d’élite et émergents du continent pour cinq jours inoubliables de compétition de haut niveau sur l’Atlantique. Installé dans la magnifique ville côtière de Cascais, au Portugal, c’est bien plus qu’un tournoi — c’est une célébration de l’avenir du sport.",
+    "CornacchiaFamilyCaption": "Équipe du tournoi de Cascais en 2018",
+    "Family_And_40_Years": "Famille Cascais et 40 ans de tournois",
+    "Tradition_Title": "Une longue tradition de passion pour le volley",
+    "Tradition_Body": "Le Cascais Volley Cup a été fondé en 1983 en hommage à la passion du volley transmise de génération en génération. Aujourd’hui, le tournoi est dirigé par une équipe dévouée ancrée dans la vision originelle, soutenue par des familles et des professionnels ayant grandi avec l’amour du sport.\n\nDepuis plus de quarante ans, le Cascais Volley Cup accueille les meilleurs clubs du Portugal, d’Europe et d’ailleurs — devenant une fête mondiale du volley. Des centaines d’équipes venues de cinq continents y ont participé, faisant de ce tournoi l’un des plus prestigieux et durables au monde pour les jeunes.",
+    "WhatPeopleAreSaying": "Ce que disent les gens"
+  },
+
+  "HallOfFamePage": {
+    "title": "Temple de la renommée du Cascais Volley Cup",
+    "description": "Au Cascais Volley Cup, nous avons accueilli des centaines d’équipes internationales. En plus de 40 ans, garçons et filles de tous niveaux et de tous les continents ont eu la chance de découvrir la magie du Portugal dans la magnifique ville de Cascais. Voici une sélection des participants les plus remarquables.",
+    "teams": "Équipes",
+    "winners": "Vainqueurs"
+  },
+
+  "ProgramPage": {
+    "Program": "Programme",
+    "Dates": "9–13 juillet 2026",
+    "Location": "Cascais / Portugal",
+    "intro_location": "Tournoi de volley d’été à Cascais / Portugal",
+    "intro_title": "Cascais Volley Cup",
+    "intro_paragraph_1": "Bienvenue au tournoi de volley jeunesse le plus palpitant d’Europe ! Le Cascais Volley Cup rassemble des équipes internationales pour une semaine inoubliable au bord de la mer.",
+    "intro_paragraph_2": "Sur cette page, vous trouverez toutes les informations sur la prochaine édition, qui a lieu chaque juillet — une nouvelle tradition estivale fondée sur la passion, le sport et la communauté.",
+    "ProgramDetails": {
+      "title": "Détails techniques",
+      "categories": {
+        "title": "Catégories",
+        "b19": "B19 (garçons nés après le 1er janv. 2007)",
+        "g19": "G19 (filles nées après le 1er janv. 2007)",
+        "b17": "B17 (garçons nés après le 1er janv. 2009)",
+        "g17": "G17 (filles nées après le 1er janv. 2009)"
+      },
+      "where": {
+        "title": "Où",
+        "description": "Cascais est une magnifique ville du Portugal, idéalement située entre Lisbonne et Sintra, à seulement une heure de l’aéroport."
+      },
+      "when": {
+        "title": "Quand",
+        "dates": "9–13 juillet 2025",
+        "note": "Été",
+        "previous": "Édition précédente : 9–13 juillet 2026",
+        "next": "Prochaine édition : 9–13 juillet 2025"
+      }
+    }
+  },
+
+  "PhotosPage": {
+    "title": "Galerie photo",
+    "subtitle": "Découvrez notre collection de moments inoubliables capturés durant le tournoi",
+    "loading": "Chargement des images...",
+    "error_title": "Oups ! Une erreur s’est produite",
+    "error_message": "Impossible de charger la galerie",
+    "empty_title": "Aucune image trouvée",
+    "empty_message": "La galerie est actuellement vide. Veuillez revenir plus tard.",
+    "image_alt": "Image de la galerie",
+    "load_more": "Charger plus de photos",
+    "close": "Fermer",
+    "download": "Télécharger l’image"
+  },
+
+  "RegistrationPage": {
+    "Title": "Inscription",
+    "Description": "Les demandes de participation au Cascais Volley Cup sont soumises à sélection par l’organisation. Remplissez ce formulaire pour recevoir un devis gratuit pour votre participation au prochain tournoi de volley de Cascais.",
+    "Name": "Mon nom",
+    "NamePlaceholder": "Mon nom complet",
+    "Email": "Email",
+    "Mobile": "Téléphone portable",
+    "Club": "Nom de mon club de volley",
+    "City": "Ville",
+    "Country": "Pays",
+    "Questions": "Des questions ?",
+    "Submit": "Envoyer"
+  },
+
+  "Footer": {
+    "Section1": {
+      "Title": "Cascais Volley Cup",
+      "About": "À propos",
+      "HallOfFame": "Temple de la renommée",
+      "Location": "Emplacement",
+      "Merchandise": "Articles"
+    },
+    "Section2": {
+      "Title": "Le Tournoi",
+      "Program": "Programme du tournoi",
+      "Registration": "Inscription",
+      "Regulation": "Règlement",
+      "WinterCup": "Coupe d’hiver"
+    },
+    "Section3": {
+      "Title": "Informations",
+      "Services": "Services",
+      "News": "Actualités",
+      "Partners": "Partenaires officiels",
+      "PressKits": "Kits presse"
+    },
+    "Section4": {
+      "Title": "Contacts"
+    }
+  }
 }

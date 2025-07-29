@@ -86,7 +86,7 @@ export default function Footer() {
             </li>
             <li>
               <a href='#' className='transition hover:underline'>
-                {t('Section3.PressKits')}
+                {t('Section3.Photos_&_Media')}
               </a>
             </li>
           </ul>

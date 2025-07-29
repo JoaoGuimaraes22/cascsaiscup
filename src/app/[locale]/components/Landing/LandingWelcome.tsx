@@ -15,7 +15,7 @@ export default function LandingWelcome() {
       <div className='absolute inset-0 bg-black/10 dark:bg-black/30' />
 
       {/* Responsive box: white in light mode, dark in dark mode */}
-      <div className='relative z-10 max-w-2xl rounded-xl bg-white/80 p-6 text-center shadow-lg backdrop-blur-sm dark:bg-black/40 sm:p-10'>
+      <div className='relative z-10 max-w-2xl rounded-xl bg-white/80 p-6 px-4 text-center shadow-lg backdrop-blur-sm dark:bg-black/40 sm:px-10 sm:py-10'>
         <h1 className='text-3xl font-extrabold leading-tight text-black dark:text-white sm:text-4xl md:text-5xl'>
           <span className='bg-span-bg bg-clip-text text-transparent'>
             {t('Cascais')}

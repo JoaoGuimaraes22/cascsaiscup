@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import RegistrationForm from '../components/Registration/RegistrationForm'
+import RegistrationContact from '../components/Registration/RegistrationContact'
 
 export default function About() {
   const t = useTranslations('RegistrationPage')
@@ -10,6 +11,7 @@ export default function About() {
       <h1 className='mb-2 text-4xl font-bold text-primary'>{t('Title')}</h1>
       <p className='mb-8 text-sm text-text-secondary'>{t('Description')}</p>
       <RegistrationForm />
+      <RegistrationContact />
     </section>
   )
 }

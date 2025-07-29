@@ -26,7 +26,10 @@ const space_grotesk = Space_Grotesk({
 })
 export const metadata: Metadata = {
   title: 'Cascais VolleyCup 2026',
-  description: 'Your next summer tournament!'
+  description: 'Your next summer tournament!',
+  icons: {
+    icon: '/img/icon/icon.svg'
+  }
 }
 
 export default function RootLayout({
