@@ -1,4 +1,3 @@
-// components/LandingOffer.tsx
 'use client'
 
 import OfferCard from './OfferCard'
@@ -39,9 +38,9 @@ export default function LandingOffer() {
   ]
 
   return (
-    <section className='bg-white py-16'>
+    <section className='bg-white py-16 transition-colors duration-300 dark:bg-background'>
       <div className='mx-auto max-w-screen-xl px-6'>
-        <h2 className='mb-12 text-center text-4xl font-bold text-primary'>
+        <h2 className='mb-12 text-center text-4xl font-bold text-primary dark:text-white'>
           {t('Title')}
         </h2>
         <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>

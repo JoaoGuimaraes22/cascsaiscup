@@ -35,7 +35,7 @@ export default function LandingLocation() {
         <div className='w-full lg:w-1/2'>
           <div className='overflow-hidden rounded-md shadow-lg'>
             <Image
-              src='/landing/cascais1.jpg'
+              src='/img/landing/cascais1.jpg'
               alt={t('ImageAlt')}
               width={800}
               height={500}

@@ -13,7 +13,7 @@ export default function AboutTradition() {
       <div className='mx-auto grid max-w-screen-xl gap-12 px-4 md:px-8 lg:grid-cols-2 lg:items-center'>
         <div className='overflow-hidden rounded-lg shadow-lg'>
           <Image
-            src='/landing/ph2.jpg'
+            src='/img/landing/ph2.jpg'
             alt={t('CornacchiaFamilyCaption')}
             width={800}
             height={600}

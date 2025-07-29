@@ -9,7 +9,7 @@ export default function LandingWelcome() {
   return (
     <section
       className='relative flex min-h-[90vh] items-center justify-center bg-cover bg-center bg-no-repeat text-primary'
-      style={{ backgroundImage: "url('/landing/ph8.jpg')" }}
+      style={{ backgroundImage: "url('/img/landing/ph8.jpg')" }}
     >
       {/* Optional background dimmer */}
       <div className='absolute inset-0 bg-black/10 dark:bg-black/30' />

@@ -12,7 +12,7 @@ const testimonials = [
       'An unforgettable experience for our team. The organization was flawless.',
     country: 'Portugal',
     team: 'Lisboa Lions',
-    flag: '/landing/flags/pt.png'
+    flag: '/img/flags/pt.png'
   },
   {
     name: 'Coach Matteo R.',
@@ -20,14 +20,14 @@ const testimonials = [
       'Cascais Volley Cup brings together great talent in a beautiful setting.',
     country: 'Italy',
     team: 'Roma Rising',
-    flag: '/landing/flags/pt.png'
+    flag: '/img/flags/fr.png'
   },
   {
     name: 'Lucía Fernández',
     quote: 'Truly international. We competed, we connected, we learned.',
     country: 'Spain',
     team: 'Madrid Stars',
-    flag: '/landing/flags/pt.png'
+    flag: '/img/flags/es.png'
   }
 ]
 
