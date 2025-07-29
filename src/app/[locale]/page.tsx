@@ -1,5 +1,4 @@
 import { useTranslations } from 'next-intl'
-import Button from './components/Button'
 import LandingWelcome from './components/Landing/LandingWelcome'
 import LandingComments from './components/Landing/LandingComments'
 import LandingNews from './components/Landing/LandingNews/LandingNews'

@@ -152,7 +152,16 @@
     }
   },
   "Gallery": {
-    "Gallery_Title": "Cascais VolleyCup Moments",
-    "Loading": "Loading photos..."
+    "title": "Photo Gallery",
+    "subtitle": "Discover our collection of beautiful moments captured during the tournament",
+    "loading": "Loading images...",
+    "error_title": "Oops! Something went wrong",
+    "error_message": "Unable to load gallery",
+    "empty_title": "No Images Found",
+    "empty_message": "The gallery is currently empty. Please check back later.",
+    "image_alt": "Gallery image",
+    "load_more": "Load More Photos",
+    "close": "Close",
+    "download": "Download image"
   }
 }

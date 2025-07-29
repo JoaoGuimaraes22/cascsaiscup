@@ -18,7 +18,7 @@ export default function AboutHero() {
       </div>
       <div className='flex justify-center'>
         <Image
-          src='/images/about-tournament.jpg'
+          src='/landing/ph1.jpg'
           alt='Cascais Volley Cup action shot'
           width={600}
           height={400}

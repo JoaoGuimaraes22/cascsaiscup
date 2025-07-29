@@ -14,21 +14,21 @@ const testimonials = [
     name: 'Daichi Saegusa',
     role: 'Team Leader',
     team: 'Japan National Team',
-    flag: '/flags/jp.png'
+    flag: '/landing/flags/mn.png'
   },
   {
     quote: `Playing in Cascais was a dream come true — sun, competition, and great teams from across Europe. We'll definitely return.`,
     name: 'Elena Marques',
     role: 'Coach',
     team: 'Portugal U18',
-    flag: '/flags/pt.png'
+    flag: '/landing/flags/pt.png'
   },
   {
     quote: `The organization was flawless. Our players felt welcomed and challenged. Cascais is now part of our journey.`,
     name: 'Michael Bauer',
     role: 'Head Coach',
     team: 'Germany Junior Team',
-    flag: '/flags/de.png'
+    flag: '/landing/flags/sp.png'
   }
 ]
 

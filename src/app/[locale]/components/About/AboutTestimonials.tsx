@@ -1,28 +1,33 @@
-// components/about/AboutTestimonials.tsx
-
 'use client'
 
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import Image from 'next/image'
 
 const testimonials = [
   {
     name: 'Inês Carvalho',
     quote:
       'An unforgettable experience for our team. The organization was flawless.',
-    country: 'Portugal'
+    country: 'Portugal',
+    team: 'Lisboa Lions',
+    flag: '/landing/flags/pt.png'
   },
   {
     name: 'Coach Matteo R.',
     quote:
       'Cascais Volley Cup brings together great talent in a beautiful setting.',
-    country: 'Italy'
+    country: 'Italy',
+    team: 'Roma Rising',
+    flag: '/landing/flags/pt.png'
   },
   {
     name: 'Lucía Fernández',
     quote: 'Truly international. We competed, we connected, we learned.',
-    country: 'Spain'
+    country: 'Spain',
+    team: 'Madrid Stars',
+    flag: '/landing/flags/pt.png'
   }
 ]
 
@@ -38,18 +43,36 @@ export default function AboutTestimonials() {
     setIndex((index + 1) % testimonials.length)
   }
 
-  const { name, quote, country } = testimonials[index]
+  const { name, quote, country, team, flag } = testimonials[index]
 
   return (
-    <section className='bg-white px-4 py-16 dark:bg-background'>
+    <section className='rounded-xl bg-white px-4 py-16 transition-all duration-300 dark:bg-background'>
       <div className='mx-auto max-w-screen-md text-center'>
         <h2 className='mb-6 text-3xl font-bold text-primary'>
           {t('WhatPeopleAreSaying')}
         </h2>
-        <div className='bg-muted relative rounded-lg p-6 shadow-md'>
-          <p className='mb-4 text-lg italic text-text-secondary'>“{quote}”</p>
-          <p className='font-semibold text-primary'>{name}</p>
-          <p className='text-text-muted text-sm'>{country}</p>
+
+        <div className='bg-muted relative rounded-b-lg rounded-t-2xl p-6 shadow-md transition-colors duration-300'>
+          <p className='mb-6 text-lg italic text-text-secondary dark:text-text-secondary'>
+            “{quote}”
+          </p>
+
+          <div className='mb-1 flex items-center justify-center gap-3'>
+            <Image
+              src={flag}
+              alt={`${country} flag`}
+              width={24}
+              height={16}
+              className='rounded-sm shadow'
+            />
+            <p className='font-semibold text-primary dark:text-primary'>
+              {name}
+            </p>
+          </div>
+
+          <p className='text-text-muted dark:text-text-muted text-sm'>
+            {team} — {country}
+          </p>
 
           <div className='absolute left-4 top-1/2 -translate-y-1/2'>
             <button onClick={prev} aria-label='Previous testimonial'>

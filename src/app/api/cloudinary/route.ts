@@ -1,31 +1,40 @@
-// src/app/api/cloudinary/route.ts
+// pages/api/test-cloudinary.js (for Pages Router)
+// OR
+// app/api/test-cloudinary/route.js (for App Router)
+
+// app/api/test-cloudinary/route.ts
+import { v2 as cloudinary } from 'cloudinary'
 import { NextResponse } from 'next/server'
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
 export async function GET() {
-  const folder = 'cascais2025'
+  try {
+    const result = await cloudinary.search
+      .expression('folder:cascaiscup')
+      .max_results(100)
+      .execute()
 
-  const result = await fetch(
-    `https://api.cloudinary.com/v1_1/dek4semrg/resources/image?prefix=${folder}/&max_results=100`,
-    {
-      headers: {
-        Authorization: `Basic ${Buffer.from(
-          `${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}`
-        ).toString('base64')}`
+    return NextResponse.json({
+      success: true,
+      imageCount: result.total_count,
+      images: result.resources.map((img: any) => ({
+        public_id: img.public_id,
+        url: img.secure_url,
+        created_at: img.created_at
+      }))
+    })
+  } catch (error: any) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: error.message
       },
-      cache: 'no-store'
-    }
-  )
-
-  const data = await result.json()
-
-  if (!data.resources) {
-    return NextResponse.json({ resources: [] }, { status: 200 })
+      { status: 500 }
+    )
   }
-
-  return NextResponse.json(
-    data.resources.map((item: any) => ({
-      public_id: item.public_id,
-      url: item.secure_url
-    }))
-  )
 }

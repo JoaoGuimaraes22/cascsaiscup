@@ -29,7 +29,7 @@ export default function LandingRegister() {
         {/* Image Block */}
         <div className='flex justify-center md:w-1/2'>
           <Image
-            src='/images/cta-register.jpg'
+            src='/landing/ph4.jpg'
             alt='Youth teams celebrating'
             width={600}
             height={400}

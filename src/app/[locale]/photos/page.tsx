@@ -11,7 +11,7 @@ export default function PhotosPage() {
 
   return (
     <section>
-      <Gallery />
+      <Gallery maxResults={50} />
     </section>
   )
 }
