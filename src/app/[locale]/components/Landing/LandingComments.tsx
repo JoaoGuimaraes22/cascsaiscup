@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import { FaStar } from 'react-icons/fa'
 
 export default function LandingComments() {
-  const t = useTranslations('LandingComments')
+  const t = useTranslations('LandingPage.LandingComments')
   const renderStars = () => (
     <div className='mt-2 flex justify-center gap-1 text-yellow-400'>
       {[...Array(5)].map((_, i) => (

@@ -7,7 +7,7 @@ import { FiMapPin } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
 
 export default function LandingLocation() {
-  const t = useTranslations('LandingLocation') // use namespace "Welcome"
+  const t = useTranslations('LandingPage.LandingLocation') // use namespace "Welcome"
 
   return (
     <section className='bg-[#0C0141] py-16 text-white'>

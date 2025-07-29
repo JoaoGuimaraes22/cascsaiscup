@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { Link } from '@/src/navigation'
 
 export default function LandingRegister() {
-  const t = useTranslations('LandingRegister')
+  const t = useTranslations('LandingPage.LandingRegister')
 
   return (
     <section className='bg-[#0C0141] py-20 text-white'>

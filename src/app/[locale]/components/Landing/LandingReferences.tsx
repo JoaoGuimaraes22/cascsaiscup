@@ -46,7 +46,7 @@ const testimonials = [
 ]
 
 export default function LandingReferences() {
-  const t = useTranslations('LandingReferences')
+  const t = useTranslations('LandingPage.LandingReferences')
   const [currentSlide, setCurrentSlide] = useState(0)
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,

@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { FaArrowCircleDown } from 'react-icons/fa'
 
 export default function HallOfFameHero() {
-  const t = useTranslations('HallOfFame')
+  const t = useTranslations('HallOfFamePage')
 
   return (
     <section className='grid grid-cols-1 items-center gap-10 px-8 py-20 md:grid-cols-2 md:px-24'>
@@ -34,7 +34,7 @@ export default function HallOfFameHero() {
 
       <div className='flex justify-center'>
         <Image
-          src='/images/hof_winning_team.png' // replace with your actual path
+          src='/img/halloffame/celeb2.jpg' // replace with your actual path
           alt='Celebrating team'
           width={600}
           height={400}

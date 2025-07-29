@@ -12,7 +12,7 @@ const newsItems = [
     date: 'April 23, 2025',
     excerpt:
       'Ranking and Pictures of Cornacchia World Cup 2025, the volleyball tournament of Pordenone',
-    image: '/images/news1.jpg',
+    image: '/img/news/news1.jpg',
     link: '/news/cornacchia-2025'
   },
   {
@@ -20,7 +20,7 @@ const newsItems = [
     date: 'March 6, 2025',
     excerpt:
       'Check out pictures, video and rankings of the Nations Winter Cup by FB Tanks #9.',
-    image: '/images/news2.jpg',
+    image: '/img/news/news2.jpg',
     link: '/news/nations-cup-9'
   },
   {
@@ -28,13 +28,13 @@ const newsItems = [
     date: 'February 20, 2025',
     excerpt:
       'Official Statement: do not pay for any streamings, and please help us report fake accounts',
-    image: '/images/news3.jpg',
+    image: '/img/news/news3.png',
     link: '/news/streaming-scam-warning'
   }
 ]
 
 export default function NewsSection() {
-  const t = useTranslations('LandingNews')
+  const t = useTranslations('LandingPage.LandingNews')
 
   return (
     <section className='bg-background py-16'>

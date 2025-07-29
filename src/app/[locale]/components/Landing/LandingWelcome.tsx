@@ -4,7 +4,7 @@ import { Link } from '@/src/navigation'
 import { useTranslations } from 'next-intl'
 
 export default function LandingWelcome() {
-  const t = useTranslations('LandingWelcome')
+  const t = useTranslations('LandingPage.LandingWelcome')
 
   return (
     <section
@@ -31,7 +31,7 @@ export default function LandingWelcome() {
         <div className='mt-4 flex flex-row justify-center gap-4'>
           <Link
             href='/program'
-            className='hover:bg-primary/80 rounded bg-primary px-6 py-3 text-button-text transition'
+            className='hover:bg-accent/80 mt-2 flex items-center rounded bg-button px-6 py-3 text-lg font-semibold text-white shadow-lg transition'
           >
             {t('Program')}
           </Link>

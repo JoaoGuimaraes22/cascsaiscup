@@ -7,8 +7,6 @@ import { useTranslations } from 'next-intl'
 import Gallery from '../components/Photos/Gallery'
 
 export default function PhotosPage() {
-  const t = useTranslations('Gallery')
-
   return (
     <section>
       <Gallery maxResults={50} />

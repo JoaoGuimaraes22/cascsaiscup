@@ -26,7 +26,7 @@ export default function Gallery({
   folder = '',
   maxResults = 20
 }: GalleryProps) {
-  const t = useTranslations('Gallery')
+  const t = useTranslations('PhotosPage')
   const [images, setImages] = useState<CloudinaryImage[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
