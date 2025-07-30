@@ -70,9 +70,9 @@ export default function Footer() {
           </h3>
           <ul className='space-y-2 text-sm'>
             <li>
-              <a href='#' className='transition hover:underline'>
+              <Link href='/services' className='transition hover:underline'>
                 {t('Section3.Services')}
-              </a>
+              </Link>
             </li>
             <li>
               <Link href='/news' className='transition hover:underline'>

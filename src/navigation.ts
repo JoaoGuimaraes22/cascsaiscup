@@ -14,10 +14,10 @@ export const pathnames = {
   '/program': '/program',
   '/registration': '/registration',
   '/news': '/news',
-  '/participants': '/participants',
   '/location': '/location',
   '/merchandise': '/merchandise',
-  '/photos': '/photos'
+  '/photos': '/photos',
+  '/services': '/services'
 } satisfies Pathnames<typeof locales>
 
 export const { Link, redirect, usePathname, useRouter, getPathname } =

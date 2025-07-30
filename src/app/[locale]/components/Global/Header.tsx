@@ -8,6 +8,7 @@ import LogoIcon from '../../../icons/logo'
 import LangSwitcher from '../LangSwitcher'
 import ThemeSwitch from '../ThemeSwitch'
 import { FiMenu, FiX } from 'react-icons/fi'
+import { FaVolleyballBall } from 'react-icons/fa'
 
 interface Props {
   locale: string
@@ -26,8 +27,8 @@ export const Header: FC<Props> = ({ locale }) => {
       <div className='flex w-full items-center justify-between sm:w-auto'>
         <Link lang={locale} href='/'>
           <div className='flex flex-row items-center'>
-            <div className='flex h-14 w-14 items-center'>
-              <LogoIcon />
+            <div className='flex h-14 w-14 items-center text-5xl text-secondary'>
+              <FaVolleyballBall />
             </div>
             <div className='mx-2 flex select-none flex-col leading-tight'>
               <span className='text-lg font-bold sm:text-xl'>Cascais</span>

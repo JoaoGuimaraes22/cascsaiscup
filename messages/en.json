@@ -65,13 +65,13 @@
   },
 
   "AboutPage": {
-    "since": "Cascais Volley Cup, since 2010",
+    "since": "Cascais Volley Cup, since 2020",
     "headline": "A showcase of future volleyball champions",
     "description": "Cascais Volley Cup is one of the most exciting international volleyball tournaments in Southern Europe. Every summer, it gathers elite and rising clubs from across the continent for five unforgettable days of high-level competition by the Atlantic. Set in the beautiful coastal city of Cascais, Portugal, it’s more than a tournament — it’s a celebration of the sport’s future.",
     "CornacchiaFamilyCaption": "Cascais Tournament Staff in 2018",
-    "Family_And_40_Years": "Cascais Family and 40 years of tournaments",
+    "Family_And_40_Years": "The Volley4All Family and the Formation of Cascais Volley Cup",
     "Tradition_Title": "A long tradition of passion for volleyball",
-    "Tradition_Body": "Cascais Volley Cup was founded in 1983 as a tribute to the passion for volleyball shared across generations. Today, the tournament is managed by a dedicated team rooted in the original vision, supported by families and professionals who grew up with a love for the sport.\n\nOver four decades, Cascais Volley Cup has welcomed top clubs from Portugal, Europe, and beyond — becoming a global celebration of the game. Hundreds of teams from five continents have participated, making it one of the most prestigious and enduring youth volleyball tournaments in the world.",
+    "Tradition_Body": "Cascais Volley Cup was founded in 2020 as a tribute to the passion for volleyball shared across generations. Today, the tournament is managed by a dedicated team rooted in the original vision, supported by families and professionals who grew up with a love for the sport.\n\nOver four years, Cascais Volley Cup has welcomed top clubs from Portugal, Europe, and beyond — becoming a global celebration of the game. Hundreds of teams from five continents have participated, making it one of the most prestigious and enduring youth volleyball tournaments in the world.",
     "WhatPeopleAreSaying": "What people are saying"
   },
 
@@ -79,7 +79,15 @@
     "title": "Hall of Fame of Cascais Volley Cup",
     "description": "At Cascais Volley Cup we hosted hundreds of international volleyball teams. In over 40 years we welcomed boys and girls of any level, from all continents, who had the chance to enjoy the magic of Portugal in the beautiful city of Cascais. What follows is just a partial list of the most celebrated participants so far.",
     "teams": "Teams",
-    "winners": "Winners"
+    "winners": "Winners",
+    "HallOfFameWinners": {
+      "Title": "Hall of Fame — Top 4 by Category",
+      "Categories": {
+        "Sub-21": "Sub-21",
+        "Sub-17": "Sub-17",
+        "Sub-15": "Sub-15"
+      }
+    }
   },
 
   "ProgramPage": {
@@ -191,6 +199,18 @@
       "MoorishCastleDesc": "An ancient fortress with panoramic views stretching from Sintra to the coast.",
       "QuintaRegaleiraTitle": "Quinta da Regaleira",
       "QuintaRegaleiraDesc": "A mystical estate with underground tunnels, lush gardens, and the famous Initiation Well."
+    }
+  },
+
+  "ServicesPage": {
+    "ServicesHero": {
+      "Title": "Services",
+      "Accommodation": "Accommodation",
+      "AccommodationDescription": "Comfortable and convenient lodging options for all teams and staff during the tournament.",
+      "Food": "Food & Meals",
+      "FoodDescription": "Nutritious meals served throughout the day to keep athletes energized and focused.",
+      "Transportation": "Transportation",
+      "TransportationDescription": "Reliable transfers between accommodations, venues, and major travel hubs."
     }
   },
 

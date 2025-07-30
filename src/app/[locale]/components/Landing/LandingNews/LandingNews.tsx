@@ -8,26 +8,25 @@ import { useTranslations } from 'next-intl'
 
 const newsItems = [
   {
-    title: 'Ranking Cornacchia World Cup 2025',
+    title: 'Ranking Cascais Volley Cup 2025',
     date: 'April 23, 2025',
     excerpt:
-      'Ranking and Pictures of Cornacchia World Cup 2025, the volleyball tournament of Pordenone',
+      'Ranking and Pictures of Cascais Volley Cup 2025, the volleyball tournament of Cascais',
     image: '/img/news/news1.jpg',
     link: '/news/cornacchia-2025'
   },
   {
-    title: 'Nations Winter Cup by FB Tanks #9 – Rankings & Pictures',
+    title: 'Under 21 – Rankings & Pictures',
     date: 'March 6, 2025',
     excerpt:
-      'Check out pictures, video and rankings of the Nations Winter Cup by FB Tanks #9.',
+      'Check out pictures, video and rankings of the Under 21 tournament.',
     image: '/img/news/news2.jpg',
     link: '/news/nations-cup-9'
   },
   {
-    title: 'Beware of Scams: Our Streamings Are Free of Charge',
+    title: 'New Arrivals: Pelamora SC',
     date: 'February 20, 2025',
-    excerpt:
-      'Official Statement: do not pay for any streamings, and please help us report fake accounts',
+    excerpt: 'Official Statement: Pelamora is coming with Under-15, 17 and 21',
     image: '/img/news/news3.png',
     link: '/news/streaming-scam-warning'
   }

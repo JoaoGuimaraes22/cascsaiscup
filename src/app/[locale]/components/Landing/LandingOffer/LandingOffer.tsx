@@ -32,7 +32,7 @@ export default function LandingOffer() {
       title: t('Card3.Title'),
       description: t('Card3.Description'),
       buttonLabel: t('Card3.Button'),
-      link: '/participants',
+      link: '/hall-of-fame',
       image: '/img/landing/talents3.jpg'
     }
   ]
