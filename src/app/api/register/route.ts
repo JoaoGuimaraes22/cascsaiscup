@@ -1,10 +1,28 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(req: Request) {
   try {
+    // Check for required environment variables
+    if (!process.env.RESEND_API_KEY) {
+      console.error('❌ RESEND_API_KEY is not configured')
+      return NextResponse.json(
+        { success: false, error: 'Email service not configured' },
+        { status: 500 }
+      )
+    }
+
+    if (!process.env.EMAIL_FROM || !process.env.EMAIL_TO) {
+      console.error('❌ EMAIL_FROM or EMAIL_TO is not configured')
+      return NextResponse.json(
+        { success: false, error: 'Email configuration incomplete' },
+        { status: 500 }
+      )
+    }
+
+    // Initialize Resend inside the function
+    const resend = new Resend(process.env.RESEND_API_KEY)
+
     const body = await req.json()
     const { name, email, mobile, club, city, country, questions } = body
 
@@ -22,8 +40,8 @@ export async function POST(req: Request) {
     `
 
     await resend.emails.send({
-      from: process.env.EMAIL_FROM!,
-      to: process.env.EMAIL_TO!,
+      from: process.env.EMAIL_FROM,
+      to: process.env.EMAIL_TO,
       subject: 'New Cascais Registration',
       html: emailHtml
     })
