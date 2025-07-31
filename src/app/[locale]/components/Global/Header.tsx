@@ -91,7 +91,7 @@ const NavLinks = ({
     { href: '/program', label: t('Program') },
     { href: '/photos', label: t('Photos') },
     { href: '/registration', label: t('Registration') }
-  ] as const
+  ]
 
   return (
     <>
@@ -102,7 +102,7 @@ const NavLinks = ({
           <Link
             key={link.href}
             lang={locale}
-            href={link.href}
+            href={link.href as Parameters<typeof Link>[0]['href']}
             onClick={closeMenu}
             className={`group relative pb-1 font-medium transition-colors hover:text-primary ${
               isActive ? 'text-primary' : 'text-muted-foreground'
