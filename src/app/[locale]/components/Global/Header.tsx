@@ -9,13 +9,13 @@ import LangSwitcher from '../LangSwitcher'
 import ThemeSwitch from '../ThemeSwitch'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { FaVolleyballBall } from 'react-icons/fa'
-
+import type { ValidPathname } from '@/src/navigation'
 interface Props {
   locale: string
 }
 
 export const Header: FC<Props> = ({ locale }) => {
-  const t = useTranslations('Header')
+  const t = useTranslations('Header') as any
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -80,12 +80,12 @@ const NavLinks = ({
   closeMenu
 }: {
   locale: string
-  t: ReturnType<typeof useTranslations>
+  t: any //ReturnType<typeof useTranslations>
   closeMenu?: () => void
 }) => {
   const pathname = usePathname()
 
-  const links = [
+  const links: { href: ValidPathname; label: string }[] = [
     { href: '/about', label: t('About') },
     { href: '/hall-of-fame', label: t('Hall_of_Fame') },
     { href: '/program', label: t('Program') },
@@ -102,7 +102,7 @@ const NavLinks = ({
           <Link
             key={link.href}
             lang={locale}
-            href={link.href as Parameters<typeof Link>[0]['href']}
+            href={link.href}
             onClick={closeMenu}
             className={`group relative pb-1 font-medium transition-colors hover:text-primary ${
               isActive ? 'text-primary' : 'text-muted-foreground'
