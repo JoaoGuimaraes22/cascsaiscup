@@ -1,49 +1,154 @@
-// components/LandingLocation.tsx
 'use client'
 
 import Image from 'next/image'
-import { Link } from '@/src/navigation'
-import { FiMapPin } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
+import { FiSun } from 'react-icons/fi'
+import { FaPlane } from 'react-icons/fa'
 
 export default function LandingLocation() {
-  const t = useTranslations('LandingPage.LandingLocation') // use namespace "Welcome"
+  const t = useTranslations('LandingPage.LandingLocation')
 
   return (
-    <section className='bg-[#0C0141] py-16 text-white'>
-      <div className='mx-auto flex max-w-screen-xl flex-col-reverse items-center gap-12 px-6 lg:flex-row'>
-        {/* Left Column */}
-        <div className='lg:w-1/2'>
-          <p className='mb-2 text-lg font-medium text-teal-400'>
-            {t('Tagline')}
+    <section className='relative isolate min-h-[720px] overflow-hidden sm:min-h-[800px] lg:min-h-[880px]'>
+      {/* Background with player (no wave here – the bottom wave is added below) */}
+      <Image
+        src='/img/landing/home-page-2-2.png'
+        alt=''
+        fill
+        priority
+        className='absolute inset-0 -z-10 object-cover object-[50%_80%] md:object-[50%_78%] lg:object-[50%_76%]'
+      />
+
+      {/* Content container */}
+      <div className='mx-auto grid max-w-screen-2xl grid-cols-1 gap-10 px-4 py-8 sm:px-6 lg:grid-cols-12 lg:py-12'>
+        {/* LEFT: title + copy + map */}
+        <div className='lg:col-span-7'>
+          <h1 className='mb-4 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl lg:text-[32px]'>
+            {t('title')}
+          </h1>
+
+          <p className='mb-4 max-w-prose text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+            {t('p1')}
           </p>
-          <h2 className='mb-6 text-4xl font-extrabold lg:text-5xl'>
-            {t('Title')}
-          </h2>
-          <p className='mb-4 text-lg'>{t('Intro')}</p>
-          <p className='mb-6 text-base text-gray-200'>{t('Description')}</p>
-          <Link
-            href='/location'
-            className='inline-flex items-center rounded-md bg-pink-600 px-6 py-3 text-lg font-medium text-white transition hover:bg-pink-500'
-          >
-            <FiMapPin className='mr-2 text-xl' />
-            {t('Button')}
-          </Link>
+          <p className='mb-6 max-w-prose text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+            {t('p2_prefix')}
+            <span className='font-extrabold'>{t('flixbus')}</span>
+            {t('p2_suffix')}
+          </p>
+
+          {/* Map block */}
+          <div className='rounded-md bg-sky-600/80 p-3 shadow-lg ring-1 ring-black/5 sm:p-4 md:max-w-[640px]'>
+            <div className='overflow-hidden rounded-md bg-white'>
+              <Image
+                src='/img/landing/mapa.png'
+                alt='Mapa Lisboa — Cascais'
+                width={768}
+                height={456}
+                className='h-auto w-full object-cover'
+                priority
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Right Column */}
-        <div className='w-full lg:w-1/2'>
-          <div className='overflow-hidden rounded-md shadow-lg'>
+        {/* RIGHT: tagline + chips + CTA */}
+        <div className='relative flex flex-col items-end gap-4 lg:col-span-5'>
+          <div className='w-[260px] sm:w-[360px] lg:w-[420px]'>
             <Image
-              src='/img/landing/cascais1.jpg'
-              alt={t('ImageAlt')}
-              width={800}
-              height={500}
-              className='h-auto w-full object-cover'
+              src='/img/landing/tagline.png'
+              alt='feel the ACTION, enjoy the SUMMER'
+              width={1000}
+              height={215}
+              className='h-auto w-full object-contain'
+              priority
             />
+          </div>
+
+          <div className='mt-2 flex flex-col items-end gap-3'>
+            <InfoChip
+              icon='sun'
+              label={t('avg_air_temp')}
+              value={t('avg_air_temp_value')}
+            />
+            <InfoChip
+              icon='plane'
+              label={t('airport')}
+              value={t('airport_value')}
+            />
+          </div>
+
+          <button
+            type='button'
+            className='mt-3 inline-flex items-center rounded-full bg-sky-600 px-5 py-2 text-sm font-bold text-white shadow-lg ring-1 ring-black/10 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:text-base'
+          >
+            {t('cta')}
+          </button>
+        </div>
+      </div>
+
+      {/* ---- Bottom wave + stats (full-bleed) ---- */}
+      <div className='relative left-1/2 w-screen -translate-x-1/2'>
+        {/* wave image */}
+        <Image
+          src='/img/global/ondas-3.png' // <- your wave asset
+          alt=''
+          width={1920}
+          height={135}
+          className='block h-auto w-full object-cover'
+          priority
+        />
+
+        {/* stats overlay */}
+        <div className='pointer-events-none absolute inset-0 flex items-center justify-start'>
+          <div className='mx-auto flex w-full max-w-screen-2xl flex-wrap items-center justify-start gap-x-6 gap-y-2 px-4 text-[13px] font-extrabold uppercase tracking-wide text-white sm:text-sm'>
+            <StatBullet>{t('stats_teams')}</StatBullet>
+            <StatBullet>{t('stats_athletes')}</StatBullet>
+            <StatBullet>{t('stats_countries')}</StatBullet>
+            <StatBullet>{t('stats_games')}</StatBullet>
           </div>
         </div>
       </div>
+      {/* ---------------------------------------- */}
     </section>
+  )
+}
+
+/* -------- UI Bits -------- */
+
+function InfoChip({
+  label,
+  value,
+  icon
+}: {
+  label: string
+  value: string
+  icon: 'sun' | 'plane'
+}) {
+  const Icon = icon === 'sun' ? FiSun : FaPlane
+  return (
+    <div className='flex items-center gap-3 rounded-2xl bg-white/85 px-4 py-3 shadow-lg ring-1 ring-black/5 backdrop-blur-sm'>
+      <div className='grid h-9 w-9 place-items-center rounded-full bg-sky-500 shadow-md ring-1 ring-black/10'>
+        <Icon aria-hidden className='text-white' />
+      </div>
+      <div className='leading-tight'>
+        <div className='text-[12px] font-extrabold tracking-wide text-slate-700 sm:text-[13px]'>
+          {label}
+        </div>
+        <div className='text-[13px] font-bold text-slate-900 sm:text-sm'>
+          {value}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function StatBullet({ children }: { children: React.ReactNode }) {
+  return (
+    <div className='flex items-center gap-2'>
+      <span className='inline-block h-3 w-3 rounded-full bg-white/90' />
+      <span className='text-sm font-extrabold tracking-wide text-white sm:text-base lg:text-lg'>
+        {children}
+      </span>
+    </div>
   )
 }

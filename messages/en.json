@@ -42,12 +42,20 @@
       "More_news": "More news →"
     },
     "LandingLocation": {
-      "Tagline": "The international volleyball event by the sea",
-      "Title": "Welcome to Cascais",
-      "Intro": "Just outside Lisbon, Cascais blends sun, sport, and stunning ocean views.",
-      "Description": "Known for its beautiful coastline and vibrant energy, Cascais offers a perfect setting for international volleyball. From thrilling matches to unforgettable moments on the beach, this is more than a tournament — it's a celebration of youth, culture, and competition.",
-      "Button": "See Location",
-      "ImageAlt": "Cascais tournament opening ceremony"
+      "title": "Como chegar a Cascais?",
+      "p1": "Existem várias formas de viajar do Aeroporto de Lisboa para Cascais: comboio, táxi, aluguer de carro ou contratar um serviço de transfers, basta escolher a opção que melhor se adapta às suas necessidades, sabendo que está a apenas a 30 km, ou seja, a cerca de 20 / 30 minutos de distância de Cascais.",
+      "p2_prefix": "Para quem viaja do Porto para Cascais, a opção mais económica e confortável chama-se ",
+      "flixbus": "FLIXBUS",
+      "p2_suffix": ". Esta operadora tem vários serviços diários com partidas de Porto (Campanhã) com destino direto a Cascais (Alcabideche) e preços imbatíveis.",
+      "avg_air_temp": "AVG AIR TEMP",
+      "avg_air_temp_value": "94°F | 34°C",
+      "airport": "AIRPORT (LIS)",
+      "airport_value": "30 km | 25 min",
+      "cta": "Podemos ajudar",
+      "stats_teams": "50 equipas",
+      "stats_athletes": "600 atletas",
+      "stats_countries": "3 países",
+      "stats_games": "150 jogos"
     },
     "LandingReferences": {
       "What_they_say": "What they say",
@@ -80,14 +88,16 @@
   },
 
   "AboutPage": {
-    "since": "Cascais Volley Cup, since 2020",
-    "headline": "A showcase of future volleyball champions",
-    "description": "Cascais Volley Cup is one of the most exciting international volleyball tournaments in Southern Europe. Every summer, it gathers elite and rising clubs from across the continent for five unforgettable days of high-level competition by the Atlantic. Set in the beautiful coastal city of Cascais, Portugal, it’s more than a tournament — it’s a celebration of the sport’s future.",
-    "CornacchiaFamilyCaption": "Cascais Tournament Staff in 2018",
-    "Family_And_40_Years": "The Volley4All Family and the Formation of Cascais Volley Cup",
-    "Tradition_Title": "A long tradition of passion for volleyball",
-    "Tradition_Body": "Cascais Volley Cup was founded in 2020 as a tribute to the passion for volleyball shared across generations. Today, the tournament is managed by a dedicated team rooted in the original vision, supported by families and professionals who grew up with a love for the sport.\n\nOver four years, Cascais Volley Cup has welcomed top clubs from Portugal, Europe, and beyond — becoming a global celebration of the game. Hundreds of teams from five continents have participated, making it one of the most prestigious and enduring youth volleyball tournaments in the world.",
-    "WhatPeopleAreSaying": "What people are saying"
+    "title": "Volley4All",
+    "p1": "Volley4All is a non-profit sports association focused on the solid development of its athletes.",
+    "p2": "Over the last years we’ve achieved important results and became a reference in the south of Portugal.",
+    "cta": "Visit us",
+    "club": { "logoAlt": "Volley4All Sparrows" },
+    "sponsors": {
+      "cascaisEstorilAlt": "Cascais Estoril Tourism",
+      "camaraAlt": "Cascais City Council",
+      "camFordAlt": "C.A.M. Ford"
+    }
   },
 
   "HallOfFamePage": {

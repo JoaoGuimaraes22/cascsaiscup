@@ -1,7 +1,6 @@
 import LandingWelcome from './components/Landing/LandingWelcome'
-import LandingLocation from './components/Landing/LandingLocation'
-import LandingRegister from './components/Landing/LandingRegister'
 import LandingUpdates from './components/Landing/LandingUpdates'
+import LandingLocation from './components/Landing/LandingLocation'
 
 export default function DashboardPage() {
   return (
@@ -9,7 +8,6 @@ export default function DashboardPage() {
       <LandingWelcome />
       <LandingUpdates />
       <LandingLocation />
-      <LandingRegister />
     </div>
   )
 }
