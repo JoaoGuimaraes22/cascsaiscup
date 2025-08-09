@@ -1,42 +1,125 @@
 'use client'
 
-import { Link } from '@/src/navigation'
+import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { FiSun } from 'react-icons/fi'
+import { FaPlane } from 'react-icons/fa'
 
 export default function LandingWelcome() {
   const t = useTranslations('LandingPage.LandingWelcome')
 
   return (
     <section
-      className='relative flex min-h-[90vh] items-center justify-center bg-cover bg-center bg-no-repeat text-primary'
-      style={{ backgroundImage: "url('/img/landing/ph8.jpg')" }}
+      role='region'
+      aria-label='Cascais Volley Cup 2026 hero'
+      // slide hero up under the header height; tweak these to your header
+      className='relative -mt-16 min-h-screen w-full overflow-hidden md:-mt-20'
     >
-      {/* Optional background dimmer */}
-      <div className='absolute inset-0 bg-black/10 dark:bg-black/30' />
+      {/* Background (full-bleed, responsive focus) */}
+      <Image
+        src='/img/landing/hero-bg.png'
+        alt='Cascais coastline with player'
+        fill
+        priority
+        sizes='100vw'
+        className='z-0 object-cover object-[center_60%] md:object-[center_58%] lg:object-[center_56%]'
+      />
 
-      {/* Responsive box: white in light mode, dark in dark mode */}
-      <div className='relative z-10 max-w-2xl rounded-xl bg-white/80 p-6 px-4 text-center shadow-lg backdrop-blur-sm dark:bg-black/40 sm:px-10 sm:py-10'>
-        <h1 className='text-3xl font-extrabold leading-tight text-black dark:text-white sm:text-4xl md:text-5xl'>
-          <span className='bg-span-bg bg-clip-text text-transparent'>
-            {t('Cascais')}
-          </span>
-          <br />
-          {t('9_13_July')}
-        </h1>
+      <div className='absolute right-4 top-24 z-10 sm:right-8 sm:top-28'>
+        <Image
+          src='/img/landing/tagline.png'
+          alt={t('tagline_alt') || 'feel the ACTION, enjoy the SUMMER'}
+          width={880}
+          height={200}
+          priority
+          sizes='(max-width: 640px) 240px, (max-width: 1024px) 360px, 520px'
+          className='h-auto w-[240px] sm:w-[360px] lg:w-[520px]'
+        />
+      </div>
 
-        <div className='my-4 text-base text-black/80 dark:text-white/80 sm:text-lg md:text-xl'>
-          {t('5_days_40_teams_500_athletes_120_games')}
+      {/* Foreground split: [ Logo ]            [ Chips ] */}
+      <div
+        className='
+    relative z-10 mx-auto flex min-h-screen w-full max-w-screen-2xl
+    translate-y-[22vh] flex-col items-center justify-center gap-6 px-12
+    sm:px-14 md:translate-y-[20vh] md:flex-row
+    md:items-center md:justify-between lg:translate-y-[18vh]
+  '
+      >
+        {/* Left — logo block */}
+        <div className='relative flex flex-col items-start text-left'>
+          <Image
+            src='/img/global/logo-white.png'
+            alt='Cascais Volley Cup 2026'
+            width={720}
+            height={250}
+            priority
+            sizes='(max-width: 640px) 260px, (max-width: 1024px) 360px, 480px'
+            className='h-auto w-[240px] sm:w-[340px] md:w-[400px] lg:w-[480px]'
+          />
+
+          {/* Portugal - top right */}
+          <p className='absolute right-2 top-2 text-[11px] font-bold uppercase tracking-[0.25em] text-white sm:text-sm md:text-base'>
+            {t('PORTUGAL') || 'PORTUGAL'}
+          </p>
+
+          {/* Dates - bottom right */}
+          <p className='absolute bottom-2 right-2 text-[12px] font-bold uppercase tracking-wide text-white sm:text-base md:text-lg'>
+            {t('dates') || '8 — 12 JULY'}
+          </p>
         </div>
 
-        <div className='mt-4 flex flex-row justify-center gap-4'>
-          <Link
-            href='/program'
-            className='hover:bg-accent/80 mt-2 flex items-center rounded bg-button px-6 py-3 text-lg font-semibold text-white shadow-lg transition'
-          >
-            {t('Program')}
-          </Link>
+        {/* Right — chips block */}
+        <div className='flex flex-col items-end gap-4'>
+          <InfoChip
+            label={t('avg_air_temp') || 'AVG AIR TEMP'}
+            value={t('avg_air_temp_value') || '94°F | 34°C'}
+            icon='sun'
+          />
+          <InfoChip
+            label={t('airport') || 'AIRPORT (LIS)'}
+            value={t('airport_value') || '30 km | 25 min'}
+            icon='plane'
+          />
         </div>
       </div>
     </section>
+  )
+}
+
+function InfoChip({
+  label,
+  value,
+  icon
+}: {
+  label: string
+  value: string
+  icon: 'sun' | 'plane'
+}) {
+  const Icon = icon === 'sun' ? FiSun : FaPlane
+  return (
+    <div className='flex items-center gap-3 text-white md:gap-4'>
+      {/* text block */}
+      <div className='flex flex-col text-right leading-tight'>
+        <span
+          className='text-base font-extrabold uppercase
+                         tracking-wide md:text-lg'
+        >
+          {label}
+        </span>
+        <span className='text-sm font-medium opacity-90 md:text-base'>
+          {value}
+        </span>
+      </div>
+
+      {/* round blue icon on the right */}
+      <div
+        className='ml-2 grid h-10 w-10
+                      place-items-center rounded-full bg-sky-500 shadow-[0_4px_14px_rgba(0,0,0,0.25)]
+                      md:h-12 md:w-12'
+      >
+        <Icon aria-hidden className='text-lg text-white md:text-xl' />
+      </div>
+    </div>
   )
 }

@@ -1,118 +1,148 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { Link } from '@/src/navigation'
 import { useTranslations } from 'next-intl'
-import LogoIcon from '../../../icons/logo'
 import LangSwitcher from '../LangSwitcher'
 import ThemeSwitch from '../ThemeSwitch'
 import { FiMenu, FiX } from 'react-icons/fi'
-import { FaVolleyballBall } from 'react-icons/fa'
+import Image from 'next/image'
+import Logo from '@/public/img/global/LOGO_1_CVCUP2026.png'
 import type { ValidPathname } from '@/src/navigation'
+
 interface Props {
   locale: string
 }
 
 export const Header: FC<Props> = ({ locale }) => {
-  const t = useTranslations('Header') as any
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    if (menuOpen) setMenuOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (menuOpen) {
+      const { overflow } = document.body.style
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = overflow
+      }
+    }
+  }, [menuOpen])
 
   return (
     <header
       role='banner'
-      className='relative z-20 mx-auto flex max-w-screen-2xl flex-col items-center justify-between p-5 sm:flex-row'
+      className='
+        relative z-[200] w-full
+        bg-background
+      '
     >
-      {/* Logo and title */}
-      <div className='flex w-full items-center justify-between sm:w-auto'>
-        <Link lang={locale} href='/'>
-          <div className='flex flex-row items-center'>
-            <div className='flex h-14 w-14 items-center text-5xl text-secondary'>
-              <FaVolleyballBall />
-            </div>
-            <div className='mx-2 flex select-none flex-col leading-tight'>
-              <span className='text-lg font-bold sm:text-xl'>Cascais</span>
-              <span className='text-muted-foreground text-sm'>
-                Volley Cup 2026
-              </span>
-            </div>
-          </div>
-        </Link>
+      <div className='mx-auto flex max-w-screen-2xl flex-col items-center justify-between px-4 py-3 sm:flex-row sm:px-5 sm:py-5'>
+        {/* Logo */}
+        <div className='flex w-full items-center justify-between sm:w-auto'>
+          <Link lang={locale} href='/' aria-label='Cascais Volley Cup 2026'>
+            <Image
+              src={Logo}
+              alt='Cascais Volley Cup 2026'
+              priority
+              sizes='(max-width: 640px) 140px, (max-width: 1024px) 180px, 220px'
+              className='h-10 w-auto sm:h-12 md:h-14 lg:h-16'
+            />
+          </Link>
 
-        {/* Theme + Lang + Mobile toggle (mobile only) */}
-        <div className='flex items-center gap-4 sm:hidden'>
+          {/* Theme + Lang + Mobile toggle (mobile only) */}
+          <div className='flex items-center gap-3 sm:hidden'>
+            <ThemeSwitch />
+            <LangSwitcher />
+            <button
+              onClick={() => setMenuOpen(o => !o)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              aria-controls='mobile-nav'
+              className='rounded p-1'
+            >
+              {menuOpen ? <FiX size={26} /> : <FiMenu size={26} />}
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop nav */}
+        <nav
+          aria-label='Primary'
+          className='hidden items-center gap-6 sm:inline-flex md:gap-10'
+        >
+          <NavLinks locale={locale} />
           <ThemeSwitch />
           <LangSwitcher />
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          >
-            {menuOpen ? <FiX size={26} /> : <FiMenu size={26} />}
-          </button>
+        </nav>
+
+        {/* Mobile dropdown menu */}
+        <div
+          id='mobile-nav'
+          aria-hidden={!menuOpen}
+          className={`w-full flex-col items-start gap-4 overflow-hidden transition-all ease-in-out motion-safe:duration-300 sm:hidden
+            ${
+              menuOpen
+                ? 'mt-4 flex max-h-[70vh] translate-y-0 opacity-100'
+                : 'pointer-events-none max-h-0 -translate-y-2 opacity-0'
+            }
+          `}
+        >
+          <NavLinks locale={locale} isMobile />
         </div>
-      </div>
-
-      {/* Desktop nav */}
-      <nav className='hidden items-center gap-10 sm:inline-flex'>
-        <NavLinks locale={locale} t={t} />
-        <ThemeSwitch />
-        <LangSwitcher />
-      </nav>
-
-      {/* Mobile dropdown menu */}
-      <div
-        className={`w-full flex-col items-start gap-4 overflow-hidden transition-all duration-300 ease-in-out sm:hidden ${
-          menuOpen
-            ? 'mt-4 flex max-h-screen translate-y-0 opacity-100'
-            : 'pointer-events-none max-h-0 -translate-y-2 opacity-0'
-        }`}
-      >
-        <NavLinks locale={locale} t={t} closeMenu={() => setMenuOpen(false)} />
       </div>
     </header>
   )
 }
 
-// Navigation links with underline behavior
-const NavLinks = ({
+function NavLinks({
   locale,
-  t,
-  closeMenu
+  isMobile = false
 }: {
   locale: string
-  t: any //ReturnType<typeof useTranslations>
-  closeMenu?: () => void
-}) => {
+  isMobile?: boolean
+}) {
+  const t = useTranslations('Header')
   const pathname = usePathname()
 
   const links: { href: ValidPathname; label: string }[] = [
     { href: '/about', label: t('About') },
-    { href: '/hall-of-fame', label: t('Hall_of_Fame') },
+    { href: '/accommodation', label: t('Accommodation') },
     { href: '/program', label: t('Program') },
-    { href: '/photos', label: t('Photos') },
-    { href: '/registration', label: t('Registration') }
+    { href: '/competition', label: t('Competition') },
+    { href: '/gallery', label: t('Gallery') },
+    { href: '/hall-of-fame', label: t('Hall_of_Fame') }
   ]
+
+  const isActive = (href: string) => {
+    const withLocale = `/${locale}${href}`
+    return pathname === withLocale || pathname.startsWith(`${withLocale}/`)
+  }
 
   return (
     <>
-      {links.map(link => {
-        const isActive = pathname?.includes(link.href)
-
+      {links.map(({ href, label }) => {
+        const active = isActive(href)
         return (
           <Link
-            key={link.href}
+            key={href}
             lang={locale}
-            href={link.href}
-            onClick={closeMenu}
-            className={`group relative pb-1 font-medium transition-colors hover:text-primary ${
-              isActive ? 'text-primary' : 'text-muted-foreground'
-            }`}
+            href={href}
+            className={`group relative pb-1 font-medium transition-colors hover:text-primary
+              ${active ? 'text-primary' : 'text-muted-foreground'}
+              ${isMobile ? 'block w-full text-base' : 'text-sm md:text-[15px]'}
+            `}
           >
-            {link.label}
+            {label}
             <span
-              className={`absolute bottom-0 left-0 h-[2px] w-full origin-left transform bg-primary transition-transform duration-300 ${
-                isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-              }`}
+              className={`absolute bottom-0 left-0 h-[2px] w-full origin-left transform bg-primary
+                motion-safe:transition-transform motion-safe:duration-300
+                ${active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}
+              `}
             />
           </Link>
         )
