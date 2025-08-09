@@ -4,124 +4,120 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
 const testimonials = [
   {
-    quote: `It was an incredible opportunity for our players to compete at this level. The matches were intense, but the experience and hospitality were unmatched.`,
-    name: 'Julien Morel',
-    role: 'Team Manager',
-    team: 'AS Monaco',
-    flag: '/img/flags/mc.png'
+    team: 'SC Arcozelo',
+    quote: '“…mais uma vez o Sporting Clube de Arcozelo participou no torneio”'
   },
   {
-    quote: `Playing in Cascais was a turning point for our young athletes. They grew on and off the court. We’ll be back stronger next year.`,
-    name: 'Sofia Almeida',
-    role: 'Head Coach',
-    team: 'Clube Voleibol do Sul',
-    flag: '/img/flags/pt.png'
+    team: 'Pel Amora SC',
+    quote:
+      '“…uma experiência inesquecível, tanto a nível competitivo como de convívio.”'
   },
   {
-    quote: `From the competition to the community, everything was world-class. Our players loved every second. Thank you, Cascais.`,
-    name: 'Carlos Romero',
-    role: 'Assistant Coach',
-    team: 'Madrid Storm Volleyball',
-    flag: '/img/flags/es.png'
+    team: 'CRCD Luzense',
+    quote: '“…um torneio garantido pela organização e ambiente fantástico.”'
   },
   {
-    quote: `An unforgettable tournament. The atmosphere was electric, and our players learned so much from the international talent present.`,
-    name: 'Amélie Duchamp',
-    role: 'Coach',
-    team: 'Olympique Sud Volley',
-    flag: '/img/flags/fr.png'
+    team: 'São Francisco AD',
+    quote: '“…as miúdas adoraram e claro que para o ano querem voltar.”'
   },
   {
-    quote: `We came to compete and left inspired. Cascais will always be a part of our team’s story.`,
-    name: 'Marcos Vázquez',
-    role: 'Team Director',
     team: 'Barcelona Flame',
-    flag: '/img/flags/es.png'
+    quote:
+      '“We came to compete and left inspired. Cascais will always be part of our story.”'
   }
 ]
 
 export default function LandingReferences() {
   const t = useTranslations('LandingPage.LandingReferences')
   const [currentSlide, setCurrentSlide] = useState(0)
+
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
-    slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel)
+    slideChanged(s) {
+      setCurrentSlide(s.track.details.rel)
     }
   })
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      instanceRef.current?.next()
-    }, 5000)
-    return () => clearInterval(interval)
+    const id = setInterval(() => instanceRef.current?.next(), 5000)
+    return () => clearInterval(id)
   }, [instanceRef])
 
   return (
-    <section className='bg-white py-16 transition-colors duration-300 dark:bg-background'>
-      <div className='mx-auto max-w-3xl px-6 text-center'>
-        <h2 className='mb-10 text-4xl font-bold text-primary dark:text-white'>
-          {t('What_they_say')}
+    <section className='relative'>
+      {/* Title OUTSIDE the wave, left-aligned */}
+      <div className='mx-auto max-w-6xl px-6'>
+        <h2 className='mb-4 text-3xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-4xl'>
+          {t('What_they_say') || 'O QUE ELES DIZEM'}
         </h2>
+      </div>
 
-        <div ref={sliderRef} className='keen-slider'>
-          {testimonials.map((item, i) => (
-            <div
-              key={i}
-              className='keen-slider__slide flex flex-col items-center px-6 transition-all duration-700 ease-in-out'
-            >
-              <p className='mb-6 max-w-2xl text-lg italic text-gray-700 dark:text-gray-300'>
-                “{item.quote}”
-              </p>
-              <div className='flex items-center gap-3'>
-                <Image
-                  src={item.flag}
-                  alt={item.team}
-                  width={40}
-                  height={40}
-                  className='rounded-full ring-1 ring-gray-200 dark:ring-gray-600'
-                />
-                <div className='text-left'>
-                  <p className='font-bold text-gray-900 dark:text-white'>
-                    {item.team}
-                  </p>
-                  <p className='text-sm text-gray-600 dark:text-gray-400'>
-                    {item.name} ({item.role})
-                  </p>
+      {/* Wave band */}
+      <div className='relative isolate overflow-hidden text-white'>
+        {/* wave background */}
+        <div className='absolute inset-0 -z-10'>
+          <Image
+            src='/img/global/ondas-7.png' // <- your wave PNG
+            alt=''
+            fill
+            priority
+            className='object-cover'
+          />
+        </div>
+
+        <div className='mx-auto max-w-6xl px-6 py-10 sm:py-12'>
+          {/* Mobile/Tablet: slider */}
+          <div className='lg:hidden'>
+            <div ref={sliderRef} className='keen-slider'>
+              {testimonials.map((item, i) => (
+                <div key={i} className='keen-slider__slide px-4'>
+                  <TestimonialCard {...item} />
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+            <div className='mt-6 flex justify-center gap-2'>
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => instanceRef.current?.moveToIdx(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                  className={`h-2 w-2 rounded-full transition-all ${
+                    currentSlide === i
+                      ? 'bg-white'
+                      : 'bg-white/50 hover:bg-white/80'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
 
-        {/* Navigation Dots */}
-        <div className='mt-6 flex justify-center gap-2'>
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => instanceRef.current?.moveToIdx(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                currentSlide === i
-                  ? 'bg-primary dark:bg-white'
-                  : 'hover:bg-primary/60 bg-gray-300 dark:bg-gray-600 dark:hover:bg-white/50'
-              }`}
-            />
-          ))}
+          {/* Desktop: first 4 side-by-side */}
+          <div className='hidden lg:grid lg:grid-cols-4 lg:gap-8'>
+            {testimonials.slice(0, 4).map((item, i) => (
+              <div key={i} className='flex'>
+                <TestimonialCard {...item} />
+              </div>
+            ))}
+          </div>
         </div>
-
-        <Link
-          href='/references'
-          className='mt-10 inline-flex items-center text-sm font-medium text-primary hover:underline dark:text-white'
-        >
-          {t('MoreReferences')} <span className='ml-1'>→</span>
-        </Link>
       </div>
     </section>
+  )
+}
+
+function TestimonialCard({ team, quote }: { team: string; quote: string }) {
+  return (
+    <div className='flex w-full flex-col items-center text-center lg:min-h-[160px]'>
+      <p className='mb-2 font-extrabold uppercase tracking-wide drop-shadow'>
+        {team}
+      </p>
+      <p className='max-w-[50ch] text-base italic leading-relaxed drop-shadow sm:text-lg'>
+        {quote}
+      </p>
+    </div>
   )
 }
