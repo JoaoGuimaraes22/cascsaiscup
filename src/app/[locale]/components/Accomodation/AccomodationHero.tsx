@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import clsx from 'clsx'
 
-export default function AccomodationHero() {
+export default function AccommodationHero() {
   const t = useTranslations('AccommodationPage.Hero')
 
   // Assets
@@ -16,7 +17,7 @@ export default function AccomodationHero() {
 
   return (
     <section className='relative min-h-[720px] w-full overflow-hidden pb-[135px]'>
-      {/* Background */}
+      {/* Background (decorative) */}
       <Image
         src={BG}
         alt=''
@@ -33,7 +34,7 @@ export default function AccomodationHero() {
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
           {/* LEFT */}
           <div className='relative z-10 lg:col-span-7'>
-            <h1 className='mb-2 text-2xl font-extrabold uppercase tracking-wide text-sky-600 sm:text-3xl'>
+            <h1 className='mb-2 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'>
               {t('title')}
             </h1>
 
@@ -96,47 +97,37 @@ export default function AccomodationHero() {
                   draggable={false}
                 />
               </div>
-              <div className='shrink-0'>
-                <Image
-                  src={LOGO}
-                  alt={t('logoAlt')}
-                  width={80}
-                  height={28}
-                  className='h-auto w-[70px] object-contain opacity-95 sm:w-[80px]'
-                  sizes='80px'
-                  decoding='async'
-                  draggable={false}
-                />
-              </div>
+              <Logo
+                src={LOGO}
+                alt={t('logoAlt')}
+                width={80}
+                className='w-[72px] shrink-0 sm:w-[80px]'
+              />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Tiny logo above wave (desktop only) — aligned to container, not viewport */}
+      {/* Tiny logo above wave (desktop only) */}
       <div
         className='pointer-events-none absolute left-1/2 z-20 hidden w-screen -translate-x-1/2 lg:block'
-        style={{ bottom: `calc(${WAVE_H}px + 6px)` }} // 6px above the wave
+        style={{ bottom: `calc(${WAVE_H}px + 6px)` }}
       >
         <div className='mx-auto max-w-screen-xl px-4'>
           <div className='flex justify-end'>
-            <Image
+            <Logo
               src={LOGO}
               alt={t('logoAlt')}
               width={80}
-              height={28}
-              className='h-auto w-[70px] object-contain opacity-95 xl:w-[80px]'
-              sizes='80px'
-              decoding='async'
-              draggable={false}
+              className='opacity-95'
             />
           </div>
         </div>
       </div>
 
-      {/* ---- Bottom wave (no trim) + stats overlay ---- */}
+      {/* ---- Bottom wave + stats overlay ---- */}
       <div className='pointer-events-none absolute bottom-0 left-1/2 z-10 w-screen -translate-x-1/2'>
-        {/* Desktop: intrinsic ratio + right-aligned stats, nudged down */}
+        {/* Desktop: intrinsic ratio + right-aligned stats */}
         <div className='relative hidden lg:block'>
           <Image
             src={WAVE}
@@ -145,18 +136,19 @@ export default function AccomodationHero() {
             height={WAVE_H}
             className='-mb-px block h-auto w-full'
             sizes='100vw'
+            decoding='async'
+            draggable={false}
           />
           <div className='pointer-events-none absolute inset-0'>
-            <div className='mx-auto flex h-full max-w-screen-xl translate-y-[4px] items-center justify-end px-4'>
-              <ul className='flex flex-wrap items-center gap-x-6 gap-y-3 text-lg font-extrabold text-white sm:text-xl'>
-                <li>{t('stats.teams')}</li>
-                <li className='text-2xl leading-none'>•</li>
-                <li>{t('stats.athletes')}</li>
-                <li className='text-2xl leading-none'>•</li>
-                <li>{t('stats.countries')}</li>
-                <li className='text-2xl leading-none'>•</li>
-                <li>{t('stats.games')}</li>
-              </ul>
+            <div className='mx-auto flex h-full max-w-screen-xl items-center justify-end px-4'>
+              <StatsList
+                items={[
+                  t('stats.teams'),
+                  t('stats.athletes'),
+                  t('stats.countries'),
+                  t('stats.games')
+                ]}
+              />
             </div>
           </div>
         </div>
@@ -167,15 +159,14 @@ export default function AccomodationHero() {
           style={{ backgroundImage: `url(${WAVE})`, height: `${WAVE_H}px` }}
         >
           <div className='absolute inset-0 flex items-center justify-center'>
-            <ul className='flex items-center gap-4 whitespace-nowrap px-4 text-[12px] font-extrabold uppercase tracking-wide text-white sm:text-[13px]'>
-              <li>{t('stats.teams')}</li>
-              <li className='text-lg leading-none'>•</li>
-              <li>{t('stats.athletes')}</li>
-              <li className='text-lg leading-none'>•</li>
-              <li>{t('stats.countries')}</li>
-              <li className='text-lg leading-none'>•</li>
-              <li>{t('stats.games')}</li>
-            </ul>
+            <StatsList
+              items={[
+                t('stats.teams'),
+                t('stats.athletes'),
+                t('stats.countries'),
+                t('stats.games')
+              ]}
+            />
           </div>
         </div>
       </div>
@@ -184,9 +175,56 @@ export default function AccomodationHero() {
 }
 
 /* --- tiny UI bits --- */
-function StatBullet({ children }: { children: React.ReactNode }) {
-  return <li className='leading-none'>{children}</li>
+
+function Logo({
+  src,
+  alt,
+  width = 80,
+  className
+}: {
+  src: string
+  alt: string
+  width?: number
+  className?: string
+}) {
+  // Maintain original aspect ratio (80x28)
+  const height = Math.round((width * 28) / 80)
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={clsx('h-auto object-contain', className)}
+      sizes={`${width}px`}
+      decoding='async'
+      draggable={false}
+    />
+  )
 }
-function StatDot() {
-  return <li className='text-xl leading-none'>•</li>
+
+/* --- tiny UI bits --- */
+function StatsList({ items }: { items: string[] }) {
+  return (
+    <ul
+      className={clsx(
+        // compact on very small screens to prevent clipping
+        'flex items-center whitespace-nowrap px-3 font-extrabold uppercase text-white',
+        'gap-3 text-[11px] tracking-normal', // xs
+        'sm:gap-4 sm:text-[13px] sm:tracking-wide', // sm+
+        'lg:gap-6 lg:text-lg'
+      )}
+    >
+      {items.map((item, i) => (
+        <li key={i} className='flex items-center gap-3 sm:gap-4 lg:gap-6'>
+          <span>{item}</span>
+          {i < items.length - 1 && (
+            <span className='text-sm leading-none sm:text-lg lg:text-2xl'>
+              •
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+  )
 }

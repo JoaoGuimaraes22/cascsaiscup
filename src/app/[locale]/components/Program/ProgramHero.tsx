@@ -86,7 +86,7 @@ export default function ProgramHero() {
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
           {/* Left: title + intro */}
           <div className='lg:col-span-7'>
-            <h1 className='mb-3 text-2xl font-extrabold uppercase tracking-wide text-sky-600 sm:text-3xl'>
+            <h1 className='mb-3 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'>
               {t('title')}
             </h1>
 
@@ -98,7 +98,7 @@ export default function ProgramHero() {
                 {t('checkin.text')}
               </p>
               <p>
-                <span className='font-extrabold uppercase tracking-wide text-sky-700'>
+                <span className='font-extrabold uppercase tracking-wide text-sky-500'>
                   {t('daysHeader')}
                 </span>
               </p>
@@ -176,7 +176,7 @@ export default function ProgramHero() {
           {/* Left: lay day + notes + buttons */}
           <div className='space-y-4 text-sm leading-relaxed text-slate-800/90 sm:text-base lg:col-span-7'>
             <div>
-              <h3 className='mb-1 text-lg font-extrabold uppercase tracking-wide text-sky-700 sm:text-xl'>
+              <h3 className='mb-1 text-lg font-extrabold uppercase tracking-wide text-sky-500 sm:text-xl'>
                 {t('layday.title')}
               </h3>
               <p>{t('layday.text')}</p>

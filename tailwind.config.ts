@@ -1,14 +1,12 @@
 import type { Config } from 'tailwindcss'
 
 const config = {
-  darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}'
   ],
-  prefix: '',
   theme: {
     container: {
       center: true,
@@ -19,25 +17,12 @@ const config = {
     },
     extend: {
       backgroundImage: {
-        'span-bg': 'var(--span-bg)'
+        'span-bg': 'var(--span-bg)' // keep only if used elsewhere
       },
       colors: {
         background: 'var(--background)',
-        primary: {
-          DEFAULT: 'var(--primary)'
-        },
-        'button-secondary': 'var(--button-secondary)',
-        'button-text': 'var(--button-text)',
-        'text-secondary': 'var(--text-secondary)',
-        'background-secondary': 'var(--background-secondary)',
-        secondary: 'var(--secondary)',
-        button: 'var(--button)',
-        selected: 'var(--selected)',
-        dropdown: 'var(--dropdown)',
-        dropdownHover: 'var(--dropdown-hover)',
-        buttonSecondary: 'var(--button-secondary)'
+        primary: { DEFAULT: 'var(--primary)' }
       },
-
       fontFamily: {
         sans: ['var(--font-space-grotesk)', 'var(--rubik)']
       },

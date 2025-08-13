@@ -62,7 +62,7 @@ export default function AboutHero() {
       {/* Content container — aligned with other sections */}
       <div className='relative z-10 mx-auto h-full max-w-screen-xl px-4 pb-24 pt-20 md:pb-20 md:pr-[34vw]'>
         <div className='space-y-6'>
-          <h2 className='text-3xl font-extrabold uppercase text-sky-600 md:text-4xl'>
+          <h2 className='text-3xl font-extrabold uppercase text-sky-500 md:text-4xl'>
             {t('title')}
           </h2>
 

@@ -29,7 +29,7 @@ export default function AccomodationFood() {
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10'>
           {/* LEFT: text + buttons (no background) */}
           <div className='lg:col-span-7 xl:col-span-8'>
-            <h2 className='mb-3 text-xl font-extrabold uppercase tracking-wide text-sky-700 sm:text-2xl'>
+            <h2 className='mb-3 text-xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-2xl'>
               {t('title')}
             </h2>
 

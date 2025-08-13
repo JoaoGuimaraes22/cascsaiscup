@@ -49,7 +49,7 @@ export default function AboutPortugal() {
         <div className='relative grid grid-cols-1 gap-8 md:grid-cols-[1.1fr_0.9fr]'>
           {/* LEFT */}
           <div className='space-y-6'>
-            <h2 className='text-2xl font-extrabold uppercase text-sky-700 sm:text-3xl md:text-4xl'>
+            <h2 className='text-2xl font-extrabold uppercase text-sky-500 sm:text-3xl md:text-4xl'>
               {t('title')}
             </h2>
             <p className='text-slate-700'>{t('p1')}</p>
@@ -99,7 +99,7 @@ export default function AboutPortugal() {
                 />
               </div>
               <div className='space-y-2 p-4'>
-                <h3 className='text-base font-extrabold uppercase text-sky-700'>
+                <h3 className='text-base font-extrabold uppercase text-sky-500'>
                   {t(`cards.${s.key}.title`)}{' '}
                   <span className='font-semibold text-slate-500'>
                     {t(`cards.${s.key}.subtitle`)}
