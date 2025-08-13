@@ -88,17 +88,60 @@
   },
 
   "AboutPage": {
-    "title": "Volley4All",
-    "p1": "Volley4All is a non-profit sports association focused on the solid development of its athletes.",
-    "p2": "Over the last years we’ve achieved important results and became a reference in the south of Portugal.",
-    "p3": "We believe in the power of sports to unite people and create positive change in society.",
-    "p4": "We are a club PLAY HARD TRAIN HARDER",
-    "cta": "Visit us",
-    "club": { "logoAlt": "Volley4All Sparrows" },
-    "sponsors": {
-      "cascaisEstorilAlt": "Cascais Estoril Tourism",
-      "camaraAlt": "Cascais City Council",
-      "camFordAlt": "C.A.M. Ford"
+    "AboutHero": {
+      "title": "Volley4All",
+      "p1": "Volley4All is a non-profit sports association focused on the solid development of its athletes.",
+      "p2": "Over the last years we’ve achieved important results and became a reference in the south of Portugal.",
+      "p3": "We believe in the power of sports to unite people and create positive change in society.",
+      "p4": "We are a club PLAY HARD TRAIN HARDER",
+      "cta": "Visit us",
+      "club": { "logoAlt": "Volley4All Sparrows" },
+      "sponsors": {
+        "cascaisEstorilAlt": "Cascais Estoril Tourism",
+        "camaraAlt": "Cascais City Council",
+        "camFordAlt": "C.A.M. Ford"
+      }
+    },
+    "AboutPortugal": {
+      "title": "PORQUÊ PORTUGAL? PORQUÊ CASCAIS?",
+      "p1": "Com um clima ameno, mais de 300 dias de sol por ano e 850 km de praias deslumbrantes banhadas pelo Oceano Atlântico, Portugal é o local ideal para viver experiências inesquecíveis durante todo o ano.",
+      "p2": "Reconhecido como um dos principais destinos turísticos da Europa e classificado no Top 3 dos destinos mais seguros do mundo, Portugal combina de forma única paisagens naturais, riqueza cultural e hospitalidade.",
+      "p3": "A apenas 2 horas de voo das principais capitais europeias, Lisboa oferece ligações rápidas e cómodas para visitantes de todo o mundo.",
+      "p4": "Cascais situa‑se no litoral atlântico, a 30 km do Aeroporto de Lisboa — charmosa, segura e perfeita para o nosso torneio.",
+      "logoAlt": "Cascais Volley Cup 2026",
+      "taglineAlt": "Feel the action, enjoy the summer",
+      "cards": {
+        "portugal": {
+          "title": "PORTUGAL",
+          "subtitle": "Lisboa",
+          "desc": "Uma das nações mais antigas da Europa, fundada em 1139 com fronteiras estáveis desde 1297.",
+          "alt": "Vista de Lisboa e Torre de Belém"
+        },
+        "cabo": {
+          "title": "CABO DA ROCA",
+          "subtitle": "Cascais",
+          "desc": "Ponto mais ocidental da Europa continental, marcado por escarpas e vistas impressionantes.",
+          "alt": "Escarpas e farol do Cabo da Roca"
+        },
+        "boca": {
+          "title": "BOCA DO INFERNO",
+          "subtitle": "Cascais",
+          "desc": "Formação rochosa única com falésias esculpidas pela força do Atlântico, a oeste de Cascais.",
+          "alt": "Arcos e falésias na Boca do Inferno"
+        },
+        "sec1719": {
+          "title": "SEC XVII | XIX",
+          "subtitle": "Cascais",
+          "desc": "Mansões nobres dos séculos XVII–XIX; refúgio histórico da realeza portuguesa.",
+          "alt": "Arquitetura histórica de Cascais"
+        }
+      },
+      "stats": {
+        "teams": "50 EQUIPAS",
+        "athletes": "600 ATLETAS",
+        "countries": "3 PAÍSES",
+        "matches": "150 JOGOS"
+      }
     }
   },
 

@@ -27,7 +27,7 @@ export default function LandingWelcome() {
 
       <div className='absolute right-4 top-24 z-10 sm:right-8 sm:top-28'>
         <Image
-          src='/img/landing/tagline.png'
+          src='/img/global/tagline.png'
           alt={t('tagline_alt') || 'feel the ACTION, enjoy the SUMMER'}
           width={880}
           height={200}
