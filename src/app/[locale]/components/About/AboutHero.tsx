@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl'
 export default function AboutHero() {
   const t = useTranslations('AboutPage')
 
-  // You can also move this to JSON if you prefer
   const sponsors = [
     {
       src: '/img/sponsors/cascais-estoril.png',
@@ -29,12 +28,24 @@ export default function AboutHero() {
   ]
 
   return (
-    <section className='relative bg-white'>
+    <section className='relative min-h-screen w-full overflow-hidden'>
+      {/* Full-section background image */}
+      <div className='absolute inset-0 z-0'>
+        <Image
+          src='/img/about/about-bg.png' // ensure this file exists; adjust extension if needed
+          alt=''
+          fill
+          className='object-cover'
+          sizes='100vw'
+          priority
+        />
+      </div>
+
       {/* Content */}
-      <div className='mx-auto grid max-w-screen-2xl grid-cols-1 gap-10 px-4 pb-20 pt-12 md:grid-cols-2 md:items-center lg:px-8'>
+      <div className='relative z-10 mx-auto grid max-w-screen-2xl grid-cols-1 gap-10 px-4 pb-20 pt-12 md:grid-cols-2 md:items-center lg:px-8'>
         {/* LEFT */}
         <div className='space-y-6'>
-          <h2 className='text-xl font-extrabold uppercase text-sky-600'>
+          <h2 className='text-3xl font-extrabold uppercase text-sky-600 md:text-4xl'>
             {t('title')}
           </h2>
 
@@ -43,6 +54,13 @@ export default function AboutHero() {
           </p>
           <p className='text-sm leading-relaxed text-slate-700 sm:text-base'>
             {t('p2')}
+          </p>
+          <p className='text-sm leading-relaxed text-slate-700 sm:text-base'>
+            {t('p3')}
+          </p>
+
+          <p className='text-sm leading-relaxed text-slate-700 sm:text-base'>
+            {t('p4')}
           </p>
 
           {/* Sponsors */}
@@ -81,7 +99,7 @@ export default function AboutHero() {
         {/* RIGHT image */}
         <div className='relative h-[420px] w-full overflow-hidden rounded-md md:h-[520px] md:rounded-xl'>
           <Image
-            src='/img/landing/about-hero.jpg' // replace with your finals
+            src='/img/about/about-hero.png'
             alt={t('title')}
             fill
             className='object-cover'
@@ -90,8 +108,8 @@ export default function AboutHero() {
         </div>
       </div>
 
-      {/* Bottom wave (full width) */}
-      <div className='pointer-events-none absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
+      {/* Bottom wave (kept on top of bg) */}
+      <div className='pointer-events-none absolute bottom-0 left-1/2 z-20 w-screen -translate-x-1/2'>
         <Image
           src='/img/global/ondas-3.png'
           alt=''
@@ -99,6 +117,7 @@ export default function AboutHero() {
           height={135}
           className='h-auto w-full object-cover'
           priority
+          sizes='100vw'
         />
       </div>
     </section>

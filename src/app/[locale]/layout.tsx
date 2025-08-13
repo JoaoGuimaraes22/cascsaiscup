@@ -69,7 +69,8 @@ export default function RootLayout({
               showSpinner={false}
             />
             <Header locale={locale} />
-            <main className='w-full'>{children}</main>
+            <main className='w-full overflow-x-hidden'>{children}</main>
+
             <Footer />
             <ScrollToTopButton />
           </NextIntlClientProvider>
