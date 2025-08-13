@@ -26,7 +26,7 @@
     "cmdk": "^0.2.1",
     "date-fns": "^3.3.1",
     "keen-slider": "^6.8.6",
-    "next": "14.1.0",
+    "next": "^14.2.31",
     "next-cloudinary": "^6.16.0",
     "next-intl": "^3.11.3",
     "next-themes": "^0.2.1",

@@ -76,11 +76,12 @@ export default function Gallery({
     }
   }
 
-  const handleKeyPress = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') handleCloseModal()
-  }
-
   useEffect(() => {
+    // Move handleKeyPress inside the useEffect
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleCloseModal()
+    }
+
     if (selectedImage) {
       document.addEventListener('keydown', handleKeyPress)
       document.body.style.overflow = 'hidden'
@@ -93,7 +94,7 @@ export default function Gallery({
       document.removeEventListener('keydown', handleKeyPress)
       document.body.style.overflow = 'unset'
     }
-  }, [selectedImage])
+  }, [selectedImage]) // Now only depends on selectedImage
 
   if (loading) {
     return (

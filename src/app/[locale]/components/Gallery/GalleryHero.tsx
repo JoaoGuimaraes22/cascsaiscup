@@ -17,18 +17,19 @@ type CloudinaryImage = {
 
 type YearConfig = { year: number; folder: string }
 
+// Move YEARS outside the component to prevent recreating on each render
+const YEARS: YearConfig[] = [
+  { year: 2023, folder: 'gallery/2023' },
+  { year: 2024, folder: 'gallery/2024' },
+  { year: 2025, folder: 'gallery/2025' }
+]
+
 export default function GalleryHeroNew() {
   const t = useTranslations('GalleryPage.Hero')
   const locale = useLocale()
 
   const BG = '/img/gallery/hero-bg.png'
   const TAGLINE = '/img/global/tagline-w.png'
-
-  const YEARS: YearConfig[] = [
-    { year: 2023, folder: 'gallery/2023' },
-    { year: 2024, folder: 'gallery/2024' },
-    { year: 2025, folder: 'gallery/2025' }
-  ]
 
   const [imagesByYear, setImagesByYear] = useState<
     Record<number, CloudinaryImage[]>
@@ -59,7 +60,7 @@ export default function GalleryHeroNew() {
         setLoading(false)
       }
     })()
-  }, [])
+  }, []) // Now YEARS is not needed in dependencies since it's constant
 
   return (
     <section
