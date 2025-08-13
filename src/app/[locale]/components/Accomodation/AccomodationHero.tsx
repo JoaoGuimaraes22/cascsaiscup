@@ -161,23 +161,21 @@ export default function AccomodationHero() {
           </div>
         </div>
 
-        {/* Mobile/Tablet: stretch to avoid seams + centered stats */}
+        {/* Mobile wave (stretched) + centered one-line stats */}
         <div
           className='relative block overflow-hidden bg-center bg-no-repeat [background-size:100%_100%] lg:hidden'
           style={{ backgroundImage: `url(${WAVE})`, height: `${WAVE_H}px` }}
         >
           <div className='absolute inset-0 flex items-center justify-center'>
-            <div className='mx-auto max-w-screen-xl px-4'>
-              <ul className='flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[13px] font-extrabold uppercase tracking-wide text-white'>
-                <StatBullet>{t('stats.teams')}</StatBullet>
-                <StatDot />
-                <StatBullet>{t('stats.athletes')}</StatBullet>
-                <StatDot />
-                <StatBullet>{t('stats.countries')}</StatBullet>
-                <StatDot />
-                <StatBullet>{t('stats.games')}</StatBullet>
-              </ul>
-            </div>
+            <ul className='flex items-center gap-4 whitespace-nowrap px-4 text-[12px] font-extrabold uppercase tracking-wide text-white sm:text-[13px]'>
+              <li>{t('stats.teams')}</li>
+              <li className='text-lg leading-none'>•</li>
+              <li>{t('stats.athletes')}</li>
+              <li className='text-lg leading-none'>•</li>
+              <li>{t('stats.countries')}</li>
+              <li className='text-lg leading-none'>•</li>
+              <li>{t('stats.games')}</li>
+            </ul>
           </div>
         </div>
       </div>

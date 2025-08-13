@@ -7,7 +7,7 @@ export default function ProgramPage() {
   const t = useTranslations('ProgramPage')
 
   return (
-    <div className='bg-background text-primary'>
+    <div>
       <ProgramHero />
     </div>
   )

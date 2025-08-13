@@ -49,19 +49,19 @@ export default function LandingReferences() {
 
   return (
     <section className='relative'>
-      {/* Title OUTSIDE the wave, left-aligned */}
+      {/* Title */}
       <div className='mx-auto max-w-6xl px-6'>
-        <h2 className='mb-4 text-3xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-4xl'>
+        <h2 className='mb-4 text-center text-3xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-4xl lg:text-left'>
           {t('What_they_say') || 'O QUE ELES DIZEM'}
         </h2>
       </div>
 
-      {/* Wave band */}
+      {/* Wave + content */}
       <div className='relative isolate overflow-hidden text-white'>
-        {/* wave background */}
+        {/* Wave background */}
         <div className='absolute inset-0 -z-10'>
           <Image
-            src='/img/global/ondas-7.png' // <- your wave PNG
+            src='/img/global/ondas-7.png'
             alt=''
             fill
             priority

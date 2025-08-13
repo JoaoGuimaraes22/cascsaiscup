@@ -7,10 +7,11 @@ export default function ProgramHero() {
   const t = useTranslations('ProgramPage.ProgramHero')
 
   // Assets
-  const BG = '/img/accommodation/hero-bg.png' // use your page BG if different
+  const BG = '/img/program/program-bg.png'
   const TAGLINE = '/img/global/tagline.png'
   const PLAYERS = '/img/program/players.png'
   const WAVE = '/img/global/ondas-3.png'
+  const PROGRAM_PDF = '/docs/program-2026.pdf' // adjust if needed
 
   const WAVE_H = 135
 
@@ -18,12 +19,12 @@ export default function ProgramHero() {
   const days = [
     {
       key: 'd1',
-      weekday: t('days.d1.weekday'), // e.g., "4ª FEIRA"
-      date: t('days.d1.date'), // "08–jul"
+      weekday: t('days.d1.weekday'),
+      date: t('days.d1.date'),
       blocks: [
-        { title: t('days.d1.block1.title') }, // "1ª FASE DE GRUPOS"
-        { subtitle: t('days.d1.block1.subtitle') }, // "Jogos"
-        { times: t('days.d1.block1.times') } // "9.00–22.00"
+        { title: t('days.d1.block1.title') },
+        { subtitle: t('days.d1.block1.subtitle') },
+        { times: t('days.d1.block1.times') }
       ]
     },
     {
@@ -40,17 +41,17 @@ export default function ProgramHero() {
       key: 'd3',
       weekday: t('days.d3.weekday'),
       date: t('days.d3.date'),
-      blocks: [{ title: t('days.d3.block1.title') }] // "LAY DAY"
+      blocks: [{ title: t('days.d3.block1.title') }]
     },
     {
       key: 'd4',
       weekday: t('days.d4.weekday'),
       date: t('days.d4.date'),
       blocks: [
-        { title: t('days.d4.block1.title') }, // "2ª FASE DE GRUPOS"
-        { title: t('days.d4.block2.title') }, // "1/4 de Final"
-        { subtitle: t('days.d4.block3.subtitle') }, // "Jogos"
-        { times: t('days.d4.block3.times') } // "9.00–22.00"
+        { title: t('days.d4.block1.title') },
+        { title: t('days.d4.block2.title') },
+        { subtitle: t('days.d4.block3.subtitle') },
+        { times: t('days.d4.block3.times') }
       ]
     },
     {
@@ -58,12 +59,12 @@ export default function ProgramHero() {
       weekday: t('days.d5.weekday'),
       date: t('days.d5.date'),
       blocks: [
-        { title: t('days.d5.block1.title') }, // "2ª FASE DE GRUPOS"
-        { title: t('days.d5.block2.title') }, // "1/2 de Final"
-        { title: t('days.d5.block3.title') }, // "Finais"
-        { subtitle: t('days.d5.block4.subtitle') }, // "Jogos"
-        { times: t('days.d5.block4.times') }, // "9.00–16.00"
-        { note: t('days.d5.block5.note') } // "Cerimónia de Entrega de Prémios 18.00"
+        { title: t('days.d5.block1.title') },
+        { title: t('days.d5.block2.title') },
+        { title: t('days.d5.block3.title') },
+        { subtitle: t('days.d5.block4.subtitle') },
+        { times: t('days.d5.block4.times') },
+        { note: t('days.d5.block5.note') }
       ]
     }
   ]
@@ -86,7 +87,7 @@ export default function ProgramHero() {
           {/* Left: title + intro */}
           <div className='lg:col-span-7'>
             <h1 className='mb-3 text-2xl font-extrabold uppercase tracking-wide text-sky-600 sm:text-3xl'>
-              {t('title')} {/* PROGRAM/PROGRAMA */}
+              {t('title')}
             </h1>
 
             <div className='space-y-3 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
@@ -113,7 +114,6 @@ export default function ProgramHero() {
               height={160}
               className='h-auto w-[240px] object-contain sm:w-[320px] lg:w-[420px]'
               sizes='(max-width:640px) 240px, (max-width:1024px) 320px, 420px'
-              priority={false}
             />
           </div>
         </div>
@@ -173,7 +173,7 @@ export default function ProgramHero() {
 
         {/* Bottom content: 2 columns */}
         <div className='mt-8 grid grid-cols-1 gap-8 lg:mt-10 lg:grid-cols-12'>
-          {/* Left: lay day + notes */}
+          {/* Left: lay day + notes + buttons */}
           <div className='space-y-4 text-sm leading-relaxed text-slate-800/90 sm:text-base lg:col-span-7'>
             <div>
               <h3 className='mb-1 text-lg font-extrabold uppercase tracking-wide text-sky-700 sm:text-xl'>
@@ -195,17 +195,43 @@ export default function ProgramHero() {
               </h4>
               <p>{t('attention.text')}</p>
             </div>
+
+            {/* Download + Contact buttons (always stacked) */}
+            <div className='flex flex-col items-start gap-3 pt-2'>
+              <a
+                href={PROGRAM_PDF}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='inline-flex items-center rounded-full bg-sky-600 px-5 py-2 text-sm font-bold text-white shadow-lg ring-1 ring-black/10 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
+              >
+                {t('downloadPdf')}
+              </a>
+
+              <a
+                href='/contact'
+                className='inline-flex items-center rounded-full bg-white/90 px-5 py-2 text-sm font-bold text-sky-700 shadow-sm ring-1 ring-sky-600/40 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
+              >
+                {t('ctaContact')}
+              </a>
+            </div>
           </div>
 
-          {/* Right: players image */}
+          {/* Right: players image — taller & reaching the boxes */}
           <div className='relative lg:col-span-5'>
-            <div className='relative mx-auto h-[320px] w-full max-w-[480px] overflow-visible'>
+            <div
+              className='
+                relative z-20 mx-auto -mt-4 h-[360px] w-full overflow-visible
+                [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_68%,transparent_100%)]
+                [mask-image:linear-gradient(to_bottom,black_0%,black_68%,transparent_100%)]
+                sm:-mt-6 sm:h-[420px] lg:-mt-10 lg:h-[560px] xl:h-[640px]
+              '
+            >
               <Image
                 src={PLAYERS}
                 alt={t('playersAlt')}
                 fill
                 className='object-contain object-bottom'
-                sizes='(max-width: 1024px) 70vw, 480px'
+                sizes='(max-width: 1024px) 90vw, 700px'
               />
             </div>
           </div>
@@ -213,17 +239,19 @@ export default function ProgramHero() {
       </div>
 
       {/* Wave + right-aligned stats (nudge down) */}
-      <div className='pointer-events-none absolute bottom-0 left-1/2 z-10 w-screen -translate-x-1/2'>
+      <div className='pointer-events-none absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
         <div className='relative hidden lg:block'>
+          {/* Wave background BELOW players */}
           <Image
             src={WAVE}
             alt=''
             width={2048}
             height={WAVE_H}
-            className='-mb-px block h-auto w-full'
+            className='z-10 -mb-px block h-auto w-full'
             sizes='100vw'
           />
-          <div className='pointer-events-none absolute inset-0'>
+          {/* Stats ABOVE players & wave */}
+          <div className='pointer-events-none absolute inset-0 z-30'>
             <div className='mx-auto flex h-full max-w-screen-xl translate-y-[4px] items-center justify-end px-4'>
               <ul className='flex flex-wrap items-center gap-x-6 gap-y-2 text-lg font-extrabold text-white sm:text-xl'>
                 <li>{t('stats.teams')}</li>

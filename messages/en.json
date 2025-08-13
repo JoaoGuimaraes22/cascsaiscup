@@ -199,48 +199,93 @@
     }
   },
 
-  "HallOfFamePage": {
-    "title": "Hall of Fame of Cascais Volley Cup",
-    "description": "At Cascais Volley Cup we hosted hundreds of international volleyball teams. In over 40 years we welcomed boys and girls of any level, from all continents, who had the chance to enjoy the magic of Portugal in the beautiful city of Cascais. What follows is just a partial list of the most celebrated participants so far.",
-    "teams": "Teams",
-    "winners": "Winners",
-    "HallOfFameWinners": {
-      "Title": "Hall of Fame — Top 4 by Category",
-      "Categories": {
-        "Sub-21": "Sub-21",
-        "Sub-17": "Sub-17",
-        "Sub-15": "Sub-15"
-      }
-    }
-  },
-
   "ProgramPage": {
-    "Program": "Program",
-    "Dates": "July 9th–13th, 2026",
-    "Location": "Cascais / Portugal",
-    "intro_location": "Summer Volleyball Tournament in Cascais / Portugal",
-    "intro_title": "Cascais Volley Cup",
-    "intro_paragraph_1": "Welcome to the most exciting youth volleyball tournament in Europe! Cascais Volley Cup brings together international teams for an unforgettable week by the sea.",
-    "intro_paragraph_2": "On this page you’ll find all information about the upcoming edition, taking place each July — a new summer tradition built on passion, sport, and community.",
-    "ProgramDetails": {
-      "title": "Technical Details",
-      "categories": {
-        "title": "Categories",
-        "b19": "B19 (boys from 1st Jan 2007)",
-        "g19": "G19 (girls from 1st Jan 2007)",
-        "b17": "B17 (boys from 1st Jan 2009)",
-        "g17": "G17 (girls from 1st Jan 2009)"
+    "ProgramHero": {
+      "title": "Programa",
+      "taglineAlt": "Tagline do evento",
+      "playersAlt": "Jogadoras em ação",
+
+      "checkin": {
+        "label": "7 de julho · 3ª feira",
+        "text": "O “CHECK IN” de todas as equipas deve ser realizado entre as 15.00 e as 24.00 deste dia no local do respetivo alojamento, que será comunicado atempadamente pela organização."
       },
-      "where": {
-        "title": "Where",
-        "description": "Cascais is a beautiful town in Portugal, perfectly located between Lisbon and Sintra, and just one hour from the airport."
+
+      "daysHeader": "Calendário resumido:",
+
+      "days": {
+        "d1": {
+          "weekday": "4ª FEIRA",
+          "date": "08–jul",
+          "block1": {
+            "title": "1ª FASE DE GRUPOS",
+            "subtitle": "Jogos",
+            "times": "9.00–22.00"
+          }
+        },
+        "d2": {
+          "weekday": "5ª FEIRA",
+          "date": "09–jul",
+          "block1": {
+            "title": "1ª FASE DE GRUPOS",
+            "subtitle": "Jogos",
+            "times": "9.00–22.00"
+          }
+        },
+        "d3": {
+          "weekday": "6ª FEIRA",
+          "date": "10–jul",
+          "block1": {
+            "title": "LAY DAY"
+          }
+        },
+        "d4": {
+          "weekday": "SÁB",
+          "date": "11–jul",
+          "block1": { "title": "2ª FASE DE GRUPOS" },
+          "block2": { "title": "1/4 de Final" },
+          "block3": {
+            "subtitle": "Jogos",
+            "times": "9.00–22.00"
+          }
+        },
+        "d5": {
+          "weekday": "DOM",
+          "date": "12–jul",
+          "block1": { "title": "2ª FASE DE GRUPOS" },
+          "block2": { "title": "1/2 de Final" },
+          "block3": { "title": "Finais" },
+          "block4": {
+            "subtitle": "Jogos",
+            "times": "9.00–16.00"
+          },
+          "block5": {
+            "note": "Cerimónia de Entrega de Prémios · 18.00"
+          }
+        }
       },
-      "when": {
-        "title": "When",
-        "dates": "July 9th–13th, 2025",
-        "note": "Summer",
-        "previous": "Previous: July 9th–13th, 2026",
-        "next": "Next edition: July 9th–13th, 2025"
+
+      "checkout": {
+        "label": "13 de julho · 2ª feira",
+        "text": "O “CHECK OUT” de todas as equipas que o solicitem e/ou necessitem de realizar transferes com o Aeroporto de Lisboa deve realizar-se até às 12.00 deste dia."
+      },
+
+      "layday": {
+        "title": "Lay Day",
+        "text": "No dia 10 de julho, sexta-feira, apenas se realizarão os jogos estritamente necessários para acerto dos respetivos calendários. Nesse dia, será possível às comitivas usufruírem da nossa vila, com a opção de se deslocarem até Lisboa. A viagem de comboio ao longo do estuário do Tejo é uma experiência lindíssima, passando por todas as praias da Costa do Estoril e oferecendo vistas de pontos turísticos como a Torre de Belém, o Mosteiro dos Jerónimos, o Padrão dos Descobrimentos, o Centro Cultural de Belém, o MAAT, entre outros. Tudo isso em uma viagem de apenas 25 minutos de comboio."
+      },
+
+      "attention": {
+        "label": "Atenção",
+        "text": "Caso entenda ser do melhor interesse de todos os participantes, a organização reserva o direito de poder alterar o respetivo programa. Nessa eventualidade, todas as equipas serão devidamente notificadas."
+      },
+      "downloadPdf": "Descarregar programa completo (PDF)",
+      "ctaContact": "Contacte-nos",
+
+      "stats": {
+        "teams": "50 equipas",
+        "athletes": "600 atletas",
+        "countries": "3 países",
+        "games": "150 jogos"
       }
     }
   },

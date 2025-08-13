@@ -98,14 +98,36 @@ export default function LandingLocation() {
           priority
         />
 
-        {/* stats overlay, aligned to the same container as above */}
-        <div className='pointer-events-none absolute inset-0'>
-          <div className='mx-auto flex h-full max-w-screen-xl items-center px-4'>
-            <div className='flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] font-extrabold uppercase tracking-wide text-white sm:text-sm'>
-              <StatBullet>{t('stats_teams')}</StatBullet>
-              <StatBullet>{t('stats_athletes')}</StatBullet>
-              <StatBullet>{t('stats_countries')}</StatBullet>
-              <StatBullet>{t('stats_games')}</StatBullet>
+        {/* ---- Bottom wave + stats (full-bleed) ---- */}
+        <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
+          {/* wave image pinned to bottom */}
+          <Image
+            src='/img/global/ondas-3.png'
+            alt=''
+            width={1920}
+            height={135}
+            className='-mb-px block h-[135px] w-full object-cover'
+            priority
+          />
+
+          {/* stats overlay: centered on mobile, left on desktop */}
+          <div className='pointer-events-none absolute inset-0'>
+            <div className='mx-auto flex h-full max-w-screen-xl items-center justify-center px-4 lg:justify-start'>
+              <ul className='flex items-center gap-4 whitespace-nowrap text-[12px] font-extrabold uppercase tracking-wide text-white sm:text-[13px] lg:gap-6 lg:text-lg'>
+                <li>{t('stats_teams')}</li>
+                <li className='text-base leading-none sm:text-lg lg:text-2xl'>
+                  •
+                </li>
+                <li>{t('stats_athletes')}</li>
+                <li className='text-base leading-none sm:text-lg lg:text-2xl'>
+                  •
+                </li>
+                <li>{t('stats_countries')}</li>
+                <li className='text-base leading-none sm:text-lg lg:text-2xl'>
+                  •
+                </li>
+                <li>{t('stats_games')}</li>
+              </ul>
             </div>
           </div>
         </div>

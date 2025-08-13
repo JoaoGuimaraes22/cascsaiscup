@@ -114,7 +114,7 @@ export default function AboutPortugal() {
         </div>
       </div>
 
-      {/* Bottom wave pinned + stats aligned to same container */}
+      {/* Bottom wave pinned + stats (centered one-line on mobile, right on desktop) */}
       <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
         <Image
           src='/img/global/ondas-3.png'
@@ -128,14 +128,25 @@ export default function AboutPortugal() {
 
         {/* Stats overlay */}
         <div className='pointer-events-none absolute inset-0'>
-          <div className='mx-auto flex h-full max-w-screen-xl items-center justify-end px-4'>
-            <ul className='flex flex-wrap items-center gap-x-6 gap-y-3 text-lg font-extrabold text-white sm:text-xl'>
+          <div className='mx-auto flex h-full max-w-screen-xl items-center justify-center px-4 lg:justify-end'>
+            <ul
+              className='
+                flex items-center gap-4 whitespace-nowrap text-[12px] font-extrabold uppercase tracking-wide
+                text-white sm:text-[13px] lg:gap-6 lg:text-lg
+              '
+            >
               <li>{t('stats.teams')}</li>
-              <li className='text-2xl leading-none'>•</li>
+              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
+                •
+              </li>
               <li>{t('stats.athletes')}</li>
-              <li className='text-2xl leading-none'>•</li>
+              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
+                •
+              </li>
               <li>{t('stats.countries')}</li>
-              <li className='text-2xl leading-none'>•</li>
+              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
+                •
+              </li>
               <li>{t('stats.matches')}</li>
             </ul>
           </div>
