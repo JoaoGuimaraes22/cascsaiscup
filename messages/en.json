@@ -156,6 +156,49 @@
     }
   },
 
+  "AccommodationPage": {
+    "Hero": {
+      "title": "Estadia",
+      "schools": {
+        "title": "Alojamento em Escolas",
+        "p1": "O alojamento e a alimentação das comitivas serão realizados nas Escolas do Concelho de Cascais, a saber:",
+        "list": {
+          "a": "Agrupamento de Escolas de Alvide | Alcabideche",
+          "b": "Agrupamento de Escolas da Cidadela | Cascais",
+          "c": "Agrupamento de Escolas de Cascais | Cascais",
+          "d": "Agrupamento de Escolas IBN Mucana | Alcabideche"
+        },
+        "p2": "Todos os jogos ocorrerão nos pavilhões do referido concelho. Entre a estadia e os jogos, as visitas à vila e às suas magníficas praias estão a uma distância de uma caminhada de 15–20 minutos. Adicionalmente, será atribuído a cada participante um “free pass card” que permitirá utilizar a rede de transportes MOBICASCAIS gratuitamente durante a realização do evento em todo o concelho de Cascais. Recomendamos a consulta da respetiva aplicação para uma melhor utilização da respetiva rede de transportes.\n\nSerá atribuída uma sala de aula a cada comitiva, e todos os participantes devem trazer o seu próprio saco cama, almofada e colchão."
+      },
+      "hotel": {
+        "title": "Alojamento em Hotel",
+        "p1": "Equipas que desejem ficar em unidades hoteleiras da região e/ou necessitem de transporte de e para o Aeroporto de Lisboa devem indicar essa necessidade/preferência durante o processo de inscrição online e contactar antecipadamente os Agentes Oficiais do evento para garantir os melhores preços disponíveis. Todas as informações e contactos estão disponíveis em: www.cascaisvolleycup.com"
+      },
+      "playerAlt": "Jogadora de voleibol em ação",
+      "logoAlt": "Logótipo Cascais Volley Cup 2026",
+      "stats": {
+        "teams": "50 Teams",
+        "athletes": "600 Athletes",
+        "countries": "3 Countries",
+        "games": "150 Games"
+      }
+    },
+
+    "Food": {
+      "taglineAlt": "Event tagline",
+      "title": "Alimentação",
+      "p1": "As cantinas só estarão em funcionamento a partir do dia 8 de julho, portanto, não serão fornecidas refeições no dia 7 de julho. No último dia do evento, 12 de julho, não será servido jantar.",
+      "scheduleTitle": "As refeições serão realizadas nas diversas cantinas escolares disponíveis conforme o seguinte horário:",
+      "breakfast": "Pequenos-almoços volantes distribuídos às equipas | 8:00–10:00",
+      "lunch": "Almoços | 12:00–15:00",
+      "dinner": "Jantares | 19:00–21:00",
+      "intolerances": "Em caso de intolerâncias alimentares, os responsáveis das equipas deverão informar a organização no momento da inscrição para que possam ser preparadas refeições adequadas para cada caso.",
+      "logoAlt": "Cascais Volley Cup logo",
+      "ctaContact": "Contacte-nos",
+      "ctaMoreInfo": "Mais informações"
+    }
+  },
+
   "HallOfFamePage": {
     "title": "Hall of Fame of Cascais Volley Cup",
     "description": "At Cascais Volley Cup we hosted hundreds of international volleyball teams. In over 40 years we welcomed boys and girls of any level, from all continents, who had the chance to enjoy the magic of Portugal in the beautiful city of Cascais. What follows is just a partial list of the most celebrated participants so far.",
