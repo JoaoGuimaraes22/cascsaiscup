@@ -30,7 +30,7 @@ export default function AboutPortugal() {
   ]
 
   return (
-    <section className='relative w-full overflow-hidden'>
+    <section className='relative w-full overflow-hidden pb-[135px]'>
       {/* Background scenic image */}
       <div className='absolute inset-0 -z-10'>
         <Image
@@ -44,7 +44,7 @@ export default function AboutPortugal() {
       </div>
 
       {/* Content */}
-      <div className='mx-auto max-w-screen-2xl px-4 py-10 sm:py-12 lg:px-8 lg:py-16'>
+      <div className='mx-auto max-w-screen-xl px-4 py-10 sm:py-12'>
         {/* Title + intro + logo/tagline */}
         <div className='relative grid grid-cols-1 gap-8 md:grid-cols-[1.1fr_0.9fr]'>
           {/* LEFT */}
@@ -114,32 +114,31 @@ export default function AboutPortugal() {
         </div>
       </div>
 
-      {/* Bottom wave with stats */}
-      <div className='relative mt-12'>
-        {/* Wave glued to bottom */}
-        <div className='pointer-events-none absolute bottom-0 left-0 w-full'>
-          <Image
-            src='/img/global/ondas-3.png'
-            alt=''
-            width={2048}
-            height={135}
-            className='block h-auto w-full object-cover'
-            priority
-            sizes='100vw'
-          />
-        </div>
+      {/* Bottom wave pinned + stats aligned to same container */}
+      <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
+        <Image
+          src='/img/global/ondas-3.png'
+          alt=''
+          width={2048}
+          height={135}
+          className='-mb-px block h-[135px] w-full object-cover'
+          sizes='100vw'
+          priority
+        />
 
-        {/* Stats over the wave */}
-        <div className='relative z-10 mx-auto max-w-screen-2xl px-4 py-8 lg:px-8'>
-          <ul className='flex flex-wrap items-center justify-end gap-x-6 gap-y-3 text-lg font-extrabold text-white sm:text-xl'>
-            <li>{t('stats.teams')}</li>
-            <li className='text-2xl leading-none'>•</li>
-            <li>{t('stats.athletes')}</li>
-            <li className='text-2xl leading-none'>•</li>
-            <li>{t('stats.countries')}</li>
-            <li className='text-2xl leading-none'>•</li>
-            <li>{t('stats.matches')}</li>
-          </ul>
+        {/* Stats overlay */}
+        <div className='pointer-events-none absolute inset-0'>
+          <div className='mx-auto flex h-full max-w-screen-xl items-center justify-end px-4'>
+            <ul className='flex flex-wrap items-center gap-x-6 gap-y-3 text-lg font-extrabold text-white sm:text-xl'>
+              <li>{t('stats.teams')}</li>
+              <li className='text-2xl leading-none'>•</li>
+              <li>{t('stats.athletes')}</li>
+              <li className='text-2xl leading-none'>•</li>
+              <li>{t('stats.countries')}</li>
+              <li className='text-2xl leading-none'>•</li>
+              <li>{t('stats.matches')}</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>

@@ -28,8 +28,14 @@ export default function AboutHero() {
   ]
 
   return (
-    <section className='relative min-h-[calc(100vh-80px)] w-full overflow-x-hidden md:h-[calc(100vh-80px)] md:overflow-hidden'>
-      {/* Background for the whole section (optional) */}
+    <section
+      className='
+        /* reserve space for
+        bottom wave
+        (135px)  */ relative min-h-[calc(100vh-80px)] w-full overflow-x-hidden pb-[135px] md:h-[calc(100vh-80px)] md:overflow-hidden
+      '
+    >
+      {/* Background */}
       <div className='absolute inset-0 z-0'>
         <Image
           src='/img/about/about-bg.png'
@@ -41,21 +47,20 @@ export default function AboutHero() {
         />
       </div>
 
-      {/* Right image panel (desktop and up): narrower & tall */}
-      <div className='absolute inset-y-0 right-0 z-0 hidden w-1/3 md:block'>
+      {/* Right image panel (desktop+) */}
+      <div className='absolute inset-y-0 right-0 z-0 hidden w-[34vw] md:block'>
         <Image
           src='/img/about/about-hero.png'
           alt={t('title')}
           fill
           className='object-cover object-top'
           priority
-          sizes='(max-width: 768px) 0px, 33vw'
+          sizes='(max-width: 768px) 0px, 34vw'
         />
       </div>
 
-      {/* Content container; reserve space on the right for the desktop image */}
-      <div className='relative z-10 mx-auto h-full max-w-screen-2xl px-4 pb-24 pt-20 md:pb-20 md:pr-[34vw] lg:px-8'>
-        {/* LEFT content */}
+      {/* Content container — aligned with other sections */}
+      <div className='relative z-10 mx-auto h-full max-w-screen-xl px-4 pb-24 pt-20 md:pb-20 md:pr-[34vw]'>
         <div className='space-y-6'>
           <h2 className='text-3xl font-extrabold uppercase text-sky-600 md:text-4xl'>
             {t('title')}
@@ -104,7 +109,7 @@ export default function AboutHero() {
             sizes='(max-width: 640px) 40vw, 260px'
           />
 
-          {/* CTA opens in new tab */}
+          {/* CTA */}
           <a
             href='https://volley4all.com'
             target='_blank'
@@ -115,7 +120,7 @@ export default function AboutHero() {
           </a>
         </div>
 
-        {/* Mobile banner image (stacks below content) */}
+        {/* Mobile banner (stacks under content) */}
         <div className='relative mt-8 block h-56 w-full overflow-hidden rounded-md md:hidden'>
           <Image
             src='/img/about/about-hero.png'
@@ -128,14 +133,14 @@ export default function AboutHero() {
         </div>
       </div>
 
-      {/* Bottom wave */}
+      {/* Bottom wave pinned to section bottom (no gap) */}
       <div className='pointer-events-none absolute bottom-0 left-1/2 z-20 w-screen -translate-x-1/2'>
         <Image
           src='/img/global/ondas-3.png'
           alt=''
           width={2048}
           height={135}
-          className='h-auto w-full object-cover'
+          className='-mb-px block h-[135px] w-full object-cover'
           sizes='100vw'
           priority
         />
