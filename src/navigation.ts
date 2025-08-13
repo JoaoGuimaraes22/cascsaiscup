@@ -16,6 +16,7 @@ export const pathnames = {
   '/news': '/news',
   '/location': '/location',
   '/gallery': '/gallery',
+  '/gallery/[year]': '/gallery/[year]',
   '/accommodation': '/accommodation',
   '/competition': '/competition'
 } satisfies Pathnames<typeof locales>

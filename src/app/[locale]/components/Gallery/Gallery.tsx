@@ -1,12 +1,9 @@
-// components/Gallery.tsx
+// components/Gallery/Gallery.tsx
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { CldImage } from 'next-cloudinary'
 import { useTranslations } from 'next-intl'
-
-// Configure Cloudinary for client-side
-import { getCldImageUrl } from 'next-cloudinary'
 
 interface CloudinaryImage {
   public_id: string
@@ -26,7 +23,8 @@ export default function Gallery({
   folder = '',
   maxResults = 20
 }: GalleryProps) {
-  const t = useTranslations('PhotosPage')
+  const t = useTranslations('GalleryPage.Hero')
+
   const [images, setImages] = useState<CloudinaryImage[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -38,10 +36,9 @@ export default function Gallery({
     const fetchImages = async () => {
       try {
         const response = await fetch(
-          `/api/cloudinary?folder=${folder}&max=${maxResults}`
+          `/api/cloudinary?folder=${encodeURIComponent(folder)}&max=${maxResults}`
         )
         if (!response.ok) throw new Error('Failed to fetch images')
-
         const data = await response.json()
         setImages(data.images || [])
       } catch (err) {
@@ -80,9 +77,7 @@ export default function Gallery({
   }
 
   const handleKeyPress = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      handleCloseModal()
-    }
+    if (e.key === 'Escape') handleCloseModal()
   }
 
   useEffect(() => {
@@ -104,7 +99,7 @@ export default function Gallery({
     return (
       <section className='flex items-center justify-center bg-background py-24'>
         <div className='flex flex-col items-center gap-4'>
-          <div className='h-12 w-12 animate-spin rounded-full border-b-2 border-primary'></div>
+          <div className='h-12 w-12 animate-spin rounded-full border-b-2 border-primary' />
           <p className='text-text-secondary'>{t('loading')}</p>
         </div>
       </section>
@@ -156,7 +151,7 @@ export default function Gallery({
 
         {/* Gallery Grid */}
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:gap-8'>
-          {images.map(image => (
+          {images.map((image: CloudinaryImage) => (
             <div
               key={image.public_id}
               className='bg-card group cursor-pointer overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:scale-[1.02] hover:shadow-xl'
@@ -260,8 +255,8 @@ export default function Gallery({
                 {/* Image Info */}
                 <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-white'>
                   <p className='text-sm opacity-90'>
-                    {new Date(selectedImage.created_at).toLocaleDateString()} •
-                    {selectedImage.width}x{selectedImage.height} •
+                    {new Date(selectedImage.created_at).toLocaleDateString()} •{' '}
+                    {selectedImage.width}x{selectedImage.height} •{' '}
                     {selectedImage.format.toUpperCase()}
                   </p>
                 </div>

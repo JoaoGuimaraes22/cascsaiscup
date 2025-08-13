@@ -341,21 +341,37 @@
         "countries": "20 Países",
         "games": "250 Jogos"
       }
+    },
+    "Info": {
+      "title": "Regulamento",
+      "intro": "Será aplicado o regulamento da FPV vigente para os diversos escalões, com as seguintes exceções:",
+      "rules": {
+        "item1": "Os jogos serão disputados à melhor de <b>3 sets obrigatórios</b> ...",
+        "item2": "Em caso de igualdade pontual, os critérios ...",
+        "item3": "Na categoria SUB15 ...",
+        "item4": "Cada atleta pode jogar em apenas uma equipa ..."
+      },
+      "notes": {
+        "p1": "Todos os jogos têm arbitragem oficial e o torneio é homologado pela <b>Federação Portuguesa de Voleibol</b>.",
+        "p2": "A organização fornecerá apenas a bola de jogo...",
+        "p3": "Cada equipa vencedora receberá <b>10 bolas GALA PRO-LINE</b>...",
+        "p4": "A organização premeia com troféus e medalhas..."
+      },
+      "playerAlt": "Atleta em ação"
     }
   },
 
-  "PhotosPage": {
-    "title": "Photo Gallery",
-    "subtitle": "Discover our collection of beautiful moments captured during the tournament",
-    "loading": "Loading images...",
-    "error_title": "Oops! Something went wrong",
-    "error_message": "Unable to load gallery",
-    "empty_title": "No Images Found",
-    "empty_message": "The gallery is currently empty. Please check back later.",
-    "image_alt": "Gallery image",
-    "load_more": "Load More Photos",
-    "close": "Close",
-    "download": "Download image"
+  "GalleryPage": {
+    "Hero": {
+      "see_more": "Ver mais",
+      "image_alt": "Imagem",
+      "loading": "A carregar…",
+      "empty_message": "Sem imagens ainda",
+      "error_message": "Falha ao carregar",
+      "taglineAlt": "feel the ACTION, enjoy the SUMMER",
+      "title": "Galeria",
+      "subtitle": "Descarrega e partilha os melhores momentos da tua equipa."
+    }
   },
 
   "RegistrationPage": {
@@ -376,64 +392,6 @@
     "RegistrationContact": {
       "Title": "Contact Us",
       "Subtitle": "Do you have questions or need more information?"
-    }
-  },
-
-  "LocationPage": {
-    "LocationHero": {
-      "Title": "Lisbon, Cascais — the Pearl of the Atlantic",
-      "Subtitle": "Where volleyball meets the sea breeze.",
-      "Explore": "Explore"
-    },
-    "LocationDetails": {
-      "Heading": "A Seaside Gem",
-      "Description": "Cascais is a coastal town just outside Lisbon, famous for its beaches, scenic views, and vibrant culture. Once a royal retreat, it now welcomes visitors from around the world.",
-      "Bullet1": "Free public transport all around town",
-      "Bullet2": "Just 30 minutes from Lisbon",
-      "Bullet3": "Surrounded by natural parks and golden beaches"
-    },
-    "LocationLisbon": {
-      "Heading": "The Capital Next Door",
-      "Description": "Lisbon, just a short train ride away, offers everything from historic neighborhoods and vibrant nightlife to iconic tram rides and breathtaking viewpoints.",
-      "Bullet1": "Only 35 minutes from Cascais by train",
-      "Bullet2": "Famous for its food, music, and history",
-      "Bullet3": "A perfect day trip for teams and families"
-    },
-    "LocationToDoCascais": {
-      "Heading": "Things to Do in Cascais",
-      "BeachesTitle": "Relax on the Beach",
-      "BeachesDesc": "Cascais is known for its stunning coastline — perfect for swimming, surfing, or just enjoying the sun.",
-      "SightseeingTitle": "Explore the Town",
-      "SightseeingDesc": "From the marina to the old fortress, Cascais blends history with postcard-perfect streets.",
-      "LocalFoodTitle": "Taste Local Flavors",
-      "LocalFoodDesc": "Enjoy fresh seafood, traditional Portuguese dishes, and cozy cafés by the sea."
-    },
-    "LocationToDoLisboa": {
-      "Heading": "Lisbon & Sintra Highlights",
-      "BelemTowerTitle": "Belém Tower",
-      "BelemTowerDesc": "A 16th-century fortress and symbol of Portugal’s Age of Discoveries.",
-      "AlfamaTitle": "Alfama District",
-      "AlfamaDesc": "The oldest neighborhood in Lisbon, filled with Fado music, cobblestone alleys, and history.",
-      "LXFactoryTitle": "LX Factory",
-      "LXFactoryDesc": "A creative hub of restaurants, bookshops, and galleries in a converted factory district.",
-      "PenaPalaceTitle": "Pena Palace",
-      "PenaPalaceDesc": "A colorful Romanticist castle atop the Sintra mountains — straight out of a fairytale.",
-      "MoorishCastleTitle": "Moorish Castle",
-      "MoorishCastleDesc": "An ancient fortress with panoramic views stretching from Sintra to the coast.",
-      "QuintaRegaleiraTitle": "Quinta da Regaleira",
-      "QuintaRegaleiraDesc": "A mystical estate with underground tunnels, lush gardens, and the famous Initiation Well."
-    }
-  },
-
-  "ServicesPage": {
-    "ServicesHero": {
-      "Title": "Services",
-      "Accommodation": "Accommodation",
-      "AccommodationDescription": "Comfortable and convenient lodging options for all teams and staff during the tournament.",
-      "Food": "Food & Meals",
-      "FoodDescription": "Nutritious meals served throughout the day to keep athletes energized and focused.",
-      "Transportation": "Transportation",
-      "TransportationDescription": "Reliable transfers between accommodations, venues, and major travel hubs."
     }
   },
 

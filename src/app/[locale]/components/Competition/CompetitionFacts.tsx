@@ -40,12 +40,12 @@ export default function CompetitionFacts() {
       id: 'games',
       heading: t('games.heading'),
       lines: [
-        <strong key='b1'>{t('games.maxPrefix')}</strong> +
-          ' ' +
-          t('games.maxSuffix'),
-        <strong key='b2'>{t('games.minPrefix')}</strong> +
-          ' ' +
-          t('games.minSuffix')
+        <>
+          <strong>{t('games.maxPrefix')}</strong> {t('games.maxSuffix')}
+        </>,
+        <>
+          <strong>{t('games.minPrefix')}</strong> {t('games.minSuffix')}
+        </>
       ]
     }
   ]
