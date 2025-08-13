@@ -6,11 +6,10 @@ import { useTranslations } from 'next-intl'
 export default function AboutPortugal() {
   const t = useTranslations('AboutPage.AboutPortugal')
 
-  // 4 feature cards (Portugal, Cabo da Roca, Boca do Inferno, Sec XVII/XIX)
   const spots = [
     {
       key: 'portugal',
-      img: '/img/about/portugal.png', // Torre de Belém (example)
+      img: '/img/about/portugal.png',
       alt: t('cards.portugal.alt')
     },
     {
@@ -31,11 +30,11 @@ export default function AboutPortugal() {
   ]
 
   return (
-    <section className='relative w-full overflow-x-hidden'>
-      {/* Background image (soft) */}
+    <section className='relative w-full overflow-hidden'>
+      {/* Background scenic image */}
       <div className='absolute inset-0 -z-10'>
         <Image
-          src='/img/about/portugal-bg.png' // your scenic background asset
+          src='/img/about/portugal-bg.png'
           alt=''
           fill
           className='object-cover'
@@ -44,27 +43,26 @@ export default function AboutPortugal() {
         />
       </div>
 
-      {/* Content container */}
+      {/* Content */}
       <div className='mx-auto max-w-screen-2xl px-4 py-10 sm:py-12 lg:px-8 lg:py-16'>
-        {/* Title + intro + logo/tagline on the right */}
+        {/* Title + intro + logo/tagline */}
         <div className='relative grid grid-cols-1 gap-8 md:grid-cols-[1.1fr_0.9fr]'>
-          {/* LEFT: Title & paragraphs */}
+          {/* LEFT */}
           <div className='space-y-6'>
             <h2 className='text-2xl font-extrabold uppercase text-sky-700 sm:text-3xl md:text-4xl'>
               {t('title')}
             </h2>
-
             <p className='text-slate-700'>{t('p1')}</p>
             <p className='text-slate-700'>{t('p2')}</p>
             <p className='text-slate-700'>{t('p3')}</p>
             <p className='text-slate-700'>{t('p4')}</p>
           </div>
 
-          {/* RIGHT: Logo + tagline (desktop) */}
+          {/* RIGHT (logo + tagline, only on md+) */}
           <div className='relative hidden items-start justify-end md:flex'>
             <div className='flex flex-col items-end gap-4'>
               <Image
-                src='/img/global/LOGO-2-CVCUP2026.png' // tournament logo
+                src='/img/global/cascais-volley-cup-2.png'
                 alt={t('logoAlt')}
                 width={260}
                 height={180}
@@ -116,42 +114,31 @@ export default function AboutPortugal() {
         </div>
       </div>
 
-      {/* Bottom wave ribbon with stats */}
-      <div className='relative'>
-        <div className='pointer-events-none absolute inset-x-0 -top-6'>
+      {/* Bottom wave with stats */}
+      <div className='relative mt-12'>
+        {/* Wave glued to bottom */}
+        <div className='pointer-events-none absolute bottom-0 left-0 w-full'>
           <Image
             src='/img/global/ondas-3.png'
             alt=''
             width={2048}
             height={135}
-            className='h-auto w-full object-cover'
+            className='block h-auto w-full object-cover'
             priority
             sizes='100vw'
           />
         </div>
 
-        <div className='mx-auto max-w-screen-2xl px-4 pb-8 pt-16 text-white lg:px-8'>
-          <ul className='flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-semibold sm:text-base'>
-            <li className='flex items-center gap-2'>
-              <span className='inline-block rounded-full bg-white/20 px-3 py-1'>
-                {t('stats.teams')}
-              </span>
-            </li>
-            <li className='flex items-center gap-2'>
-              <span className='inline-block rounded-full bg-white/20 px-3 py-1'>
-                {t('stats.athletes')}
-              </span>
-            </li>
-            <li className='flex items-center gap-2'>
-              <span className='inline-block rounded-full bg-white/20 px-3 py-1'>
-                {t('stats.countries')}
-              </span>
-            </li>
-            <li className='flex items-center gap-2'>
-              <span className='inline-block rounded-full bg-white/20 px-3 py-1'>
-                {t('stats.matches')}
-              </span>
-            </li>
+        {/* Stats over the wave */}
+        <div className='relative z-10 mx-auto max-w-screen-2xl px-4 py-8 lg:px-8'>
+          <ul className='flex flex-wrap items-center justify-end gap-x-6 gap-y-3 text-lg font-extrabold text-white sm:text-xl'>
+            <li>{t('stats.teams')}</li>
+            <li className='text-2xl leading-none'>•</li>
+            <li>{t('stats.athletes')}</li>
+            <li className='text-2xl leading-none'>•</li>
+            <li>{t('stats.countries')}</li>
+            <li className='text-2xl leading-none'>•</li>
+            <li>{t('stats.matches')}</li>
           </ul>
         </div>
       </div>

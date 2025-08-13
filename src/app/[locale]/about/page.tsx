@@ -7,7 +7,7 @@ import AboutPortugal from '../components/About/AboutPortugal'
 export default function About() {
   const t = useTranslations('AboutPage')
   return (
-    <main className='bg-background'>
+    <main>
       <AboutHero />
       <AboutPortugal />
     </main>
