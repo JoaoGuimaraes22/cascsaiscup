@@ -12,10 +12,9 @@ export default function LandingWelcome() {
     <section
       role='region'
       aria-label='Cascais Volley Cup 2026 hero'
-      // slide hero up under the header height; tweak these to your header
       className='relative -mt-16 min-h-screen w-full overflow-hidden md:-mt-20'
     >
-      {/* Background (full-bleed, responsive focus) */}
+      {/* Background (full-bleed) */}
       <Image
         src='/img/landing/hero-bg.png'
         alt='Cascais coastline with player'
@@ -25,7 +24,8 @@ export default function LandingWelcome() {
         className='z-0 object-cover object-[center_60%] md:object-[center_58%] lg:object-[center_56%]'
       />
 
-      <div className='absolute right-4 top-24 z-10 sm:right-8 sm:top-28'>
+      {/* Tagline — centered on mobile, right on desktop */}
+      <div className='absolute left-1/2 top-20 z-10 -translate-x-1/2 sm:top-24 md:left-auto md:right-8 md:top-28 md:translate-x-0'>
         <Image
           src='/img/global/tagline.png'
           alt={t('tagline_alt') || 'feel the ACTION, enjoy the SUMMER'}
@@ -37,14 +37,13 @@ export default function LandingWelcome() {
         />
       </div>
 
-      {/* Foreground split: [ Logo ]            [ Chips ] */}
+      {/* Foreground: center on mobile, offset only on md+ */}
       <div
         className='
-    relative z-10 mx-auto flex min-h-screen w-full max-w-screen-2xl
-    translate-y-[22vh] flex-col items-center justify-center gap-6 px-12
-    sm:px-14 md:translate-y-[20vh] md:flex-row
-    md:items-center md:justify-between lg:translate-y-[18vh]
-  '
+          relative z-10 mx-auto flex min-h-screen w-full max-w-screen-2xl
+          translate-y-0 flex-col items-center justify-center gap-6 px-12
+          sm:px-14 md:translate-y-[20vh] md:flex-row md:items-center md:justify-between lg:translate-y-[18vh]
+        '
       >
         {/* Left — logo block */}
         <div className='relative flex flex-col items-start text-left'>
@@ -101,10 +100,7 @@ function InfoChip({
     <div className='flex items-center gap-3 text-white md:gap-4'>
       {/* text block */}
       <div className='flex flex-col text-right leading-tight'>
-        <span
-          className='text-base font-extrabold uppercase
-                         tracking-wide md:text-lg'
-        >
+        <span className='text-base font-extrabold uppercase tracking-wide md:text-lg'>
           {label}
         </span>
         <span className='text-sm font-medium opacity-90 md:text-base'>
@@ -113,11 +109,7 @@ function InfoChip({
       </div>
 
       {/* round blue icon on the right */}
-      <div
-        className='ml-2 grid h-10 w-10
-                      place-items-center rounded-full bg-sky-500 shadow-[0_4px_14px_rgba(0,0,0,0.25)]
-                      md:h-12 md:w-12'
-      >
+      <div className='ml-2 grid h-10 w-10 place-items-center rounded-full bg-sky-500 shadow-[0_4px_14px_rgba(0,0,0,0.25)] md:h-12 md:w-12'>
         <Icon aria-hidden className='text-lg text-white md:text-xl' />
       </div>
     </div>

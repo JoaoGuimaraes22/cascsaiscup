@@ -10,7 +10,7 @@ export default function LandingLocation() {
 
   return (
     <section className='relative isolate min-h-[720px] overflow-hidden pb-[135px] sm:min-h-[800px] lg:min-h-[880px]'>
-      {/* Background with player (no wave here – the bottom wave is added below) */}
+      {/* Background */}
       <Image
         src='/img/landing/home-page-2-2.png'
         alt=''
@@ -51,9 +51,9 @@ export default function LandingLocation() {
           </div>
         </div>
 
-        {/* RIGHT: tagline + chips + CTA */}
-        <div className='relative flex flex-col items-end gap-4 lg:col-span-5'>
-          <div className='w-[260px] sm:w-[360px] lg:w-[420px]'>
+        {/* RIGHT: tagline + chips + CTA (left on mobile, right on desktop) */}
+        <div className='relative flex flex-col items-start gap-4 lg:col-span-5 lg:items-end'>
+          <div className='w-[260px] self-start sm:w-[360px] lg:w-[420px] lg:self-end'>
             <Image
               src='/img/global/tagline.png'
               alt='feel the ACTION, enjoy the SUMMER'
@@ -64,7 +64,7 @@ export default function LandingLocation() {
             />
           </div>
 
-          <div className='mt-2 flex flex-col items-end gap-3'>
+          <div className='mt-2 flex flex-col items-start gap-3 lg:items-end'>
             <InfoChip
               icon='sun'
               label={t('avg_air_temp')}
@@ -79,16 +79,15 @@ export default function LandingLocation() {
 
           <button
             type='button'
-            className='mt-3 inline-flex items-center rounded-full bg-sky-600 px-5 py-2 text-sm font-bold text-white shadow-lg ring-1 ring-black/10 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:text-base'
+            className='mt-3 inline-flex items-center self-start rounded-full bg-sky-600 px-5 py-2 text-sm font-bold text-white shadow-lg ring-1 ring-black/10 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:text-base lg:self-end'
           >
             {t('cta')}
           </button>
         </div>
       </div>
 
-      {/* ---- Bottom wave + stats (full-bleed) ---- */}
+      {/* ---- Bottom wave + stats ---- */}
       <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
-        {/* wave image pinned to bottom */}
         <Image
           src='/img/global/ondas-3.png'
           alt=''
@@ -98,37 +97,24 @@ export default function LandingLocation() {
           priority
         />
 
-        {/* ---- Bottom wave + stats (full-bleed) ---- */}
-        <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
-          {/* wave image pinned to bottom */}
-          <Image
-            src='/img/global/ondas-3.png'
-            alt=''
-            width={1920}
-            height={135}
-            className='-mb-px block h-[135px] w-full object-cover'
-            priority
-          />
-
-          {/* stats overlay: centered on mobile, left on desktop */}
-          <div className='pointer-events-none absolute inset-0'>
-            <div className='mx-auto flex h-full max-w-screen-xl items-center justify-center px-4 lg:justify-start'>
-              <ul className='flex items-center gap-4 whitespace-nowrap text-[12px] font-extrabold uppercase tracking-wide text-white sm:text-[13px] lg:gap-6 lg:text-lg'>
-                <li>{t('stats_teams')}</li>
-                <li className='text-base leading-none sm:text-lg lg:text-2xl'>
-                  •
-                </li>
-                <li>{t('stats_athletes')}</li>
-                <li className='text-base leading-none sm:text-lg lg:text-2xl'>
-                  •
-                </li>
-                <li>{t('stats_countries')}</li>
-                <li className='text-base leading-none sm:text-lg lg:text-2xl'>
-                  •
-                </li>
-                <li>{t('stats_games')}</li>
-              </ul>
-            </div>
+        {/* stats overlay: centered on mobile, left on desktop */}
+        <div className='pointer-events-none absolute inset-0'>
+          <div className='mx-auto flex h-full max-w-screen-xl items-center justify-center px-4 lg:justify-start'>
+            <ul className='flex items-center gap-4 whitespace-nowrap text-[12px] font-extrabold uppercase tracking-wide text-white sm:text-[13px] lg:gap-6 lg:text-lg'>
+              <li>{t('stats_teams')}</li>
+              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
+                •
+              </li>
+              <li>{t('stats_athletes')}</li>
+              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
+                •
+              </li>
+              <li>{t('stats_countries')}</li>
+              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
+                •
+              </li>
+              <li>{t('stats_games')}</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -161,17 +147,6 @@ function InfoChip({
           {value}
         </div>
       </div>
-    </div>
-  )
-}
-
-function StatBullet({ children }: { children: React.ReactNode }) {
-  return (
-    <div className='flex items-center gap-2'>
-      <span className='inline-block h-3 w-3 rounded-full bg-white/90' />
-      <span className='text-sm font-extrabold tracking-wide text-white sm:text-base lg:text-lg'>
-        {children}
-      </span>
     </div>
   )
 }

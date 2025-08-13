@@ -1,4 +1,3 @@
-import { ThemeProvider } from '@/src/app/[locale]/components/ThemeProvider'
 import type { Metadata } from 'next'
 import {
   AbstractIntlMessages,
@@ -47,34 +46,27 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <ThemeProvider
-          enableSystem={false}
-          attribute='class'
-          defaultTheme='light'
-          themes={['light', 'dark']}
+        <NextIntlClientProvider
+          locale={locale}
+          messages={messages as AbstractIntlMessages}
         >
-          <NextIntlClientProvider
-            locale={locale}
-            messages={messages as AbstractIntlMessages}
-          >
-            <NextTopLoader
-              initialPosition={0.08}
-              crawlSpeed={200}
-              height={3}
-              crawl={true}
-              easing='ease'
-              speed={200}
-              shadow='0 0 10px #2299DD,0 0 5px #2299DD'
-              color='var(--primary)'
-              showSpinner={false}
-            />
-            <Header locale={locale} />
-            <main className='w-full overflow-x-hidden'>{children}</main>
+          <NextTopLoader
+            initialPosition={0.08}
+            crawlSpeed={200}
+            height={3}
+            crawl={true}
+            easing='ease'
+            speed={200}
+            shadow='0 0 10px #2299DD,0 0 5px #2299DD'
+            color='var(--primary)'
+            showSpinner={false}
+          />
+          <Header locale={locale} />
+          <main className='w-full overflow-x-hidden'>{children}</main>
 
-            <Footer />
-            <ScrollToTopButton />
-          </NextIntlClientProvider>
-        </ThemeProvider>
+          <Footer />
+          <ScrollToTopButton />
+        </NextIntlClientProvider>
       </body>
     </html>
   )

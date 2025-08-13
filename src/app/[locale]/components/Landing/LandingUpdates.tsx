@@ -5,7 +5,7 @@ import 'keen-slider/keen-slider.min.css'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import NewsCard from './NewsCard' // <- adjust if your path differs
+import NewsCard from './NewsCard'
 
 // --- DATA ---
 const testimonials = [
@@ -106,7 +106,7 @@ export default function LandingUpdates() {
         />
       </div>
 
-      {/* Content pushed below the top wave height (135/1920 ≈ 7.03vw) */}
+      {/* Content pushed below the top wave height */}
       <div className='mx-auto max-w-screen-xl px-4 pt-[clamp(96px,9vw,180px)]'>
         <h2 className='mb-6 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'>
           {t('LandingNews.Latest_news') || 'LATEST NEWS'}
@@ -124,51 +124,58 @@ export default function LandingUpdates() {
         </h3>
       </div>
 
-      {/* Full-bleed wave band with testimonials */}
+      {/* Full-bleed wave band with testimonials (mobile: ≥ 50vh) */}
       <div className='relative left-1/2 w-screen -translate-x-1/2'>
-        <Image
-          src='/img/global/ondas-8.png'
-          alt='Wave band'
-          width={1920}
-          height={220}
-          className='h-auto w-full object-cover'
-          priority
-        />
-        {/* Testimonials inside — moved a bit lower */}
-        <div className='absolute inset-0 flex flex-col justify-start pt-[1%] text-white sm:pt-[3%]'>
-          <div className='mx-auto max-w-screen-xl px-4'>
-            {/* Mobile slider */}
-            <div className='lg:hidden'>
-              <div ref={sliderRef} className='keen-slider'>
-                {testimonials.map((item, i) => (
-                  <div key={i} className='keen-slider__slide px-2'>
+        <div className='relative min-h-[50vh] sm:min-h-[360px]'>
+          {/* Wave background fills the wrapper */}
+          <Image
+            src='/img/global/ondas-8.png'
+            alt='Wave band'
+            fill
+            className='object-cover'
+            priority
+          />
+
+          {/* Testimonials overlay */}
+          <div className='absolute inset-0 flex items-center text-white'>
+            <div className='mx-auto w-full max-w-screen-xl px-4'>
+              {/* Mobile slider */}
+              <div className='lg:hidden'>
+                <div ref={sliderRef} className='keen-slider'>
+                  {testimonials.map((item, i) => (
+                    <div
+                      key={i}
+                      className='keen-slider__slide min-h-[180px] px-2 py-6'
+                    >
+                      <TestimonialCard {...item} />
+                    </div>
+                  ))}
+                </div>
+
+                <div className='mt-6 flex justify-center gap-2'>
+                  {testimonials.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => instanceRef.current?.moveToIdx(i)}
+                      aria-label={`Go to slide ${i + 1}`}
+                      className={`h-2 w-2 rounded-full transition-all ${
+                        currentSlide === i
+                          ? 'bg-white'
+                          : 'bg-white/50 hover:bg-white/80'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Desktop 4-up */}
+              <div className='hidden lg:grid lg:grid-cols-4 lg:gap-8'>
+                {testimonials.slice(0, 4).map((item, i) => (
+                  <div key={i} className='flex'>
                     <TestimonialCard {...item} />
                   </div>
                 ))}
               </div>
-              <div className='mt-6 flex justify-center gap-2'>
-                {testimonials.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => instanceRef.current?.moveToIdx(i)}
-                    aria-label={`Go to slide ${i + 1}`}
-                    className={`h-2 w-2 rounded-full transition-all ${
-                      currentSlide === i
-                        ? 'bg-white'
-                        : 'bg-white/50 hover:bg-white/80'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Desktop 4-up */}
-            <div className='hidden lg:grid lg:grid-cols-4 lg:gap-8'>
-              {testimonials.slice(0, 4).map((item, i) => (
-                <div key={i} className='flex'>
-                  <TestimonialCard {...item} />
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -179,7 +186,7 @@ export default function LandingUpdates() {
 
 function TestimonialCard({ team, quote }: { team: string; quote: string }) {
   return (
-    <div className='flex w-full flex-col items-center text-center text-white lg:min-h-[160px]'>
+    <div className='flex min-h-[140px] w-full flex-col items-center text-center text-white lg:min-h-[160px]'>
       <p className='mb-2 font-extrabold uppercase tracking-wide drop-shadow'>
         {team}
       </p>
