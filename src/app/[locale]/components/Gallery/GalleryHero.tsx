@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { CldImage } from 'next-cloudinary'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
+import { Link } from '@/src/navigation'
 
 type CloudinaryImage = {
   public_id: string
@@ -15,18 +15,19 @@ type CloudinaryImage = {
   format: string
 }
 
-type YearConfig = { year: number; folder: string; href: string }
+type YearConfig = { year: number; folder: string }
 
 export default function GalleryHeroNew() {
   const t = useTranslations('GalleryPage.Hero')
+  const locale = useLocale()
 
   const BG = '/img/gallery/hero-bg.png'
   const TAGLINE = '/img/global/tagline-w.png'
 
   const YEARS: YearConfig[] = [
-    { year: 2023, folder: 'gallery/2023', href: '/gallery/2023' },
-    { year: 2024, folder: 'gallery/2024', href: '/gallery/2024' },
-    { year: 2025, folder: 'gallery/2025', href: '/gallery/2025' }
+    { year: 2023, folder: 'gallery/2023' },
+    { year: 2024, folder: 'gallery/2024' },
+    { year: 2025, folder: 'gallery/2025' }
   ]
 
   const [imagesByYear, setImagesByYear] = useState<
@@ -40,7 +41,6 @@ export default function GalleryHeroNew() {
       try {
         const results = await Promise.all(
           YEARS.map(async ({ year, folder }) => {
-            // SERVER limits to 4 via `max=4`
             const res = await fetch(
               `/api/cloudinary?folder=${encodeURIComponent(folder)}&max=4`
             )
@@ -94,7 +94,7 @@ export default function GalleryHeroNew() {
       {/* Year cards */}
       <div className='mx-auto flex h-full max-w-screen-xl flex-col justify-end px-4 pb-6 pt-4 sm:pb-8'>
         <div className='grid grid-cols-1 gap-5 md:grid-cols-3'>
-          {YEARS.map(({ year, href }) => {
+          {YEARS.map(({ year }) => {
             const imgs = imagesByYear[year] || []
             return (
               <article key={year} className='flex flex-col'>
@@ -133,17 +133,21 @@ export default function GalleryHeroNew() {
                       ))}
                     </div>
                   )}
-                </div>
 
-                {/* See more */}
-                <div className='mt-3 text-right'>
-                  <Link
-                    href={href}
-                    className='inline-flex items-center rounded-full bg-sky-600 px-4 py-1.5 text-sm font-bold text-white shadow ring-1 ring-black/10 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
-                    aria-label={`${t('see_more')} ${year}`}
-                  >
-                    {t('see_more')}
-                  </Link>
+                  {/* See more (INSIDE the box) */}
+                  <div className='mt-3 text-right'>
+                    <Link
+                      lang={locale}
+                      href={{
+                        pathname: '/gallery/[year]',
+                        params: { year: String(year) }
+                      }}
+                      className='inline-flex items-center rounded-full bg-sky-600 px-4 py-1.5 text-sm font-bold text-white shadow ring-1 ring-black/10 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
+                      aria-label={`${t('see_more')} ${year}`}
+                    >
+                      {t('see_more')}
+                    </Link>
+                  </div>
                 </div>
               </article>
             )

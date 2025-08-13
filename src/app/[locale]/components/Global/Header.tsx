@@ -15,6 +15,9 @@ interface Props {
   locale: string
 }
 
+/** Exclude the dynamic route so Header links stay static-only */
+type StaticPathname = Exclude<ValidPathname, '/gallery/[year]'>
+
 export const Header: FC<Props> = ({ locale }) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
@@ -101,7 +104,7 @@ function NavLinks({
   const t = useTranslations('Header')
   const pathname = usePathname()
 
-  const links: { href: ValidPathname; label: string }[] = [
+  const links: { href: StaticPathname; label: string }[] = [
     { href: '/about', label: t('About') },
     { href: '/accommodation', label: t('Accommodation') },
     { href: '/program', label: t('Program') },
@@ -144,6 +147,7 @@ function NavLinks({
     </>
   )
 }
+
 function LangButton({ className }: { className?: string }) {
   return (
     <span
