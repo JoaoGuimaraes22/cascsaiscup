@@ -30,9 +30,8 @@ export default function AboutHero() {
   return (
     <section
       className='
-        /* reserve space for
-        bottom wave
-        (135px)  */ relative min-h-[calc(100vh-80px)] w-full overflow-x-hidden pb-[135px] md:h-[calc(100vh-80px)] md:overflow-hidden
+        relative min-h-[calc(100vh-80px)] w-full overflow-x-hidden pb-[90px] md:h-[calc(100vh-80px)]
+        md:overflow-hidden lg:pb-[135px]
       '
     >
       {/* Background */}
@@ -60,7 +59,7 @@ export default function AboutHero() {
       </div>
 
       {/* Content container — aligned with other sections */}
-      <div className='relative z-10 mx-auto h-full max-w-screen-xl px-4 pb-24 pt-20 md:pb-20 md:pr-[34vw]'>
+      <div className='relative z-10 mx-auto h-full max-w-screen-xl px-4 pb-8 pt-20 md:pb-20 md:pr-[34vw]'>
         <div className='space-y-6'>
           <h2 className='text-3xl font-extrabold uppercase text-sky-500 md:text-4xl'>
             {t('title')}
@@ -121,7 +120,7 @@ export default function AboutHero() {
         </div>
 
         {/* Mobile banner (stacks under content) */}
-        <div className='relative mt-8 block h-56 w-full overflow-hidden rounded-md md:hidden'>
+        <div className='relative mt-3 block h-56 w-full overflow-hidden rounded-md md:hidden'>
           <Image
             src='/img/about/about-hero.png'
             alt={t('title')}
@@ -133,14 +132,14 @@ export default function AboutHero() {
         </div>
       </div>
 
-      {/* Bottom wave pinned to section bottom (no gap) */}
+      {/* Bottom wave pinned to section bottom */}
       <div className='pointer-events-none absolute bottom-0 left-1/2 z-20 w-screen -translate-x-1/2'>
         <Image
           src='/img/global/ondas-3.png'
           alt=''
           width={2048}
           height={135}
-          className='-mb-px block h-[135px] w-full object-cover'
+          className='-mb-px block h-[90px] w-full object-cover lg:h-[135px]'
           sizes='100vw'
           priority
         />

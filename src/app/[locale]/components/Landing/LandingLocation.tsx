@@ -60,7 +60,6 @@ export default function LandingLocation() {
               width={1000}
               height={215}
               className='h-auto w-full object-contain'
-              priority
             />
           </div>
 
@@ -94,7 +93,6 @@ export default function LandingLocation() {
           width={1920}
           height={135}
           className='-mb-px block h-[135px] w-full object-cover'
-          priority
         />
 
         {/* stats overlay: centered on mobile, left on desktop */}

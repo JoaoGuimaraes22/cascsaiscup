@@ -102,7 +102,6 @@ export default function LandingUpdates() {
           width={1920}
           height={135}
           className='-mt-px block h-auto w-full object-cover'
-          priority
         />
       </div>
 
@@ -133,7 +132,6 @@ export default function LandingUpdates() {
             alt='Wave band'
             fill
             className='object-cover'
-            priority
           />
 
           {/* Testimonials overlay */}

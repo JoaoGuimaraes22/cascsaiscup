@@ -291,6 +291,59 @@
     }
   },
 
+  "CompetitionPage": {
+    "Hero": {
+      "phoneAlt": "Aplicação da Cascais Volley Cup exibida num telemóvel",
+      "title": "A COMPETIÇÃO",
+      "p1": "O quadro competitivo será organizado em função do número de inscrições, sempre com o objetivo de promover o maior número de jogos possível para todas as equipas.",
+      "p2": "Teremos uma 1ª fase constituída por grupos de 4 equipas, onde todos jogarão contra todos e apuram os primeiros classificados de cada grupo. As equipas apuradas entram numa 2ª fase de eliminatória simples para apurar do 1º ao 8º classificado e as equipas não apuradas, entram numa 2ª fase de grupos para apurar as restantes classificações. É garantido um número mínimo de 6 jogos e um número máximo de 8 jogos por equipa.",
+      "p3": "A constituição dos grupos, as classificações, as pontuações e o calendário de jogos de todas as equipas, estará sempre atualizado e disponível para consulta na APP do CASCAIS VOLLEY CUP | link disponível em www.cascaisvolleycup.com",
+      "cta": "REGULAMENTO",
+      "ctaHref": "/regulamento",
+      "mosaicAlt": "Mosaico de imagens da competição"
+    },
+    "LogoTaglineHero": {
+      "sectionLabel": "Faixa do Cascais Volley Cup",
+      "logoAlt": "Logótipo Cascais Volley Cup 2026",
+      "taglineAlt": "feel the ACTION, enjoy the SUMMER"
+    },
+    "Facts": {
+      "ages": {
+        "heading": "ESCALÕES ETÁRIOS?",
+        "l1": "SUB 15 (≤ 2011)",
+        "l2": "SUB 17 (2010–2009)",
+        "l3": "OPEN (≥ 2008)"
+      },
+      "who": {
+        "heading": "QUEM PODE PARTICIPAR?",
+        "l1": "UNIVERSIDADES",
+        "l2": "SELEÇÕES",
+        "l3": "COLÉGIOS",
+        "l4": "ESCOLAS",
+        "l5": "CLUBES"
+      },
+      "wherewhen": {
+        "heading": "ONDE E QUANDO?",
+        "l1": "No concelho de",
+        "l2": "CASCAIS",
+        "l3": "de 8 a 12 de julho"
+      },
+      "games": {
+        "heading": "QUANTOS JOGOS?",
+        "maxPrefix": "MÁXIMO",
+        "maxSuffix": "8 Jogos",
+        "minPrefix": "MÍNIMO",
+        "minSuffix": "6 Jogos"
+      },
+      "stats": {
+        "teams": "100 Equipas",
+        "athletes": "1500 Atletas",
+        "countries": "20 Países",
+        "games": "250 Jogos"
+      }
+    }
+  },
+
   "PhotosPage": {
     "title": "Photo Gallery",
     "subtitle": "Discover our collection of beautiful moments captured during the tournament",

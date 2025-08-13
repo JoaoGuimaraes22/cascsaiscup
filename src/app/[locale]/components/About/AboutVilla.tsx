@@ -51,7 +51,7 @@ export default function AboutVilla() {
           style={{ backgroundImage: `url(${WAVE})` }}
         >
           <div className='mx-auto max-w-screen-xl px-4 py-6 sm:py-7'>
-            <h2 className='mb-2 text-[20px] font-extrabold uppercase tracking-wide text-white drop-shadow sm:text-2xl'>
+            <h2 className='mb-2 inline-block rounded-md bg-sky-500 px-2 py-1 text-[20px] font-extrabold uppercase tracking-wide text-white drop-shadow sm:text-2xl'>
               {t('title')}
             </h2>
             <div className='space-y-3 text-[13.5px] leading-[1.55] text-white/95 drop-shadow sm:text-[14.5px]'>

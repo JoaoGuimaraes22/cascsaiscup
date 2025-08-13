@@ -28,12 +28,24 @@ export default function AccommodationHero() {
         decoding='async'
         draggable={false}
       />
+      {/* Mobile: player BEHIND the text */}
+      <div className='pointer-events-none absolute inset-x-0 top-0 z-0 h-[80vh] lg:hidden'>
+        <Image
+          src={PLAYER}
+          alt=''
+          fill
+          className='object-contain object-top opacity-10'
+          sizes='100vw'
+          decoding='async'
+          draggable={false}
+        />
+      </div>
 
       {/* Content */}
-      <div className='relative mx-auto max-w-screen-xl px-4 pt-8 sm:pt-12'>
+      <div className='relative z-10 mx-auto max-w-screen-xl px-4 pt-8 sm:pt-12'>
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
           {/* LEFT */}
-          <div className='relative z-10 lg:col-span-7'>
+          <div className='relative lg:col-span-7'>
             <h1 className='mb-2 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'>
               {t('title')}
             </h1>
@@ -72,38 +84,20 @@ export default function AccommodationHero() {
           {/* RIGHT */}
           <div className='relative lg:col-span-5'>
             {/* Player (desktop) */}
-            <div className='absolute inset-y-0 right-0 hidden w-[38vw] max-w-[520px] lg:block'>
+            <div className='absolute inset-y-0 right-[-6vw] hidden w-[65vw] max-w-[900px] lg:block'>
               <Image
                 src={PLAYER}
                 alt={t('playerAlt')}
                 fill
                 className='object-contain object-bottom'
-                sizes='(max-width: 1280px) 38vw, 520px'
+                sizes='(max-width: 1280px) 65vw, 900px'
                 decoding='async'
                 draggable={false}
               />
             </div>
 
-            {/* Mobile/tablet: player + logo side by side */}
-            <div className='mt-6 flex w-full items-end justify-between gap-4 lg:hidden'>
-              <div className='relative h-44 flex-1 overflow-hidden rounded-md'>
-                <Image
-                  src={PLAYER}
-                  alt={t('playerAlt')}
-                  fill
-                  className='object-contain object-bottom'
-                  sizes='100vw'
-                  decoding='async'
-                  draggable={false}
-                />
-              </div>
-              <Logo
-                src={LOGO}
-                alt={t('logoAlt')}
-                width={80}
-                className='w-[72px] shrink-0 sm:w-[80px]'
-              />
-            </div>
+            {/* Mobile: HIDE the side-by-side logo entirely */}
+            {/* (No mobile logo anymore, per new goals) */}
           </div>
         </div>
       </div>
@@ -203,14 +197,12 @@ function Logo({
   )
 }
 
-/* --- tiny UI bits --- */
 function StatsList({ items }: { items: string[] }) {
   return (
     <ul
       className={clsx(
-        // compact on very small screens to prevent clipping
         'flex items-center whitespace-nowrap px-3 font-extrabold uppercase text-white',
-        'gap-3 text-[11px] tracking-normal', // xs
+        'gap-3 text-[11px] tracking-normal', // xs (tight so it never clips)
         'sm:gap-4 sm:text-[13px] sm:tracking-wide', // sm+
         'lg:gap-6 lg:text-lg'
       )}
