@@ -9,7 +9,7 @@ export default function LandingLocation() {
   const t = useTranslations('LandingPage.LandingLocation')
 
   return (
-    <section className='relative isolate min-h-[720px] overflow-hidden sm:min-h-[800px] lg:min-h-[880px]'>
+    <section className='relative isolate min-h-[720px] overflow-hidden pb-[135px] sm:min-h-[800px] lg:min-h-[880px]'>
       {/* Background with player (no wave here – the bottom wave is added below) */}
       <Image
         src='/img/landing/home-page-2-2.png'
@@ -20,7 +20,7 @@ export default function LandingLocation() {
       />
 
       {/* Content container */}
-      <div className='mx-auto grid max-w-screen-2xl grid-cols-1 gap-10 px-4 py-8 sm:px-6 lg:grid-cols-12 lg:py-12'>
+      <div className='mx-auto grid max-w-screen-xl grid-cols-1 gap-10 px-4 pb-10 pt-[clamp(32px,4vw,64px)] sm:px-4 sm:pb-12 lg:grid-cols-12'>
         {/* LEFT: title + copy + map */}
         <div className='lg:col-span-7'>
           <h1 className='mb-4 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl lg:text-[32px]'>
@@ -55,7 +55,7 @@ export default function LandingLocation() {
         <div className='relative flex flex-col items-end gap-4 lg:col-span-5'>
           <div className='w-[260px] sm:w-[360px] lg:w-[420px]'>
             <Image
-              src='/img/landing/tagline.png'
+              src='/img/global/tagline.png'
               alt='feel the ACTION, enjoy the SUMMER'
               width={1000}
               height={215}
@@ -87,15 +87,14 @@ export default function LandingLocation() {
       </div>
 
       {/* ---- Bottom wave + stats (full-bleed) ---- */}
-      <div className='relative left-1/2 w-screen -translate-x-1/2'>
+      <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
         {/* wave image */}
         <Image
-          src='/img/global/ondas-3.png' // <- your wave asset
+          src='/img/global/ondas-3.png'
           alt=''
           width={1920}
           height={135}
-          className='block h-auto w-full object-cover'
-          priority
+          className='-mb-px block h-[135px] w-full object-cover'
         />
 
         {/* stats overlay */}

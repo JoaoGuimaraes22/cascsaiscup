@@ -84,7 +84,7 @@ export default function LandingUpdates() {
   }, [instanceRef])
 
   return (
-    <section className='relative isolate overflow-hidden pb-10 sm:pb-12'>
+    <section className='relative isolate overflow-hidden pb-6 sm:pb-8'>
       {/* Background for whole section */}
       <Image
         src='/img/landing/home-page-2.png'
@@ -107,8 +107,7 @@ export default function LandingUpdates() {
       </div>
 
       {/* Content pushed below the top wave height (135/1920 ≈ 7.03vw) */}
-      <div className='mx-auto max-w-screen-xl px-4 pt-[clamp(64px,7.03vw,140px)]'>
-        {/* Latest News */}
+      <div className='mx-auto max-w-screen-xl px-4 pt-[clamp(96px,9vw,180px)]'>
         <h2 className='mb-6 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'>
           {t('LandingNews.Latest_news') || 'LATEST NEWS'}
         </h2>
