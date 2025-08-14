@@ -12,10 +12,10 @@ export default function HallOfFameWinners() {
   const BG = '/img/hall-of-fame/hero-bg.png'
   const WINNERS_IMG = '/img/program/players.png'
   const TAGLINE = '/img/global/tagline.png'
-  const WAVE = '/img/global/ondas-3.png' // Decorative wave
+  const WAVE = '/img/global/ondas-3.png' // decorative only
   const WAVE_H = 135
 
-  // Sort years so latest first
+  // Latest year first (e.g., 2025, 2024, 2023)
   const years = Object.keys(t.raw('years')).sort(
     (a, b) => Number(b) - Number(a)
   )
@@ -43,9 +43,10 @@ export default function HallOfFameWinners() {
         className='absolute inset-0 -z-10 object-cover opacity-40'
       />
 
+      {/* Content */}
       <div className='mx-auto max-w-screen-xl px-4 pb-0 pt-10 lg:pt-14'>
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
-          {/* Left: Accordion */}
+          {/* Left: Accordion & tagline (text-first on all breakpoints) */}
           <div className='flex flex-col lg:col-span-6'>
             <h2 className='mb-3 text-xl font-extrabold uppercase tracking-wide text-sky-600 sm:text-2xl'>
               {t('title')}
@@ -54,6 +55,7 @@ export default function HallOfFameWinners() {
               {t('description')}
             </p>
 
+            {/* Scroll area so the right image doesn't move */}
             <div
               className='space-y-4 overflow-y-auto pr-1'
               style={{ maxHeight: '480px' }}
@@ -67,6 +69,8 @@ export default function HallOfFameWinners() {
                   <button
                     onClick={() => setOpenYear(openYear === year ? '' : year)}
                     className='flex w-full items-center justify-between px-4 py-3 text-left font-bold text-sky-700 sm:px-5 sm:py-4'
+                    aria-expanded={openYear === year}
+                    aria-controls={`winners-${year}`}
                   >
                     <span className='text-lg'>{year}</span>
                     <span className='text-sky-500'>
@@ -74,8 +78,9 @@ export default function HallOfFameWinners() {
                     </span>
                   </button>
 
-                  {/* Content */}
+                  {/* Content (springy open/close) */}
                   <div
+                    id={`winners-${year}`}
                     className={`grid overflow-hidden transition-all duration-300 ease-out ${
                       openYear === year
                         ? 'grid-rows-[1fr] opacity-100'
@@ -109,7 +114,7 @@ export default function HallOfFameWinners() {
               ))}
             </div>
 
-            {/* Tagline image */}
+            {/* Tagline image at the bottom of the left column */}
             <div className='mt-6'>
               <Image
                 src={TAGLINE}
@@ -122,7 +127,7 @@ export default function HallOfFameWinners() {
             </div>
           </div>
 
-          {/* Right: Winners image */}
+          {/* Right: Winners image (fixed height so it doesn't jump) */}
           <div className='relative flex items-start justify-center lg:col-span-6'>
             <div className='relative z-10 h-[320px] w-full sm:h-[420px] lg:h-[500px]'>
               <Image
@@ -134,21 +139,21 @@ export default function HallOfFameWinners() {
                 priority
               />
             </div>
-
-            {/* Decorative wave under image */}
-            <div className='pointer-events-none absolute bottom-0 left-1/2 z-0 w-screen -translate-x-1/2'>
-              <Image
-                src={WAVE}
-                alt=''
-                role='presentation'
-                width={2048}
-                height={WAVE_H}
-                sizes='100vw'
-                className='block h-auto w-full'
-              />
-            </div>
           </div>
         </div>
+      </div>
+
+      {/* Decorative full-width wave at the very bottom */}
+      <div className='pointer-events-none absolute bottom-0 left-1/2 z-0 w-screen -translate-x-1/2'>
+        <Image
+          src={WAVE}
+          alt=''
+          role='presentation'
+          width={2048}
+          height={WAVE_H}
+          sizes='100vw'
+          className='block h-auto w-full'
+        />
       </div>
     </section>
   )
