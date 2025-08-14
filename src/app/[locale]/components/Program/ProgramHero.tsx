@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { Link } from '@/src/navigation'
 
 export default function ProgramHero() {
-  const t = useTranslations('ProgramPage.ProgramHero')
+  const t = useTranslations('ProgramPage.Hero')
 
   // Assets
   const BG = '/img/program/program-bg.png'

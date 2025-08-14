@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 export default function AboutHero() {
-  const t = useTranslations('AboutPage.AboutHero')
+  const t = useTranslations('AboutPage.Hero')
 
   const sponsors = [
     {

@@ -10,7 +10,7 @@
   },
 
   "LandingPage": {
-    "LandingWelcome": {
+    "Welcome": {
       "Cascais": "Cascais Volley Cup 2026",
       "9_13_July": "July 9th–13th",
       "5_days_40_teams_500_athletes_120_games": "5 Days • 40 Teams • 500 Athletes • 120 Games",
@@ -30,66 +30,32 @@
       "airport_value": "30 km | 25 min",
       "tagline_alt": "feel the ACTION, enjoy the SUMMER"
     },
-    "LandingComments": {
-      "We_love_cascais_cup_1": "“The energy, the beach, the game — we love it all.”",
-      "We_love_cascais_cup_2": "“Where summer meets passion — Cascais VolleyCup.”",
-      "We_love_cascais_cup_3": "“Our favorite time of the year? Cascais VolleyCup.”",
-      "We_love_author_1": "Monaco Volley",
-      "We_love_author_2": "Madrid Volley",
-      "We_love_author_3": "Paris Volley"
-    },
-    "LandingNews": {
+    "Updates": {
       "Latest_news": "Latest news",
-      "More_news": "More news →"
+      "More_news": "More news →",
+      "What_they_say": "What they say",
+      "MoreReferences": "More References"
     },
-    "LandingLocation": {
-      "title": "Como chegar a Cascais?",
-      "p1": "Existem várias formas de viajar do Aeroporto de Lisboa para Cascais: comboio, táxi, aluguer de carro ou contratar um serviço de transfers, basta escolher a opção que melhor se adapta às suas necessidades, sabendo que está a apenas a 30 km, ou seja, a cerca de 20 / 30 minutos de distância de Cascais.",
-      "p2_prefix": "Para quem viaja do Porto para Cascais, a opção mais económica e confortável chama-se ",
+    "Location": {
+      "title": "How to get to Cascais?",
+      "p1": "There are several ways to travel from Lisbon Airport to Cascais: train, taxi, car rental, or booking a transfer service. Just choose the option that best suits your needs, knowing that it’s only 30 km away — about 20–30 minutes from Cascais.",
+      "p2_prefix": "For those traveling from Porto to Cascais, the most economical and comfortable option is called ",
       "flixbus": "FLIXBUS",
-      "p2_suffix": ". Esta operadora tem vários serviços diários com partidas de Porto (Campanhã) com destino direto a Cascais (Alcabideche) e preços imbatíveis.",
+      "p2_suffix": ". This operator offers several daily services departing from Porto (Campanhã) directly to Cascais (Alcabideche) at unbeatable prices.",
       "avg_air_temp": "AVG AIR TEMP",
       "avg_air_temp_value": "94°F | 34°C",
       "airport": "AIRPORT (LIS)",
       "airport_value": "30 km | 25 min",
-      "cta": "Podemos ajudar",
-      "stats_teams": "50 equipas",
-      "stats_athletes": "600 atletas",
-      "stats_countries": "3 países",
-      "stats_games": "150 jogos"
-    },
-    "LandingReferences": {
-      "What_they_say": "What they say",
-      "MoreReferences": "More References"
-    },
-    "LandingOffer": {
-      "Title": "What do we offer?",
-      "Card1": {
-        "Title": "An opportunity for talents",
-        "Description": "The participation of an extraordinary amount of National selections and top teams makes Cascais VolleyCup the perfect tournament to challenge young volleyball players.",
-        "Button": "Hall of Fame"
-      },
-      "Card2": {
-        "Title": "A strong tradition",
-        "Description": "Cascais VolleyCup is one of the fastest growing volleyball tournaments in Europe, combining sun, sand, and serious competition.",
-        "Button": "About"
-      },
-      "Card3": {
-        "Title": "Lifetime international experience",
-        "Description": "Thousands of players have participated over the years — from every continent. Some go on to become legends in World Cups, European Cups and Olympics.",
-        "Button": "Participants"
-      }
-    },
-    "LandingRegister": {
-      "Subtitle": "Do you want to join the tournament?",
-      "Title": "Register now!",
-      "Description": "Requests of participation are subject to selection.\nContact us and don’t miss the chance to be part of the best volleyball tournament in Europe!",
-      "Button": "Send request"
+      "cta": "We can help",
+      "stats_teams": "50 teams",
+      "stats_athletes": "600 athletes",
+      "stats_countries": "3 countries",
+      "stats_games": "150 games"
     }
   },
 
   "AboutPage": {
-    "AboutHero": {
+    "Hero": {
       "title": "Volley4All",
       "p1": "Volley4All is a non-profit sports association focused on the solid development of its athletes.",
       "p2": "Over the last years we’ve achieved important results and became a reference in the south of Portugal.",
@@ -103,48 +69,48 @@
         "camFordAlt": "C.A.M. Ford"
       }
     },
-    "AboutPortugal": {
-      "title": "PORQUÊ PORTUGAL? PORQUÊ CASCAIS?",
-      "p1": "Com um clima ameno, mais de 300 dias de sol por ano e 850 km de praias deslumbrantes banhadas pelo Oceano Atlântico, Portugal é o local ideal para viver experiências inesquecíveis durante todo o ano.",
-      "p2": "Reconhecido como um dos principais destinos turísticos da Europa e classificado no Top 3 dos destinos mais seguros do mundo, Portugal combina de forma única paisagens naturais, riqueza cultural e hospitalidade.",
-      "p3": "A apenas 2 horas de voo das principais capitais europeias, Lisboa oferece ligações rápidas e cómodas para visitantes de todo o mundo.",
-      "p4": "Cascais situa‑se no litoral atlântico, a 30 km do Aeroporto de Lisboa — charmosa, segura e perfeita para o nosso torneio.",
+    "Portugal": {
+      "title": "WHY PORTUGAL? WHY CASCAIS?",
+      "p1": "With a mild climate, over 300 days of sunshine per year, and 850 km of stunning beaches washed by the Atlantic Ocean, Portugal is the perfect place to enjoy unforgettable experiences all year round.",
+      "p2": "Recognized as one of Europe’s top tourist destinations and ranked in the Top 3 safest countries in the world, Portugal uniquely combines natural landscapes, cultural richness, and hospitality.",
+      "p3": "Just 2 hours by plane from major European capitals, Lisbon offers fast and convenient connections for visitors from around the world.",
+      "p4": "Cascais is located on the Atlantic coast, 30 km from Lisbon Airport — charming, safe, and perfect for our tournament.",
       "logoAlt": "Cascais Volley Cup 2026",
       "taglineAlt": "Feel the action, enjoy the summer",
       "cards": {
         "portugal": {
           "title": "PORTUGAL",
-          "subtitle": "Lisboa",
-          "desc": "Uma das nações mais antigas da Europa, fundada em 1139 com fronteiras estáveis desde 1297.",
-          "alt": "Vista de Lisboa e Torre de Belém"
+          "subtitle": "Lisbon",
+          "desc": "One of the oldest nations in Europe, founded in 1139 with stable borders since 1297.",
+          "alt": "View of Lisbon and Belém Tower"
         },
         "cabo": {
           "title": "CABO DA ROCA",
           "subtitle": "Cascais",
-          "desc": "Ponto mais ocidental da Europa continental, marcado por escarpas e vistas impressionantes.",
-          "alt": "Escarpas e farol do Cabo da Roca"
+          "desc": "The westernmost point of mainland Europe, marked by cliffs and breathtaking views.",
+          "alt": "Cliffs and lighthouse at Cabo da Roca"
         },
         "boca": {
           "title": "BOCA DO INFERNO",
           "subtitle": "Cascais",
-          "desc": "Formação rochosa única com falésias esculpidas pela força do Atlântico, a oeste de Cascais.",
-          "alt": "Arcos e falésias na Boca do Inferno"
+          "desc": "A unique rock formation with cliffs sculpted by the force of the Atlantic, west of Cascais.",
+          "alt": "Arches and cliffs at Boca do Inferno"
         },
         "sec1719": {
           "title": "SEC XVII | XIX",
           "subtitle": "Cascais",
-          "desc": "Mansões nobres dos séculos XVII–XIX; refúgio histórico da realeza portuguesa.",
-          "alt": "Arquitetura histórica de Cascais"
+          "desc": "Noble mansions from the 17th–19th centuries; a historic refuge of Portuguese royalty.",
+          "alt": "Historic architecture of Cascais"
         }
       },
       "stats": {
-        "teams": "50 EQUIPAS",
-        "athletes": "600 ATLETAS",
-        "countries": "3 PAÍSES",
-        "matches": "150 JOGOS"
+        "teams": "50 TEAMS",
+        "athletes": "600 ATHLETES",
+        "countries": "3 COUNTRIES",
+        "matches": "150 MATCHES"
       }
     },
-    "AboutVilla": {
+    "Villa": {
       "taglineAlt": "feel the ACTION, enjoy the SUMMER",
       "title": "Cascais — The Town",
       "p1": "Cascais is a charming seaside town, famous for its picturesque beaches, elegant gardens, great food, and a relaxed, welcoming atmosphere. Here, tradition and modernity live side by side, creating an ideal setting for leisure, sport, and well-being.",
@@ -159,24 +125,24 @@
 
   "AccommodationPage": {
     "Hero": {
-      "title": "Estadia",
+      "title": "Accommodation",
       "schools": {
-        "title": "Alojamento em Escolas",
-        "p1": "O alojamento e a alimentação das comitivas serão realizados nas Escolas do Concelho de Cascais, a saber:",
+        "title": "Accommodation in Schools",
+        "p1": "Accommodation and meals for the delegations will be provided in the Schools of the Municipality of Cascais, namely:",
         "list": {
           "a": "Agrupamento de Escolas de Alvide | Alcabideche",
           "b": "Agrupamento de Escolas da Cidadela | Cascais",
           "c": "Agrupamento de Escolas de Cascais | Cascais",
           "d": "Agrupamento de Escolas IBN Mucana | Alcabideche"
         },
-        "p2": "Todos os jogos ocorrerão nos pavilhões do referido concelho. Entre a estadia e os jogos, as visitas à vila e às suas magníficas praias estão a uma distância de uma caminhada de 15–20 minutos. Adicionalmente, será atribuído a cada participante um “free pass card” que permitirá utilizar a rede de transportes MOBICASCAIS gratuitamente durante a realização do evento em todo o concelho de Cascais. Recomendamos a consulta da respetiva aplicação para uma melhor utilização da respetiva rede de transportes.\n\nSerá atribuída uma sala de aula a cada comitiva, e todos os participantes devem trazer o seu próprio saco cama, almofada e colchão."
+        "p2": "All matches will take place in sports halls within the municipality. Between matches and accommodation, visits to the town and its magnificent beaches are within a 15–20 minute walk. Additionally, each participant will receive a “free pass card” allowing free use of the MOBICASCAIS transport network throughout the municipality during the event. We recommend checking the official app for better use of the transport network.\n\nEach delegation will be assigned a classroom, and all participants must bring their own sleeping bag, pillow, and mattress."
       },
       "hotel": {
-        "title": "Alojamento em Hotel",
-        "p1": "Equipas que desejem ficar em unidades hoteleiras da região e/ou necessitem de transporte de e para o Aeroporto de Lisboa devem indicar essa necessidade/preferência durante o processo de inscrição online e contactar antecipadamente os Agentes Oficiais do evento para garantir os melhores preços disponíveis. Todas as informações e contactos estão disponíveis em: www.cascaisvolleycup.com"
+        "title": "Accommodation in Hotels",
+        "p1": "Teams wishing to stay in hotels in the region and/or requiring transportation to and from Lisbon Airport must indicate this need/preference during the online registration process and contact the Official Agents of the event in advance to ensure the best available prices. All information and contacts are available at: www.cascaisvolleycup.com"
       },
-      "playerAlt": "Jogadora de voleibol em ação",
-      "logoAlt": "Logótipo Cascais Volley Cup 2026",
+      "playerAlt": "Volleyball player in action",
+      "logoAlt": "Cascais Volley Cup 2026 logo",
       "stats": {
         "teams": "50 Teams",
         "athletes": "600 Athletes",
@@ -184,220 +150,212 @@
         "games": "150 Games"
       }
     },
-
     "Food": {
       "taglineAlt": "Event tagline",
-      "title": "Alimentação",
-      "p1": "As cantinas só estarão em funcionamento a partir do dia 8 de julho, portanto, não serão fornecidas refeições no dia 7 de julho. No último dia do evento, 12 de julho, não será servido jantar.",
-      "scheduleTitle": "As refeições serão realizadas nas diversas cantinas escolares disponíveis conforme o seguinte horário:",
-      "breakfast": "Pequenos-almoços volantes distribuídos às equipas | 8:00–10:00",
-      "lunch": "Almoços | 12:00–15:00",
-      "dinner": "Jantares | 19:00–21:00",
-      "intolerances": "Em caso de intolerâncias alimentares, os responsáveis das equipas deverão informar a organização no momento da inscrição para que possam ser preparadas refeições adequadas para cada caso.",
+      "title": "Food & Meals",
+      "p1": "The canteens will only be operational from July 8th, so no meals will be provided on July 7th. On the last day of the event, July 12th, dinner will not be served.",
+      "scheduleTitle": "Meals will be served in the various school canteens available according to the following schedule:",
+      "breakfast": "Packed breakfasts distributed to teams | 8:00–10:00",
+      "lunch": "Lunch | 12:00–15:00",
+      "dinner": "Dinner | 19:00–21:00",
+      "intolerances": "In case of food intolerances, team leaders must inform the organization at the time of registration so that appropriate meals can be prepared for each case.",
       "logoAlt": "Cascais Volley Cup logo",
-      "ctaContact": "Contacte-nos",
-      "ctaMoreInfo": "Mais informações"
+      "ctaContact": "Contact us",
+      "ctaMoreInfo": "More information"
     }
   },
 
   "ProgramPage": {
-    "ProgramHero": {
-      "title": "Programa",
-      "taglineAlt": "Tagline do evento",
-      "playersAlt": "Jogadoras em ação",
-
+    "Hero": {
+      "title": "Program",
+      "taglineAlt": "Event tagline",
+      "playersAlt": "Players in action",
       "checkin": {
-        "label": "7 de julho · 3ª feira",
-        "text": "O “CHECK IN” de todas as equipas deve ser realizado entre as 15.00 e as 24.00 deste dia no local do respetivo alojamento, que será comunicado atempadamente pela organização."
+        "label": "July 7 · Tuesday",
+        "text": "The check-in for all teams must take place between 15:00 and 24:00 on this day at their assigned accommodation, which will be communicated in advance by the organization."
       },
-
-      "daysHeader": "Calendário resumido:",
-
+      "daysHeader": "Summary schedule:",
       "days": {
         "d1": {
-          "weekday": "4ª FEIRA",
-          "date": "08–jul",
+          "weekday": "WEDNESDAY",
+          "date": "08–Jul",
           "block1": {
-            "title": "1ª FASE DE GRUPOS",
-            "subtitle": "Jogos",
-            "times": "9.00–22.00"
+            "title": "1st GROUP STAGE",
+            "subtitle": "Matches",
+            "times": "9:00–22:00"
           }
         },
         "d2": {
-          "weekday": "5ª FEIRA",
-          "date": "09–jul",
+          "weekday": "THURSDAY",
+          "date": "09–Jul",
           "block1": {
-            "title": "1ª FASE DE GRUPOS",
-            "subtitle": "Jogos",
-            "times": "9.00–22.00"
+            "title": "1st GROUP STAGE",
+            "subtitle": "Matches",
+            "times": "9:00–22:00"
           }
         },
         "d3": {
-          "weekday": "6ª FEIRA",
-          "date": "10–jul",
+          "weekday": "FRIDAY",
+          "date": "10–Jul",
           "block1": {
             "title": "LAY DAY"
           }
         },
         "d4": {
-          "weekday": "SÁB",
-          "date": "11–jul",
-          "block1": { "title": "2ª FASE DE GRUPOS" },
-          "block2": { "title": "1/4 de Final" },
+          "weekday": "SAT",
+          "date": "11–Jul",
+          "block1": { "title": "2nd GROUP STAGE" },
+          "block2": { "title": "Quarter-Finals" },
           "block3": {
-            "subtitle": "Jogos",
-            "times": "9.00–22.00"
+            "subtitle": "Matches",
+            "times": "9:00–22:00"
           }
         },
         "d5": {
-          "weekday": "DOM",
-          "date": "12–jul",
-          "block1": { "title": "2ª FASE DE GRUPOS" },
-          "block2": { "title": "1/2 de Final" },
-          "block3": { "title": "Finais" },
+          "weekday": "SUN",
+          "date": "12–Jul",
+          "block1": { "title": "2nd GROUP STAGE" },
+          "block2": { "title": "Semi-Finals" },
+          "block3": { "title": "Finals" },
           "block4": {
-            "subtitle": "Jogos",
-            "times": "9.00–16.00"
+            "subtitle": "Matches",
+            "times": "9:00–16:00"
           },
           "block5": {
-            "note": "Cerimónia de Entrega de Prémios · 18.00"
+            "note": "Awards Ceremony · 18:00"
           }
         }
       },
-
       "checkout": {
-        "label": "13 de julho · 2ª feira",
-        "text": "O “CHECK OUT” de todas as equipas que o solicitem e/ou necessitem de realizar transferes com o Aeroporto de Lisboa deve realizar-se até às 12.00 deste dia."
+        "label": "July 13 · Monday",
+        "text": "The check-out for all teams requesting and/or requiring transfers to Lisbon Airport must be completed by 12:00 on this day."
       },
-
       "layday": {
         "title": "Lay Day",
-        "text": "No dia 10 de julho, sexta-feira, apenas se realizarão os jogos estritamente necessários para acerto dos respetivos calendários. Nesse dia, será possível às comitivas usufruírem da nossa vila, com a opção de se deslocarem até Lisboa. A viagem de comboio ao longo do estuário do Tejo é uma experiência lindíssima, passando por todas as praias da Costa do Estoril e oferecendo vistas de pontos turísticos como a Torre de Belém, o Mosteiro dos Jerónimos, o Padrão dos Descobrimentos, o Centro Cultural de Belém, o MAAT, entre outros. Tudo isso em uma viagem de apenas 25 minutos de comboio."
+        "text": "On July 10, Friday, only the matches strictly necessary to adjust the respective schedules will be played. On this day, delegations will have the opportunity to enjoy our town, with the option of traveling to Lisbon. The train ride along the Tagus estuary is a beautiful experience, passing by all the beaches of the Estoril Coast and offering views of tourist landmarks such as the Belém Tower, Jerónimos Monastery, Monument to the Discoveries, Belém Cultural Center, MAAT, among others. All this in just a 25-minute train journey."
       },
-
       "attention": {
-        "label": "Atenção",
-        "text": "Caso entenda ser do melhor interesse de todos os participantes, a organização reserva o direito de poder alterar o respetivo programa. Nessa eventualidade, todas as equipas serão devidamente notificadas."
+        "label": "Attention",
+        "text": "If deemed in the best interest of all participants, the organization reserves the right to change the program. In such case, all teams will be duly notified."
       },
-      "downloadPdf": "Descarregar programa completo (PDF)",
-      "ctaContact": "Contacte-nos",
-
+      "downloadPdf": "Download full program (PDF)",
+      "ctaContact": "Contact us",
       "stats": {
-        "teams": "50 equipas",
-        "athletes": "600 atletas",
-        "countries": "3 países",
-        "games": "150 jogos"
+        "teams": "50 teams",
+        "athletes": "600 athletes",
+        "countries": "3 countries",
+        "games": "150 games"
       }
     }
   },
 
   "CompetitionPage": {
     "Hero": {
-      "phoneAlt": "Aplicação da Cascais Volley Cup exibida num telemóvel",
-      "title": "A COMPETIÇÃO",
-      "p1": "O quadro competitivo será organizado em função do número de inscrições, sempre com o objetivo de promover o maior número de jogos possível para todas as equipas.",
-      "p2": "Teremos uma 1ª fase constituída por grupos de 4 equipas, onde todos jogarão contra todos e apuram os primeiros classificados de cada grupo. As equipas apuradas entram numa 2ª fase de eliminatória simples para apurar do 1º ao 8º classificado e as equipas não apuradas, entram numa 2ª fase de grupos para apurar as restantes classificações. É garantido um número mínimo de 6 jogos e um número máximo de 8 jogos por equipa.",
-      "p3": "A constituição dos grupos, as classificações, as pontuações e o calendário de jogos de todas as equipas, estará sempre atualizado e disponível para consulta na APP do CASCAIS VOLLEY CUP | link disponível em www.cascaisvolleycup.com",
-      "cta": "REGULAMENTO",
+      "phoneAlt": "Cascais Volley Cup app displayed on a mobile phone",
+      "title": "THE COMPETITION",
+      "p1": "The competition format will be organized according to the number of registrations, always aiming to provide the highest possible number of matches for all teams.",
+      "p2": "There will be a first phase consisting of groups of 4 teams, where all play against each other and the top-ranked teams in each group qualify. Qualified teams enter a second phase of single elimination to determine rankings from 1st to 8th place, while non-qualified teams enter a second group phase to determine the remaining rankings. Each team is guaranteed a minimum of 6 matches and a maximum of 8 matches.",
+      "p3": "The formation of groups, rankings, points, and match schedules for all teams will always be updated and available in the CASCAIS VOLLEY CUP app | link available at www.cascaisvolleycup.com",
+      "cta": "REGULATIONS",
       "ctaHref": "/regulamento",
-      "mosaicAlt": "Mosaico de imagens da competição"
+      "mosaicAlt": "Mosaic of competition images"
     },
     "LogoTaglineHero": {
-      "sectionLabel": "Faixa do Cascais Volley Cup",
-      "logoAlt": "Logótipo Cascais Volley Cup 2026",
+      "sectionLabel": "Cascais Volley Cup banner",
+      "logoAlt": "Cascais Volley Cup 2026 logo",
       "taglineAlt": "feel the ACTION, enjoy the SUMMER"
     },
     "Facts": {
       "ages": {
-        "heading": "ESCALÕES ETÁRIOS?",
-        "l1": "SUB 15 (≤ 2011)",
-        "l2": "SUB 17 (2010–2009)",
+        "heading": "AGE CATEGORIES?",
+        "l1": "UNDER 15 (≤ 2011)",
+        "l2": "UNDER 17 (2010–2009)",
         "l3": "OPEN (≥ 2008)"
       },
       "who": {
-        "heading": "QUEM PODE PARTICIPAR?",
-        "l1": "UNIVERSIDADES",
-        "l2": "SELEÇÕES",
-        "l3": "COLÉGIOS",
-        "l4": "ESCOLAS",
-        "l5": "CLUBES"
+        "heading": "WHO CAN PARTICIPATE?",
+        "l1": "UNIVERSITIES",
+        "l2": "NATIONAL TEAMS",
+        "l3": "COLLEGES",
+        "l4": "SCHOOLS",
+        "l5": "CLUBS"
       },
       "wherewhen": {
-        "heading": "ONDE E QUANDO?",
-        "l1": "No concelho de",
+        "heading": "WHERE AND WHEN?",
+        "l1": "In the municipality of",
         "l2": "CASCAIS",
-        "l3": "de 8 a 12 de julho"
+        "l3": "from July 8 to 12"
       },
       "games": {
-        "heading": "QUANTOS JOGOS?",
-        "maxPrefix": "MÁXIMO",
-        "maxSuffix": "8 Jogos",
-        "minPrefix": "MÍNIMO",
-        "minSuffix": "6 Jogos"
+        "heading": "HOW MANY MATCHES?",
+        "maxPrefix": "MAXIMUM",
+        "maxSuffix": "8 Matches",
+        "minPrefix": "MINIMUM",
+        "minSuffix": "6 Matches"
       },
       "stats": {
-        "teams": "100 Equipas",
-        "athletes": "1500 Atletas",
-        "countries": "20 Países",
-        "games": "250 Jogos"
+        "teams": "50 Teams",
+        "athletes": "600 Athletes",
+        "countries": "3 Countries",
+        "games": "150 Matches"
       }
     },
     "Info": {
-      "title": "Regulamento",
-      "intro": "Será aplicado o regulamento da FPV vigente para os diversos escalões, com as seguintes exceções:",
+      "title": "Regulations",
+      "intro": "The current FPV regulations will apply for the various categories, with the following exceptions:",
       "rules": {
-        "item1": "Os jogos serão disputados à melhor de <b>3 sets obrigatórios</b> ...",
-        "item2": "Em caso de igualdade pontual, os critérios ...",
-        "item3": "Na categoria SUB15 ...",
-        "item4": "Cada atleta pode jogar em apenas uma equipa ..."
+        "item1": "Matches will be played as the best of <b>3 mandatory sets</b> ...",
+        "item2": "In the event of a tie in points, the criteria ...",
+        "item3": "In the UNDER 15 category ...",
+        "item4": "Each player may play for only one team ..."
       },
       "notes": {
-        "p1": "Todos os jogos têm arbitragem oficial e o torneio é homologado pela <b>Federação Portuguesa de Voleibol</b>.",
-        "p2": "A organização fornecerá apenas a bola de jogo...",
-        "p3": "Cada equipa vencedora receberá <b>10 bolas GALA PRO-LINE</b>...",
-        "p4": "A organização premeia com troféus e medalhas..."
+        "p1": "All matches will have official referees, and the tournament is sanctioned by the <b>Portuguese Volleyball Federation</b>.",
+        "p2": "The organization will provide only the match ball...",
+        "p3": "Each winning team will receive <b>10 GALA PRO-LINE balls</b>...",
+        "p4": "The organization awards trophies and medals..."
       },
-      "playerAlt": "Atleta em ação"
+      "playerAlt": "Player in action"
     }
   },
 
   "GalleryPage": {
     "Hero": {
-      "see_more": "Ver mais",
-      "image_alt": "Imagem",
-      "loading": "A carregar…",
-      "empty_message": "Sem imagens ainda",
-      "error_message": "Falha ao carregar",
+      "see_more": "See more",
+      "image_alt": "Image",
+      "loading": "Loading…",
+      "empty_message": "No images yet",
+      "error_message": "Failed to load",
       "taglineAlt": "feel the ACTION, enjoy the SUMMER",
-      "title": "Galeria",
-      "subtitle": "Descarrega e partilha os melhores momentos da tua equipa."
+      "title": "Gallery",
+      "subtitle": "Download your team’s best moments."
     }
   },
 
   "HallOfFamePage": {
     "Hero": {
       "title": "Hall of Fame",
-      "intro": "Nos últimos três anos... (o teu texto da intro)",
-      "see_more": "Ver mais",
-      "hero_alt": "MVPs do torneio",
-      "logoAlt": "Logótipo Cascais Volley Cup",
+      "intro": "In the last three years... (your intro text here)",
+      "see_more": "See more",
+      "hero_alt": "Tournament MVPs",
+      "logoAlt": "Cascais Volley Cup logo",
       "mvpAlt": "MVP 2025"
     },
     "Participants": {
-      "title": "Equipas participantes",
-      "intro": "Texto introdutório sobre as equipas participantes...",
-      "playersAlt": "Jogadoras a celebrar",
+      "title": "Participating Teams",
+      "intro": "Introductory text about the participating teams...",
+      "playersAlt": "Players celebrating",
       "seeWinners": "See Winners",
       "stats": {
-        "teams": "50 equipas",
-        "athletes": "600 atletas",
-        "countries": "3 países",
-        "games": "150 jogos"
+        "teams": "50 teams",
+        "athletes": "600 athletes",
+        "countries": "3 countries",
+        "games": "150 games"
       }
     },
     "Winners": {
-      "title": "Equipas Vencedoras",
-      "description": "Descobre as equipas que subiram ao pódio nos últimos anos, em cada escalão.",
+      "title": "Winning Teams",
+      "description": "Discover the teams that reached the podium in recent years, in each category.",
       "years": {
         "2025": {
           "Sub21": [
@@ -461,69 +419,68 @@
         }
       },
       "labels": {
-        "sub21": "Sub-21",
-        "sub17": "Sub-17",
-        "sub15": "Sub-15",
-        "seeMore": "Ver mais"
+        "sub21": "Under-21",
+        "sub17": "Under-17",
+        "sub15": "Under-15",
+        "seeMore": "See more"
       }
     }
   },
 
   "RegistrationPage": {
     "RegistrationHero": {
-      "title": "Inscrições",
-      "intro": "A inscrição é obrigatória através do site do evento...",
+      "title": "Registrations",
+      "intro": "Registration is mandatory through the event website...",
       "earlyBird": {
         "label": "EARLY BIRD",
-        "text": "1 de janeiro a 31 de março — 165 euros/atleta..."
+        "text": "January 1 to March 31 — 165 euros/player..."
       },
       "regularBird": {
         "label": "REGULAR BIRD",
-        "text": "1 de abril a 31 de maio — 185 euros/atleta..."
+        "text": "April 1 to May 31 — 185 euros/player..."
       },
-      "teamMinimum": "Cada equipa deve ter um mínimo de 10 atletas inscritas.",
-      "coachesOffer": "A organização oferece inscrição gratuita para 2 treinadores por equipa.",
+      "teamMinimum": "Each team must have a minimum of 10 registered players.",
+      "coachesOffer": "The organization offers free registration for 2 coaches per team.",
       "hotel": {
-        "title": "Alojamento em Hotel",
-        "text": "Equipas que desejem ficar em unidades hoteleiras da região e/ou necessitem de transporte de e para o Aeroporto de Lisboa devem indicar essa necessidade/preferência durante o processo de inscrição online e contactar antecipadamente os",
-        "agents": "Agentes Oficiais",
-        "more": "do evento para garantir os melhores preços disponíveis. Todas as informações e contactos estão disponíveis em:"
+        "title": "Accommodation in Hotels",
+        "text": "Teams wishing to stay in hotels in the region and/or requiring transportation to and from Lisbon Airport must indicate this need/preference during the online registration process and contact the",
+        "agents": "Official Agents",
+        "more": "of the event in advance to guarantee the best available prices. All information and contacts are available at:"
       },
-
-      "ctaScroll": "Ir para o formulário",
-      "playerAlt": "Atleta a rematar durante o jogo",
+      "ctaScroll": "Go to the form",
+      "playerAlt": "Player spiking during a match",
       "stats": {
-        "teams": "50 equipas",
-        "athletes": "600 atletas",
-        "countries": "3 países",
-        "games": "150 jogos"
+        "teams": "50 teams",
+        "athletes": "600 athletes",
+        "countries": "3 countries",
+        "games": "150 games"
       },
       "taglineAlt": "feel the ACTION, enjoy the SUMMER"
     },
 
     "Form": {
-      "FormTitle": "Formulário de Inscrição",
-      "Name": "Nome",
-      "NamePlaceholder": "Digite o nome completo",
-      "Mobile": "Telemóvel",
-      "Club": "Clube",
-      "City": "Cidade",
-      "Country": "País",
-      "Questions": "Questões / Observações",
-      "Submit": "Enviar",
-      "Submitting": "A enviar...",
-      "SuccessMessage": "Inscrição enviada com sucesso! Entraremos em contacto em breve.",
-      "ErrorMessage": "Ocorreu um erro. Por favor, tente novamente.",
+      "FormTitle": "Registration Form",
+      "Name": "Name",
+      "NamePlaceholder": "Enter full name",
+      "Mobile": "Mobile phone",
+      "Club": "Club",
+      "City": "City",
+      "Country": "Country",
+      "Questions": "Questions / Observations",
+      "Submit": "Submit",
+      "Submitting": "Submitting...",
+      "SuccessMessage": "Registration sent successfully! We will contact you soon.",
+      "ErrorMessage": "An error occurred. Please try again.",
       "EarlyBird": {
         "label": "EARLY BIRD",
-        "text": "De 1 de janeiro a 31 de março — 165 euros/atleta."
+        "text": "From January 1 to March 31 — 165 euros/player."
       },
       "RegularBird": {
         "label": "REGULAR BIRD",
-        "text": "De 1 de abril a 31 de maio — 185 euros/atleta."
+        "text": "From April 1 to May 31 — 185 euros/player."
       },
-      "TeamMinimum": "Cada equipa deve ter um mínimo de 10 atletas inscritas.",
-      "CoachesOffer": "A organização oferece inscrição gratuita para 2 treinadores por equipa."
+      "TeamMinimum": "Each team must have a minimum of 10 registered players.",
+      "CoachesOffer": "The organization offers free registration for 2 coaches per team."
     }
   }
 }

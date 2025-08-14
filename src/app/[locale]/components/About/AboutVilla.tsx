@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
 export default function AboutVilla() {
-  const t = useTranslations('AboutPage.AboutVilla')
+  const t = useTranslations('AboutPage.Villa')
 
   const BG = '/img/about/villa-bg.png'
   const WAVE = '/img/global/ondas-6.png'

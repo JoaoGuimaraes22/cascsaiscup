@@ -68,7 +68,7 @@ const newsItems = [
 
 // --- COMPONENT ---
 export default function LandingUpdates() {
-  const t = useTranslations('LandingPage')
+  const t = useTranslations('LandingPage.Updates')
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -108,7 +108,7 @@ export default function LandingUpdates() {
       {/* Content pushed below the top wave height */}
       <div className='mx-auto max-w-screen-xl px-4 pt-[clamp(96px,9vw,180px)]'>
         <h2 className='mb-6 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'>
-          {t('LandingNews.Latest_news') || 'LATEST NEWS'}
+          {t('Latest_news') || 'LATEST NEWS'}
         </h2>
 
         <div className='grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-4'>
@@ -119,7 +119,7 @@ export default function LandingUpdates() {
 
         {/* What they say TITLE outside the wave */}
         <h3 className='mb-3 mt-12 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:mb-4 sm:mt-16 sm:text-3xl'>
-          {t('LandingReferences.What_they_say') || 'WHAT THEY SAY'}
+          {t('What_they_say') || 'WHAT THEY SAY'}
         </h3>
       </div>
 

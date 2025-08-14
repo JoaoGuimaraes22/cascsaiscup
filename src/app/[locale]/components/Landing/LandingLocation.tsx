@@ -6,7 +6,7 @@ import { FiSun } from 'react-icons/fi'
 import { FaPlane } from 'react-icons/fa'
 
 export default function LandingLocation() {
-  const t = useTranslations('LandingPage.LandingLocation')
+  const t = useTranslations('LandingPage.Location')
 
   return (
     <section className='relative isolate min-h-[720px] overflow-hidden pb-[135px] sm:min-h-[800px] lg:min-h-[880px]'>

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 export default function AboutPortugal() {
-  const t = useTranslations('AboutPage.AboutPortugal')
+  const t = useTranslations('AboutPage.Portugal')
 
   const spots = [
     {

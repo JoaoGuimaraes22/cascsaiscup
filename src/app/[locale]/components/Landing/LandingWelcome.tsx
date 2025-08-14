@@ -6,7 +6,7 @@ import { FiSun } from 'react-icons/fi'
 import { FaPlane } from 'react-icons/fa'
 
 export default function LandingWelcome() {
-  const t = useTranslations('LandingPage.LandingWelcome')
+  const t = useTranslations('LandingPage.Welcome')
 
   return (
     <section
