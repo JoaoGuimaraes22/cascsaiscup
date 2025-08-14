@@ -8,7 +8,7 @@ export default function AccomodationFood() {
   const t = useTranslations('AccommodationPage.Food')
 
   // Assets (same BG as hero)
-  const BG = '/img/accommodation/hero-bg.png'
+  const BG = '/img/about/portugal-bg.png'
   const TAGLINE = '/img/global/tagline.png'
   const LOGO = '/img/global/cascais-volley-cup-1.png'
 

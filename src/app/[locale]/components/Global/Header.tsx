@@ -15,20 +15,20 @@ interface Props {
   locale: string
 }
 
-/** Exclude the dynamic route so Header links stay static-only */
 type StaticPathname = Exclude<ValidPathname, '/gallery/[year]'>
+
+// ====== Assets ======
+const HEADER_BG = '/img/footer/footer-bg.png'
 
 export const Header: FC<Props> = ({ locale }) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
 
-  // Close menu when pathname changes (navigation occurs)
   useEffect(() => {
     setMenuOpen(false)
   }, [pathname])
 
-  // Handle body overflow when menu is open
   useEffect(() => {
     if (menuOpen) {
       const { overflow } = document.body.style
@@ -41,8 +41,6 @@ export const Header: FC<Props> = ({ locale }) => {
 
   const handleLogoClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-
-    // If already on home (locale-aware), just scroll
     const isHome = pathname === `/${locale}` || pathname === `/${locale}/`
     if (isHome) {
       window.scrollTo({
@@ -52,23 +50,27 @@ export const Header: FC<Props> = ({ locale }) => {
       })
       return
     }
-
-    // Navigate to home WITHOUT Next's auto-scroll, then hard-scroll to top
     startTransition(() => {
       router.push('/', { scroll: false })
-      // Ensure we run after layout paints
       requestAnimationFrame(() => {
         window.scrollTo(0, 0)
-        // Tiny fallback in case another effect runs after RAF
         setTimeout(() => window.scrollTo(0, 0), 0)
       })
     })
   }
 
   return (
-    <header role='banner' className='relative z-[200] w-full bg-slate-100'>
+    <header
+      role='banner'
+      className='relative z-[200] w-full bg-slate-100'
+      style={{
+        backgroundImage: `url(${HEADER_BG})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
       <div className='mx-auto flex max-w-screen-2xl flex-col items-center justify-between px-3 py-2 sm:flex-row sm:px-5 sm:py-4'>
-        {/* Logo (nudged right) */}
+        {/* Logo */}
         <div className='ml-1 flex w-full items-center justify-between sm:ml-3 sm:w-auto md:ml-6'>
           <Link
             lang={locale}
@@ -85,7 +87,7 @@ export const Header: FC<Props> = ({ locale }) => {
             />
           </Link>
 
-          {/* Lang + Mobile toggle (mobile only) */}
+          {/* Lang + Mobile menu button */}
           <div className='flex items-center gap-3 sm:hidden'>
             <LangButton />
             <button
@@ -109,7 +111,7 @@ export const Header: FC<Props> = ({ locale }) => {
           <LangButton />
         </nav>
 
-        {/* Mobile dropdown menu (site nav) */}
+        {/* Mobile dropdown */}
         <div
           id='mobile-nav'
           aria-hidden={!menuOpen}
@@ -145,22 +147,19 @@ function NavLinks({
     { href: '/competition', label: t('Competition') },
     { href: '/gallery', label: t('Gallery') },
     { href: '/hall-of-fame', label: t('Hall_of_Fame') },
-    { href: '/registration', label: t('Registration'), cta: true } // last & standout
+    { href: '/registration', label: t('Registration'), cta: true }
   ]
 
   const isActive = (href: string) => {
     const withLocale = `/${locale}${href}`
-    if (pathname === withLocale) return true // exact
-    return pathname.startsWith(withLocale + '/') // true children only
+    return pathname === withLocale || pathname.startsWith(withLocale + '/')
   }
 
   return (
     <>
       {links.map(({ href, label, cta }) => {
         const active = isActive(href)
-
         if (cta) {
-          // CTA: prominent pill on desktop, full-width button on mobile
           return (
             <Link
               key={href}
@@ -183,8 +182,6 @@ function NavLinks({
             </Link>
           )
         }
-
-        // Default link style
         return (
           <Link
             key={href}

@@ -7,6 +7,7 @@ import {
 import { Inter, Rubik, Space_Grotesk } from 'next/font/google'
 import NextTopLoader from 'nextjs-toploader'
 import { Header } from './components/Global/Header'
+import Footer from './components/Global/Footer'
 import ScrollToTopButton from './components/Global/ScrollToTopButton'
 import './globals.css'
 
@@ -61,8 +62,8 @@ export default function RootLayout({
             showSpinner={false}
           />
           <Header locale={locale} />
-          <main className='w-full overflow-x-hidden'>{children}</main>
-
+          <main className='w-full flex-1 overflow-x-hidden'>{children}</main>
+          <Footer locale={locale} />
           <ScrollToTopButton />
         </NextIntlClientProvider>
       </body>

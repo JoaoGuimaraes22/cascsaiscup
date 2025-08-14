@@ -7,7 +7,7 @@ export default function CompetitionInfo() {
   const t = useTranslations('CompetitionPage.Info')
 
   // Assets
-  const BG = '/img/competition/hero-bg.png'
+  const BG = '/img/about/about-bg.png'
   const WAVE_TOP = '/img/global/ondas-5.png'
   const WAVE_BOTTOM = '/img/global/ondas-3.png'
   const PLAYER = '/img/program/players.png'

@@ -374,6 +374,101 @@
     }
   },
 
+  "HallOfFamePage": {
+    "Hero": {
+      "title": "Hall of Fame",
+      "intro": "Nos últimos três anos... (o teu texto da intro)",
+      "see_more": "Ver mais",
+      "hero_alt": "MVPs do torneio",
+      "logoAlt": "Logótipo Cascais Volley Cup",
+      "mvpAlt": "MVP 2025"
+    },
+    "Participants": {
+      "title": "Equipas participantes",
+      "intro": "Texto introdutório sobre as equipas participantes...",
+      "playersAlt": "Jogadoras a celebrar",
+      "seeWinners": "See Winners",
+      "stats": {
+        "teams": "50 equipas",
+        "athletes": "600 atletas",
+        "countries": "3 países",
+        "games": "150 jogos"
+      }
+    },
+    "Winners": {
+      "title": "Equipas Vencedoras",
+      "description": "Descobre as equipas que subiram ao pódio nos últimos anos, em cada escalão.",
+      "years": {
+        "2025": {
+          "Sub21": [
+            "Lisboa Spikers",
+            "Porto Power",
+            "Cascais Crushers",
+            "Oeiras Thunder"
+          ],
+          "Sub17": [
+            "Algarve Waves",
+            "Braga Blockers",
+            "Estoril Eagles",
+            "Sintra Smash"
+          ],
+          "Sub15": [
+            "Coimbra Titans",
+            "Funchal Flames",
+            "Viana Sea Storm",
+            "Setúbal Sharks"
+          ]
+        },
+        "2024": {
+          "Sub21": [
+            "Aveiro Ace Queens",
+            "Faro Flyers",
+            "Leiria Lightning",
+            "Madeira Volley Stars"
+          ],
+          "Sub17": [
+            "Porto Power",
+            "Lisboa Spikers",
+            "Braga Blockers",
+            "Oeiras Thunder"
+          ],
+          "Sub15": [
+            "Cascais Crushers",
+            "Sintra Smash",
+            "Estoril Eagles",
+            "Setúbal Sharks"
+          ]
+        },
+        "2023": {
+          "Sub21": [
+            "Madeira Volley Stars",
+            "Oeiras Thunder",
+            "Braga Blockers",
+            "Lisboa Spikers"
+          ],
+          "Sub17": [
+            "Coimbra Titans",
+            "Setúbal Sharks",
+            "Porto Power",
+            "Cascais Crushers"
+          ],
+          "Sub15": [
+            "Algarve Waves",
+            "Sintra Smash",
+            "Funchal Flames",
+            "Viana Sea Storm"
+          ]
+        }
+      },
+      "labels": {
+        "sub21": "Sub-21",
+        "sub17": "Sub-17",
+        "sub15": "Sub-15",
+        "seeMore": "Ver mais"
+      }
+    }
+  },
+
   "RegistrationPage": {
     "RegistrationHero": {
       "title": "Inscrições",
@@ -405,6 +500,7 @@
       },
       "taglineAlt": "feel the ACTION, enjoy the SUMMER"
     },
+
     "Form": {
       "FormTitle": "Formulário de Inscrição",
       "Name": "Nome",
@@ -428,33 +524,6 @@
       },
       "TeamMinimum": "Cada equipa deve ter um mínimo de 10 atletas inscritas.",
       "CoachesOffer": "A organização oferece inscrição gratuita para 2 treinadores por equipa."
-    }
-  },
-
-  "Footer": {
-    "Section1": {
-      "Title": "Cascais Volley Cup",
-      "About": "About",
-      "HallOfFame": "Hall of Fame",
-      "Location": "Location",
-      "Merchandise": "Merchandise"
-    },
-    "Section2": {
-      "Title": "The Tournament",
-      "Program": "Program of the Tournament",
-      "Registration": "Registration",
-      "Regulation": "Regulation",
-      "WinterCup": "Winter Cup"
-    },
-    "Section3": {
-      "Title": "Information",
-      "Services": "Services",
-      "News": "News",
-      "Partners": "Official Partners",
-      "Photos_&_Media": "Photos & Media"
-    },
-    "Section4": {
-      "Title": "Contacts"
     }
   }
 }

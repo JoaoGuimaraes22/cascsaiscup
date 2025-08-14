@@ -8,7 +8,7 @@ export default function CompetitionFacts() {
   const t = useTranslations('CompetitionPage.Facts')
 
   // Assets (adjust paths if needed)
-  const BG = '/img/competition/hero-bg.png'
+  const BG = '/img/landing/home-page-2.png'
   const WAVE = '/img/global/ondas-3.png'
   const WAVE_H = 135
 
