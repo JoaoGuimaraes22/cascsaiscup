@@ -388,6 +388,13 @@
       },
       "teamMinimum": "Cada equipa deve ter um mínimo de 10 atletas inscritas.",
       "coachesOffer": "A organização oferece inscrição gratuita para 2 treinadores por equipa.",
+      "hotel": {
+        "title": "Alojamento em Hotel",
+        "text": "Equipas que desejem ficar em unidades hoteleiras da região e/ou necessitem de transporte de e para o Aeroporto de Lisboa devem indicar essa necessidade/preferência durante o processo de inscrição online e contactar antecipadamente os",
+        "agents": "Agentes Oficiais",
+        "more": "do evento para garantir os melhores preços disponíveis. Todas as informações e contactos estão disponíveis em:"
+      },
+
       "ctaScroll": "Ir para o formulário",
       "playerAlt": "Atleta a rematar durante o jogo",
       "stats": {
@@ -395,25 +402,32 @@
         "athletes": "600 atletas",
         "countries": "3 países",
         "games": "150 jogos"
-      }
+      },
+      "taglineAlt": "feel the ACTION, enjoy the SUMMER"
     },
-    "Title": "Registration",
-    "Description": "Requests of participation for Cascais Volley Cup are subject to selection by the organization. Fill this form to get a free quotation for your participation at the next volleyball tournament of Cascais.",
-    "Name": "My name",
-    "NamePlaceholder": "My full name",
-    "Email": "Email",
-    "Mobile": "Mobile",
-    "Club": "Name of my Volleyball Club",
-    "City": "City",
-    "Country": "Country",
-    "Questions": "Questions?",
-    "Submit": "Submit",
-    "Submitting": "Submitting...",
-    "SuccessMessage": "Thank you! Your registration was received.",
-    "ErrorMessage": "Something went wrong. Please try again later.",
-    "RegistrationContact": {
-      "Title": "Contact Us",
-      "Subtitle": "Do you have questions or need more information?"
+    "Form": {
+      "FormTitle": "Formulário de Inscrição",
+      "Name": "Nome",
+      "NamePlaceholder": "Digite o nome completo",
+      "Mobile": "Telemóvel",
+      "Club": "Clube",
+      "City": "Cidade",
+      "Country": "País",
+      "Questions": "Questões / Observações",
+      "Submit": "Enviar",
+      "Submitting": "A enviar...",
+      "SuccessMessage": "Inscrição enviada com sucesso! Entraremos em contacto em breve.",
+      "ErrorMessage": "Ocorreu um erro. Por favor, tente novamente.",
+      "EarlyBird": {
+        "label": "EARLY BIRD",
+        "text": "De 1 de janeiro a 31 de março — 165 euros/atleta."
+      },
+      "RegularBird": {
+        "label": "REGULAR BIRD",
+        "text": "De 1 de abril a 31 de maio — 185 euros/atleta."
+      },
+      "TeamMinimum": "Cada equipa deve ter um mínimo de 10 atletas inscritas.",
+      "CoachesOffer": "A organização oferece inscrição gratuita para 2 treinadores por equipa."
     }
   },
 

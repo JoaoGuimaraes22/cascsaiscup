@@ -11,23 +11,30 @@ export default function RegistrationHero() {
   const BG = '/img/registration/hero-bg.png'
   const PLAYER = '/img/registration/player.png'
   const WAVE = '/img/global/ondas-3.png'
+  const TAGLINE = '/img/global/tagline.png'
 
   const WAVE_H = 135
 
   const onScrollToForm = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     const el = document.getElementById('registration-form')
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    } else {
+    if (!el) {
       window.location.hash = '#registration-form'
+      return
     }
+    const prefersReduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    el.scrollIntoView({
+      behavior: prefersReduced ? 'auto' : 'smooth',
+      block: 'start'
+    })
   }
 
   return (
     <section
       className='relative max-h-[89vh] w-full overflow-hidden'
-      style={{ paddingBottom: `${WAVE_H}px` }}
+      style={{ maxHeight: '89svh' }}
     >
       {/* Background */}
       <Image
@@ -40,7 +47,11 @@ export default function RegistrationHero() {
         className='absolute inset-0 -z-10 object-cover'
       />
 
-      <div className='mx-auto max-w-screen-xl px-4 pt-8 sm:pt-12'>
+      {/* Padding for the wave lives here so wave fits inside 89vh */}
+      <div
+        className='mx-auto max-w-screen-xl px-4 pt-8 sm:pt-12'
+        style={{ paddingBottom: `${WAVE_H}px` }}
+      >
         {/* Content grid */}
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
           {/* Left: heading + copy + CTA */}
@@ -69,6 +80,25 @@ export default function RegistrationHero() {
                 <li>{t('coachesOffer')}</li>
               </ul>
 
+              {/* Alojamento em Hotel section */}
+              <div>
+                <h3 className='mb-1 font-extrabold uppercase tracking-wide text-sky-500'>
+                  {t('hotel.title')}
+                </h3>
+                <p>
+                  {t('hotel.text')} <strong>{t('hotel.agents')}</strong>{' '}
+                  {t('hotel.more')}{' '}
+                  <a
+                    href='https://www.cascaisvolleycup.com'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='font-semibold underline'
+                  >
+                    www.cascaisvolleycup.com
+                  </a>
+                </p>
+              </div>
+
               <button
                 onClick={onScrollToForm}
                 className='inline-flex items-center rounded-full bg-sky-700 px-5 py-2 text-sm font-bold text-white shadow-lg ring-1 ring-black/10 hover:bg-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
@@ -76,6 +106,18 @@ export default function RegistrationHero() {
               >
                 {t('ctaScroll')}
               </button>
+
+              {/* Tagline (desktop only) */}
+              <div className='hidden pt-6 lg:block'>
+                <Image
+                  src={TAGLINE}
+                  alt={t('taglineAlt')}
+                  width={420}
+                  height={160}
+                  className='h-auto w-[320px] object-contain'
+                  sizes='(max-width:1024px) 320px, 420px'
+                />
+              </div>
             </div>
           </div>
 
