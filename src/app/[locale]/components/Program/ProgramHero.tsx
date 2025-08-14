@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { Link } from '@/src/navigation'
 
 export default function ProgramHero() {
   const t = useTranslations('ProgramPage.ProgramHero')
@@ -70,11 +71,15 @@ export default function ProgramHero() {
   ]
 
   return (
-    <section className='relative w-full overflow-hidden pb-[135px]'>
+    <section
+      className='relative w-full overflow-hidden'
+      style={{ paddingBottom: `${WAVE_H}px` }}
+    >
       {/* BG */}
       <Image
         src={BG}
         alt=''
+        role='presentation'
         fill
         className='absolute inset-0 -z-10 object-cover'
         sizes='100vw'
@@ -124,7 +129,8 @@ export default function ProgramHero() {
             {days.map(d => (
               <article
                 key={d.key}
-                className='rounded-2xl bg-sky-600/90 p-4 text-center text-white shadow-lg ring-1 ring-black/10'
+                className='rounded-2xl bg-sky-600/90 p-4 text-center text-white shadow-lg ring-1 ring-black/10
+                           hover:-translate-y-0.5 hover:shadow-xl motion-safe:transition-transform motion-safe:duration-300'
               >
                 <div className='mb-2 text-xs font-extrabold uppercase tracking-wide text-white/90 sm:text-[13px]'>
                   {d.weekday}{' '}
@@ -132,39 +138,20 @@ export default function ProgramHero() {
                 </div>
 
                 <div className='flex min-h-[160px] flex-col items-center justify-center gap-1 sm:min-h-[180px]'>
-                  {d.blocks.map((b, i) => {
-                    if (b.title)
-                      return (
-                        <p
-                          key={i}
-                          className='text-[15px] font-extrabold uppercase'
-                        >
-                          {b.title}
-                        </p>
-                      )
-                    if (b.subtitle)
-                      return (
-                        <p key={i} className='text-sm'>
-                          {b.subtitle}
-                        </p>
-                      )
-                    if (b.times)
-                      return (
-                        <p key={i} className='text-sm'>
-                          {b.times}
-                        </p>
-                      )
-                    if (b.note)
-                      return (
-                        <p
-                          key={i}
-                          className='mt-1 max-w-[18ch] text-[13px] font-extrabold uppercase'
-                        >
-                          {b.note}
-                        </p>
-                      )
-                    return null
-                  })}
+                  {d.blocks.map((b, i) => (
+                    <p
+                      key={i}
+                      className={
+                        b.title
+                          ? 'text-[15px] font-extrabold uppercase'
+                          : b.note
+                            ? 'mt-1 max-w-[18ch] text-[13px] font-extrabold uppercase'
+                            : 'text-sm'
+                      }
+                    >
+                      {b.title ?? b.subtitle ?? b.times ?? b.note}
+                    </p>
+                  ))}
                 </div>
               </article>
             ))}
@@ -202,17 +189,19 @@ export default function ProgramHero() {
                 href={PROGRAM_PDF}
                 target='_blank'
                 rel='noopener noreferrer'
+                type='application/pdf'
+                download
                 className='inline-flex items-center rounded-full bg-sky-600 px-5 py-2 text-sm font-bold text-white shadow-lg ring-1 ring-black/10 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
               >
                 {t('downloadPdf')}
               </a>
 
-              <a
-                href='/contact'
+              <Link
+                href='/registration'
                 className='inline-flex items-center rounded-full bg-white/90 px-5 py-2 text-sm font-bold text-sky-700 shadow-sm ring-1 ring-sky-600/40 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
               >
                 {t('ctaContact')}
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -245,6 +234,7 @@ export default function ProgramHero() {
           <Image
             src={WAVE}
             alt=''
+            role='presentation'
             width={2048}
             height={WAVE_H}
             className='z-10 -mb-px block h-auto w-full'
@@ -267,10 +257,30 @@ export default function ProgramHero() {
         </div>
 
         {/* Mobile wave (stretched) */}
+        {/* Mobile wave (with centered stats) */}
         <div
-          className='relative block overflow-hidden bg-center bg-no-repeat [background-size:100%_100%] lg:hidden'
-          style={{ backgroundImage: `url(${WAVE})`, height: `${WAVE_H}px` }}
-        />
+          className='relative block lg:hidden'
+          style={{
+            backgroundImage: `url(${WAVE})`,
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            height: `${WAVE_H}px`
+          }}
+        >
+          {/* Stats overlay */}
+          <div className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4'>
+            <ul className='flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-base font-extrabold text-white'>
+              <li>{t('stats.teams')}</li>
+              <li className='text-xl leading-none'>•</li>
+              <li>{t('stats.athletes')}</li>
+              <li className='text-xl leading-none'>•</li>
+              <li>{t('stats.countries')}</li>
+              <li className='text-xl leading-none'>•</li>
+              <li>{t('stats.games')}</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   )

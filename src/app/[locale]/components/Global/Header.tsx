@@ -1,7 +1,7 @@
 'use client'
 
-import { FC, useEffect, useState } from 'react'
-import { usePathname } from 'next/navigation'
+import { FC, useEffect, useState, MouseEvent, startTransition } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { Link } from '@/src/navigation'
 import { useTranslations } from 'next-intl'
 import LangSwitcher from '../LangSwitcher'
@@ -21,11 +21,14 @@ type StaticPathname = Exclude<ValidPathname, '/gallery/[year]'>
 export const Header: FC<Props> = ({ locale }) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
 
+  // Close menu when pathname changes (navigation occurs)
   useEffect(() => {
-    if (menuOpen) setMenuOpen(false)
+    setMenuOpen(false)
   }, [pathname])
 
+  // Handle body overflow when menu is open
   useEffect(() => {
     if (menuOpen) {
       const { overflow } = document.body.style
@@ -36,12 +39,43 @@ export const Header: FC<Props> = ({ locale }) => {
     }
   }, [menuOpen])
 
+  const handleLogoClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+
+    // If already on home (locale-aware), just scroll
+    const isHome = pathname === `/${locale}` || pathname === `/${locale}/`
+    if (isHome) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant' as ScrollBehavior
+      })
+      return
+    }
+
+    // Navigate to home WITHOUT Next's auto-scroll, then hard-scroll to top
+    startTransition(() => {
+      router.push('/', { scroll: false })
+      // Ensure we run after layout paints
+      requestAnimationFrame(() => {
+        window.scrollTo(0, 0)
+        // Tiny fallback in case another effect runs after RAF
+        setTimeout(() => window.scrollTo(0, 0), 0)
+      })
+    })
+  }
+
   return (
     <header role='banner' className='relative z-[200] w-full bg-slate-100'>
       <div className='mx-auto flex max-w-screen-2xl flex-col items-center justify-between px-3 py-2 sm:flex-row sm:px-5 sm:py-4'>
         {/* Logo (nudged right) */}
         <div className='ml-1 flex w-full items-center justify-between sm:ml-3 sm:w-auto md:ml-6'>
-          <Link lang={locale} href='/' aria-label='Cascais Volley Cup 2026'>
+          <Link
+            lang={locale}
+            href='/'
+            aria-label='Cascais Volley Cup 2026'
+            onClick={handleLogoClick}
+          >
             <Image
               src={Logo}
               alt='Cascais Volley Cup 2026'
@@ -104,24 +138,53 @@ function NavLinks({
   const t = useTranslations('Header')
   const pathname = usePathname()
 
-  const links: { href: StaticPathname; label: string }[] = [
+  const links: { href: StaticPathname; label: string; cta?: boolean }[] = [
     { href: '/about', label: t('About') },
     { href: '/accommodation', label: t('Accommodation') },
     { href: '/program', label: t('Program') },
     { href: '/competition', label: t('Competition') },
     { href: '/gallery', label: t('Gallery') },
-    { href: '/hall-of-fame', label: t('Hall_of_Fame') }
+    { href: '/hall-of-fame', label: t('Hall_of_Fame') },
+    { href: '/registration', label: t('Registration'), cta: true } // last & standout
   ]
 
   const isActive = (href: string) => {
     const withLocale = `/${locale}${href}`
-    return pathname === withLocale || pathname.startsWith(`${withLocale}/`)
+    if (pathname === withLocale) return true // exact
+    return pathname.startsWith(withLocale + '/') // true children only
   }
 
   return (
     <>
-      {links.map(({ href, label }) => {
+      {links.map(({ href, label, cta }) => {
         const active = isActive(href)
+
+        if (cta) {
+          // CTA: prominent pill on desktop, full-width button on mobile
+          return (
+            <Link
+              key={href}
+              lang={locale}
+              href={href}
+              aria-current={active ? 'page' : undefined}
+              aria-label={label}
+              className={clsx(
+                'inline-flex items-center font-semibold shadow-sm motion-safe:transition-colors motion-safe:duration-200',
+                isMobile
+                  ? 'w-full justify-center rounded-md px-3 py-2 text-sm'
+                  : 'rounded-full px-4 py-1.5 text-xs md:text-sm',
+                active
+                  ? 'bg-sky-800 text-white'
+                  : 'bg-sky-700 text-white hover:bg-sky-800 focus-visible:bg-sky-800',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
+              )}
+            >
+              {label}
+            </Link>
+          )
+        }
+
+        // Default link style
         return (
           <Link
             key={href}
@@ -132,6 +195,7 @@ function NavLinks({
               active ? 'text-sky-700' : 'text-slate-600',
               isMobile ? 'block w-full text-xs' : 'text-xs md:text-sm'
             )}
+            aria-current={active ? 'page' : undefined}
           >
             {label}
             <span

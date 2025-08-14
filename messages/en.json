@@ -375,6 +375,28 @@
   },
 
   "RegistrationPage": {
+    "RegistrationHero": {
+      "title": "Inscrições",
+      "intro": "A inscrição é obrigatória através do site do evento...",
+      "earlyBird": {
+        "label": "EARLY BIRD",
+        "text": "1 de janeiro a 31 de março — 165 euros/atleta..."
+      },
+      "regularBird": {
+        "label": "REGULAR BIRD",
+        "text": "1 de abril a 31 de maio — 185 euros/atleta..."
+      },
+      "teamMinimum": "Cada equipa deve ter um mínimo de 10 atletas inscritas.",
+      "coachesOffer": "A organização oferece inscrição gratuita para 2 treinadores por equipa.",
+      "ctaScroll": "Ir para o formulário",
+      "playerAlt": "Atleta a rematar durante o jogo",
+      "stats": {
+        "teams": "50 equipas",
+        "athletes": "600 atletas",
+        "countries": "3 países",
+        "games": "150 jogos"
+      }
+    },
     "Title": "Registration",
     "Description": "Requests of participation for Cascais Volley Cup are subject to selection by the organization. Fill this form to get a free quotation for your participation at the next volleyball tournament of Cascais.",
     "Name": "My name",
