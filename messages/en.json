@@ -11,24 +11,16 @@
 
   "LandingPage": {
     "Welcome": {
-      "Cascais": "Cascais Volley Cup 2026",
-      "9_13_July": "July 9th–13th",
-      "5_days_40_teams_500_athletes_120_games": "5 Days • 40 Teams • 500 Athletes • 120 Games",
-      "Program": "Program",
-      "Register": "Register",
-      "PORTUGAL": "Portugal",
-      "Cascais_Volley_Cup_2026": "Cascais Volley Cup 2026",
-      "dates": "8 — 12 July",
-      "stats_line": "5 Days • 40 Teams • 500 Athletes • 120 Games",
-      "feel_the": "feel the",
-      "ACTION": "ACTION",
-      "enjoy_the": "enjoy the",
-      "SUMMER": "SUMMER",
+      "tagline_alt": "feel the ACTION, enjoy the SUMMER",
+      "PORTUGAL": "PORTUGAL",
+      "dates": "8 — 12 JULY",
       "avg_air_temp": "AVG AIR TEMP",
       "avg_air_temp_value": "94°F | 34°C",
       "airport": "AIRPORT (LIS)",
       "airport_value": "30 km | 25 min",
-      "tagline_alt": "feel the ACTION, enjoy the SUMMER"
+      "location": "LOCATION",
+      "location_value": "LISBON, CASCAIS",
+      "scrollDown": "Scroll Down"
     },
     "Updates": {
       "Latest_news": "Latest news",
