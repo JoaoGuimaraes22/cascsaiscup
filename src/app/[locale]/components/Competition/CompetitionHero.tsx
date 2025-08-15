@@ -59,7 +59,7 @@ export default function CompetitionHero() {
 
           {/* Right: text + button */}
           <div className='md:col-span-7 lg:col-span-7'>
-            <h2 className='text-2xl font-extrabold uppercase tracking-wide text-sky-600 sm:text-3xl'>
+            <h2 className='text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'>
               {t('title') || 'A COMPETIÇÃO'}
             </h2>
 

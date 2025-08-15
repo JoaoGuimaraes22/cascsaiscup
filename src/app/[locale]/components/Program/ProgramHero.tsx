@@ -3,11 +3,12 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/src/navigation'
+import clsx from 'clsx'
 
 export default function ProgramHero() {
   const t = useTranslations('ProgramPage.Hero')
 
-  // Assets
+  // ===== Assets =====
   const BG = '/img/program/program-bg.png'
   const TAGLINE = '/img/global/tagline.png'
   const PLAYERS = '/img/program/players.png'
@@ -227,10 +228,10 @@ export default function ProgramHero() {
         </div>
       </div>
 
-      {/* Wave + right-aligned stats (nudge down) */}
+      {/* Wave + stats */}
       <div className='pointer-events-none absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
+        {/* Desktop */}
         <div className='relative hidden lg:block'>
-          {/* Wave background BELOW players */}
           <Image
             src={WAVE}
             alt=''
@@ -240,24 +241,21 @@ export default function ProgramHero() {
             className='z-10 -mb-px block h-auto w-full'
             sizes='100vw'
           />
-          {/* Stats ABOVE players & wave */}
           <div className='pointer-events-none absolute inset-0 z-30'>
             <div className='mx-auto flex h-full max-w-screen-xl translate-y-[4px] items-center justify-end px-4'>
-              <ul className='flex flex-wrap items-center gap-x-6 gap-y-2 text-lg font-extrabold text-white sm:text-xl'>
-                <li>{t('stats.teams')}</li>
-                <li className='text-2xl leading-none'>•</li>
-                <li>{t('stats.athletes')}</li>
-                <li className='text-2xl leading-none'>•</li>
-                <li>{t('stats.countries')}</li>
-                <li className='text-2xl leading-none'>•</li>
-                <li>{t('stats.games')}</li>
-              </ul>
+              <StatsList
+                items={[
+                  t('stats.teams'),
+                  t('stats.athletes'),
+                  t('stats.countries'),
+                  t('stats.games')
+                ]}
+              />
             </div>
           </div>
         </div>
 
-        {/* Mobile wave (stretched) */}
-        {/* Mobile wave (with centered stats) */}
+        {/* Mobile (stretched wave + compact centered stats) */}
         <div
           className='relative block lg:hidden'
           style={{
@@ -268,20 +266,62 @@ export default function ProgramHero() {
             height: `${WAVE_H}px`
           }}
         >
-          {/* Stats overlay */}
           <div className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4'>
-            <ul className='flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-base font-extrabold text-white'>
-              <li>{t('stats.teams')}</li>
-              <li className='text-xl leading-none'>•</li>
-              <li>{t('stats.athletes')}</li>
-              <li className='text-xl leading-none'>•</li>
-              <li>{t('stats.countries')}</li>
-              <li className='text-xl leading-none'>•</li>
-              <li>{t('stats.games')}</li>
-            </ul>
+            <StatsList
+              compact
+              items={[
+                t('stats.teams'),
+                t('stats.athletes'),
+                t('stats.countries'),
+                t('stats.games')
+              ]}
+            />
           </div>
         </div>
       </div>
     </section>
+  )
+}
+
+/* --- Reusable stats list --- */
+function StatsList({
+  items,
+  compact = false
+}: {
+  items: string[]
+  compact?: boolean
+}) {
+  return (
+    <ul
+      aria-label='Tournament stats'
+      className={clsx(
+        'flex items-center whitespace-nowrap font-extrabold uppercase text-white',
+        compact
+          ? 'gap-2 px-2 text-[10px] tracking-tight' // mobile compact, single line
+          : 'gap-3 px-3 text-[11px] tracking-normal sm:gap-4 sm:text-[13px] sm:tracking-wide lg:gap-6 lg:text-lg'
+      )}
+    >
+      {items.map((item, i) => (
+        <li
+          key={i}
+          className={clsx(
+            'flex items-center',
+            compact ? 'gap-2' : 'gap-3 sm:gap-4 lg:gap-6'
+          )}
+        >
+          <span>{item}</span>
+          {i < items.length - 1 && (
+            <span
+              className={clsx(
+                'leading-none',
+                compact ? 'text-xs' : 'text-sm sm:text-lg lg:text-2xl'
+              )}
+            >
+              •
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
   )
 }

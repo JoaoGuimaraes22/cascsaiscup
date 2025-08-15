@@ -459,28 +459,34 @@
     },
 
     "Form": {
-      "FormTitle": "Registration Form",
-      "Name": "Name",
-      "NamePlaceholder": "Enter full name",
-      "Mobile": "Mobile phone",
-      "Club": "Club",
+      "FormTitle": "Tournament Registration",
+      "FormDescription": "Fill out the form below to register for the Cascais Volley Cup 2026",
+      "Name": "Full Name",
+      "NamePlaceholder": "Enter your full name",
+      "Mobile": "Phone Number",
+      "Club": "Club/Team Name",
+      "ClubPlaceholder": "Enter your club or team name",
       "City": "City",
+      "CityPlaceholder": "Your city",
       "Country": "Country",
-      "Questions": "Questions / Observations",
-      "Submit": "Submit",
+      "CountryPlaceholder": "Your country",
+      "Questions": "Additional Questions or Comments",
+      "QuestionsPlaceholder": "Any questions, dietary requirements, or special requests...",
+      "Submit": "Submit Registration",
       "Submitting": "Submitting...",
-      "SuccessMessage": "Registration sent successfully! We will contact you soon.",
-      "ErrorMessage": "An error occurred. Please try again.",
-      "EarlyBird": {
-        "label": "EARLY BIRD",
-        "text": "From January 1 to March 31 — 165 euros/player."
-      },
-      "RegularBird": {
-        "label": "REGULAR BIRD",
-        "text": "From April 1 to May 31 — 185 euros/player."
-      },
-      "TeamMinimum": "Each team must have a minimum of 10 registered players.",
-      "CoachesOffer": "The organization offers free registration for 2 coaches per team."
+      "SuccessMessage": "Registration successful! We will contact you soon.",
+      "ErrorMessage": "Something went wrong. Please try again.",
+      "ValidationErrors": {
+        "nameRequired": "Name is required",
+        "nameMinLength": "Name must be at least 2 characters",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "clubRequired": "Club name is required",
+        "cityRequired": "City is required",
+        "countryRequired": "Country is required",
+        "mobileInvalid": "Please enter a valid phone number",
+        "fixErrors": "Please fix the errors above"
+      }
     }
   },
 

@@ -7,7 +7,7 @@ import clsx from 'clsx'
 export default function CompetitionFacts() {
   const t = useTranslations('CompetitionPage.Facts')
 
-  // Assets (adjust paths if needed)
+  // ===== Assets =====
   const BG = '/img/landing/home-page-2.png'
   const WAVE = '/img/global/ondas-3.png'
   const WAVE_H = 135
@@ -51,7 +51,10 @@ export default function CompetitionFacts() {
   ]
 
   return (
-    <section className='relative w-full overflow-hidden'>
+    <section
+      className='relative w-full overflow-hidden'
+      style={{ paddingBottom: `${WAVE_H}px` }}
+    >
       {/* Background */}
       <Image
         src={BG}
@@ -95,29 +98,48 @@ export default function CompetitionFacts() {
         </div>
       </div>
 
-      {/* Desktop-only bottom wave with stats */}
-      <div className='pointer-events-none relative hidden lg:block'>
+      {/* ---- Wave + stats (mobile & desktop) ---- */}
+      <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
+        {/* Wave image */}
         <Image
           src={WAVE}
           alt=''
           width={2048}
           height={WAVE_H}
-          className='-mb-px block h-[135px] w-full object-cover'
+          className='-mb-px block w-full object-cover'
+          style={{ height: `${WAVE_H}px` }}
           sizes='100vw'
           decoding='async'
           loading='lazy'
           draggable={false}
         />
-        <div className='absolute inset-0'>
-          <div className='mx-auto flex h-full max-w-screen-xl items-center justify-end px-4'>
-            <StatsList
-              items={[
-                t('stats.teams'),
-                t('stats.athletes'),
-                t('stats.countries'),
-                t('stats.games')
-              ]}
-            />
+
+        {/* Stats overlay: centered on mobile, right-aligned on lg+ */}
+        <div className='pointer-events-none absolute inset-0'>
+          <div className='mx-auto flex h-full max-w-screen-xl items-center justify-center px-4 lg:justify-end'>
+            {/* Mobile: compact single-line */}
+            <div className='block lg:hidden'>
+              <StatsList
+                compact
+                items={[
+                  t('stats.teams'),
+                  t('stats.athletes'),
+                  t('stats.countries'),
+                  t('stats.games')
+                ]}
+              />
+            </div>
+            {/* Desktop: standard, right-aligned */}
+            <div className='hidden lg:block'>
+              <StatsList
+                items={[
+                  t('stats.teams'),
+                  t('stats.athletes'),
+                  t('stats.countries'),
+                  t('stats.games')
+                ]}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -165,14 +187,41 @@ function PinMarker({
   )
 }
 
-function StatsList({ items }: { items: string[] }) {
+function StatsList({
+  items,
+  compact = false
+}: {
+  items: string[]
+  compact?: boolean
+}) {
   return (
-    <ul className='flex items-center gap-4 whitespace-nowrap font-extrabold uppercase tracking-wide text-white lg:gap-6 lg:text-lg'>
+    <ul
+      aria-label='Tournament stats'
+      className={clsx(
+        'flex items-center whitespace-nowrap font-extrabold uppercase text-white',
+        compact
+          ? 'gap-2 px-2 text-[10px] tracking-tight' // tighter on mobile; forces one line
+          : 'gap-3 px-3 text-[11px] tracking-normal sm:gap-4 sm:text-[13px] sm:tracking-wide lg:gap-6 lg:text-lg'
+      )}
+    >
       {items.map((item, i) => (
-        <li key={i} className='flex items-center gap-4'>
+        <li
+          key={i}
+          className={clsx(
+            'flex items-center',
+            compact ? 'gap-2' : 'gap-4 lg:gap-6'
+          )}
+        >
           <span>{item}</span>
           {i < items.length - 1 && (
-            <span className='text-base leading-none lg:text-2xl'>•</span>
+            <span
+              className={clsx(
+                'leading-none',
+                compact ? 'text-xs' : 'text-base sm:text-lg lg:text-2xl'
+              )}
+            >
+              •
+            </span>
           )}
         </li>
       ))}

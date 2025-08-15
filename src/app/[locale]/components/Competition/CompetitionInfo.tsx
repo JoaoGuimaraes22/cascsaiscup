@@ -26,20 +26,6 @@ export default function CompetitionInfo() {
         draggable={false}
       />
 
-      {/* Top wave */}
-      <div className='relative'>
-        <Image
-          src={WAVE_TOP}
-          alt=''
-          width={2048}
-          height={160}
-          className='block h-[120px] w-full sm:h-[140px] lg:h-auto lg:object-contain'
-          decoding='async'
-          loading='lazy'
-          draggable={false}
-        />
-      </div>
-
       {/* Content (no bottom padding so it touches the wave) */}
       <div className='mx-auto max-w-screen-xl px-4 pb-0 pt-8 sm:pt-10 lg:pt-12'>
         <div className='grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12'>

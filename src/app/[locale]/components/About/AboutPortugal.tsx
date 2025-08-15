@@ -2,9 +2,16 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import clsx from 'clsx'
 
 export default function AboutPortugal() {
   const t = useTranslations('AboutPage.Portugal')
+
+  // ===== Assets =====
+  const BG = '/img/about/portugal-bg.png'
+  const LOGO = '/img/global/cascais-volley-cup-2.png'
+  const TAGLINE = '/img/global/tagline.png'
+  const WAVE = '/img/global/ondas-3.png'
 
   const spots = [
     {
@@ -29,12 +36,17 @@ export default function AboutPortugal() {
     }
   ]
 
+  const WAVE_H = 135 // px
+
   return (
-    <section className='relative w-full overflow-hidden pb-[135px]'>
+    <section
+      className='relative w-full overflow-hidden'
+      style={{ paddingBottom: `${WAVE_H}px` }}
+    >
       {/* Background scenic image */}
       <div className='absolute inset-0 -z-10'>
         <Image
-          src='/img/about/portugal-bg.png'
+          src={BG}
           alt=''
           fill
           className='object-cover'
@@ -62,7 +74,7 @@ export default function AboutPortugal() {
           <div className='relative hidden items-start justify-end md:flex'>
             <div className='flex flex-col items-end gap-4'>
               <Image
-                src='/img/global/cascais-volley-cup-2.png'
+                src={LOGO}
                 alt={t('logoAlt')}
                 width={260}
                 height={180}
@@ -70,7 +82,7 @@ export default function AboutPortugal() {
                 priority
               />
               <Image
-                src='/img/global/tagline.png'
+                src={TAGLINE}
                 alt={t('taglineAlt')}
                 width={360}
                 height={150}
@@ -114,14 +126,15 @@ export default function AboutPortugal() {
         </div>
       </div>
 
-      {/* Bottom wave pinned + stats (centered one-line on mobile, right on desktop) */}
+      {/* Bottom wave pinned + stats */}
       <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
         <Image
-          src='/img/global/ondas-3.png'
+          src={WAVE}
           alt=''
           width={2048}
-          height={135}
-          className='-mb-px block h-[135px] w-full object-cover'
+          height={WAVE_H}
+          className='-mb-px block w-full object-cover'
+          style={{ height: `${WAVE_H}px` }}
           sizes='100vw'
           priority
         />
@@ -129,29 +142,75 @@ export default function AboutPortugal() {
         {/* Stats overlay */}
         <div className='pointer-events-none absolute inset-0'>
           <div className='mx-auto flex h-full max-w-screen-xl items-center justify-center px-4 lg:justify-end'>
-            <ul
-              className='
-                flex items-center gap-4 whitespace-nowrap text-[12px] font-extrabold uppercase tracking-wide
-                text-white sm:text-[13px] lg:gap-6 lg:text-lg
-              '
-            >
-              <li>{t('stats.teams')}</li>
-              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
-                •
-              </li>
-              <li>{t('stats.athletes')}</li>
-              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
-                •
-              </li>
-              <li>{t('stats.countries')}</li>
-              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
-                •
-              </li>
-              <li>{t('stats.matches')}</li>
-            </ul>
+            {/* Mobile: compact */}
+            <div className='block lg:hidden'>
+              <StatsList
+                compact
+                items={[
+                  t('stats.teams'),
+                  t('stats.athletes'),
+                  t('stats.countries'),
+                  t('stats.matches')
+                ]}
+              />
+            </div>
+            {/* Desktop */}
+            <div className='hidden lg:block'>
+              <StatsList
+                items={[
+                  t('stats.teams'),
+                  t('stats.athletes'),
+                  t('stats.countries'),
+                  t('stats.matches')
+                ]}
+              />
+            </div>
           </div>
         </div>
       </div>
     </section>
+  )
+}
+
+/* --- Reusable stats list --- */
+function StatsList({
+  items,
+  compact = false
+}: {
+  items: string[]
+  compact?: boolean
+}) {
+  return (
+    <ul
+      aria-label='Tournament stats'
+      className={clsx(
+        'flex items-center whitespace-nowrap font-extrabold uppercase text-white',
+        compact
+          ? 'gap-2 px-2 text-[10px] tracking-tight'
+          : 'gap-3 px-3 text-[11px] tracking-normal sm:gap-4 sm:text-[13px] sm:tracking-wide lg:gap-6 lg:text-lg'
+      )}
+    >
+      {items.map((item, i) => (
+        <li
+          key={i}
+          className={clsx(
+            'flex items-center',
+            compact ? 'gap-2' : 'gap-3 sm:gap-4 lg:gap-6'
+          )}
+        >
+          <span>{item}</span>
+          {i < items.length - 1 && (
+            <span
+              className={clsx(
+                'leading-none',
+                compact ? 'text-xs' : 'text-sm sm:text-lg lg:text-2xl'
+              )}
+            >
+              •
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
   )
 }

@@ -140,7 +140,7 @@ const Footer: FC<Props> = ({ locale }) => {
                   <Link
                     lang={locale}
                     href={href as any}
-                    className='rounded-sm text-sm text-slate-600 transition-colors hover:text-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+                    className='rounded-sm text-sm text-sky-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 sm:text-slate-600 sm:hover:text-sky-700'
                   >
                     {label}
                   </Link>
@@ -234,15 +234,15 @@ const Footer: FC<Props> = ({ locale }) => {
             <div className='flex gap-4 text-xs'>
               <Link
                 lang={locale}
-                href='/registration'
-                className='text-slate-500 transition-colors hover:text-slate-700'
+                href='/privacy'
+                className='text-sky-700 transition-colors sm:text-slate-500 sm:hover:text-slate-700'
               >
                 {t('privacy') || 'Privacy Policy'}
               </Link>
               <Link
                 lang={locale}
-                href='/registration'
-                className='text-slate-500 transition-colors hover:text-slate-700'
+                href='/terms'
+                className='text-sky-700 transition-colors sm:text-slate-500 sm:hover:text-slate-700'
               >
                 {t('terms') || 'Terms of Service'}
               </Link>
@@ -311,7 +311,7 @@ const SponsorLogo: FC<{ sponsor: Sponsor }> = ({ sponsor }) => {
       alt={sponsor.alt}
       width={sponsor.w}
       height={sponsor.h}
-      className='h-auto max-h-16 w-auto object-contain grayscale filter transition-all hover:scale-105 hover:grayscale-0'
+      className='h-auto max-h-16 w-auto object-contain transition-all hover:scale-105'
       sizes='(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 160px'
       loading='lazy'
     />

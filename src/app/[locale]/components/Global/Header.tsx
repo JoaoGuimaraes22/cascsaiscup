@@ -152,7 +152,7 @@ export const Header: FC<Props> = ({ locale }) => {
               alt='Cascais Volley Cup 2026'
               priority
               sizes='(max-width: 640px) 150px, (max-width: 1024px) 190px, 240px'
-              className='h-10 w-auto transition-transform hover:scale-105 sm:h-12 md:h-14 lg:h-[4.5rem]'
+              className='h-8 w-auto transition-transform hover:scale-105 sm:h-10 md:h-12 lg:h-14'
             />
           </Link>
 
@@ -302,9 +302,9 @@ const LangButton: FC<{ className?: string }> = ({ className }) => {
   return (
     <div
       className={clsx(
-        'lang-sky inline-flex items-center rounded-md bg-sky-700/90 px-3 py-1.5 text-sm font-medium text-white shadow-sm backdrop-blur-sm',
+        'lang-sky inline-flex items-center rounded bg-sky-700/90 px-2 py-0.5 text-xs font-medium text-white shadow-sm backdrop-blur-sm',
         'focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-300 focus-within:ring-offset-2',
-        'transition-all hover:bg-sky-800 hover:shadow-md',
+        'transition-all hover:bg-sky-800 hover:shadow-md sm:rounded-md sm:px-2.5 sm:py-1 sm:text-sm',
         className
       )}
     >
