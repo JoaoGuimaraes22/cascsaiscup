@@ -2,185 +2,388 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { useEffect, useRef, useState } from 'react'
+import { FiExternalLink, FiArrowRight } from 'react-icons/fi'
+import clsx from 'clsx'
+
+// Types
+interface SponsorLogo {
+  src: string
+  alt: string
+  w: number
+  h: number
+  id: string
+}
+
+interface ClubInfo {
+  src: string
+  alt: string
+  w: number
+  h: number
+  url: string
+}
 
 export default function AboutHero() {
   const t = useTranslations('AboutPage.Hero')
+  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
 
-  // ===== Assets =====
-  const BG = '/img/about/about-bg.png'
-  const HERO = '/img/about/about-hero.png'
-  const WAVE = '/img/global/ondas-3.png'
-  const CLUB_LOGO = '/img/sponsors/volley4all.png'
-  const SP_CASCAIS_ESTORIL = '/img/sponsors/cascais-estoril.png'
-  const SP_CAMARA = '/img/sponsors/cascais-camara.png'
-  const SP_CAM_FORD = '/img/sponsors/cam-ford.png'
+  // Constants for better maintainability
+  const ASSETS = {
+    background: '/img/about/about-bg.png',
+    hero: '/img/about/about-hero.png',
+    wave: '/img/global/ondas-3.png',
+    club: '/img/sponsors/volley4all.png'
+  } as const
 
-  const sponsors = [
+  const SPONSOR_LOGOS: SponsorLogo[] = [
     {
-      src: SP_CASCAIS_ESTORIL,
+      id: 'cascais-estoril',
+      src: '/img/sponsors/cascais-estoril.png',
       alt: t('sponsors.cascaisEstorilAlt'),
       w: 140,
       h: 56
     },
-    { src: SP_CAMARA, alt: t('sponsors.camaraAlt'), w: 160, h: 56 },
-    { src: SP_CAM_FORD, alt: t('sponsors.camFordAlt'), w: 150, h: 56 }
+    {
+      id: 'camara',
+      src: '/img/sponsors/cascais-camara.png',
+      alt: t('sponsors.camaraAlt'),
+      w: 160,
+      h: 56
+    },
+    {
+      id: 'cam-ford',
+      src: '/img/sponsors/cam-ford.png',
+      alt: t('sponsors.camFordAlt'),
+      w: 150,
+      h: 56
+    }
   ]
-  const club = { src: CLUB_LOGO, alt: t('club.logoAlt'), w: 260, h: 70 }
+
+  const CLUB_INFO: ClubInfo = {
+    src: ASSETS.club,
+    alt: t('club.logoAlt'),
+    w: 260,
+    h: 70,
+    url: 'https://volley4all.com'
+  }
+
+  const PARAGRAPHS = ['p1', 'p2', 'p3', 'p4'] as const
+
+  // Intersection observer for animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  const handleCtaClick = () => {
+    // Handle CTA click if needed
+  }
 
   return (
     <section
-      className='
-        relative min-h-[calc(100vh-80px)] w-full overflow-x-hidden md:h-[calc(100vh-80px)]
-        md:overflow-hidden lg:pb-[135px]
-      '
+      ref={sectionRef}
+      className='relative min-h-[calc(100vh-1px)] w-full overflow-x-hidden md:h-[calc(100vh-80px)] md:overflow-hidden lg:pb-[135px]'
+      aria-labelledby='about-hero-title'
     >
-      {/* Background */}
+      {/* Enhanced Background with Loading State */}
       <div className='absolute inset-0 z-0'>
+        <div className='absolute inset-0 bg-gradient-to-br from-slate-50 to-slate-100' />
         <Image
-          src={BG}
+          src={ASSETS.background}
           alt=''
           role='presentation'
           fill
-          className='object-cover'
+          className={clsx(
+            'object-cover transition-opacity duration-700',
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          )}
           sizes='100vw'
+          priority
+          onLoad={() => setImageLoaded(true)}
+        />
+      </div>
+
+      {/* Right Hero Image Panel */}
+      <div className='absolute inset-y-0 right-0 z-0 hidden w-[34vw] md:block'>
+        <div className='absolute inset-0 bg-gradient-to-l from-transparent to-white/20' />
+        <Image
+          src={ASSETS.hero}
+          alt={
+            t('heroImageAlt') ||
+            'Volleyball players in action at Cascais tournament'
+          }
+          fill
+          className='object-cover object-top'
+          sizes='(max-width: 768px) 0px, 34vw'
           priority
         />
       </div>
 
-      {/* Right image panel (desktop+) */}
-      <div className='absolute inset-y-0 right-0 z-0 hidden w-[34vw] md:block'>
-        <Image
-          src={HERO}
-          alt=''
-          role='presentation'
-          fill
-          className='object-cover object-top'
-          sizes='(max-width: 768px) 0px, 34vw'
-        />
-      </div>
-
-      {/* Content container */}
+      {/* Main Content Container */}
       <div className='relative z-10 mx-auto h-full max-w-screen-xl px-4 pb-8 pt-20 md:pb-20 md:pr-[34vw]'>
         <div className='space-y-6'>
-          <h2 className='text-3xl font-extrabold uppercase text-sky-500 md:text-4xl'>
-            {t('title')}
-          </h2>
+          {/* Animated Title */}
+          <div
+            className={clsx(
+              'transition-all duration-1000 ease-out',
+              isVisible
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-8 opacity-0'
+            )}
+          >
+            <h1
+              id='about-hero-title'
+              className='text-3xl font-extrabold uppercase text-sky-500 md:text-4xl lg:text-5xl'
+            >
+              {t('title')}
+            </h1>
+          </div>
 
-          <p className='text-sm leading-relaxed text-slate-700 sm:text-base'>
-            {t('p1')}
-          </p>
-          <p className='text-sm leading-relaxed text-slate-700 sm:text-base'>
-            {t('p2')}
-          </p>
-          <p className='text-sm leading-relaxed text-slate-700 sm:text-base'>
-            {t('p3')}
-          </p>
-          <p className='text-sm leading-relaxed text-slate-700 sm:text-base'>
-            {t('p4')}
-          </p>
+          {/* Animated Paragraphs with Staggered Delays */}
+          <div className='space-y-4'>
+            {PARAGRAPHS.map((key, index) => (
+              <div
+                key={key}
+                className={clsx(
+                  'transition-all duration-700 ease-out',
+                  isVisible
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-8 opacity-0'
+                )}
+                style={{
+                  transitionDelay: `${(index + 1) * 200}ms`
+                }}
+              >
+                <p className='max-w-prose text-sm leading-relaxed text-slate-700 sm:text-base lg:text-lg'>
+                  {t(key)}
+                </p>
+              </div>
+            ))}
+          </div>
 
-          {/* ---- MOBILE: 2x2 grid + CTA with matched width ---- */}
+          {/* Mobile Layout: 2x2 Grid + CTA */}
           <div className='md:hidden'>
-            {/* Wrapper controls width for BOTH grid and button */}
-            <div className='mx-auto w-full max-w-[360px]'>
+            <div
+              className={clsx(
+                'mx-auto w-full max-w-[360px] transition-all duration-1000 ease-out',
+                isVisible
+                  ? 'translate-y-0 opacity-100'
+                  : 'translate-y-8 opacity-0'
+              )}
+              style={{ transitionDelay: '1000ms' }}
+            >
               <div className='grid grid-cols-2 gap-4'>
-                {[...sponsors, club].map((item, i) => (
-                  <div key={i} className='flex items-center justify-center p-2'>
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      width={item.w}
-                      height={item.h}
-                      className='h-14 w-auto object-contain'
-                      loading='lazy'
-                      decoding='async'
-                      sizes='(max-width: 640px) 45vw, 160px'
-                    />
-                  </div>
+                {[...SPONSOR_LOGOS, CLUB_INFO].map((item, index) => (
+                  <LogoCard
+                    key={'id' in item ? item.id : 'club'}
+                    logo={item}
+                    index={index}
+                    mobile
+                  />
                 ))}
               </div>
 
-              {/* CTA matches the grid width (same wrapper) */}
-              <a
-                href='https://volley4all.com'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='mt-4 block w-full rounded-md bg-sky-600 px-6 py-2 text-center font-bold text-white shadow-md ring-1 ring-black/10 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
+              <CtaButton
+                href={CLUB_INFO.url}
+                onClick={handleCtaClick}
+                className='mt-6 block w-full'
+                mobile
               >
                 {t('cta')}
-              </a>
+              </CtaButton>
             </div>
           </div>
 
-          {/* ---- DESKTOP/TABLET: original row layout + CTA ---- */}
+          {/* Desktop Layout: Row + CTA */}
           <div className='hidden md:block'>
-            <div className='flex flex-wrap items-center gap-6'>
-              {sponsors.map((s, i) => (
-                <div key={i} className='flex items-center justify-center p-3'>
-                  <Image
-                    src={s.src}
-                    alt={s.alt}
-                    width={s.w}
-                    height={s.h}
-                    className='h-16 w-auto object-contain'
-                    loading='lazy'
-                    decoding='async'
-                    sizes='(max-width: 1024px) 160px, 200px'
-                  />
-                </div>
-              ))}
-              <div className='flex items-center justify-center p-3'>
-                <Image
-                  src={club.src}
-                  alt={club.alt}
-                  width={club.w}
-                  height={club.h}
-                  className='h-16 w-auto object-contain'
-                  loading='lazy'
-                  decoding='async'
-                  sizes='260px'
+            <div
+              className={clsx(
+                'transition-all duration-1000 ease-out',
+                isVisible
+                  ? 'translate-y-0 opacity-100'
+                  : 'translate-y-8 opacity-0'
+              )}
+              style={{ transitionDelay: '1000ms' }}
+            >
+              <div className='flex flex-wrap items-center justify-center gap-8 lg:justify-start'>
+                {SPONSOR_LOGOS.map((logo, index) => (
+                  <LogoCard key={logo.id} logo={logo} index={index} />
+                ))}
+                <LogoCard
+                  logo={CLUB_INFO}
+                  index={SPONSOR_LOGOS.length}
+                  featured
                 />
               </div>
-            </div>
 
-            <a
-              href='https://volley4all.com'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='mt-2 inline-block rounded-md bg-sky-600 px-6 py-2 font-bold text-white shadow-md ring-1 ring-black/10 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
-            >
-              {t('cta')}
-            </a>
+              <CtaButton
+                href={CLUB_INFO.url}
+                onClick={handleCtaClick}
+                className='mt-6 inline-flex'
+              >
+                {t('cta')}
+              </CtaButton>
+            </div>
           </div>
         </div>
 
-        {/* Mobile banner */}
-        <div className='relative mt-3 block h-56 w-full overflow-hidden rounded-md md:hidden'>
+        {/* Mobile Hero Banner */}
+        <div
+          className={clsx(
+            'relative mt-8 block h-56 w-full overflow-hidden rounded-lg shadow-xl md:hidden',
+            'transition-all duration-1000 ease-out',
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          )}
+          style={{ transitionDelay: '1400ms' }}
+        >
           <Image
-            src={HERO}
-            alt=''
-            role='presentation'
+            src={ASSETS.hero}
+            alt={
+              t('heroImageAlt') ||
+              'Volleyball players in action at Cascais tournament'
+            }
             fill
             className='object-cover object-top'
             sizes='100vw'
-            priority
           />
+          <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent' />
         </div>
       </div>
 
-      {/* Bottom wave (desktop only) */}
-      <div className='pointer-events-none absolute bottom-0 left-1/2 z-20 hidden w-screen -translate-x-1/2 lg:block'>
+      {/* Bottom Wave (Desktop Only) */}
+      <div className='pointer-events-none absolute bottom-0 left-1/2 z-0 hidden w-screen -translate-x-1/2 lg:block'>
         <Image
-          src={WAVE}
+          src={ASSETS.wave}
           alt=''
           role='presentation'
           width={2048}
           height={135}
           className='-mb-px block h-[135px] w-full object-cover'
           sizes='100vw'
-          priority
         />
       </div>
     </section>
   )
+}
+
+/* -------- Enhanced Sub-Components -------- */
+
+interface LogoCardProps {
+  logo: SponsorLogo | ClubInfo
+  index: number
+  mobile?: boolean
+  featured?: boolean
+}
+
+function LogoCard({
+  logo,
+  index,
+  mobile = false,
+  featured = false
+}: LogoCardProps) {
+  const [imageLoaded, setImageLoaded] = useState(false)
+
+  return (
+    <div
+      className={clsx(
+        'group flex items-center justify-center transition-all duration-300',
+        mobile ? 'min-h-[80px]' : 'min-h-[100px]'
+      )}
+      style={{
+        animationDelay: `${index * 100}ms`
+      }}
+    >
+      {/* Loading placeholder */}
+      {!imageLoaded && (
+        <div className='absolute inset-0 animate-pulse rounded-lg bg-slate-200/30' />
+      )}
+
+      <Image
+        src={logo.src}
+        alt={logo.alt}
+        width={logo.w}
+        height={logo.h}
+        className={clsx(
+          'w-auto object-contain transition-all duration-300 group-hover:scale-105',
+          mobile ? 'h-12' : 'h-14 lg:h-16',
+          imageLoaded ? 'opacity-100' : 'opacity-0'
+        )}
+        loading='lazy'
+        decoding='async'
+        sizes={
+          mobile
+            ? '(max-width: 640px) 45vw, 160px'
+            : '(max-width: 1024px) 160px, 200px'
+        }
+        onLoad={() => setImageLoaded(true)}
+      />
+    </div>
+  )
+}
+
+interface CtaButtonProps {
+  href: string
+  onClick: () => void
+  className?: string
+  children: React.ReactNode
+  mobile?: boolean
+}
+
+function CtaButton({
+  href,
+  onClick,
+  className,
+  children,
+  mobile = false
+}: CtaButtonProps) {
+  return (
+    <a
+      href={href}
+      target='_blank'
+      rel='noopener noreferrer'
+      onClick={onClick}
+      className={clsx(
+        'group relative overflow-hidden rounded-lg font-bold text-white shadow-lg ring-1 ring-black/10 transition-all duration-300',
+        'bg-gradient-to-r from-sky-600 to-sky-700',
+        'hover:scale-105 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300',
+        mobile
+          ? 'px-6 py-3 text-center text-base'
+          : 'items-center gap-2 px-6 py-3 text-sm lg:text-base',
+        className
+      )}
+    >
+      <span className='relative z-10 flex items-center justify-center gap-2'>
+        {children}
+        {mobile ? (
+          <FiExternalLink className='h-4 w-4' />
+        ) : (
+          <FiArrowRight className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1' />
+        )}
+      </span>
+
+      {/* Shimmer effect */}
+      <div className='absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full' />
+    </a>
+  )
+}
+
+// Extend global Window interface for gtag
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void
+  }
 }
