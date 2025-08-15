@@ -12,24 +12,28 @@ export default function HallOfFameParticipants() {
   const WAVE = '/img/global/ondas-7.png'
   const WAVE_H = 135
 
-  const SAMPLE_TEAMS = [
-    'Lisboa Spikers',
-    'Porto Power',
-    'Algarve Waves',
-    'Madeira Volley Stars',
-    'Cascais Crushers',
-    'Braga Blockers',
-    'Oeiras Thunder',
-    'Estoril Eagles',
-    'Sintra Smash',
-    'Coimbra Titans',
-    'Funchal Flames',
-    'Viana Sea Storm',
-    'Setúbal Sharks',
-    'Aveiro Ace Queens',
-    'Faro Flyers',
-    'Leiria Lightning'
+  // Team + country (ISO alpha-2)
+  const SAMPLE_TEAMS: { name: string; country: string }[] = [
+    { name: 'Lisboa Spikers', country: 'PT' },
+    { name: 'Porto Power', country: 'PT' },
+    { name: 'Algarve Waves', country: 'PT' },
+    { name: 'Madeira Volley Stars', country: 'PT' },
+    { name: 'Cascais Crushers', country: 'PT' },
+    { name: 'Braga Blockers', country: 'PT' },
+    { name: 'Oeiras Thunder', country: 'PT' },
+    { name: 'Estoril Eagles', country: 'PT' },
+    { name: 'Sintra Smash', country: 'PT' },
+    { name: 'Coimbra Titans', country: 'PT' },
+    { name: 'Funchal Flames', country: 'PT' },
+    { name: 'Viana Sea Storm', country: 'PT' },
+    { name: 'Setúbal Sharks', country: 'PT' },
+    { name: 'Aveiro Ace Queens', country: 'PT' },
+    { name: 'Faro Flyers', country: 'PT' },
+    { name: 'Leiria Lightning', country: 'PT' }
   ]
+
+  const flagSrc = (code: string) =>
+    `/img/hall-of-fame/${code.toLowerCase()}.svg`
 
   return (
     <section
@@ -50,9 +54,7 @@ export default function HallOfFameParticipants() {
       {/* Content */}
       <div
         className='mx-auto max-w-screen-xl px-4 pt-8 sm:pt-12 lg:pb-[135px]'
-        style={{
-          paddingBottom: `calc(${WAVE_H}px + 12px)` // mobile extra space
-        }}
+        style={{ paddingBottom: `calc(${WAVE_H}px + 12px)` }}
       >
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
           {/* Left: players image */}
@@ -79,14 +81,26 @@ export default function HallOfFameParticipants() {
             <h2 className='mb-3 text-xl font-extrabold uppercase tracking-wide text-sky-600 sm:text-2xl'>
               {t('title')}
             </h2>
+
             <ul className='grid grid-cols-2 gap-1 text-sm sm:text-base'>
-              {SAMPLE_TEAMS.map((team, idx) => (
+              {SAMPLE_TEAMS.map(({ name, country }, idx) => (
                 <li key={idx} className='flex items-center gap-2'>
-                  <span className='h-1.5 w-1.5 rounded-full bg-sky-600'></span>
-                  {team}
+                  {/* Flag */}
+                  <span className='relative inline-block h-[14px] w-[20px] shrink-0 overflow-hidden rounded-[2px] ring-1 ring-black/10'>
+                    <Image
+                      src={flagSrc(country)}
+                      alt={country}
+                      fill
+                      sizes='20px'
+                      className='object-cover'
+                    />
+                  </span>
+                  {/* Team name */}
+                  <span>{name}</span>
                 </li>
               ))}
             </ul>
+
             <button
               type='button'
               className='mt-5 inline-flex items-center rounded-full bg-sky-700 px-4 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-black/10 hover:bg-sky-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'

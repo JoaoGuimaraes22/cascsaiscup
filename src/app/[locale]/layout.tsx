@@ -11,24 +11,17 @@ import Footer from './components/Global/Footer'
 import ScrollToTopButton from './components/Global/ScrollToTopButton'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--inter'
-})
-const rubik = Rubik({
-  subsets: ['arabic'],
-  variable: '--rubik'
-})
+const inter = Inter({ subsets: ['latin'], variable: '--inter' })
+const rubik = Rubik({ subsets: ['arabic'], variable: '--rubik' })
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk'
 })
+
 export const metadata: Metadata = {
   title: 'Cascais VolleyCup 2026',
   description: 'Your next summer tournament!',
-  icons: {
-    icon: '/img/icon/icon.svg'
-  }
+  icons: { icon: '/img/icon/icon.svg' }
 }
 
 export default function RootLayout({
@@ -39,13 +32,14 @@ export default function RootLayout({
   params: { locale: string }
 }) {
   const messages = useMessages()
+
   return (
     <html
       lang={locale}
       className={`${space_grotesk.variable} ${rubik.variable} scroll-smooth`}
       suppressHydrationWarning
     >
-      <body>
+      <body className='flex min-h-screen flex-col overflow-x-hidden pt-[var(--header-h)]'>
         <NextIntlClientProvider
           locale={locale}
           messages={messages as AbstractIntlMessages}
@@ -61,8 +55,13 @@ export default function RootLayout({
             color='var(--primary)'
             showSpinner={false}
           />
+
+          {/* Fixed header (measures itself and updates --header-h) */}
           <Header locale={locale} />
-          <main className='w-full flex-1 overflow-x-hidden'>{children}</main>
+
+          {/* Content sits below the header thanks to body padding */}
+          <main className='w-full flex-1'>{children}</main>
+
           <Footer locale={locale} />
           <ScrollToTopButton />
         </NextIntlClientProvider>

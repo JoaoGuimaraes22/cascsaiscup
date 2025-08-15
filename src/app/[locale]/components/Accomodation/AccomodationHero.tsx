@@ -16,7 +16,10 @@ export default function AccommodationHero() {
   const WAVE_H = 135 // px
 
   return (
-    <section className='relative min-h-[720px] w-full overflow-hidden pb-[135px]'>
+    <section
+      className='relative min-h-[720px] w-full overflow-hidden'
+      style={{ paddingBottom: `${WAVE_H}px` }}
+    >
       {/* Background (decorative) */}
       <Image
         src={BG}
@@ -28,6 +31,7 @@ export default function AccommodationHero() {
         decoding='async'
         draggable={false}
       />
+
       {/* Mobile: player BEHIND the text */}
       <div className='pointer-events-none absolute inset-x-0 top-0 z-0 h-[80vh] lg:hidden'>
         <Image
@@ -95,9 +99,6 @@ export default function AccommodationHero() {
                 draggable={false}
               />
             </div>
-
-            {/* Mobile: HIDE the side-by-side logo entirely */}
-            {/* (No mobile logo anymore, per new goals) */}
           </div>
         </div>
       </div>
@@ -133,7 +134,7 @@ export default function AccommodationHero() {
             decoding='async'
             draggable={false}
           />
-          <div className='pointer-events-none absolute inset-0'>
+          <div className='absolute inset-0'>
             <div className='mx-auto flex h-full max-w-screen-xl items-center justify-end px-4'>
               <StatsList
                 items={[
@@ -154,6 +155,7 @@ export default function AccommodationHero() {
         >
           <div className='absolute inset-0 flex items-center justify-center'>
             <StatsList
+              compact
               items={[
                 t('stats.teams'),
                 t('stats.athletes'),
@@ -181,7 +183,6 @@ function Logo({
   width?: number
   className?: string
 }) {
-  // Maintain original aspect ratio (80x28)
   const height = Math.round((width * 28) / 80)
   return (
     <Image
@@ -197,21 +198,39 @@ function Logo({
   )
 }
 
-function StatsList({ items }: { items: string[] }) {
+function StatsList({
+  items,
+  compact = false
+}: {
+  items: string[]
+  compact?: boolean
+}) {
   return (
     <ul
+      aria-label='Tournament stats'
       className={clsx(
-        'flex items-center whitespace-nowrap px-3 font-extrabold uppercase text-white',
-        'gap-3 text-[11px] tracking-normal', // xs (tight so it never clips)
-        'sm:gap-4 sm:text-[13px] sm:tracking-wide', // sm+
-        'lg:gap-6 lg:text-lg'
+        'flex items-center whitespace-nowrap font-extrabold uppercase text-white',
+        compact
+          ? 'gap-2 px-2 text-[10px] tracking-tight' // mobile/compact: tighter, one line
+          : 'gap-3 px-3 text-[11px] tracking-normal sm:gap-4 sm:text-[13px] sm:tracking-wide lg:gap-6 lg:text-lg'
       )}
     >
       {items.map((item, i) => (
-        <li key={i} className='flex items-center gap-3 sm:gap-4 lg:gap-6'>
+        <li
+          key={i}
+          className={clsx(
+            'flex items-center',
+            compact ? 'gap-2' : 'gap-3 sm:gap-4 lg:gap-6'
+          )}
+        >
           <span>{item}</span>
           {i < items.length - 1 && (
-            <span className='text-sm leading-none sm:text-lg lg:text-2xl'>
+            <span
+              className={clsx(
+                'leading-none',
+                compact ? 'text-xs' : 'text-sm sm:text-lg lg:text-2xl'
+              )}
+            >
               •
             </span>
           )}

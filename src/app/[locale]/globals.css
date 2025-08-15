@@ -5,6 +5,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
 }
 
 @layer base {
@@ -16,6 +17,7 @@ html {
     --span-bg: linear-gradient(to right, #4e4e9e, #097fa5, #3e87ed);
 
     /* Fonts are defined in tailwind.config.ts as CSS vars, so keep them set in your @font-face or global font loader */
+    --header-h: 4rem;
   }
 }
 

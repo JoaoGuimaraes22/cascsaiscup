@@ -1,6 +1,14 @@
 'use client'
 
-import { FC, useEffect, useState, MouseEvent, startTransition } from 'react'
+import {
+  FC,
+  useEffect,
+  useState,
+  MouseEvent,
+  startTransition,
+  useLayoutEffect,
+  useRef
+} from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Link } from '@/src/navigation'
 import { useTranslations } from 'next-intl'
@@ -16,19 +24,20 @@ interface Props {
 }
 
 type StaticPathname = Exclude<ValidPathname, '/gallery/[year]'>
-
-// ====== Assets ======
 const HEADER_BG = '/img/footer/footer-bg.png'
 
 export const Header: FC<Props> = ({ locale }) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
+  const headerRef = useRef<HTMLElement | null>(null)
 
+  // Close mobile menu on route change
   useEffect(() => {
     setMenuOpen(false)
   }, [pathname])
 
+  // Lock page scroll when mobile menu is open
   useEffect(() => {
     if (menuOpen) {
       const { overflow } = document.body.style
@@ -37,6 +46,26 @@ export const Header: FC<Props> = ({ locale }) => {
         document.body.style.overflow = overflow
       }
     }
+  }, [menuOpen])
+
+  // Dynamically sync --header-h with current header height
+  const syncHeaderHeight = () => {
+    const h = headerRef.current?.offsetHeight ?? 0
+    document.documentElement.style.setProperty('--header-h', `${h}px`)
+  }
+
+  useLayoutEffect(() => {
+    syncHeaderHeight()
+    if (!headerRef.current) return
+    const ro = new ResizeObserver(syncHeaderHeight)
+    ro.observe(headerRef.current)
+    return () => ro.disconnect()
+  }, [])
+
+  // Re-measure after mobile menu transition (300ms in your classes)
+  useEffect(() => {
+    const id = setTimeout(syncHeaderHeight, 320)
+    return () => clearTimeout(id)
   }, [menuOpen])
 
   const handleLogoClick = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -61,8 +90,9 @@ export const Header: FC<Props> = ({ locale }) => {
 
   return (
     <header
+      ref={headerRef}
       role='banner'
-      className='relative z-[200] w-full bg-slate-100'
+      className='fixed inset-x-0 top-0 z-[200] w-full bg-slate-100 shadow-md'
       style={{
         backgroundImage: `url(${HEADER_BG})`,
         backgroundSize: 'cover',

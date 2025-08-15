@@ -5,6 +5,78 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { FaMedal } from 'react-icons/fa'
 
+type DivisionKey = 'Sub21' | 'Sub17' | 'Sub15'
+const DIVISIONS: DivisionKey[] = ['Sub21', 'Sub17', 'Sub15']
+
+// ====== Winners data (NOT translated) ======
+// Add/extend years here. Team names are plain strings; each gets a country code.
+const WINNERS: Record<
+  string,
+  Record<DivisionKey, { name: string; country: string }[]>
+> = {
+  // Latest first in UI; sort handles it anyway
+  '2025': {
+    Sub21: [
+      { name: 'Lisboa Spikers', country: 'PT' },
+      { name: 'Porto Power', country: 'PT' },
+      { name: 'Algarve Waves', country: 'PT' },
+      { name: 'Cascais Crushers', country: 'PT' }
+    ],
+    Sub17: [
+      { name: 'Madeira Volley Stars', country: 'PT' },
+      { name: 'Braga Blockers', country: 'PT' },
+      { name: 'Oeiras Thunder', country: 'PT' },
+      { name: 'Estoril Eagles', country: 'PT' }
+    ],
+    Sub15: [
+      { name: 'Sintra Smash', country: 'PT' },
+      { name: 'Coimbra Titans', country: 'PT' },
+      { name: 'Funchal Flames', country: 'PT' },
+      { name: 'Viana Sea Storm', country: 'PT' }
+    ]
+  },
+  '2024': {
+    Sub21: [
+      { name: 'Setúbal Sharks', country: 'PT' },
+      { name: 'Aveiro Ace Queens', country: 'PT' },
+      { name: 'Faro Flyers', country: 'PT' },
+      { name: 'Leiria Lightning', country: 'PT' }
+    ],
+    Sub17: [
+      { name: 'Cascais Crushers', country: 'PT' },
+      { name: 'Lisboa Spikers', country: 'PT' },
+      { name: 'Porto Power', country: 'PT' },
+      { name: 'Algarve Waves', country: 'PT' }
+    ],
+    Sub15: [
+      { name: 'Braga Blockers', country: 'PT' },
+      { name: 'Oeiras Thunder', country: 'PT' },
+      { name: 'Estoril Eagles', country: 'PT' },
+      { name: 'Madeira Volley Stars', country: 'PT' }
+    ]
+  },
+  '2023': {
+    Sub21: [
+      { name: 'Team A', country: 'PT' },
+      { name: 'Team B', country: 'PT' },
+      { name: 'Team C', country: 'PT' },
+      { name: 'Team D', country: 'PT' }
+    ],
+    Sub17: [
+      { name: 'Team E', country: 'PT' },
+      { name: 'Team F', country: 'PT' },
+      { name: 'Team G', country: 'PT' },
+      { name: 'Team H', country: 'PT' }
+    ],
+    Sub15: [
+      { name: 'Team I', country: 'PT' },
+      { name: 'Team J', country: 'PT' },
+      { name: 'Team K', country: 'PT' },
+      { name: 'Team L', country: 'PT' }
+    ]
+  }
+}
+
 export default function HallOfFameWinners() {
   const t = useTranslations('HallOfFamePage.Winners')
 
@@ -12,21 +84,21 @@ export default function HallOfFameWinners() {
   const BG = '/img/hall-of-fame/hero-bg.png'
   const WINNERS_IMG = '/img/program/players.png'
   const TAGLINE = '/img/global/tagline.png'
-  const WAVE = '/img/global/ondas-3.png' // decorative only
+  const WAVE = '/img/global/ondas-3.png'
   const WAVE_H = 135
 
-  // Latest year first (e.g., 2025, 2024, 2023)
-  const years = Object.keys(t.raw('years')).sort(
-    (a, b) => Number(b) - Number(a)
-  )
+  const years = Object.keys(WINNERS).sort((a, b) => Number(b) - Number(a))
   const [openYear, setOpenYear] = useState(years[0])
 
   const medalColors = [
-    'text-yellow-400',
-    'text-gray-300',
-    'text-amber-700',
-    'text-sky-400'
-  ]
+    'text-yellow-400', // 1st
+    'text-gray-300', // 2nd
+    'text-amber-700', // 3rd
+    'text-sky-400' // 4th
+  ] as const
+
+  const flagSrc = (code: string) =>
+    `/img/hall-of-fame/${code.toLowerCase()}.svg`
 
   return (
     <section
@@ -46,7 +118,7 @@ export default function HallOfFameWinners() {
       {/* Content */}
       <div className='mx-auto max-w-screen-xl px-4 pb-0 pt-10 lg:pt-14'>
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
-          {/* Left: Accordion & tagline (text-first on all breakpoints) */}
+          {/* Left: Accordion & tagline */}
           <div className='flex flex-col lg:col-span-6'>
             <h2 className='mb-3 text-xl font-extrabold uppercase tracking-wide text-sky-600 sm:text-2xl'>
               {t('title')}
@@ -88,23 +160,42 @@ export default function HallOfFameWinners() {
                     }`}
                   >
                     <div className='overflow-hidden'>
-                      {['Sub21', 'Sub17', 'Sub15'].map(divKey => (
+                      {DIVISIONS.map(divKey => (
                         <div key={divKey} className='px-4 py-2 sm:px-5'>
                           <h3 className='mb-2 text-sm font-semibold uppercase text-sky-600'>
                             {t(`labels.${divKey.toLowerCase()}`)}
                           </h3>
+
                           <ul className='space-y-1 text-sm'>
-                            {t
-                              .raw(`years.${year}.${divKey}`)
-                              .map((team: string, idx: number) => (
+                            {WINNERS[year][divKey].map(
+                              ({ name, country }, idx) => (
                                 <li
-                                  key={idx}
+                                  key={name}
                                   className='flex items-center gap-2 text-slate-700'
                                 >
-                                  <FaMedal className={medalColors[idx]} />
-                                  {team}
+                                  {/* Medal */}
+                                  <FaMedal
+                                    className={
+                                      medalColors[idx] ?? 'text-slate-300'
+                                    }
+                                  />
+
+                                  {/* Flag */}
+                                  <span className='relative inline-block h-[14px] w-[20px] shrink-0 overflow-hidden rounded-[2px] ring-1 ring-black/10'>
+                                    <Image
+                                      src={flagSrc(country)}
+                                      alt={country}
+                                      fill
+                                      sizes='20px'
+                                      className='object-cover'
+                                    />
+                                  </span>
+
+                                  {/* Plain team name (not translated) */}
+                                  <span>{name}</span>
                                 </li>
-                              ))}
+                              )
+                            )}
                           </ul>
                         </div>
                       ))}
