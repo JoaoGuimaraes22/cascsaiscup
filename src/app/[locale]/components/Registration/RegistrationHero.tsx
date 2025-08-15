@@ -142,9 +142,9 @@ export default function RegistrationHero() {
         </div>
       </div>
 
-      {/* Wave + centered stats */}
+      {/* Wave + stats */}
       <div className='pointer-events-none absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
-        {/* Desktop */}
+        {/* Desktop: right-aligned */}
         <div className='relative hidden lg:block'>
           <Image
             src={WAVE}
@@ -157,20 +157,19 @@ export default function RegistrationHero() {
           />
           <div className='pointer-events-none absolute inset-0 z-30'>
             <div className='mx-auto flex h-full max-w-screen-xl translate-y-[4px] items-center justify-end px-4'>
-              <ul className='flex flex-wrap items-center gap-x-6 gap-y-2 text-lg font-extrabold text-white sm:text-xl'>
-                <li>{t('stats.teams')}</li>
-                <li className='text-2xl leading-none'>•</li>
-                <li>{t('stats.athletes')}</li>
-                <li className='text-2xl leading-none'>•</li>
-                <li>{t('stats.countries')}</li>
-                <li className='text-2xl leading-none'>•</li>
-                <li>{t('stats.games')}</li>
-              </ul>
+              <StatsList
+                items={[
+                  t('stats.teams'),
+                  t('stats.athletes'),
+                  t('stats.countries'),
+                  t('stats.games')
+                ]}
+              />
             </div>
           </div>
         </div>
 
-        {/* Mobile */}
+        {/* Mobile: compact, single-line centered */}
         <div
           className='relative block lg:hidden'
           style={{
@@ -182,18 +181,49 @@ export default function RegistrationHero() {
           }}
         >
           <div className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4'>
-            <ul className='flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-base font-extrabold text-white'>
-              <li>{t('stats.teams')}</li>
-              <li className='text-xl leading-none'>•</li>
-              <li>{t('stats.athletes')}</li>
-              <li className='text-xl leading-none'>•</li>
-              <li>{t('stats.countries')}</li>
-              <li className='text-xl leading-none'>•</li>
-              <li>{t('stats.games')}</li>
-            </ul>
+            <StatsList
+              compact
+              items={[
+                t('stats.teams'),
+                t('stats.athletes'),
+                t('stats.countries'),
+                t('stats.games')
+              ]}
+            />
           </div>
         </div>
       </div>
     </section>
+  )
+}
+
+/* --- Reusable stats list (desktop standard, mobile compact) --- */
+function StatsList({
+  items,
+  compact = false
+}: {
+  items: string[]
+  compact?: boolean
+}) {
+  const listClass =
+    'flex items-center font-extrabold uppercase text-white whitespace-nowrap ' +
+    (compact
+      ? 'px-2 gap-2 text-[10px] tracking-tight'
+      : 'px-3 gap-3 text-[11px] tracking-normal sm:gap-4 sm:text-[13px] sm:tracking-wide lg:gap-6 lg:text-lg')
+
+  const liGap = compact ? 'gap-2' : 'gap-3 sm:gap-4 lg:gap-6'
+  const dotSize = compact ? 'text-xs' : 'text-sm sm:text-lg lg:text-2xl'
+
+  return (
+    <ul aria-label='Tournament stats' className={listClass}>
+      {items.map((item, i) => (
+        <li key={i} className={`flex items-center ${liGap}`}>
+          <span>{item}</span>
+          {i < items.length - 1 && (
+            <span className={`leading-none ${dotSize}`}>•</span>
+          )}
+        </li>
+      ))}
+    </ul>
   )
 }
