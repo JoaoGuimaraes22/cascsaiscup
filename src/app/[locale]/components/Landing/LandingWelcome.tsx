@@ -8,16 +8,22 @@ import { FaPlane } from 'react-icons/fa'
 export default function LandingWelcome() {
   const t = useTranslations('LandingPage.Welcome')
 
+  // ===== Assets =====
+  const BG = '/img/landing/hero-bg.png'
+  const TAGLINE = '/img/global/tagline.png'
+  const LOGO = '/img/global/logo-white.png'
+
   return (
     <section
       role='region'
       aria-label='Cascais Volley Cup 2026 hero'
       className='relative -mt-16 min-h-screen w-full overflow-hidden md:-mt-20'
     >
-      {/* Background */}
+      {/* Background (decorative) */}
       <Image
-        src='/img/landing/hero-bg.png'
-        alt='Cascais coastline with player'
+        src={BG}
+        alt=''
+        role='presentation'
         fill
         priority
         sizes='100vw'
@@ -27,7 +33,7 @@ export default function LandingWelcome() {
       {/* Tagline — RIGHT on mobile & desktop */}
       <div className='absolute right-4 top-20 z-10 sm:right-6 sm:top-24 md:right-8 md:top-28'>
         <Image
-          src='/img/global/tagline.png'
+          src={TAGLINE}
           alt={t('tagline_alt') || 'feel the ACTION, enjoy the SUMMER'}
           width={880}
           height={200}
@@ -37,7 +43,7 @@ export default function LandingWelcome() {
         />
       </div>
 
-      {/* Foreground content — centered vertically on mobile; larger sizing */}
+      {/* Foreground content */}
       <div
         className='
           relative z-10 mx-auto flex min-h-screen w-full max-w-screen-2xl
@@ -49,7 +55,7 @@ export default function LandingWelcome() {
         {/* Left — event logo */}
         <div className='relative flex flex-col items-start'>
           <Image
-            src='/img/global/logo-white.png'
+            src={LOGO}
             alt='Cascais Volley Cup 2026'
             width={720}
             height={250}
@@ -99,7 +105,7 @@ function InfoChip({
   const Icon = icon === 'sun' ? FiSun : FaPlane
   return (
     <div className='flex items-center gap-3 text-white sm:gap-4'>
-      {/* text block (bigger on mobile now) */}
+      {/* text block */}
       <div className='flex flex-col text-right leading-tight'>
         <span className='text-lg font-extrabold uppercase tracking-wide sm:text-xl'>
           {label}
@@ -109,7 +115,7 @@ function InfoChip({
         </span>
       </div>
 
-      {/* round blue icon on the right (slightly larger on mobile) */}
+      {/* round blue icon */}
       <div className='ml-2 grid h-11 w-11 place-items-center rounded-full bg-sky-500 shadow-[0_4px_14px_rgba(0,0,0,0.25)] sm:h-12 sm:w-12'>
         <Icon aria-hidden className='text-xl text-white sm:text-2xl' />
       </div>
