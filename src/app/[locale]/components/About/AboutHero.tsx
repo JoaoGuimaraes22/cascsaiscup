@@ -96,7 +96,7 @@ export default function AboutHero() {
   return (
     <section
       ref={sectionRef}
-      className='relative min-h-[calc(100vh-1px)] w-full overflow-x-hidden md:h-[calc(100vh-80px)] md:overflow-hidden lg:pb-[135px]'
+      className='relative min-h-[100vh] w-full overflow-x-hidden md:h-[calc(100vh-80px)] md:overflow-hidden lg:pb-[135px]'
       aria-labelledby='about-hero-title'
     >
       {/* Enhanced Background with Loading State */}

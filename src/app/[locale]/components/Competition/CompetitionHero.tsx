@@ -4,113 +4,175 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
+// Constants for better maintainability
+const ASSETS = {
+  BG: '/img/competition/hero-bg.png',
+  PHONE: '/img/global/hand-phone.png',
+  MOSAIC: '/img/competition/mosaic.png',
+  MOSAIC_MOBILE: '/img/competition/mosaic-2.png'
+} as const
+
+const PHONE_DIMENSIONS = {
+  mobile: { width: 200, height: 256 },
+  tablet: { width: 230, height: 288 },
+  desktop: { width: 260, height: 300 },
+  large: { width: 280, height: 320 },
+  xl: { width: 300, height: 340 }
+} as const
+
 export default function CompetitionHero() {
   const t = useTranslations('CompetitionPage.Hero')
 
-  // Assets
-  const BG = '/img/competition/hero-bg.png' // background image
-  const PHONE = '/img/global/hand-phone.png'
-  const MOSAIC = '/img/competition/mosaic.png'
-  const MOSAIC_2 = '/img/competition/mosaic-2.png' // half-size variant
-
   return (
-    <section className='relative w-full overflow-hidden'>
-      {/* Background */}
-      <Image
-        src={BG}
-        alt=''
-        fill
-        priority
-        className='absolute inset-0 -z-10 object-cover'
-        sizes='100vw'
-        decoding='async'
-        draggable={false}
-      />
+    <section
+      className='relative w-full overflow-hidden'
+      aria-labelledby='competition-hero-title'
+    >
+      {/* Background with loading optimization */}
+      <div className='absolute inset-0 -z-10'>
+        <Image
+          src={ASSETS.BG}
+          alt=''
+          fill
+          priority
+          className='object-cover'
+          sizes='100vw'
+          quality={85}
+          placeholder='blur'
+          blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkbHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
+          draggable={false}
+        />
+      </div>
 
-      {/* Content */}
-      <div className='mx-auto max-w-screen-xl px-4 py-10 sm:py-12 lg:py-16'>
-        <div className='grid grid-cols-1 items-center gap-10 md:grid-cols-12'>
-          {/* Left: phone image — hug the left edge, slightly off-screen on large, smaller on desktop */}
-          <div className='md:col-span-5 lg:col-span-5'>
-            <div
-              className='
-      /*
-      pull past padding, but not too much */ /* responsive
-      size (smaller than before on desktop)
-      */ container relative -ml-4 h-64 w-[200px] sm:-ml-6 sm:h-72 sm:w-[230px]
-      md:-ml-14  md:h-[300px]
-      md:w-[260px] lg:-ml-[8vw]
-      lg:h-[320px] lg:w-[280px]
-      xl:-ml-[9vw] xl:h-[340px]
-      xl:w-[300px] 2xl:-ml-[10vw]
-    '
-            >
+      {/* Main Content Container */}
+      <div className='relative z-10 mx-auto max-w-screen-xl px-4 py-10 sm:py-12 lg:py-16'>
+        <div className='grid grid-cols-1 items-center gap-8 md:grid-cols-12 md:gap-10'>
+          {/* Phone Image Section */}
+          <div className='md:col-span-5'>
+            <div className='phone-container relative -ml-4 sm:-ml-6 md:-ml-14 lg:-ml-[8vw] xl:-ml-[9vw] 2xl:-ml-[10vw]'>
               <Image
-                src={PHONE}
-                alt={t('phoneAlt') || 'App preview in a hand'}
-                fill
-                className='object-contain object-left drop-shadow-xl'
+                src={ASSETS.PHONE}
+                alt={
+                  t('phoneAlt') ||
+                  "Mobile app preview showing the competition interface in someone's hand"
+                }
+                width={PHONE_DIMENSIONS.xl.width}
+                height={PHONE_DIMENSIONS.xl.height}
+                className='h-auto w-auto max-w-none object-contain object-left drop-shadow-2xl transition-transform duration-300 hover:scale-105'
                 sizes='(max-width: 640px) 200px, (max-width: 768px) 230px, (max-width: 1024px) 260px, (max-width: 1280px) 280px, 300px'
-                decoding='async'
+                priority
+                quality={90}
                 draggable={false}
               />
             </div>
           </div>
 
-          {/* Right: text + button */}
-          <div className='md:col-span-7 lg:col-span-7'>
-            <h2 className='text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'>
-              {t('title') || 'A COMPETIÇÃO'}
-            </h2>
+          {/* Text Content Section */}
+          <div className='md:col-span-7'>
+            <header>
+              <h1
+                id='competition-hero-title'
+                className='text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl lg:text-4xl'
+              >
+                {t('title') || 'A Competição'}
+              </h1>
+            </header>
 
-            <div className='mt-4 space-y-4 text-sm leading-relaxed text-slate-700 sm:text-base'>
-              <p>{t('p1')}</p>
-              <p>{t('p2')}</p>
-              <p>{t('p3')}</p>
+            <div className='prose prose-slate mt-6 max-w-none'>
+              <div className='space-y-4 text-sm leading-relaxed text-slate-700 sm:text-base lg:text-lg'>
+                {t('p1') && <p>{t('p1')}</p>}
+                {t('p2') && <p>{t('p2')}</p>}
+                {t('p3') && <p>{t('p3')}</p>}
+              </div>
             </div>
 
-            <Link
-              href={t('ctaHref') || '/regulations'}
-              className='mt-6 inline-flex items-center rounded-full bg-sky-600 px-6 py-2.5 font-bold text-white shadow-lg ring-1 ring-black/10 hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
-              aria-label={t('cta') || 'Regulamento'}
-            >
-              {t('cta') || 'REGULAMENTO'}
-            </Link>
+            <div className='mt-8'>
+              <Link
+                href={t('ctaHref') || '/regulations'}
+                className='group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-600 to-sky-700 px-6 py-3 font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-sky-700 hover:to-sky-800 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+                aria-describedby='cta-description'
+              >
+                <span>{t('cta') || 'Regulamento'}</span>
+                <svg
+                  className='h-4 w-4 transition-transform group-hover:translate-x-1'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                  aria-hidden='true'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M9 5l7 7-7 7'
+                  />
+                </svg>
+              </Link>
+              <span id='cta-description' className='sr-only'>
+                {t('ctaDescription') ||
+                  'View detailed competition rules and regulations'}
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Mosaic strip (desktop/tablet) */}
-      <div className='mx-auto hidden w-full max-w-screen-2xl px-0 md:block'>
-        <div className='relative h-[220px] w-full overflow-hidden'>
+      {/* Mosaic Section with Responsive Images */}
+      <MosaicStrip
+        desktopSrc={ASSETS.MOSAIC}
+        mobileSrc={ASSETS.MOSAIC_MOBILE}
+        alt={
+          t('mosaicAlt') ||
+          'Photo mosaic showcasing competition highlights and participants'
+        }
+      />
+    </section>
+  )
+}
+
+// Extracted Mosaic component for better organization
+function MosaicStrip({
+  desktopSrc,
+  mobileSrc,
+  alt
+}: {
+  desktopSrc: string
+  mobileSrc: string
+  alt: string
+}) {
+  return (
+    <>
+      {/* Desktop/Tablet Mosaic */}
+      <div className='mx-auto hidden w-full max-w-screen-2xl md:block'>
+        <div className='relative h-[180px] w-full overflow-hidden lg:h-[220px]'>
           <Image
-            src={MOSAIC}
-            alt={t('mosaicAlt') || 'Competition photo mosaic'}
+            src={desktopSrc}
+            alt={alt}
             fill
-            className='object-cover'
+            className='object-cover transition-opacity duration-300'
             sizes='100vw'
-            decoding='async'
+            quality={80}
+            loading='lazy'
             draggable={false}
-            priority={false}
           />
         </div>
       </div>
 
-      {/* Mosaic strip (mobile: uses smaller image) */}
-      <div className='mx-auto block w-full max-w-screen-2xl px-0 md:hidden'>
-        <div className='relative h-[160px] w-full overflow-hidden'>
+      {/* Mobile Mosaic */}
+      <div className='mx-auto block w-full max-w-screen-2xl md:hidden'>
+        <div className='relative h-[140px] w-full overflow-hidden sm:h-[160px]'>
           <Image
-            src={MOSAIC_2}
-            alt={t('mosaicAlt') || 'Competition photo mosaic'}
+            src={mobileSrc}
+            alt={alt}
             fill
-            className='object-cover'
+            className='object-cover transition-opacity duration-300'
             sizes='100vw'
-            decoding='async'
+            quality={80}
+            loading='lazy'
             draggable={false}
-            priority={false}
           />
         </div>
       </div>
-    </section>
+    </>
   )
 }

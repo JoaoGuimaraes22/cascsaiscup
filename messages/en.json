@@ -238,6 +238,7 @@
       },
       "downloadPdf": "Download full program (PDF)",
       "ctaContact": "Contact us",
+      "logoAlt": "Cascais Volley Cup 2026 logo",
       "stats": {
         "teams": "50 teams",
         "athletes": "600 athletes",
@@ -256,6 +257,7 @@
       "p3": "The formation of groups, rankings, points, and match schedules for all teams will always be updated and available in the CASCAIS VOLLEY CUP app | link available at www.cascaisvolleycup.com",
       "cta": "REGULATIONS",
       "ctaHref": "/regulamento",
+      "ctaDescription": "View the full competition regulations",
       "mosaicAlt": "Mosaic of competition images"
     },
     "LogoTaglineHero": {
@@ -264,6 +266,7 @@
       "taglineAlt": "feel the ACTION, enjoy the SUMMER"
     },
     "Facts": {
+      "sectionTitle": "Facts Section",
       "ages": {
         "heading": "AGE CATEGORIES?",
         "l1": "UNDER 15 (≤ 2011)",
