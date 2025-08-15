@@ -103,7 +103,6 @@ export default function CompetitionInfo() {
       ref={sectionRef}
       className='relative w-full overflow-hidden'
       aria-labelledby='competition-info-title'
-      id='regulations'
     >
       {/* Background Layer */}
       <BackgroundImage />
