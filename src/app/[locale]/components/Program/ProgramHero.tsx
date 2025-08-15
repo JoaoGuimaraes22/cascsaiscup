@@ -129,7 +129,7 @@ export default function ProgramHero() {
             {days.map(d => (
               <article
                 key={d.key}
-                className='rounded-2xl bg-sky-600/90 p-4 text-center text-white shadow-lg ring-1 ring-black/10
+                className='rounded-2xl bg-sky-500 p-4 text-center text-white shadow-lg ring-1 ring-black/10
                            hover:-translate-y-0.5 hover:shadow-xl motion-safe:transition-transform motion-safe:duration-300'
               >
                 <div className='mb-2 text-xs font-extrabold uppercase tracking-wide text-white/90 sm:text-[13px]'>

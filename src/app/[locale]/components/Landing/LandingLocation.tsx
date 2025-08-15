@@ -4,15 +4,27 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { FiSun } from 'react-icons/fi'
 import { FaPlane } from 'react-icons/fa'
+import clsx from 'clsx'
 
 export default function LandingLocation() {
   const t = useTranslations('LandingPage.Location')
 
+  // ====== Assets ======
+  const BG = '/img/landing/home-page-2-2.png'
+  const MAP = '/img/landing/mapa.png'
+  const TAGLINE = '/img/global/tagline.png'
+  const WAVE = '/img/global/ondas-3.png'
+
+  const WAVE_H = 135 // px
+
   return (
-    <section className='relative isolate min-h-[720px] overflow-hidden pb-[135px] sm:min-h-[800px] lg:min-h-[880px]'>
+    <section
+      className='relative isolate min-h-[720px] overflow-hidden sm:min-h-[800px] lg:min-h-[880px]'
+      style={{ paddingBottom: `${WAVE_H}px` }}
+    >
       {/* Background */}
       <Image
-        src='/img/landing/home-page-2-2.png'
+        src={BG}
         alt=''
         fill
         priority
@@ -40,7 +52,7 @@ export default function LandingLocation() {
           <div className='rounded-md bg-sky-600/80 p-3 shadow-lg ring-1 ring-black/5 sm:p-4 md:max-w-[640px]'>
             <div className='overflow-hidden rounded-md bg-white'>
               <Image
-                src='/img/landing/mapa.png'
+                src={MAP}
                 alt='Mapa Lisboa — Cascais'
                 width={768}
                 height={456}
@@ -55,7 +67,7 @@ export default function LandingLocation() {
         <div className='relative flex flex-col items-start gap-4 lg:col-span-5 lg:items-end'>
           <div className='w-[260px] self-start sm:w-[360px] lg:w-[420px] lg:self-end'>
             <Image
-              src='/img/global/tagline.png'
+              src={TAGLINE}
               alt='feel the ACTION, enjoy the SUMMER'
               width={1000}
               height={215}
@@ -88,31 +100,40 @@ export default function LandingLocation() {
       {/* ---- Bottom wave + stats ---- */}
       <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
         <Image
-          src='/img/global/ondas-3.png'
+          src={WAVE}
           alt=''
           width={1920}
-          height={135}
-          className='-mb-px block h-[135px] w-full object-cover'
+          height={WAVE_H}
+          className='-mb-px block w-full object-cover'
+          style={{ height: `${WAVE_H}px` }}
         />
 
-        {/* stats overlay: centered on mobile, left on desktop */}
+        {/* stats overlay: centered on mobile, LEFT on desktop */}
         <div className='pointer-events-none absolute inset-0'>
           <div className='mx-auto flex h-full max-w-screen-xl items-center justify-center px-4 lg:justify-start'>
-            <ul className='flex items-center gap-4 whitespace-nowrap text-[12px] font-extrabold uppercase tracking-wide text-white sm:text-[13px] lg:gap-6 lg:text-lg'>
-              <li>{t('stats_teams')}</li>
-              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
-                •
-              </li>
-              <li>{t('stats_athletes')}</li>
-              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
-                •
-              </li>
-              <li>{t('stats_countries')}</li>
-              <li className='text-base leading-none sm:text-lg lg:text-2xl'>
-                •
-              </li>
-              <li>{t('stats_games')}</li>
-            </ul>
+            {/* Mobile: compact, single-line */}
+            <div className='block lg:hidden'>
+              <StatsList
+                compact
+                items={[
+                  t('stats_teams'),
+                  t('stats_athletes'),
+                  t('stats_countries'),
+                  t('stats_games')
+                ]}
+              />
+            </div>
+            {/* Desktop: normal, left-aligned */}
+            <div className='hidden lg:block'>
+              <StatsList
+                items={[
+                  t('stats_teams'),
+                  t('stats_athletes'),
+                  t('stats_countries'),
+                  t('stats_games')
+                ]}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -146,5 +167,47 @@ function InfoChip({
         </div>
       </div>
     </div>
+  )
+}
+
+function StatsList({
+  items,
+  compact = false
+}: {
+  items: string[]
+  compact?: boolean
+}) {
+  return (
+    <ul
+      aria-label='Tournament stats'
+      className={clsx(
+        'flex items-center whitespace-nowrap font-extrabold uppercase text-white',
+        compact
+          ? 'gap-2 px-2 text-[10px] tracking-tight' // tighter for mobile, one line
+          : 'gap-3 px-3 text-[11px] tracking-normal sm:gap-4 sm:text-[13px] sm:tracking-wide lg:gap-6 lg:text-lg'
+      )}
+    >
+      {items.map((item, i) => (
+        <li
+          key={i}
+          className={clsx(
+            'flex items-center',
+            compact ? 'gap-2' : 'gap-3 sm:gap-4 lg:gap-6'
+          )}
+        >
+          <span>{item}</span>
+          {i < items.length - 1 && (
+            <span
+              className={clsx(
+                'leading-none',
+                compact ? 'text-xs' : 'text-sm sm:text-lg lg:text-2xl'
+              )}
+            >
+              •
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
   )
 }

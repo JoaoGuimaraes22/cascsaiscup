@@ -482,5 +482,30 @@
       "TeamMinimum": "Each team must have a minimum of 10 registered players.",
       "CoachesOffer": "The organization offers free registration for 2 coaches per team."
     }
+  },
+
+  "Footer": {
+    "logoAria": "Cascais Volley Cup - Home",
+    "description": "The premier volleyball tournament in beautiful Cascais, Portugal. Join us for an unforgettable sporting experience by the Atlantic coast.",
+    "quickLinks": "Quick Links",
+    "about": "About",
+    "program": "Program",
+    "competition": "Competition",
+    "accommodation": "Accommodation",
+    "gallery": "Gallery",
+    "hallOfFame": "Hall of Fame",
+    "contact": "Contact",
+    "email": "Email us",
+    "phone": "Call us",
+    "location": "Our location",
+    "followUs": "Follow Us",
+    "facebook": "Visit our Facebook page",
+    "instagram": "Visit our Instagram profile",
+    "registrationCTA": "Register for the tournament",
+    "registration": "Registration",
+    "sponsors": "Our Partners & Sponsors",
+    "allRightsReserved": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   }
 }

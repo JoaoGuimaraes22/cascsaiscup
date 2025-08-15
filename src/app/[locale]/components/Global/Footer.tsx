@@ -1,51 +1,83 @@
 'use client'
 
+import { FC, useMemo } from 'react'
 import Image from 'next/image'
 import { Link } from '@/src/navigation'
-import { FiMail, FiPhone } from 'react-icons/fi'
+import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
 import { FaFacebookF, FaInstagram } from 'react-icons/fa'
+import { useTranslations } from 'next-intl'
 import clsx from 'clsx'
 
 interface Props {
   locale: string
 }
 
-export default function Footer({ locale }: Props) {
+interface Sponsor {
+  src: string
+  alt: string
+  w: number
+  h: number
+  url?: string
+}
+
+const Footer: FC<Props> = ({ locale }) => {
+  const t = useTranslations('Footer')
+
   const LOGO = '/img/global/cascais-volley-cup-1.png'
-
-  // All 6 sponsors in one list (renders as 2x3 on mobile, 3x2 on >=sm)
-  const SPONSORS = [
-    { src: '/img/sponsors/cam-ford.png', alt: 'C.A.M. Ford', w: 220, h: 80 },
-    {
-      src: '/img/sponsors/cascais-camara.png',
-      alt: 'Cascais Câmara Municipal',
-      w: 220,
-      h: 80
-    },
-    {
-      src: '/img/sponsors/fpv.png',
-      alt: 'Federação Portuguesa de Voleibol',
-      w: 220,
-      h: 80
-    },
-    {
-      src: '/img/sponsors/cascais-estoril.png',
-      alt: 'Cascais Estoril',
-      w: 220,
-      h: 80
-    },
-    {
-      src: '/img/sponsors/volley4all.png',
-      alt: 'Volley4All Sparrows',
-      w: 220,
-      h: 80
-    },
-    { src: '/img/sponsors/cam-ford.png', alt: 'Ford CAM', w: 220, h: 80 }
-  ]
-
   const EMAIL = 'info@cascaisvolleycup.com'
+  const PHONE = '+351 123 456 789'
   const FACEBOOK_URL = 'https://www.facebook.com/cascaisvolleycup'
   const INSTAGRAM_URL = 'https://www.instagram.com/cascaisvolleycup'
+
+  // Memoized sponsors data with potential links
+  const sponsors: Sponsor[] = useMemo(
+    () => [
+      {
+        src: '/img/sponsors/cam-ford.png',
+        alt: 'C.A.M. Ford',
+        w: 220,
+        h: 80,
+        url: 'https://camford.pt'
+      },
+      {
+        src: '/img/sponsors/cascais-camara.png',
+        alt: 'Cascais Câmara Municipal',
+        w: 220,
+        h: 80,
+        url: 'https://www.cascais.pt'
+      },
+      {
+        src: '/img/sponsors/fpv.png',
+        alt: 'Federação Portuguesa de Voleibol',
+        w: 220,
+        h: 80,
+        url: 'https://www.fpvoleibol.pt'
+      },
+      {
+        src: '/img/sponsors/cascais-estoril.png',
+        alt: 'Cascais Estoril',
+        w: 220,
+        h: 80,
+        url: 'https://www.cascaisestoril.com'
+      },
+      {
+        src: '/img/sponsors/volley4all.png',
+        alt: 'Volley4All Sparrows',
+        w: 220,
+        h: 80
+      },
+      {
+        src: '/img/sponsors/cam-ford.png',
+        alt: 'Ford CAM',
+        w: 220,
+        h: 80,
+        url: 'https://camford.pt'
+      }
+    ],
+    []
+  )
+
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer
@@ -53,156 +85,257 @@ export default function Footer({ locale }: Props) {
       className="relative w-full border-t border-slate-200/60 bg-slate-100/95 bg-[url('/img/footer/footer-bg.png')] bg-cover bg-center backdrop-blur"
     >
       <div className='mx-auto max-w-screen-lg px-4 py-8 sm:py-10'>
-        {/* Row 1 — stacks on mobile (1 col, 3 rows), 3 cols on >=sm */}
-        <div className='grid grid-cols-1 items-center gap-6 sm:grid-cols-3'>
-          {/* Left: Logo */}
-          <div className='justify-self-center sm:justify-self-start'>
-            <Link lang={locale} href='/' aria-label='Cascais Volley Cup - Home'>
+        {/* Main Footer Content */}
+        <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+          {/* Logo & Description */}
+          <div className='sm:col-span-2 lg:col-span-1'>
+            <Link
+              lang={locale}
+              href='/'
+              aria-label={t('logoAria') || 'Cascais Volley Cup - Home'}
+              className='inline-block rounded-sm transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+            >
               <Image
                 src={LOGO}
                 alt='Cascais Volley Cup'
                 width={200}
                 height={72}
-                className='h-10 w-auto sm:h-12 md:h-14'
+                className='h-12 w-auto md:h-14'
+                priority
               />
             </Link>
+            <p className='mt-4 text-sm leading-relaxed text-slate-600'>
+              {t('description') ||
+                'The premier volleyball tournament in beautiful Cascais, Portugal. Join us for an unforgettable sporting experience.'}
+            </p>
           </div>
 
-          {/* Center: icon buttons */}
-          <div className='flex items-center justify-center gap-3'>
-            <IconBtn
-              as={Link}
-              href='/contact'
-              lang={locale}
-              ariaLabel='Contact'
-              title='Contact'
+          {/* Quick Links */}
+          <nav className='lg:col-span-1' aria-labelledby='quick-links-heading'>
+            <h3
+              id='quick-links-heading'
+              className='mb-4 text-sm font-semibold uppercase tracking-wider text-slate-800'
             >
-              <FiPhone className='h-4 w-4' />
-            </IconBtn>
-            <IconBtn
-              as='a'
-              href={`mailto:${EMAIL}`}
-              ariaLabel='Send email'
-              title={EMAIL}
-            >
-              <FiMail className='h-4 w-4' />
-            </IconBtn>
-            <IconBtn
-              as='a'
-              href={FACEBOOK_URL}
-              ariaLabel='Facebook'
-              title='Facebook'
-              rel='noopener noreferrer'
-              target='_blank'
-            >
-              <FaFacebookF className='h-4 w-4' />
-            </IconBtn>
-            <IconBtn
-              as='a'
-              href={INSTAGRAM_URL}
-              ariaLabel='Instagram'
-              title='Instagram'
-              rel='noopener noreferrer'
-              target='_blank'
-            >
-              <FaInstagram className='h-4 w-4' />
-            </IconBtn>
+              {t('quickLinks') || 'Quick Links'}
+            </h3>
+            <ul className='space-y-2'>
+              {[
+                { href: '/about', label: t('about') || 'About' },
+                { href: '/program', label: t('program') || 'Program' },
+                {
+                  href: '/competition',
+                  label: t('competition') || 'Competition'
+                },
+                {
+                  href: '/accommodation',
+                  label: t('accommodation') || 'Accommodation'
+                },
+                { href: '/gallery', label: t('gallery') || 'Gallery' },
+                {
+                  href: '/hall-of-fame',
+                  label: t('hallOfFame') || 'Hall of Fame'
+                }
+              ].map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    lang={locale}
+                    href={href as any}
+                    className='rounded-sm text-sm text-slate-600 transition-colors hover:text-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Contact Info */}
+          <div className='lg:col-span-1'>
+            <h3 className='mb-4 text-sm font-semibold uppercase tracking-wider text-slate-800'>
+              {t('contact') || 'Contact'}
+            </h3>
+            <div className='space-y-3'>
+              <ContactItem
+                icon={<FiMail className='h-4 w-4' />}
+                href={`mailto:${EMAIL}`}
+                text={EMAIL}
+                label={t('email') || 'Email us'}
+              />
+              <ContactItem
+                icon={<FiPhone className='h-4 w-4' />}
+                href={`tel:${PHONE.replace(/\s/g, '')}`}
+                text={PHONE}
+                label={t('phone') || 'Call us'}
+              />
+              <ContactItem
+                icon={<FiMapPin className='h-4 w-4' />}
+                text='Cascais, Portugal'
+                label={t('location') || 'Our location'}
+              />
+            </div>
           </div>
 
-          {/* Right: Registration CTA */}
-          <div className='justify-self-center sm:justify-self-end'>
+          {/* Social & CTA */}
+          <div className='lg:col-span-1'>
+            <h3 className='mb-4 text-sm font-semibold uppercase tracking-wider text-slate-800'>
+              {t('followUs') || 'Follow Us'}
+            </h3>
+
+            {/* Social Icons */}
+            <div className='mb-6 flex items-center gap-3'>
+              <SocialIcon
+                href={FACEBOOK_URL}
+                ariaLabel={t('facebook') || 'Visit our Facebook page'}
+                title='Facebook'
+                icon={<FaFacebookF className='h-4 w-4' />}
+              />
+              <SocialIcon
+                href={INSTAGRAM_URL}
+                ariaLabel={t('instagram') || 'Visit our Instagram profile'}
+                title='Instagram'
+                icon={<FaInstagram className='h-4 w-4' />}
+              />
+            </div>
+
+            {/* CTA Button */}
             <Link
               lang={locale}
               href='/registration'
-              className='inline-flex items-center rounded-full bg-sky-700 px-4 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-black/10 hover:bg-sky-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
-              aria-label='Registration'
+              className='inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-sky-600 to-sky-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm ring-1 ring-black/10 transition-all hover:scale-105 hover:from-sky-700 hover:to-sky-800 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+              aria-label={t('registrationCTA') || 'Register for the tournament'}
             >
-              Registration
+              {t('registration') || 'Registration'}
             </Link>
           </div>
         </div>
 
         {/* Divider */}
-        <div className='my-6 h-px w-full bg-slate-300/60' />
+        <div className='my-8 h-px w-full bg-gradient-to-r from-transparent via-slate-300/60 to-transparent' />
 
-        {/* Sponsors — 2x3 on mobile, 3x2 on >=sm */}
-        <div className='mx-auto grid max-w-screen-lg grid-cols-2 items-center justify-items-center gap-6 sm:grid-cols-3'>
-          {SPONSORS.map((s, i) => (
-            <div key={i} className='opacity-90 transition hover:opacity-100'>
-              <Image
-                src={s.src}
-                alt={s.alt}
-                width={s.w}
-                height={s.h}
-                className='h-auto w-auto object-contain'
-                sizes='(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 220px'
-              />
-            </div>
-          ))}
+        {/* Sponsors Section */}
+        <div className='text-center'>
+          <h3 className='mb-6 text-lg font-semibold text-slate-800'>
+            {t('sponsors') || 'Our Partners & Sponsors'}
+          </h3>
+          <div className='mx-auto grid max-w-screen-lg grid-cols-2 items-center justify-items-center gap-6 sm:grid-cols-3 lg:grid-cols-6'>
+            {sponsors.map((sponsor, index) => (
+              <SponsorLogo key={index} sponsor={sponsor} />
+            ))}
+          </div>
         </div>
 
-        {/* Tiny meta */}
-        <div className='mt-6 text-center text-xs text-slate-500'>
-          © {new Date().getFullYear()} Cascais Volley Cup. All rights reserved.
+        {/* Bottom Bar */}
+        <div className='mt-8 border-t border-slate-200/60 pt-6'>
+          <div className='flex flex-col items-center justify-between gap-4 sm:flex-row'>
+            <div className='text-xs text-slate-500'>
+              © {currentYear} Cascais Volley Cup.{' '}
+              {t('allRightsReserved') || 'All rights reserved.'}
+            </div>
+            <div className='flex gap-4 text-xs'>
+              <Link
+                lang={locale}
+                href='/registration'
+                className='text-slate-500 transition-colors hover:text-slate-700'
+              >
+                {t('privacy') || 'Privacy Policy'}
+              </Link>
+              <Link
+                lang={locale}
+                href='/registration'
+                className='text-slate-500 transition-colors hover:text-slate-700'
+              >
+                {t('terms') || 'Terms of Service'}
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
   )
 }
 
-/* Helpers */
+/* Helper Components */
 
-type IconBtnProps =
-  | {
-      as: typeof Link
-      href: string
-      lang: string
-      ariaLabel: string
-      title?: string
-      className?: string
-      rel?: string
-      target?: string
-      children: React.ReactNode
-    }
-  | {
-      as: 'a'
-      href: string
-      ariaLabel: string
-      title?: string
-      className?: string
-      rel?: string
-      target?: string
-      children: React.ReactNode
-    }
+const ContactItem: FC<{
+  icon: React.ReactNode
+  href?: string
+  text: string
+  label: string
+}> = ({ icon, href, text, label }) => {
+  const content = (
+    <div className='flex items-center gap-2 text-sm text-slate-600'>
+      <span className='text-sky-600' aria-hidden='true'>
+        {icon}
+      </span>
+      <span>{text}</span>
+    </div>
+  )
 
-function IconBtn(props: IconBtnProps) {
-  const base =
-    'inline-flex h-9 w-9 items-center justify-center rounded-full bg-white text-sky-700 shadow-sm ring-1 ring-slate-300 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
-  if (props.as === 'a') {
-    const { href, ariaLabel, title, className, rel, target, children } = props
+  if (href) {
     return (
       <a
         href={href}
-        aria-label={ariaLabel}
-        title={title}
-        className={clsx(base, className)}
-        rel={rel}
-        target={target}
+        aria-label={label}
+        className='block rounded-sm transition-colors hover:text-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
       >
-        {children}
+        {content}
       </a>
     )
   }
-  const { href, lang, ariaLabel, title, className, children } = props
+
+  return <div aria-label={label}>{content}</div>
+}
+
+const SocialIcon: FC<{
+  href: string
+  ariaLabel: string
+  title: string
+  icon: React.ReactNode
+}> = ({ href, ariaLabel, title, icon }) => (
+  <a
+    href={href}
+    aria-label={ariaLabel}
+    title={title}
+    className='inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-sky-700 shadow-sm ring-1 ring-slate-300 transition-all hover:scale-105 hover:bg-sky-50 hover:text-sky-800 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+    rel='noopener noreferrer'
+    target='_blank'
+  >
+    {icon}
+  </a>
+)
+
+const SponsorLogo: FC<{ sponsor: Sponsor }> = ({ sponsor }) => {
+  const logoElement = (
+    <Image
+      src={sponsor.src}
+      alt={sponsor.alt}
+      width={sponsor.w}
+      height={sponsor.h}
+      className='h-auto max-h-16 w-auto object-contain grayscale filter transition-all hover:scale-105 hover:grayscale-0'
+      sizes='(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 160px'
+      loading='lazy'
+    />
+  )
+
+  if (sponsor.url) {
+    return (
+      <a
+        href={sponsor.url}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='block rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+        aria-label={`Visit ${sponsor.alt} website`}
+      >
+        {logoElement}
+      </a>
+    )
+  }
+
   return (
-    <Link
-      href={href as any}
-      lang={lang}
-      aria-label={ariaLabel}
-      title={title}
-      className={clsx(base, className)}
-    >
-      {children}
-    </Link>
+    <div className='opacity-70 transition-opacity hover:opacity-100'>
+      {logoElement}
+    </div>
   )
 }
+
+export default Footer

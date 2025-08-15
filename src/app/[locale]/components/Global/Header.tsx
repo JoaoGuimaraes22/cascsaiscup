@@ -2,12 +2,14 @@
 
 import {
   FC,
+  useCallback,
   useEffect,
   useState,
   MouseEvent,
   startTransition,
   useLayoutEffect,
-  useRef
+  useRef,
+  useMemo
 } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Link } from '@/src/navigation'
@@ -26,11 +28,35 @@ interface Props {
 type StaticPathname = Exclude<ValidPathname, '/gallery/[year]'>
 const HEADER_BG = '/img/footer/footer-bg.png'
 
-export const Header: FC<Props> = ({ locale }) => {
+// Custom hook for header height management
+const useHeaderHeight = (
+  headerRef: React.RefObject<HTMLElement>,
+  menuOpen: boolean
+) => {
+  const syncHeaderHeight = useCallback(() => {
+    const h = headerRef.current?.offsetHeight ?? 0
+    document.documentElement.style.setProperty('--header-h', `${h}px`)
+  }, [headerRef])
+
+  useLayoutEffect(() => {
+    syncHeaderHeight()
+    if (!headerRef.current) return
+
+    const ro = new ResizeObserver(syncHeaderHeight)
+    ro.observe(headerRef.current)
+    return () => ro.disconnect()
+  }, [syncHeaderHeight])
+
+  // Re-measure after mobile menu transition
+  useEffect(() => {
+    const id = setTimeout(syncHeaderHeight, 320)
+    return () => clearTimeout(id)
+  }, [menuOpen, syncHeaderHeight])
+}
+
+// Custom hook for mobile menu management
+const useMobileMenu = (pathname: string) => {
   const [menuOpen, setMenuOpen] = useState(false)
-  const pathname = usePathname()
-  const router = useRouter()
-  const headerRef = useRef<HTMLElement | null>(null)
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -40,59 +66,71 @@ export const Header: FC<Props> = ({ locale }) => {
   // Lock page scroll when mobile menu is open
   useEffect(() => {
     if (menuOpen) {
-      const { overflow } = document.body.style
+      const originalOverflow = document.body.style.overflow
       document.body.style.overflow = 'hidden'
       return () => {
-        document.body.style.overflow = overflow
+        document.body.style.overflow = originalOverflow
       }
     }
   }, [menuOpen])
 
-  // Dynamically sync --header-h with current header height
-  const syncHeaderHeight = () => {
-    const h = headerRef.current?.offsetHeight ?? 0
-    document.documentElement.style.setProperty('--header-h', `${h}px`)
-  }
-
-  useLayoutEffect(() => {
-    syncHeaderHeight()
-    if (!headerRef.current) return
-    const ro = new ResizeObserver(syncHeaderHeight)
-    ro.observe(headerRef.current)
-    return () => ro.disconnect()
+  const toggleMenu = useCallback(() => {
+    setMenuOpen(prev => !prev)
   }, [])
 
-  // Re-measure after mobile menu transition (300ms in your classes)
-  useEffect(() => {
-    const id = setTimeout(syncHeaderHeight, 320)
-    return () => clearTimeout(id)
-  }, [menuOpen])
+  return { menuOpen, toggleMenu }
+}
 
-  const handleLogoClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    const isHome = pathname === `/${locale}` || pathname === `/${locale}/`
-    if (isHome) {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'instant' as ScrollBehavior
+export const Header: FC<Props> = ({ locale }) => {
+  const pathname = usePathname()
+  const router = useRouter()
+  const headerRef = useRef<HTMLElement | null>(null)
+
+  const { menuOpen, toggleMenu } = useMobileMenu(pathname)
+  useHeaderHeight(headerRef, menuOpen)
+
+  const handleLogoClick = useCallback(
+    (e: MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault()
+      const isHome = pathname === `/${locale}` || pathname === `/${locale}/`
+
+      if (isHome) {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth' // Changed from 'instant' for better UX
+        })
+        return
+      }
+
+      startTransition(() => {
+        router.push('/', { scroll: false })
+        // Simplified scroll logic
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: 0, behavior: 'instant' })
+        })
       })
-      return
+    },
+    [pathname, locale, router]
+  )
+
+  // Handle escape key for mobile menu
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && menuOpen) {
+        toggleMenu()
+      }
     }
-    startTransition(() => {
-      router.push('/', { scroll: false })
-      requestAnimationFrame(() => {
-        window.scrollTo(0, 0)
-        setTimeout(() => window.scrollTo(0, 0), 0)
-      })
-    })
-  }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [menuOpen, toggleMenu])
 
   return (
     <header
       ref={headerRef}
       role='banner'
-      className='fixed inset-x-0 top-0 z-[200] w-full bg-slate-100 shadow-md'
+      className='fixed inset-x-0 top-0 z-[200] w-full bg-slate-100/95 shadow-md backdrop-blur-sm'
       style={{
         backgroundImage: `url(${HEADER_BG})`,
         backgroundSize: 'cover',
@@ -105,15 +143,16 @@ export const Header: FC<Props> = ({ locale }) => {
           <Link
             lang={locale}
             href='/'
-            aria-label='Cascais Volley Cup 2026'
+            aria-label='Cascais Volley Cup 2026 - Go to homepage'
             onClick={handleLogoClick}
+            className='rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
           >
             <Image
               src={Logo}
               alt='Cascais Volley Cup 2026'
               priority
               sizes='(max-width: 640px) 150px, (max-width: 1024px) 190px, 240px'
-              className='h-10 w-auto sm:h-12 md:h-14 lg:h-[4.5rem]'
+              className='h-10 w-auto transition-transform hover:scale-105 sm:h-12 md:h-14 lg:h-[4.5rem]'
             />
           </Link>
 
@@ -121,20 +160,29 @@ export const Header: FC<Props> = ({ locale }) => {
           <div className='flex items-center gap-3 sm:hidden'>
             <LangButton />
             <button
-              onClick={() => setMenuOpen(o => !o)}
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              onClick={toggleMenu}
+              aria-label={
+                menuOpen ? 'Close navigation menu' : 'Open navigation menu'
+              }
               aria-expanded={menuOpen}
               aria-controls='mobile-nav'
-              className='rounded p-1'
+              className='rounded-md p-2 transition-colors hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
             >
-              {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+              <span className='sr-only'>
+                {menuOpen ? 'Close menu' : 'Open menu'}
+              </span>
+              {menuOpen ? (
+                <FiX size={24} aria-hidden='true' />
+              ) : (
+                <FiMenu size={24} aria-hidden='true' />
+              )}
             </button>
           </div>
         </div>
 
         {/* Desktop nav */}
         <nav
-          aria-label='Primary'
+          aria-label='Primary navigation'
           className='hidden items-center gap-7 sm:inline-flex md:gap-8'
         >
           <NavLinks locale={locale} />
@@ -142,53 +190,61 @@ export const Header: FC<Props> = ({ locale }) => {
         </nav>
 
         {/* Mobile dropdown */}
-        <div
+        <nav
           id='mobile-nav'
+          aria-label='Mobile navigation'
           aria-hidden={!menuOpen}
-          className={`w-full flex-col items-start gap-4 overflow-hidden transition-all ease-in-out motion-safe:duration-300 sm:hidden
-            ${
-              menuOpen
-                ? 'mt-3 flex max-h-[65vh] translate-y-0 opacity-100'
-                : 'pointer-events-none max-h-0 -translate-y-2 opacity-0'
-            }
-          `}
+          className={clsx(
+            'w-full flex-col items-start gap-4 overflow-hidden transition-all ease-in-out motion-safe:duration-300 sm:hidden',
+            menuOpen
+              ? 'mt-3 flex max-h-[65vh] translate-y-0 opacity-100'
+              : 'pointer-events-none max-h-0 -translate-y-2 opacity-0'
+          )}
         >
           <NavLinks locale={locale} isMobile />
-        </div>
+        </nav>
       </div>
     </header>
   )
 }
 
-function NavLinks({
-  locale,
-  isMobile = false
-}: {
+const NavLinks: FC<{
   locale: string
   isMobile?: boolean
-}) {
+}> = ({ locale, isMobile = false }) => {
   const t = useTranslations('Header')
   const pathname = usePathname()
 
-  const links: { href: StaticPathname; label: string; cta?: boolean }[] = [
-    { href: '/about', label: t('About') },
-    { href: '/accommodation', label: t('Accommodation') },
-    { href: '/program', label: t('Program') },
-    { href: '/competition', label: t('Competition') },
-    { href: '/gallery', label: t('Gallery') },
-    { href: '/hall-of-fame', label: t('Hall_of_Fame') },
-    { href: '/registration', label: t('Registration'), cta: true }
-  ]
+  const links = useMemo(
+    () => [
+      { href: '/about' as StaticPathname, label: t('About') },
+      { href: '/accommodation' as StaticPathname, label: t('Accommodation') },
+      { href: '/program' as StaticPathname, label: t('Program') },
+      { href: '/competition' as StaticPathname, label: t('Competition') },
+      { href: '/gallery' as StaticPathname, label: t('Gallery') },
+      { href: '/hall-of-fame' as StaticPathname, label: t('Hall_of_Fame') },
+      {
+        href: '/registration' as StaticPathname,
+        label: t('Registration'),
+        cta: true
+      }
+    ],
+    [t]
+  )
 
-  const isActive = (href: string) => {
-    const withLocale = `/${locale}${href}`
-    return pathname === withLocale || pathname.startsWith(withLocale + '/')
-  }
+  const isActive = useCallback(
+    (href: string) => {
+      const withLocale = `/${locale}${href}`
+      return pathname === withLocale || pathname.startsWith(withLocale + '/')
+    },
+    [pathname, locale]
+  )
 
   return (
     <>
       {links.map(({ href, label, cta }) => {
         const active = isActive(href)
+
         if (cta) {
           return (
             <Link
@@ -196,22 +252,23 @@ function NavLinks({
               lang={locale}
               href={href}
               aria-current={active ? 'page' : undefined}
-              aria-label={label}
+              aria-label={`${label} - Call to action`}
               className={clsx(
-                'inline-flex items-center font-semibold shadow-sm motion-safe:transition-colors motion-safe:duration-200',
+                'inline-flex items-center font-semibold shadow-sm motion-safe:transition-all motion-safe:duration-200',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2',
                 isMobile
                   ? 'w-full justify-center rounded-md px-3 py-2 text-sm'
                   : 'rounded-full px-4 py-1.5 text-xs md:text-sm',
                 active
                   ? 'bg-sky-800 text-white'
-                  : 'bg-sky-700 text-white hover:bg-sky-800 focus-visible:bg-sky-800',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
+                  : 'bg-sky-700 text-white hover:scale-105 hover:bg-sky-800 hover:shadow-md focus-visible:bg-sky-800'
               )}
             >
               {label}
             </Link>
           )
         }
+
         return (
           <Link
             key={href}
@@ -219,8 +276,9 @@ function NavLinks({
             href={href}
             className={clsx(
               'group relative pb-0.5 font-medium transition-colors hover:text-sky-700',
+              'rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2',
               active ? 'text-sky-700' : 'text-slate-600',
-              isMobile ? 'block w-full text-xs' : 'text-xs md:text-sm'
+              isMobile ? 'block w-full py-1 text-sm' : 'text-xs md:text-sm'
             )}
             aria-current={active ? 'page' : undefined}
           >
@@ -231,6 +289,7 @@ function NavLinks({
                 'motion-safe:transition-transform motion-safe:duration-300',
                 active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
               )}
+              aria-hidden='true'
             />
           </Link>
         )
@@ -239,16 +298,17 @@ function NavLinks({
   )
 }
 
-function LangButton({ className }: { className?: string }) {
+const LangButton: FC<{ className?: string }> = ({ className }) => {
   return (
-    <span
+    <div
       className={clsx(
-        'lang-sky inline-flex items-center rounded-md bg-sky-700 px-3 py-1.5 text-sm font-medium text-white shadow-sm',
-        'focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-300',
+        'lang-sky inline-flex items-center rounded-md bg-sky-700/90 px-3 py-1.5 text-sm font-medium text-white shadow-sm backdrop-blur-sm',
+        'focus-within:outline-none focus-within:ring-2 focus-within:ring-sky-300 focus-within:ring-offset-2',
+        'transition-all hover:bg-sky-800 hover:shadow-md',
         className
       )}
     >
       <LangSwitcher />
-    </span>
+    </div>
   )
 }
