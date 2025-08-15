@@ -23,10 +23,13 @@
       "scrollDown": "Scroll Down"
     },
     "Updates": {
-      "Latest_news": "Latest news",
-      "More_news": "More news →",
-      "What_they_say": "What they say",
-      "MoreReferences": "More References"
+      "Latest_news": "LATEST NEWS",
+      "What_they_say": "WHAT THEY SAY",
+      "previousTestimonial": "Previous testimonial",
+      "nextTestimonial": "Next testimonial",
+      "goToSlide": "Go to slide",
+      "pauseSlideshow": "Pause slideshow",
+      "playSlideshow": "Play slideshow"
     },
     "Location": {
       "title": "How to get to Cascais?",
@@ -42,7 +45,9 @@
       "stats_teams": "50 teams",
       "stats_athletes": "600 athletes",
       "stats_countries": "3 countries",
-      "stats_games": "150 games"
+      "stats_games": "150 games",
+      "mapAlt": "Map showing route from Lisbon to Cascais",
+      "taglineAlt": "Feel the action, enjoy the summer"
     }
   },
 
