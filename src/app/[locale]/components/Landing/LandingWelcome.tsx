@@ -17,14 +17,28 @@ export default function LandingWelcome() {
   const t = useTranslations('LandingPage.Welcome')
   const [isLoaded, setIsLoaded] = useState(false)
   const [scrollY, setScrollY] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   // Assets
   const BG = '/img/landing/hero-bg.png'
   const TAGLINE = '/img/global/tagline.png'
   const LOGO = '/img/global/logo-white.png'
 
-  // Parallax effect for tagline
+  // Check if device is mobile
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768) // md breakpoint
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Parallax effect for tagline (disabled on mobile)
+  useEffect(() => {
+    if (isMobile) return
+
     const handleScroll = () => setScrollY(window.scrollY)
 
     let ticking = false
@@ -40,7 +54,7 @@ export default function LandingWelcome() {
 
     window.addEventListener('scroll', throttledScroll, { passive: true })
     return () => window.removeEventListener('scroll', throttledScroll)
-  }, [])
+  }, [isMobile])
 
   // Load animation trigger
   useEffect(() => {
@@ -72,7 +86,7 @@ export default function LandingWelcome() {
       aria-labelledby='hero-heading'
       className='relative -mt-16 min-h-screen w-full overflow-hidden md:-mt-20'
     >
-      {/* Background with subtle parallax */}
+      {/* Background with parallax disabled on mobile */}
       <div className='absolute inset-0 z-0'>
         <Image
           src={BG}
@@ -83,18 +97,18 @@ export default function LandingWelcome() {
           sizes='100vw'
           className='object-cover object-[center_60%] md:object-[center_58%] lg:object-[center_56%]'
           style={{
-            transform: `translateY(${scrollY * 0.5}px)`
+            transform: isMobile ? 'none' : `translateY(${scrollY * 0.5}px)`
           }}
         />
         {/* Gradient overlay for better text readability */}
         <div className='absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent' />
       </div>
 
-      {/* Floating tagline with subtle parallax */}
+      {/* Floating tagline with parallax disabled on mobile */}
       <div
         className='absolute right-4 top-20 z-20 sm:right-6 sm:top-24 md:right-8 md:top-28'
         style={{
-          transform: `translateY(${scrollY * 0.2}px)`
+          transform: isMobile ? 'none' : `translateY(${scrollY * 0.2}px)`
         }}
       >
         <div
