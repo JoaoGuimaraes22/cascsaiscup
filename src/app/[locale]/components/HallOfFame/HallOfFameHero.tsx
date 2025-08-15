@@ -277,9 +277,9 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
             <Image
               src={ASSETS.mvpLogo}
               alt={mvpAlt}
-              width={140}
-              height={48}
-              className='h-[32px] w-auto transition-transform duration-300 hover:scale-110'
+              width={120}
+              height={40}
+              className='h-[20px] w-auto transition-transform duration-300 hover:scale-110'
             />
           </div>
         </div>
