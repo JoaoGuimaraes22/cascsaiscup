@@ -21,7 +21,7 @@ interface Team {
   country: string
 }
 
-// Sample teams data - could be moved to props or API call
+// Sample teams data - all Portuguese teams
 const SAMPLE_TEAMS: Team[] = [
   { name: 'Lisboa Spikers', country: 'PT' },
   { name: 'Porto Power', country: 'PT' },
@@ -66,7 +66,7 @@ function useStaggeredAnimation(threshold = 0.15) {
   return { isVisible, sectionRef }
 }
 
-// Enhanced team item component with animations
+// Team item component without hover animations
 interface TeamItemProps {
   team: Team
   index: number
@@ -80,40 +80,28 @@ function TeamItem({ team, index, isVisible }: TeamItemProps) {
   return (
     <li
       className={clsx(
-        'group flex items-center gap-3 rounded-lg bg-white/60 px-3 py-2 shadow-sm ring-1 ring-black/5 backdrop-blur-sm transition-all duration-500 ease-out hover:scale-105 hover:bg-white/80 hover:shadow-md',
+        'flex items-center gap-3 rounded-lg bg-white/60 px-3 py-2 shadow-sm ring-1 ring-black/5 backdrop-blur-sm transition-all duration-500 ease-out',
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
       )}
       style={{
         transitionDelay: `${700 + Math.floor(index / 2) * 100}ms`
       }}
     >
-      {/* Enhanced flag with loading state */}
-      <div className='relative inline-block h-[16px] w-[24px] shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/10 transition-transform duration-300 group-hover:scale-110'>
+      {/* Flag - Portugal for all teams */}
+      <div className='relative inline-block h-[16px] w-[24px] shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/10'>
         <Image
           src={flagSrc(team.country)}
           alt={`${team.country} flag`}
           fill
           sizes='24px'
-          className='object-cover transition-opacity duration-300'
-          onError={e => {
-            // Fallback to flag icon if image fails to load
-            const target = e.target as HTMLImageElement
-            target.style.display = 'none'
-          }}
+          className='object-cover'
         />
-        {/* Fallback flag icon */}
-        <div className='absolute inset-0 grid place-items-center bg-slate-100'>
-          <FiFlag className='h-3 w-3 text-slate-400' />
-        </div>
       </div>
 
-      {/* Team name with enhanced typography */}
-      <span className='flex-1 text-sm font-medium text-slate-800 transition-colors duration-200 group-hover:text-slate-900 sm:text-base'>
+      {/* Team name - no hover effects */}
+      <span className='flex-1 text-sm font-medium text-slate-800 sm:text-base'>
         {team.name}
       </span>
-
-      {/* Subtle hover indicator */}
-      <div className='h-1.5 w-1.5 rounded-full bg-sky-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
     </li>
   )
 }
@@ -334,12 +322,21 @@ function WaveSection({ statsItems, isVisible }: WaveSectionProps) {
 export default function HallOfFameParticipants() {
   const t = useTranslations('HallOfFamePage.Participants')
   const { isVisible, sectionRef } = useStaggeredAnimation(0.15)
+  const [showAllTeams, setShowAllTeams] = useState(false)
+
+  // Show first 7 teams on mobile, all on desktop
+  const visibleTeams = showAllTeams ? SAMPLE_TEAMS : SAMPLE_TEAMS.slice(0, 7)
+  const hasMoreTeams = SAMPLE_TEAMS.length > 7
 
   const handleSeeWinners = () => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     document
       .getElementById('hall-of-fame-winners')
       ?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' })
+  }
+
+  const handleSeeMoreTeams = () => {
+    setShowAllTeams(true)
   }
 
   const statsItems = [
@@ -356,7 +353,7 @@ export default function HallOfFameParticipants() {
       className='relative w-full overflow-hidden'
       aria-labelledby='participants-title'
     >
-      {/* Enhanced background */}
+      {/* Background */}
       <div className='absolute inset-0 -z-10'>
         <Image
           src={ASSETS.background}
@@ -365,10 +362,8 @@ export default function HallOfFameParticipants() {
           fill
           priority
           sizes='100vw'
-          className='duration-[15s] object-cover opacity-40 transition-transform ease-out hover:scale-105'
+          className='object-cover'
         />
-        {/* Subtle gradient overlay */}
-        <div className='absolute inset-0 bg-gradient-to-br from-sky-50/20 via-transparent to-blue-50/10' />
       </div>
 
       {/* Content */}
@@ -401,7 +396,7 @@ export default function HallOfFameParticipants() {
               </h2>
             </header>
 
-            {/* Enhanced teams grid */}
+            {/* Teams grid with mobile limitation */}
             <div
               className={clsx(
                 'transition-all duration-1000 ease-out',
@@ -411,7 +406,8 @@ export default function HallOfFameParticipants() {
               )}
               style={{ transitionDelay: '600ms' }}
             >
-              <ul className='grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 sm:text-base lg:gap-2'>
+              {/* Desktop: Show all teams */}
+              <ul className='hidden grid-cols-1 gap-3 text-sm sm:grid sm:grid-cols-2 sm:text-base lg:gap-2'>
                 {SAMPLE_TEAMS.map((team, index) => (
                   <TeamItem
                     key={`${team.name}-${index}`}
@@ -421,6 +417,38 @@ export default function HallOfFameParticipants() {
                   />
                 ))}
               </ul>
+
+              {/* Mobile: Show limited teams */}
+              <ul className='grid grid-cols-1 gap-3 text-sm sm:hidden'>
+                {visibleTeams.map((team, index) => (
+                  <TeamItem
+                    key={`${team.name}-${index}`}
+                    team={team}
+                    index={index}
+                    isVisible={isVisible}
+                  />
+                ))}
+              </ul>
+
+              {/* Mobile: See More Teams button */}
+              {hasMoreTeams && !showAllTeams && (
+                <button
+                  type='button'
+                  onClick={handleSeeMoreTeams}
+                  className={clsx(
+                    'mt-4 inline-flex items-center gap-2 rounded-lg bg-white/70 px-4 py-2 text-sm font-semibold text-sky-700 shadow-sm ring-1 ring-black/5 backdrop-blur-sm transition-all duration-300 hover:bg-white/90 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:hidden',
+                    'transition-all duration-700 ease-out',
+                    isVisible
+                      ? 'translate-y-0 opacity-100'
+                      : 'translate-y-6 opacity-0'
+                  )}
+                  style={{ transitionDelay: '800ms' }}
+                >
+                  <FiUsers className='h-4 w-4' />
+                  See {SAMPLE_TEAMS.length - 7} more teams
+                  <FiArrowDown className='h-4 w-4' />
+                </button>
+              )}
 
               <CTAButton onClick={handleSeeWinners} isVisible={isVisible}>
                 {t('seeWinners')}

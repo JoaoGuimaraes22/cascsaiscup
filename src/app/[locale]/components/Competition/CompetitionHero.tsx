@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import { MouseEvent } from 'react'
 
 // Constants for better maintainability
 const ASSETS = {
@@ -22,6 +22,26 @@ const PHONE_DIMENSIONS = {
 
 export default function CompetitionHero() {
   const t = useTranslations('CompetitionPage.Hero')
+
+  const handleScrollToRegulations = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    const regulationsSection = document.getElementById('regulations')
+
+    if (!regulationsSection) {
+      // Fallback if section doesn't exist
+      window.location.hash = '#regulations'
+      return
+    }
+
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    regulationsSection.scrollIntoView({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      block: 'start'
+    })
+  }
 
   return (
     <section
@@ -87,8 +107,8 @@ export default function CompetitionHero() {
             </div>
 
             <div className='mt-8'>
-              <Link
-                href={t('ctaHref') || '/regulations'}
+              <button
+                onClick={handleScrollToRegulations}
                 className='group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-600 to-sky-700 px-6 py-3 font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-sky-700 hover:to-sky-800 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
                 aria-describedby='cta-description'
               >
@@ -104,13 +124,13 @@ export default function CompetitionHero() {
                     strokeLinecap='round'
                     strokeLinejoin='round'
                     strokeWidth={2}
-                    d='M9 5l7 7-7 7'
+                    d='M19 14l-7 7m0 0l-7-7m7 7V3'
                   />
                 </svg>
-              </Link>
+              </button>
               <span id='cta-description' className='sr-only'>
                 {t('ctaDescription') ||
-                  'View detailed competition rules and regulations'}
+                  'Scroll to view detailed competition rules and regulations'}
               </span>
             </div>
           </div>
