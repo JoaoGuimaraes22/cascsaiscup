@@ -2,7 +2,10 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import { useKeenSlider } from 'keen-slider/react'
+import 'keen-slider/keen-slider.min.css'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import clsx from 'clsx'
 
 export default function AboutPortugal() {
@@ -10,12 +13,12 @@ export default function AboutPortugal() {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   // ===== Constants =====
   const ASSETS = {
     background: '/img/about/portugal-bg.png',
     logo: '/img/global/cascais-volley-cup-2.png',
-    tagline: '/img/global/tagline.png',
     wave: '/img/global/ondas-3.png'
   } as const
 
@@ -42,14 +45,44 @@ export default function AboutPortugal() {
     }
   ] as const
 
-  const STATS = [
-    t('stats.teams'),
-    t('stats.athletes'),
-    t('stats.countries'),
-    t('stats.matches')
-  ] as const
-
   const WAVE_HEIGHT = 135
+
+  // Slider setup - only for mobile/tablet
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
+    loop: false,
+    defaultAnimation: { duration: 600 },
+    slides: {
+      perView: 1.2,
+      spacing: 16
+    },
+    breakpoints: {
+      '(min-width: 640px)': {
+        slides: { perView: 2.2, spacing: 20 }
+      },
+      '(min-width: 1024px)': {
+        disabled: true // Disable slider on desktop
+      }
+    },
+    slideChanged(s) {
+      setCurrentSlide(s.track.details.rel)
+    }
+  })
+
+  // Navigation functions
+  const goToSlide = useCallback(
+    (index: number) => {
+      instanceRef.current?.moveToIdx(index)
+    },
+    [instanceRef]
+  )
+
+  const goToPrevious = useCallback(() => {
+    instanceRef.current?.prev()
+  }, [instanceRef])
+
+  const goToNext = useCallback(() => {
+    instanceRef.current?.next()
+  }, [instanceRef])
 
   // Intersection observer for animations
   useEffect(() => {
@@ -96,7 +129,7 @@ export default function AboutPortugal() {
 
       {/* Content */}
       <div className='mx-auto max-w-screen-xl px-4 py-10 sm:py-12'>
-        {/* Title + intro + logo/tagline */}
+        {/* Title + intro + logo */}
         <div className='relative grid grid-cols-1 gap-8 md:grid-cols-[1.1fr_0.9fr]'>
           {/* LEFT - Content */}
           <div
@@ -134,7 +167,7 @@ export default function AboutPortugal() {
             </div>
           </div>
 
-          {/* RIGHT - Logo and tagline (desktop only) */}
+          {/* RIGHT - Logo only (desktop only) */}
           <div
             className={clsx(
               'relative hidden items-start justify-end transition-all duration-1000 ease-out md:flex',
@@ -144,7 +177,7 @@ export default function AboutPortugal() {
             )}
             style={{ transitionDelay: '600ms' }}
           >
-            <div className='flex flex-col items-end gap-4'>
+            <div className='flex flex-col items-end'>
               <Image
                 src={ASSETS.logo}
                 alt={t('logoAlt')}
@@ -153,22 +186,14 @@ export default function AboutPortugal() {
                 className='h-auto w-[220px] object-contain transition-transform duration-300 hover:scale-105 lg:w-[260px]'
                 sizes='(max-width: 1024px) 220px, 260px'
               />
-              <Image
-                src={ASSETS.tagline}
-                alt={t('taglineAlt')}
-                width={360}
-                height={150}
-                className='h-auto w-[280px] object-contain transition-transform duration-300 hover:scale-105 lg:w-[360px]'
-                sizes='(max-width: 1024px) 280px, 360px'
-              />
             </div>
           </div>
         </div>
 
-        {/* Cards grid with staggered animation */}
+        {/* Cards - Desktop Grid */}
         <div
           className={clsx(
-            'mt-10 grid grid-cols-1 gap-6 transition-all duration-1000 ease-out sm:grid-cols-2 lg:grid-cols-4',
+            'mt-10 hidden grid-cols-4 gap-6 transition-all duration-1000 ease-out lg:grid',
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           )}
           style={{ transitionDelay: '800ms' }}
@@ -183,9 +208,75 @@ export default function AboutPortugal() {
             />
           ))}
         </div>
+
+        {/* Cards - Mobile/Tablet Slider */}
+        <div
+          className={clsx(
+            'mt-10 transition-all duration-1000 ease-out lg:hidden',
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          )}
+          style={{ transitionDelay: '800ms' }}
+        >
+          {/* Slider */}
+          <div className='relative'>
+            <div
+              ref={sliderRef}
+              className='keen-slider'
+              aria-labelledby='portugal-title'
+            >
+              {SPOTS.map((spot, index) => (
+                <div key={spot.key} className='keen-slider__slide px-2'>
+                  <SpotCard
+                    spot={spot}
+                    index={index}
+                    t={t}
+                    isVisible={isVisible}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Navigation controls */}
+            <div className='mt-4 flex items-center justify-center gap-4'>
+              {/* Navigation arrows */}
+              <button
+                onClick={goToPrevious}
+                aria-label='Previous card'
+                className='rounded-full bg-sky-500/20 p-2 backdrop-blur-sm transition-all hover:bg-sky-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50'
+              >
+                <FiChevronLeft className='h-4 w-4 text-sky-500' />
+              </button>
+
+              {/* Dots */}
+              <div className='flex gap-2'>
+                {SPOTS.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    aria-label={`Go to card ${index + 1}`}
+                    className={clsx(
+                      'h-2 w-2 rounded-full transition-all',
+                      currentSlide === index
+                        ? 'scale-125 bg-sky-500'
+                        : 'bg-sky-500/50 hover:bg-sky-500/80'
+                    )}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={goToNext}
+                aria-label='Next card'
+                className='rounded-full bg-sky-500/20 p-2 backdrop-blur-sm transition-all hover:bg-sky-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50'
+              >
+                <FiChevronRight className='h-4 w-4 text-sky-500' />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Bottom wave with stats overlay */}
+      {/* Bottom wave without stats */}
       <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
         <Image
           src={ASSETS.wave}
@@ -198,30 +289,6 @@ export default function AboutPortugal() {
           sizes='100vw'
           priority
         />
-
-        {/* Stats overlay with animation */}
-        <div className='pointer-events-none absolute inset-0'>
-          <div className='mx-auto flex h-full max-w-screen-xl items-center justify-center px-4 lg:justify-end'>
-            <div
-              className={clsx(
-                'transition-all duration-1000 ease-out',
-                isVisible
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-4 opacity-0'
-              )}
-              style={{ transitionDelay: '1200ms' }}
-            >
-              {/* Mobile: compact */}
-              <div className='block lg:hidden'>
-                <StatsList compact items={STATS} />
-              </div>
-              {/* Desktop */}
-              <div className='hidden lg:block'>
-                <StatsList items={STATS} />
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   )
@@ -245,17 +312,32 @@ function SpotCard({ spot, index, t, isVisible }: SpotCardProps) {
   return (
     <article
       className={clsx(
-        'group overflow-hidden rounded-xl bg-white/70 shadow-sm ring-1 ring-black/5 backdrop-blur-sm transition-all duration-700 ease-out hover:shadow-lg hover:ring-black/10',
+        'group flex h-full flex-col transition-all duration-700 ease-out',
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
       )}
       style={{
         transitionDelay: `${800 + index * 100}ms`
       }}
     >
-      <div className='relative h-40 w-full overflow-hidden sm:h-44'>
+      {/* Content - Title, Subtitle, Text */}
+      <div className='mb-4 flex-1'>
+        <h3 className='mb-3 text-lg font-extrabold uppercase text-sky-500 sm:text-xl'>
+          {t(`cards.${spot.key}.title`)}{' '}
+          <span className='font-normal text-sky-500'>
+            {t(`cards.${spot.key}.subtitle`)}
+          </span>
+        </h3>
+
+        <p className='text-sm leading-relaxed text-slate-700 sm:text-base'>
+          {t(`cards.${spot.key}.desc`)}
+        </p>
+      </div>
+
+      {/* Image at bottom */}
+      <div className='relative h-40 w-full overflow-hidden rounded-lg sm:h-48'>
         {/* Loading placeholder */}
         {!imageLoaded && (
-          <div className='absolute inset-0 animate-pulse bg-slate-200' />
+          <div className='absolute inset-0 animate-pulse rounded-lg bg-slate-200' />
         )}
 
         <Image
@@ -263,7 +345,7 @@ function SpotCard({ spot, index, t, isVisible }: SpotCardProps) {
           alt={spot.alt}
           fill
           className={clsx(
-            'object-cover transition-all duration-300 group-hover:scale-105',
+            'rounded-lg object-cover transition-all duration-300 group-hover:scale-105',
             imageLoaded ? 'opacity-100' : 'opacity-0'
           )}
           sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'
@@ -272,61 +354,6 @@ function SpotCard({ spot, index, t, isVisible }: SpotCardProps) {
           onLoad={() => setImageLoaded(true)}
         />
       </div>
-
-      <div className='space-y-2 p-4'>
-        <h3 className='text-base font-extrabold uppercase text-sky-500'>
-          {t(`cards.${spot.key}.title`)}{' '}
-          <span className='font-semibold text-slate-500'>
-            {t(`cards.${spot.key}.subtitle`)}
-          </span>
-        </h3>
-        <p className='text-sm leading-relaxed text-slate-700'>
-          {t(`cards.${spot.key}.desc`)}
-        </p>
-      </div>
     </article>
-  )
-}
-
-/* --- Enhanced Stats List Component --- */
-interface StatsListProps {
-  items: readonly string[]
-  compact?: boolean
-}
-
-function StatsList({ items, compact = false }: StatsListProps) {
-  return (
-    <ul
-      aria-label='Tournament statistics'
-      className={clsx(
-        'flex items-center whitespace-nowrap font-extrabold uppercase text-white',
-        compact
-          ? 'gap-2 px-2 text-[10px] tracking-tight'
-          : 'gap-3 px-3 text-[11px] tracking-normal sm:gap-4 sm:text-[13px] sm:tracking-wide lg:gap-6 lg:text-lg'
-      )}
-    >
-      {items.map((item, index) => (
-        <li
-          key={index}
-          className={clsx(
-            'flex items-center',
-            compact ? 'gap-2' : 'gap-3 sm:gap-4 lg:gap-6'
-          )}
-        >
-          <span>{item}</span>
-          {index < items.length - 1 && (
-            <span
-              className={clsx(
-                'leading-none text-white/70',
-                compact ? 'text-xs' : 'text-sm sm:text-lg lg:text-2xl'
-              )}
-              aria-hidden='true'
-            >
-              •
-            </span>
-          )}
-        </li>
-      ))}
-    </ul>
   )
 }

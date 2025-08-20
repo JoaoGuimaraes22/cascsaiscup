@@ -91,6 +91,37 @@ const newsItems: NewsItem[] = [
     excerpt: 'MVP awards given to the athletes who stood out during the event.',
     image: '/img/news/news4.jpg',
     link: '/news/mvp-awards'
+  },
+  {
+    title: 'Training Camp Schedule 2025',
+    date: 'January 25, 2025',
+    excerpt:
+      'Complete schedule for the upcoming summer training camps across Europe.',
+    image: '/img/news/news5.jpg',
+    link: '/news/training-camps'
+  },
+  {
+    title: 'New Sponsorship Partnership',
+    date: 'January 15, 2025',
+    excerpt:
+      'We are excited to announce our new partnership with major sports brand.',
+    image: '/img/news/news6.jpg',
+    link: '/news/sponsorship-deal'
+  },
+  {
+    title: 'Championship Finals Results',
+    date: 'December 20, 2024',
+    excerpt: 'Recap of the thrilling championship finals with photo gallery.',
+    image: '/img/news/news7.jpg',
+    link: '/news/championship-finals'
+  },
+  {
+    title: 'Youth Development Program',
+    date: 'December 10, 2024',
+    excerpt:
+      'Launch of our new youth development program for aspiring players.',
+    image: '/img/news/news8.jpg',
+    link: '/news/youth-program'
   }
 ]
 
@@ -98,14 +129,16 @@ const newsItems: NewsItem[] = [
 export default function LandingUpdates() {
   const t = useTranslations('LandingPage.Updates')
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentNewsSlide, setCurrentNewsSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const intervalRef = useRef<ReturnType<typeof setInterval>>()
 
+  // Testimonials slider
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
-    defaultAnimation: { duration: 800 }, // ⬅️ replaces `duration: 800`
+    defaultAnimation: { duration: 800 },
     slides: {
       perView: 1,
       spacing: 16
@@ -126,7 +159,28 @@ export default function LandingUpdates() {
     }
   })
 
-  // Auto-play functionality
+  // News slider - same structure as testimonials
+  const [newsSliderRef, newsInstanceRef] = useKeenSlider<HTMLDivElement>({
+    loop: true,
+    defaultAnimation: { duration: 600 },
+    slides: {
+      perView: 1,
+      spacing: 16
+    },
+    breakpoints: {
+      '(min-width: 768px)': {
+        slides: { perView: 2, spacing: 20 }
+      },
+      '(min-width: 1024px)': {
+        slides: { perView: 4, spacing: 24 }
+      }
+    },
+    slideChanged(s) {
+      setCurrentNewsSlide(s.track.details.rel)
+    }
+  })
+
+  // Auto-play functionality for testimonials
   const startAutoPlay = useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current)
     intervalRef.current = setInterval(() => {
@@ -144,7 +198,7 @@ export default function LandingUpdates() {
     setIsAutoPlaying(prev => !prev)
   }, [])
 
-  // Navigation functions
+  // Navigation functions for testimonials
   const goToPrevious = useCallback(() => {
     instanceRef.current?.prev()
     stopAutoPlay()
@@ -165,6 +219,22 @@ export default function LandingUpdates() {
     },
     [instanceRef, stopAutoPlay]
   )
+
+  // Navigation functions for news slider
+  const goToNewsSlide = useCallback(
+    (index: number) => {
+      newsInstanceRef.current?.moveToIdx(index)
+    },
+    [newsInstanceRef]
+  )
+
+  const goToNewsPrevious = useCallback(() => {
+    newsInstanceRef.current?.prev()
+  }, [newsInstanceRef])
+
+  const goToNewsNext = useCallback(() => {
+    newsInstanceRef.current?.next()
+  }, [newsInstanceRef])
 
   // Auto-play effect
   useEffect(() => {
@@ -210,20 +280,19 @@ export default function LandingUpdates() {
         className='absolute inset-0 -z-10 object-cover'
       />
 
-      {/* Top wave (flush to top) */}
-      <div className='absolute inset-x-0 top-0 z-0'>
+      {/* Top wave - responsive height with better mobile scaling */}
+      <div className='absolute inset-x-0 top-0 z-0 h-[60px] sm:h-[80px] lg:h-[120px]'>
         <Image
           src='/img/global/ondas-4.png'
           alt=''
           role='presentation'
-          width={1920}
-          height={135}
-          className='-mt-px block h-auto w-full object-cover'
+          fill
+          className='object-cover object-center'
         />
       </div>
 
-      {/* Content pushed below the top wave height */}
-      <div className='mx-auto max-w-screen-xl px-4 pt-[clamp(96px,9vw,180px)]'>
+      {/* Content with responsive padding that matches wave height */}
+      <div className='mx-auto max-w-screen-xl px-4 pt-[80px] sm:pt-[100px] lg:pt-[140px]'>
         {/* News Section */}
         <div
           className={clsx(
@@ -238,23 +307,56 @@ export default function LandingUpdates() {
             {t('Latest_news') || 'LATEST NEWS'}
           </h2>
 
-          <div className='grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-4'>
-            {newsItems.map((item, index) => (
-              <div
-                key={index}
-                className={clsx(
-                  'transition-all duration-700 ease-out',
-                  isVisible
-                    ? 'translate-y-0 opacity-100'
-                    : 'translate-y-8 opacity-0'
-                )}
-                style={{
-                  transitionDelay: `${index * 150}ms`
-                }}
+          {/* News Slider */}
+          <div className='relative'>
+            <div
+              ref={newsSliderRef}
+              className='keen-slider'
+              aria-labelledby='updates-heading'
+            >
+              {newsItems.map((item, index) => (
+                <div key={index} className='keen-slider__slide px-2'>
+                  <NewsCard {...item} />
+                </div>
+              ))}
+            </div>
+
+            {/* News slider controls */}
+            <div className='mt-4 flex items-center justify-center gap-4'>
+              {/* Navigation arrows */}
+              <button
+                onClick={goToNewsPrevious}
+                aria-label='Previous news'
+                className='rounded-full bg-sky-500/20 p-2 backdrop-blur-sm transition-all hover:bg-sky-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50'
               >
-                <NewsCard {...item} />
+                <FiChevronLeft className='h-4 w-4 text-sky-500' />
+              </button>
+
+              {/* Dots - One for each news item */}
+              <div className='flex gap-2'>
+                {newsItems.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToNewsSlide(index)}
+                    aria-label={`Go to news item ${index + 1}`}
+                    className={clsx(
+                      'h-2 w-2 rounded-full transition-all',
+                      currentNewsSlide === index
+                        ? 'scale-125 bg-sky-500'
+                        : 'bg-sky-500/50 hover:bg-sky-500/80'
+                    )}
+                  />
+                ))}
               </div>
-            ))}
+
+              <button
+                onClick={goToNewsNext}
+                aria-label='Next news'
+                className='rounded-full bg-sky-500/20 p-2 backdrop-blur-sm transition-all hover:bg-sky-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50'
+              >
+                <FiChevronRight className='h-4 w-4 text-sky-500' />
+              </button>
+            </div>
           </div>
         </div>
 

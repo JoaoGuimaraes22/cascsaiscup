@@ -2,17 +2,9 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { FiSun, FiMapPin } from 'react-icons/fi'
-import { FaPlane } from 'react-icons/fa'
+import { FiMapPin } from 'react-icons/fi'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
-
-// Types
-interface InfoChipProps {
-  label: string
-  value: string
-  icon: 'sun' | 'plane' | 'map'
-}
 
 interface StatsListProps {
   items: string[]
@@ -82,13 +74,14 @@ export default function LandingLocation() {
         />
       </div>
 
-      {/* Content container */}
-      <div className='mx-auto grid max-w-screen-xl grid-cols-1 gap-10 px-4 pb-10 pt-[clamp(32px,4vw,64px)] sm:px-4 sm:pb-12 lg:grid-cols-12 lg:gap-16'>
-        {/* LEFT: Content Section */}
-        <div className='lg:col-span-7'>
+      {/* Content container - Mobile: center everything, Desktop: grid layout */}
+      <div className='mx-auto max-w-screen-xl px-4 pb-10 pt-[clamp(32px,4vw,64px)] sm:pb-12 lg:grid lg:h-full lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-8'>
+        {/* Mobile Layout: Centered vertical stack */}
+        <div className='flex flex-col items-center space-y-6 lg:hidden'>
+          {/* Text Content */}
           <div
             className={clsx(
-              'transition-all duration-1000 ease-out',
+              'w-full max-w-md transition-all duration-1000 ease-out',
               isVisible
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'
@@ -96,16 +89,16 @@ export default function LandingLocation() {
           >
             <h1
               id='location-title'
-              className='mb-4 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl lg:text-[32px]'
+              className='mb-4 text-left text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'
             >
               {t('title')}
             </h1>
 
-            <div className='mb-6 space-y-4'>
-              <p className='max-w-prose text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+            <div className='mb-6 space-y-4 text-left'>
+              <p className='text-sm leading-relaxed text-slate-800/90 sm:text-base'>
                 {t('p1')}
               </p>
-              <p className='max-w-prose text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+              <p className='text-sm leading-relaxed text-slate-800/90 sm:text-base'>
                 {t('p2_prefix')}
                 <span className='font-extrabold text-sky-600'>
                   {t('flixbus')}
@@ -115,16 +108,16 @@ export default function LandingLocation() {
             </div>
           </div>
 
-          {/* Map Section with animation */}
+          {/* Map */}
           <div
             className={clsx(
-              'transition-all delay-300 duration-1000 ease-out',
+              'w-full max-w-lg transition-all delay-300 duration-1000 ease-out',
               isVisible
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'
             )}
           >
-            <div className='group rounded-lg bg-gradient-to-br from-sky-600 to-sky-700 p-[3px] shadow-xl ring-1 ring-black/5 md:max-w-[640px]'>
+            <div className='group rounded-lg bg-gradient-to-br from-sky-600 to-sky-700 p-[3px] shadow-xl ring-1 ring-black/5'>
               <div className='overflow-hidden rounded-md bg-white transition-transform duration-300 group-hover:scale-[1.02]'>
                 <Image
                   src={ASSETS.map}
@@ -135,18 +128,38 @@ export default function LandingLocation() {
                   height={456}
                   className='h-auto w-full object-cover'
                   priority
-                  sizes='(max-width: 768px) 100vw, 640px'
+                  sizes='(max-width: 768px) 90vw, 512px'
                 />
               </div>
             </div>
           </div>
-        </div>
 
-        {/* RIGHT: Tagline and Info Section */}
-        <div className='relative flex flex-col items-start gap-6 lg:col-span-5 lg:items-end'>
+          {/* CTA Button */}
           <div
             className={clsx(
-              'w-[260px] self-start transition-all delay-500 duration-1000 ease-out sm:w-[360px] lg:w-[420px] lg:self-end',
+              'transition-all delay-500 duration-700 ease-out',
+              isVisible
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-8 opacity-0'
+            )}
+          >
+            <button
+              type='button'
+              onClick={handlePlanTripClick}
+              className='group relative overflow-hidden rounded-full bg-gradient-to-r from-sky-600 to-sky-700 px-6 py-3 text-sm font-bold text-white shadow-xl ring-1 ring-black/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
+            >
+              <span className='relative z-10 flex items-center gap-2'>
+                <FiMapPin className='h-4 w-4' />
+                {t('cta')}
+              </span>
+              <div className='absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full' />
+            </button>
+          </div>
+
+          {/* Tagline */}
+          <div
+            className={clsx(
+              'w-[260px] transition-all delay-700 duration-1000 ease-out sm:w-[320px]',
               isVisible
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'
@@ -158,46 +171,94 @@ export default function LandingLocation() {
               width={1000}
               height={215}
               className='h-auto w-full object-contain drop-shadow-lg'
-              sizes='(max-width: 640px) 260px, (max-width: 1024px) 360px, 420px'
+              sizes='(max-width: 640px) 260px, 320px'
             />
           </div>
+        </div>
 
-          {/* Info Chips with staggered animation */}
-          <div className='flex flex-col items-start gap-3 lg:items-end'>
-            <div
-              className={clsx(
-                'transition-all delay-700 duration-700 ease-out',
-                isVisible
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-8 opacity-0'
-              )}
+        {/* Desktop Layout: Grid positioning */}
+        <div className='hidden lg:contents'>
+          {/* Top Left: Text Content */}
+          <div
+            className={clsx(
+              'flex flex-col transition-all duration-1000 ease-out',
+              isVisible
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-8 opacity-0'
+            )}
+          >
+            <h1
+              id='location-title'
+              className='mb-4 text-3xl font-extrabold uppercase tracking-wide text-sky-500 lg:text-[32px]'
             >
-              <InfoChip
-                icon='sun'
-                label={t('avg_air_temp')}
-                value={t('avg_air_temp_value')}
-              />
+              {t('title')}
+            </h1>
+
+            <div className='space-y-4'>
+              <p className='max-w-prose text-base leading-relaxed text-slate-800/90'>
+                {t('p1')}
+              </p>
+              <p className='max-w-prose text-base leading-relaxed text-slate-800/90'>
+                {t('p2_prefix')}
+                <span className='font-extrabold text-sky-600'>
+                  {t('flixbus')}
+                </span>
+                {t('p2_suffix')}
+              </p>
             </div>
-            <div
-              className={clsx(
-                'delay-[850ms] transition-all duration-700 ease-out',
-                isVisible
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-8 opacity-0'
-              )}
-            >
-              <InfoChip
-                icon='plane'
-                label={t('airport')}
-                value={t('airport_value')}
+          </div>
+
+          {/* Top Right: Tagline */}
+          <div
+            className={clsx(
+              'flex items-start justify-end transition-all delay-300 duration-1000 ease-out',
+              isVisible
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-8 opacity-0'
+            )}
+          >
+            <div className='w-[380px] xl:w-[420px]'>
+              <Image
+                src={ASSETS.tagline}
+                alt={t('taglineAlt') || 'Feel the action, enjoy the summer'}
+                width={1000}
+                height={215}
+                className='h-auto w-full object-contain drop-shadow-lg'
+                sizes='420px'
               />
             </div>
           </div>
 
-          {/* CTA Button with enhanced styling */}
+          {/* Bottom Left: Map */}
           <div
             className={clsx(
-              'transition-all delay-1000 duration-700 ease-out',
+              'flex items-start justify-start transition-all delay-500 duration-1000 ease-out',
+              isVisible
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-8 opacity-0'
+            )}
+          >
+            <div className='group max-w-[540px] rounded-lg bg-gradient-to-br from-sky-600 to-sky-700 p-[3px] shadow-xl ring-1 ring-black/5'>
+              <div className='overflow-hidden rounded-md bg-white transition-transform duration-300 group-hover:scale-[1.02]'>
+                <Image
+                  src={ASSETS.map}
+                  alt={
+                    t('mapAlt') || 'Map showing route from Lisbon to Cascais'
+                  }
+                  width={768}
+                  height={456}
+                  className='h-auto w-full object-cover'
+                  priority
+                  sizes='540px'
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Right: CTA Button */}
+          <div
+            className={clsx(
+              'flex items-end justify-end transition-all delay-700 duration-700 ease-out',
               isVisible
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'
@@ -206,10 +267,10 @@ export default function LandingLocation() {
             <button
               type='button'
               onClick={handlePlanTripClick}
-              className='group relative self-start overflow-hidden rounded-full bg-gradient-to-r from-sky-600 to-sky-700 px-6 py-3 text-sm font-bold text-white shadow-xl ring-1 ring-black/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base lg:self-end'
+              className='group relative overflow-hidden rounded-full bg-gradient-to-r from-sky-600 to-sky-700 px-8 py-4 text-base font-bold text-white shadow-xl ring-1 ring-black/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 lg:text-lg'
             >
               <span className='relative z-10 flex items-center gap-2'>
-                <FiMapPin className='h-4 w-4' />
+                <FiMapPin className='h-5 w-5' />
                 {t('cta')}
               </span>
               <div className='absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full' />
@@ -235,7 +296,7 @@ export default function LandingLocation() {
           <div className='mx-auto flex h-full max-w-screen-xl items-center justify-center px-4 lg:justify-start'>
             <div
               className={clsx(
-                'delay-1200 transition-all duration-1000 ease-out',
+                'transition-all delay-1000 duration-1000 ease-out',
                 isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-4 opacity-0'
@@ -254,34 +315,6 @@ export default function LandingLocation() {
         </div>
       </div>
     </section>
-  )
-}
-
-/* -------- Enhanced Components -------- */
-
-function InfoChip({ label, value, icon }: InfoChipProps) {
-  const iconMap = {
-    sun: FiSun,
-    plane: FaPlane,
-    map: FiMapPin
-  } as const
-
-  const Icon = iconMap[icon]
-
-  return (
-    <div className='group flex items-center gap-3 rounded-2xl bg-white/90 px-4 py-3 shadow-lg ring-1 ring-black/5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/95 hover:shadow-xl'>
-      <div className='grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-sky-500 to-sky-600 shadow-md ring-1 ring-black/10 transition-transform duration-300 group-hover:scale-110'>
-        <Icon className='h-4 w-4 text-white' aria-hidden />
-      </div>
-      <div className='leading-tight'>
-        <div className='text-[11px] font-extrabold uppercase tracking-wider text-slate-600 sm:text-[12px]'>
-          {label}
-        </div>
-        <div className='text-[13px] font-bold text-slate-900 sm:text-sm'>
-          {value}
-        </div>
-      </div>
-    </div>
   )
 }
 

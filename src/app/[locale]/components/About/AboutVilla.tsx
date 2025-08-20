@@ -16,13 +16,14 @@ export default function AboutVilla() {
   // ===== Constants =====
   const ASSETS = {
     background: '/img/about/villa-bg.png',
-    wave: '/img/global/ondas-6.png',
-    tagline: '/img/global/tagline.png',
+    bottomWave: '/img/global/ondas-3.png',
+    tagline: '/img/global/tagline-w.png',
     logo: '/img/global/cascais-volley-cup-1-w.png',
     sponsor: '/img/sponsors/cascais-camara-w.png'
   } as const
 
   const PARAGRAPHS = ['p1', 'p2', 'p3', 'p4'] as const
+  const WAVE_HEIGHT = 135
 
   // Intersection observer for animations
   useEffect(() => {
@@ -45,10 +46,11 @@ export default function AboutVilla() {
   return (
     <section
       ref={sectionRef}
-      className='relative min-h-[640px] w-full overflow-hidden'
+      className='relative max-h-[95vh] min-h-[640px] w-full overflow-hidden'
+      style={{ paddingBottom: `${WAVE_HEIGHT}px` }}
       aria-labelledby='villa-title'
     >
-      {/* Enhanced Background with Loading State */}
+      {/* Enhanced Background with Loading State and Dark Overlay */}
       <div className='absolute inset-0 -z-10'>
         <div className='absolute inset-0 bg-gradient-to-br from-blue-900 to-blue-800' />
         <Image
@@ -65,162 +67,109 @@ export default function AboutVilla() {
           draggable={false}
           onLoad={() => setBackgroundLoaded(true)}
         />
+        {/* Dark overlay */}
+        <div className='absolute inset-0 bg-black/30' />
       </div>
 
-      {/* Animated Tagline */}
-      <div className='mx-auto max-w-screen-xl px-4 pt-4 sm:pt-6'>
-        <div
-          className={clsx(
-            'flex justify-center transition-all duration-1000 ease-out sm:justify-end',
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          )}
-        >
-          <Image
-            src={ASSETS.tagline}
-            alt={t('taglineAlt')}
-            width={520}
-            height={220}
-            className='h-auto w-[200px] object-contain drop-shadow transition-transform duration-300 hover:scale-105 sm:w-[340px] lg:w-[520px]'
-            sizes='(max-width: 640px) 200px, (max-width: 1024px) 340px, 520px'
-            decoding='async'
-            draggable={false}
-          />
-        </div>
-      </div>
-
-      {/* Enhanced Wave Band */}
-      <div className='relative left-1/2 mt-4 w-screen -translate-x-1/2 sm:mt-6'>
-        {/* MOBILE/TABLET: stretch wave to content */}
-        <div
-          className={clsx(
-            'relative block overflow-hidden bg-center bg-no-repeat transition-all duration-1000 ease-out [background-size:100%_100%] lg:hidden',
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          )}
-          style={{
-            backgroundImage: `url(${ASSETS.wave})`,
-            transitionDelay: '300ms'
-          }}
-        >
-          <div className='mx-auto max-w-screen-xl px-4 py-6 sm:py-7'>
-            <h2
-              id='villa-title'
-              className='mb-2 inline-block rounded-md bg-sky-500 px-2 py-1 text-[20px] font-extrabold uppercase tracking-wide text-white drop-shadow transition-transform duration-300 hover:scale-105 sm:text-2xl'
-            >
-              {t('title')}
-            </h2>
-            <div className='space-y-3 text-[13.5px] leading-[1.55] text-white/95 drop-shadow sm:text-[14.5px]'>
-              {PARAGRAPHS.map((key, index) => (
-                <p
-                  key={key}
-                  className={clsx(
-                    'transition-all duration-700 ease-out',
-                    index === 2 && 'hidden sm:block',
-                    isVisible
-                      ? 'translate-y-0 opacity-100'
-                      : 'translate-y-4 opacity-0'
-                  )}
-                  style={{
-                    transitionDelay: `${500 + index * 100}ms`
-                  }}
-                >
-                  {t(key)}
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* DESKTOP: preserve full wave shape */}
-        <div
-          className={clsx(
-            'relative hidden transition-all duration-1000 ease-out lg:block',
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          )}
-          style={{ transitionDelay: '300ms' }}
-        >
-          <Image
-            src={ASSETS.wave}
-            alt=''
-            role='presentation'
-            width={2048}
-            height={380}
-            className='block h-auto w-full'
-            sizes='100vw'
-            decoding='async'
-            draggable={false}
-          />
-          <div className='absolute inset-0 flex items-center'>
-            <div className='mx-auto max-w-screen-xl px-4 py-8'>
-              <div className='xl:max-w-[110ch] 2xl:max-w-[120ch]'>
-                <h2
-                  id='villa-title-desktop'
-                  className='mb-3 text-3xl font-extrabold uppercase tracking-wide text-white drop-shadow transition-transform duration-300 hover:scale-105'
-                >
-                  {t('title')}
-                </h2>
-                <div className='space-y-4 text-base leading-relaxed text-white/95 drop-shadow'>
-                  {PARAGRAPHS.map((key, index) => (
-                    <p
-                      key={key}
-                      className={clsx(
-                        'transition-all duration-700 ease-out',
-                        isVisible
-                          ? 'translate-y-0 opacity-100'
-                          : 'translate-y-4 opacity-0'
-                      )}
-                      style={{
-                        transitionDelay: `${500 + index * 100}ms`
-                      }}
-                    >
-                      {t(key)}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Enhanced Bottom Row */}
-      <div className='mx-auto max-w-screen-xl px-4 py-5 sm:py-7'>
-        <div
-          className={clsx(
-            'flex flex-col items-start justify-between gap-4 transition-all duration-1000 ease-out sm:flex-row sm:items-center sm:gap-5',
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          )}
-          style={{ transitionDelay: '900ms' }}
-        >
-          {/* Logo with hover effect */}
-          <div className='group'>
+      {/* Content */}
+      <div className='relative z-10 mx-auto flex h-full max-h-[95vh] min-h-[640px] max-w-screen-xl flex-col px-4 py-4 pb-24 pt-16 sm:py-6 md:py-12 md:pb-40'>
+        {/* Desktop: Small Tagline top right */}
+        <div className='hidden md:block'>
+          <div
+            className={clsx(
+              'mb-8 flex justify-end transition-all duration-1000 ease-out',
+              isVisible
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-8 opacity-0'
+            )}
+          >
             <Image
-              src={ASSETS.logo}
-              alt={t('eventLogoAlt')}
-              width={260}
-              height={80}
-              className='h-auto w-[160px] object-contain drop-shadow transition-transform duration-300 group-hover:scale-105 sm:w-[220px] lg:w-[260px]'
-              sizes='(max-width: 640px) 160px, (max-width: 1024px) 220px, 260px'
+              src={ASSETS.tagline}
+              alt={t('taglineAlt')}
+              width={520}
+              height={220}
+              className='h-auto w-[280px] object-contain drop-shadow transition-transform duration-300 hover:scale-105 lg:w-[320px]'
+              sizes='(max-width: 1024px) 280px, 320px'
               decoding='async'
               draggable={false}
             />
           </div>
+        </div>
 
-          <div className='flex w-full items-center justify-between gap-4 sm:w-auto sm:justify-end sm:gap-5'>
-            {/* Sponsor logo with hover effect */}
+        {/* Main content area - grows to fill space */}
+        <div className='flex flex-1 flex-col overflow-y-auto'>
+          {/* Mobile: Title and Logo in same row */}
+          <div className='flex items-start justify-between gap-4 md:block'>
+            <h2
+              id='villa-title'
+              className='text-2xl font-extrabold uppercase tracking-wide text-white drop-shadow sm:text-3xl md:text-4xl'
+            >
+              <span className='md:hidden'>
+                {t('title').split(' - ')[0]} -<br />
+                {t('title').split(' - ')[1]}
+              </span>
+              <span className='hidden md:inline'>{t('title')}</span>
+            </h2>
+
+            {/* Mobile: Logo on the right of title */}
+            <div className='shrink-0 md:hidden'>
+              <Image
+                src={ASSETS.logo}
+                alt={t('eventLogoAlt')}
+                width={260}
+                height={80}
+                className='h-auto w-[120px] object-contain drop-shadow transition-transform duration-300 hover:scale-105'
+                sizes='120px'
+                decoding='async'
+                draggable={false}
+              />
+            </div>
+          </div>
+
+          {/* Content paragraphs */}
+          <div
+            className={clsx(
+              'mt-6 space-y-4 text-white/95 drop-shadow transition-all duration-1000 ease-out',
+              isVisible
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-8 opacity-0'
+            )}
+            style={{ transitionDelay: '200ms' }}
+          >
+            {PARAGRAPHS.map((key, index) => (
+              <p
+                key={key}
+                className={clsx(
+                  'text-sm leading-relaxed transition-all duration-700 ease-out sm:text-base',
+                  index === 2 && 'hidden sm:block',
+                  isVisible
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-4 opacity-0'
+                )}
+                style={{
+                  transitionDelay: `${400 + index * 100}ms`
+                }}
+              >
+                {t(key)}
+              </p>
+            ))}
+          </div>
+
+          {/* Mobile: Sponsor and CTA at bottom */}
+          <div className='mt-6 flex items-center justify-end gap-4 md:mt-8 md:hidden'>
             <div className='group'>
               <Image
                 src={ASSETS.sponsor}
                 alt={t('sponsorAlt')}
                 width={240}
                 height={80}
-                className='h-auto w-[150px] object-contain drop-shadow transition-transform duration-300 group-hover:scale-105 sm:w-[200px] lg:w-[240px]'
-                sizes='(max-width: 640px) 150px, (max-width: 1024px) 200px, 240px'
+                className='h-auto w-[120px] object-contain drop-shadow transition-transform duration-300 group-hover:scale-105'
+                sizes='120px'
                 decoding='async'
                 draggable={false}
               />
             </div>
 
-            {/* Enhanced CTA Button */}
             <EnhancedButton
               href='https://www.visitcascais.com/en'
               ariaLabel={t('cta')}
@@ -229,6 +178,67 @@ export default function AboutVilla() {
             </EnhancedButton>
           </div>
         </div>
+
+        {/* Desktop: Bottom Row - Logo left, Sponsor + CTA right */}
+        <div
+          className={clsx(
+            'mt-8 hidden items-end justify-between transition-all duration-1000 ease-out md:flex',
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          )}
+          style={{ transitionDelay: '800ms' }}
+        >
+          {/* Left: Logo */}
+          <div className='group'>
+            <Image
+              src={ASSETS.logo}
+              alt={t('eventLogoAlt')}
+              width={260}
+              height={80}
+              className='h-auto w-[220px] object-contain drop-shadow transition-transform duration-300 group-hover:scale-105 lg:w-[260px]'
+              sizes='(max-width: 1024px) 220px, 260px'
+              decoding='async'
+              draggable={false}
+            />
+          </div>
+
+          {/* Right: Sponsor + CTA */}
+          <div className='flex items-center gap-5'>
+            <div className='group'>
+              <Image
+                src={ASSETS.sponsor}
+                alt={t('sponsorAlt')}
+                width={240}
+                height={80}
+                className='h-auto w-[200px] object-contain drop-shadow transition-transform duration-300 group-hover:scale-105 lg:w-[240px]'
+                sizes='(max-width: 1024px) 200px, 240px'
+                decoding='async'
+                draggable={false}
+              />
+            </div>
+
+            <EnhancedButton
+              href='https://www.visitcascais.com/en'
+              ariaLabel={t('cta')}
+            >
+              {t('cta')}
+            </EnhancedButton>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Wave */}
+      <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
+        <Image
+          src={ASSETS.bottomWave}
+          alt=''
+          role='presentation'
+          width={2048}
+          height={WAVE_HEIGHT}
+          className='-mb-px block w-full object-cover'
+          style={{ height: `${WAVE_HEIGHT}px` }}
+          sizes='100vw'
+          priority
+        />
       </div>
     </section>
   )

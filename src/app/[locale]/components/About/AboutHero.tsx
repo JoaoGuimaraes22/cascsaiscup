@@ -33,7 +33,6 @@ export default function AboutHero() {
   const ASSETS = {
     background: '/img/about/about-bg.png',
     hero: '/img/about/about-hero.png',
-    wave: '/img/global/ondas-3.png',
     club: '/img/sponsors/volley4all.png'
   } as const
 
@@ -57,6 +56,13 @@ export default function AboutHero() {
       src: '/img/sponsors/cam-ford.png',
       alt: t('sponsors.camFordAlt'),
       w: 150,
+      h: 56
+    },
+    {
+      id: 'fpv',
+      src: '/img/sponsors/fpv.png',
+      alt: t('sponsors.fpvAlt'),
+      w: 140,
       h: 56
     }
   ]
@@ -96,7 +102,7 @@ export default function AboutHero() {
   return (
     <section
       ref={sectionRef}
-      className='relative min-h-[100vh] w-full overflow-x-hidden md:h-[calc(100vh-80px)] md:overflow-hidden lg:pb-[135px]'
+      className='relative min-h-[100vh] w-full overflow-x-hidden md:h-[calc(100vh-80px)] md:overflow-hidden'
       aria-labelledby='about-hero-title'
     >
       {/* Enhanced Background with Loading State */}
@@ -117,7 +123,7 @@ export default function AboutHero() {
         />
       </div>
 
-      {/* Right Hero Image Panel */}
+      {/* Right Hero Image Panel - Hidden on Mobile */}
       <div className='absolute inset-y-0 right-0 z-0 hidden w-[34vw] md:block'>
         <div className='absolute inset-0 bg-gradient-to-l from-transparent to-white/20' />
         <Image
@@ -175,7 +181,7 @@ export default function AboutHero() {
             ))}
           </div>
 
-          {/* Mobile Layout: 2x2 Grid + CTA */}
+          {/* Mobile Layout: New arrangement */}
           <div className='md:hidden'>
             <div
               className={clsx(
@@ -186,29 +192,54 @@ export default function AboutHero() {
               )}
               style={{ transitionDelay: '1000ms' }}
             >
-              <div className='grid grid-cols-2 gap-4'>
-                {[...SPONSOR_LOGOS, CLUB_INFO].map((item, index) => (
-                  <LogoCard
-                    key={'id' in item ? item.id : 'club'}
-                    logo={item}
-                    index={index}
-                    mobile
-                  />
-                ))}
+              {/* First row: cam-ford, fpv, cascais-camara */}
+              <div className='mb-3 grid grid-cols-3 gap-1'>
+                <LogoCard
+                  key='cam-ford-mobile'
+                  logo={SPONSOR_LOGOS.find(s => s.id === 'cam-ford')!}
+                  index={0}
+                  mobile
+                />
+                <LogoCard
+                  key='fpv-mobile'
+                  logo={SPONSOR_LOGOS.find(s => s.id === 'fpv')!}
+                  index={1}
+                  mobile
+                />
+                <LogoCard
+                  key='camara-mobile'
+                  logo={SPONSOR_LOGOS.find(s => s.id === 'camara')!}
+                  index={2}
+                  mobile
+                />
               </div>
 
-              <CtaButton
-                href={CLUB_INFO.url}
-                onClick={handleCtaClick}
-                className='mt-6 block w-full'
-                mobile
-              >
-                {t('cta')}
-              </CtaButton>
+              {/* Second row: cascais-estoril, volley4all */}
+              <div className='grid grid-cols-2 gap-2'>
+                <LogoCard
+                  key='cascais-estoril-mobile'
+                  logo={SPONSOR_LOGOS.find(s => s.id === 'cascais-estoril')!}
+                  index={3}
+                  mobile
+                />
+                <LogoCard
+                  key='volley4all-mobile'
+                  logo={CLUB_INFO}
+                  index={4}
+                  mobile
+                />
+              </div>
+
+              {/* Centered CTA Button */}
+              <div className='mt-6 flex justify-center'>
+                <CtaButton href={CLUB_INFO.url} onClick={handleCtaClick} mobile>
+                  {t('cta')}
+                </CtaButton>
+              </div>
             </div>
           </div>
 
-          {/* Desktop Layout: Row + CTA */}
+          {/* Desktop Layout: Inline sponsors + right-aligned CTA */}
           <div className='hidden md:block'>
             <div
               className={clsx(
@@ -219,62 +250,23 @@ export default function AboutHero() {
               )}
               style={{ transitionDelay: '1000ms' }}
             >
-              <div className='flex flex-wrap items-center justify-center gap-8 lg:justify-start'>
+              {/* Sponsors in one line */}
+              <div className='flex flex-wrap items-center justify-center gap-6 lg:justify-start lg:gap-8'>
                 {SPONSOR_LOGOS.map((logo, index) => (
                   <LogoCard key={logo.id} logo={logo} index={index} />
                 ))}
-                <LogoCard
-                  logo={CLUB_INFO}
-                  index={SPONSOR_LOGOS.length}
-                  featured
-                />
+                <LogoCard logo={CLUB_INFO} index={SPONSOR_LOGOS.length} />
               </div>
 
-              <CtaButton
-                href={CLUB_INFO.url}
-                onClick={handleCtaClick}
-                className='mt-6 inline-flex'
-              >
-                {t('cta')}
-              </CtaButton>
+              {/* Right-aligned CTA Button */}
+              <div className='mt-6 flex justify-end'>
+                <CtaButton href={CLUB_INFO.url} onClick={handleCtaClick}>
+                  {t('cta')}
+                </CtaButton>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Mobile Hero Banner */}
-        <div
-          className={clsx(
-            'relative mt-8 block h-56 w-full overflow-hidden rounded-lg shadow-xl md:hidden',
-            'transition-all duration-1000 ease-out',
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          )}
-          style={{ transitionDelay: '1400ms' }}
-        >
-          <Image
-            src={ASSETS.hero}
-            alt={
-              t('heroImageAlt') ||
-              'Volleyball players in action at Cascais tournament'
-            }
-            fill
-            className='object-cover object-top'
-            sizes='100vw'
-          />
-          <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent' />
-        </div>
-      </div>
-
-      {/* Bottom Wave (Desktop Only) */}
-      <div className='pointer-events-none absolute bottom-0 left-1/2 z-0 hidden w-screen -translate-x-1/2 lg:block'>
-        <Image
-          src={ASSETS.wave}
-          alt=''
-          role='presentation'
-          width={2048}
-          height={135}
-          className='-mb-px block h-[135px] w-full object-cover'
-          sizes='100vw'
-        />
       </div>
     </section>
   )
@@ -286,22 +278,16 @@ interface LogoCardProps {
   logo: SponsorLogo | ClubInfo
   index: number
   mobile?: boolean
-  featured?: boolean
 }
 
-function LogoCard({
-  logo,
-  index,
-  mobile = false,
-  featured = false
-}: LogoCardProps) {
+function LogoCard({ logo, index, mobile = false }: LogoCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
     <div
       className={clsx(
         'group flex items-center justify-center transition-all duration-300',
-        mobile ? 'min-h-[80px]' : 'min-h-[100px]'
+        mobile ? 'min-h-[60px]' : 'min-h-[80px]'
       )}
       style={{
         animationDelay: `${index * 100}ms`
@@ -319,15 +305,15 @@ function LogoCard({
         height={logo.h}
         className={clsx(
           'w-auto object-contain transition-all duration-300 group-hover:scale-105',
-          mobile ? 'h-12' : 'h-14 lg:h-16',
+          mobile ? 'h-10 sm:h-12' : 'h-12 lg:h-14',
           imageLoaded ? 'opacity-100' : 'opacity-0'
         )}
         loading='lazy'
         decoding='async'
         sizes={
           mobile
-            ? '(max-width: 640px) 45vw, 160px'
-            : '(max-width: 1024px) 160px, 200px'
+            ? '(max-width: 640px) 25vw, 120px'
+            : '(max-width: 1024px) 140px, 160px'
         }
         onLoad={() => setImageLoaded(true)}
       />
@@ -338,7 +324,6 @@ function LogoCard({
 interface CtaButtonProps {
   href: string
   onClick: () => void
-  className?: string
   children: React.ReactNode
   mobile?: boolean
 }
@@ -346,7 +331,6 @@ interface CtaButtonProps {
 function CtaButton({
   href,
   onClick,
-  className,
   children,
   mobile = false
 }: CtaButtonProps) {
@@ -360,10 +344,8 @@ function CtaButton({
         'group relative overflow-hidden rounded-lg font-bold text-white shadow-lg ring-1 ring-black/10 transition-all duration-300',
         'bg-gradient-to-r from-sky-600 to-sky-700',
         'hover:scale-105 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300',
-        mobile
-          ? 'px-6 py-3 text-center text-base'
-          : 'items-center gap-2 px-6 py-3 text-sm lg:text-base',
-        className
+        'inline-flex items-center gap-2',
+        mobile ? 'px-6 py-3 text-sm' : 'px-6 py-3 text-sm lg:text-base'
       )}
     >
       <span className='relative z-10 flex items-center justify-center gap-2'>
