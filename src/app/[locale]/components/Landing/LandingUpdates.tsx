@@ -91,37 +91,6 @@ const newsItems: NewsItem[] = [
     excerpt: 'MVP awards given to the athletes who stood out during the event.',
     image: '/img/news/news4.jpg',
     link: '/news/mvp-awards'
-  },
-  {
-    title: 'Training Camp Schedule 2025',
-    date: 'January 25, 2025',
-    excerpt:
-      'Complete schedule for the upcoming summer training camps across Europe.',
-    image: '/img/news/news5.jpg',
-    link: '/news/training-camps'
-  },
-  {
-    title: 'New Sponsorship Partnership',
-    date: 'January 15, 2025',
-    excerpt:
-      'We are excited to announce our new partnership with major sports brand.',
-    image: '/img/news/news6.jpg',
-    link: '/news/sponsorship-deal'
-  },
-  {
-    title: 'Championship Finals Results',
-    date: 'December 20, 2024',
-    excerpt: 'Recap of the thrilling championship finals with photo gallery.',
-    image: '/img/news/news7.jpg',
-    link: '/news/championship-finals'
-  },
-  {
-    title: 'Youth Development Program',
-    date: 'December 10, 2024',
-    excerpt:
-      'Launch of our new youth development program for aspiring players.',
-    image: '/img/news/news8.jpg',
-    link: '/news/youth-program'
   }
 ]
 

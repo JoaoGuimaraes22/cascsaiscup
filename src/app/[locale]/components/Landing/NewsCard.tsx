@@ -31,7 +31,7 @@ export default function NewsCard({
           width={600}
           height={400}
           className='h-40 w-full object-cover transition duration-300 group-hover:scale-[1.02] sm:h-44'
-          loading='lazy'
+          loading='eager'
           quality={75}
         />
       </div>
