@@ -424,33 +424,52 @@
   },
   "RegistrationPage": {
     "RegistrationHero": {
-      "title": "Inscrições",
-      "intro": "A inscrição é obrigatória através do site do evento...",
-      "earlyBird": {
-        "label": "EARLY BIRD",
-        "text": "1 de janeiro a 31 de março — 165 euros/atleta..."
+      "title": "INSCRIÇÕES",
+      "schoolAccommodation": {
+        "title": "ALOJAMENTO EM ESCOLAS",
+        "description": "A inscrição tem que ser feita obrigatoriamente através do site do evento seguindo as instruções que serão fornecidas no mesmo. De uma forma geral, a inscrição no CASCAIS VOLLEY CUP 2026 tem dois momentos:"
       },
-      "regularBird": {
-        "label": "REGULAR BIRD",
-        "text": "1 de abril a 31 de maio — 185 euros/atleta..."
+      "pricing": {
+        "earlyBird": {
+          "label": "EARLY BIRD",
+          "period": "I De 1 de janeiro a 31 de março",
+          "price": "165 euros/atleta",
+          "details": "inclui inscrição no torneio, estadia e alimentação de 8 a 12 de julho I Alojamento Escolar de ocupação múltipla (mín 10 pax – max 20 pax)."
+        },
+        "regularBird": {
+          "label": "REGULAR BIRD",
+          "period": "I De 1 de abril a 31 de maio",
+          "price": "185 euros/atleta",
+          "details": "inclui inscrição, estadia e alimentação de 8 a 12 de julho I Alojamento Escolar de ocupação múltipla (mín 10 pax – max 20 pax)."
+        }
       },
-      "teamMinimum": "Cada equipa deve ter um mínimo de 10 atletas inscritas.",
-      "coachesOffer": "A organização oferece inscrição gratuita para 2 treinadores por equipa.",
-      "hotel": {
-        "title": "Alojamento em Hotéis",
-        "text": "Equipas que pretendam ficar em unidades hoteleiras da região e/ou necessitem de transporte de e para o Aeroporto de Lisboa devem indicar essa necessidade/preferência durante o processo de inscrição online e contactar",
-        "agents": "Agentes Oficiais",
-        "more": "do evento antecipadamente para garantir os melhores preços disponíveis. Todas as informações e contactos estão disponíveis em:"
+      "teamRequirements": "Cada equipa deve ter um mínimo de 10 atletas inscritas, e a organização oferece a inscrição gratuita para 2 treinadores por equipa.",
+      "paymentInfo": {
+        "instruction": "Os pagamentos devem ser efetuados por transferência bancária para:",
+        "account": {
+          "name": "CASCAIS VOLLEY4ALL I Banco BPI",
+          "iban": "PT50 0010 0000 5072 8780 0018 3",
+          "bic": "BBPIPTPL",
+          "nib": "0010.0000.50728.780001.83"
+        }
       },
-      "ctaScroll": "Ir para o formulário",
-      "playerAlt": "Atleta a rematar durante o jogo",
+      "registrationNotice": "As equipas só estarão formalmente inscritas após completado todo o processo de inscrição online. Informamos que, após a inscrição e pagamento, em caso de desistência, a organização do evento reserva o direito de não reembolsar as quantias já pagas.",
+      "hotelAccommodation": {
+        "title": "ALOJAMENTO EM HOTEL",
+        "description": "Equipas que desejem e/ou necessitem ficar em unidades hoteleiras da região e/ou necessitem de transporte de e para o Aeroporto de Lisboa devem comunicar com a agência de viagens oficial, a O-SPORTS. Para terem acesso aos melhores preços e a uma estadia sem percalços, todos os interessados neste serviço devem comunicar com a respetiva Agência de Viagens o mais cedo possível, preferencialmente, até final de novembro."
+      },
+      "buttons": {
+        "brochure": "BROCHURA (PDF)",
+        "registerTeams": "INSCREVER EQUIPAS",
+        "osports": "O-SPORTS"
+      },
+      "playerAlt": "Beach volleyball player",
       "stats": {
-        "teams": "50 equipas",
-        "athletes": "600 atletas",
-        "countries": "3 países",
-        "games": "150 jogos"
-      },
-      "taglineAlt": "sente a AÇÃO, desfruta o VERÃO"
+        "teams": "50 Equipas",
+        "athletes": "600 Atletas",
+        "countries": "3 Países",
+        "games": "150 Jogos"
+      }
     },
 
     "Form": {

@@ -76,7 +76,7 @@ export default function LandingWelcome() {
           }}
         />
         {/* Gradient overlay for better text readability */}
-        <div className='absolute inset-0 bg-gradient-to-t from-black/25 via-black/10 to-black/5' />
+        <div className='absolute inset-0 bg-gradient-to-t from-black/25 via-black/15 to-black/10' />
       </div>
 
       {/* Top overlay content */}

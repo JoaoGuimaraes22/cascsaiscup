@@ -7,6 +7,7 @@ import { useMemo, useEffect, useRef, useState } from 'react'
 
 // Constants for better maintainability
 const ASSETS = {
+  background: '/img/competition/hero-bg.png',
   wave: '/img/global/ondas-3.png'
 } as const
 
@@ -53,17 +54,40 @@ export default function CompetitionFacts() {
       {
         id: 'ages',
         heading: t('ages.heading'),
-        lines: [t('ages.l1'), t('ages.l2'), t('ages.l3')].filter(Boolean)
+        lines: [
+          <span key='u15-1'>
+            <strong className='font-extrabold text-white'>Under 15</strong>
+          </span>,
+          '(<2011)',
+          <span key='u17'>
+            <strong className='font-extrabold text-white'>Under 17</strong>
+          </span>,
+          '(2010-2009)',
+          <span key='open'>
+            <strong className='font-extrabold text-white'>Open</strong>
+          </span>,
+          '(>2008)'
+        ]
       },
       {
         id: 'who',
         heading: t('who.heading'),
         lines: [
-          t('who.l1'),
-          t('who.l2'),
-          t('who.l3'),
-          t('who.l4'),
-          t('who.l5')
+          <strong key='who-1' className='font-extrabold text-white'>
+            {t('who.l1')}
+          </strong>,
+          <strong key='who-2' className='font-extrabold text-white'>
+            {t('who.l2')}
+          </strong>,
+          <strong key='who-3' className='font-extrabold text-white'>
+            {t('who.l3')}
+          </strong>,
+          <strong key='who-4' className='font-extrabold text-white'>
+            {t('who.l4')}
+          </strong>,
+          <strong key='who-5' className='font-extrabold text-white'>
+            {t('who.l5')}
+          </strong>
         ].filter(Boolean)
       },
       {
@@ -72,7 +96,10 @@ export default function CompetitionFacts() {
         lines: [
           t('wherewhen.l1'),
           t('wherewhen.l2') && (
-            <strong key='wherewhen-emphasis' className='text-white'>
+            <strong
+              key='wherewhen-emphasis'
+              className='font-extrabold text-white'
+            >
               {t('wherewhen.l2')}
             </strong>
           ),
@@ -83,19 +110,15 @@ export default function CompetitionFacts() {
         id: 'games',
         heading: t('games.heading'),
         lines: [
-          t('games.maxPrefix') && t('games.maxSuffix') && (
-            <span key='games-max'>
-              <strong className='text-white'>{t('games.maxPrefix')}</strong>{' '}
-              {t('games.maxSuffix')}
-            </span>
-          ),
-          t('games.minPrefix') && t('games.minSuffix') && (
-            <span key='games-min'>
-              <strong className='text-white'>{t('games.minPrefix')}</strong>{' '}
-              {t('games.minSuffix')}
-            </span>
-          )
-        ].filter(Boolean)
+          <span key='games-max'>
+            <strong className='font-extrabold text-white'>Maximum</strong>
+          </span>,
+          '8 matches',
+          <span key='games-min'>
+            <strong className='font-extrabold text-white'>Minimum</strong>
+          </span>,
+          '6 matches'
+        ]
       }
     ],
     [t]
@@ -125,8 +148,20 @@ export default function CompetitionFacts() {
         {t('sectionTitle') || 'Competition Facts and Information'}
       </h2>
 
-      {/* Flowing Blue-Cyan-Green Gradient Background */}
-      <div className='absolute inset-0 -z-10 bg-gradient-to-r from-blue-600 via-cyan-400 to-emerald-300 sm:bg-gradient-to-b lg:bg-gradient-to-r' />
+      {/* Background Image */}
+      <div className='absolute inset-0 -z-10'>
+        <Image
+          src={ASSETS.background}
+          alt=''
+          fill
+          sizes='100vw'
+          className='object-cover'
+          quality={80}
+          loading='lazy'
+          draggable={false}
+          aria-hidden='true'
+        />
+      </div>
 
       {/* Main Content */}
       <div className='relative z-10 mx-auto max-w-screen-xl px-4 py-16 sm:py-20 lg:py-24'>
@@ -178,72 +213,68 @@ function FactCard({
   return (
     <article
       className={clsx(
-        'flex flex-col items-center gap-6 text-center transition-all duration-700 ease-out',
+        'flex flex-col items-center gap-4 text-center transition-all duration-700 ease-out',
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
       )}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <header>
-        <h3 className='text-sm font-extrabold uppercase tracking-wide text-white sm:text-base lg:text-lg'>
-          {item.heading}
-        </h3>
-      </header>
+      {/* Title - Outside and above the pin */}
+      <h3 className='text-lg font-extrabold uppercase tracking-wide text-sky-600 sm:text-xl lg:text-2xl'>
+        {item.heading}
+      </h3>
 
-      <CircleMarker index={index} isVisible={isVisible}>
-        <div
-          className='space-y-1 text-[13px] font-bold uppercase leading-snug text-white sm:text-sm'
-          role='list'
-          aria-label={`Details for ${item.heading}`}
-        >
-          {item.lines.map((line, lineIndex) => (
-            <div
-              key={lineIndex}
-              role='listitem'
-              className={clsx(
-                'transition-all duration-300',
-                lineIndex === 0 && 'text-[14px] sm:text-base'
-              )}
-            >
-              {line}
-            </div>
-          ))}
+      {/* Pin-shaped container with content */}
+      <PinContainer index={index} isVisible={isVisible} delay={delay}>
+        <div className='space-y-3'>
+          {/* Content lines only */}
+          <div className='space-y-2'>
+            {item.lines.map((line, lineIndex) => (
+              <p
+                key={lineIndex}
+                className='text-sm leading-relaxed text-white/90 sm:text-base'
+              >
+                {line}
+              </p>
+            ))}
+          </div>
         </div>
-      </CircleMarker>
+      </PinContainer>
     </article>
   )
 }
 
-// Enhanced pin marker with improved design and animations
-function CircleMarker({
+// Pin-shaped container component
+function PinContainer({
   children,
   index,
-  isVisible
+  isVisible,
+  delay
 }: {
   children: React.ReactNode
   index: number
   isVisible: boolean
+  delay: number
 }) {
-  const delay = index * 150 + 300
-
   return (
     <div
       className={clsx(
-        'group relative mx-auto transition-all duration-700 ease-out',
+        'group relative transition-all duration-700 ease-out',
         isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
       )}
       style={{
         transitionDelay: `${delay}ms`,
-        width: '220px',
-        height: '280px'
+        width: '260px',
+        height: '320px'
       }}
     >
       {/* Pin Shape SVG */}
       <svg
         viewBox='0 0 120 160'
-        className='h-full w-full drop-shadow-lg transition-transform duration-300 group-hover:scale-105'
+        className='h-full w-full drop-shadow-2xl transition-transform duration-300 group-hover:scale-105'
         aria-hidden='true'
       >
         <defs>
+          {/* Blue gradient for the pin */}
           <linearGradient
             id={`pin-gradient-${index}`}
             x1='0%'
@@ -251,29 +282,64 @@ function CircleMarker({
             x2='100%'
             y2='100%'
           >
-            <stop offset='0%' stopColor='rgba(255, 255, 255, 0.3)' />
-            <stop offset='50%' stopColor='rgba(255, 255, 255, 0.2)' />
-            <stop offset='100%' stopColor='rgba(255, 255, 255, 0.1)' />
+            <stop offset='0%' stopColor='#0ea5e9' />
+            <stop offset='50%' stopColor='#0284c7' />
+            <stop offset='100%' stopColor='#0369a1' />
+          </linearGradient>
+
+          {/* Inner lighter blue gradient */}
+          <linearGradient
+            id={`pin-inner-gradient-${index}`}
+            x1='0%'
+            y1='0%'
+            x2='100%'
+            y2='100%'
+          >
+            <stop offset='0%' stopColor='#38bdf8' />
+            <stop offset='50%' stopColor='#0ea5e9' />
+            <stop offset='100%' stopColor='#0284c7' />
+          </linearGradient>
+
+          {/* White border gradient */}
+          <linearGradient
+            id={`pin-border-gradient-${index}`}
+            x1='0%'
+            y1='0%'
+            x2='100%'
+            y2='100%'
+          >
+            <stop offset='0%' stopColor='#ffffff' />
+            <stop offset='50%' stopColor='#f8fafc' />
+            <stop offset='100%' stopColor='#e2e8f0' />
           </linearGradient>
         </defs>
 
-        {/* Pin Shape Path */}
+        {/* Main blue pin shape - full pin */}
         <path
           d='M60 0C26.863 0 0 26.863 0 60c0 45 60 100 60 100s60-55 60-100C120 26.863 93.137 0 60 0z'
           fill={`url(#pin-gradient-${index})`}
-          stroke='rgba(255, 255, 255, 0.4)'
-          strokeWidth='2'
+          stroke='none'
         />
 
         {/* Inner highlight for depth */}
         <path
           d='M60 8C32.386 8 10 30.386 10 58c0 35.5 50 80 50 80s50-44.5 50-80C110 30.386 87.614 8 60 8z'
-          fill='rgba(255, 255, 255, 0.15)'
+          fill={`url(#pin-inner-gradient-${index})`}
+        />
+
+        {/* Bottom accent for more depth */}
+        <ellipse
+          cx='60'
+          cy='54'
+          rx='25'
+          ry='8'
+          fill='rgba(59, 130, 246, 0.3)'
+          transform='rotate(-10 60 54)'
         />
       </svg>
 
       {/* Content overlay */}
-      <div className='absolute inset-0 flex items-center justify-center px-6 pb-12'>
+      <div className='absolute inset-0 flex items-center justify-center px-6 pb-16'>
         <div className='transform text-center transition-transform duration-300 group-hover:scale-105'>
           {children}
         </div>

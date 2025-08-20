@@ -252,12 +252,15 @@
       "taglineAlt": "feel the ACTION, enjoy the SUMMER"
     },
     "Facts": {
-      "sectionTitle": "Facts Section",
+      "sectionTitle": "Competition Facts and Information",
       "ages": {
-        "heading": "AGE CATEGORIES?",
-        "l1": "UNDER 15 (≤ 2011)",
-        "l2": "UNDER 17 (2010–2009)",
-        "l3": "OPEN (≥ 2008)"
+        "heading": "AGE GROUPS",
+        "under15": "Under 15",
+        "under15Years": "(≤2011)",
+        "under17": "Under 17",
+        "under17Years": "(2010-2009)",
+        "open": "Open",
+        "openYears": "(≥2008)"
       },
       "who": {
         "heading": "WHO CAN PARTICIPATE?",
@@ -271,20 +274,20 @@
         "heading": "WHERE AND WHEN?",
         "l1": "In the municipality of",
         "l2": "CASCAIS",
-        "l3": "from July 8 to 12"
+        "l3": "from July 8th to 12th"
       },
       "games": {
-        "heading": "HOW MANY MATCHES?",
-        "maxPrefix": "MAXIMUM",
-        "maxSuffix": "8 Matches",
-        "minPrefix": "MINIMUM",
-        "minSuffix": "6 Matches"
+        "heading": "HOW MANY GAMES?",
+        "maximum": "Maximum",
+        "maxMatches": "8 games",
+        "minimum": "Minimum",
+        "minMatches": "6 games"
       },
       "stats": {
         "teams": "50 Teams",
         "athletes": "600 Athletes",
         "countries": "3 Countries",
-        "games": "150 Matches"
+        "games": "150 Games"
       }
     },
     "Info": {
@@ -466,8 +469,8 @@
     },
 
     "Form": {
-      "FormTitle": "Tournament Registration",
-      "FormDescription": "Fill out the form below to register for the Cascais Volley Cup 2026",
+      "FormTitle": "Contact Us",
+      "FormDescription": "Fill out the form below to get in touch with us",
       "Name": "Full Name",
       "NamePlaceholder": "Enter your full name",
       "Mobile": "Phone Number",
@@ -477,11 +480,11 @@
       "CityPlaceholder": "Your city",
       "Country": "Country",
       "CountryPlaceholder": "Your country",
-      "Questions": "Additional Questions or Comments",
-      "QuestionsPlaceholder": "Any questions, dietary requirements, or special requests...",
-      "Submit": "Submit Registration",
+      "Questions": "Questions or Comments",
+      "QuestionsPlaceholder": "Any questions, more information, ...",
+      "Submit": "Send Message",
       "Submitting": "Submitting...",
-      "SuccessMessage": "Registration successful! We will contact you soon.",
+      "SuccessMessage": "Message Sent! We will contact you soon.",
       "ErrorMessage": "Something went wrong. Please try again.",
       "ValidationErrors": {
         "nameRequired": "Name is required",

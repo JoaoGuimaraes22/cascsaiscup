@@ -67,11 +67,11 @@ const Footer: FC<Props> = ({ locale }) => {
         h: 80
       },
       {
-        src: '/img/sponsors/cam-ford.png',
-        alt: 'Ford CAM',
+        src: '/img/global/tagline.png',
+        alt: 'Feel the summer',
         w: 220,
         h: 80,
-        url: 'https://camford.pt'
+        url: '/'
       }
     ],
     []
