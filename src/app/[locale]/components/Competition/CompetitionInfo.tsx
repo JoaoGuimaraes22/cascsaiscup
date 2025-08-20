@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
+import { FiDownload } from 'react-icons/fi'
 import clsx from 'clsx'
 
 // Types
@@ -17,8 +18,12 @@ const ASSETS = {
   background: '/img/about/about-bg.png',
   waveTop: '/img/global/ondas-5.png',
   waveBottom: '/img/global/ondas-3.png',
-  fpvSponsor: '/img/sponsors/fpv.png',
-  cascaisSponsor: '/img/sponsors/cascais-camara.png'
+  sponsors: {
+    fpv: '/img/sponsors/fpv.png',
+    cascais: '/img/sponsors/cascais-camara.png',
+    camFord: '/img/sponsors/cam-ford.png',
+    cascaisEstoril: '/img/sponsors/cascais-estoril.png'
+  }
 } as const
 
 export default function CompetitionInfo() {
@@ -32,9 +37,37 @@ export default function CompetitionInfo() {
   } as const
 
   const SPONSOR_DIMENSIONS = {
-    width: 240,
-    height: 80
+    width: 160,
+    height: 64
   } as const
+
+  // Sponsor data for the 2x2 grid
+  const sponsors = [
+    {
+      src: ASSETS.sponsors.fpv,
+      alt: 'Federação Portuguesa de Voleibol',
+      width: 160,
+      height: 64
+    },
+    {
+      src: ASSETS.sponsors.cascais,
+      alt: 'Câmara Municipal de Cascais',
+      width: 160,
+      height: 64
+    },
+    {
+      src: ASSETS.sponsors.camFord,
+      alt: 'C.A.M. Ford',
+      width: 160,
+      height: 64
+    },
+    {
+      src: ASSETS.sponsors.cascaisEstoril,
+      alt: 'Cascais Estoril',
+      width: 160,
+      height: 64
+    }
+  ] as const
 
   // Intersection observer for animations
   useEffect(() => {
@@ -103,7 +136,7 @@ export default function CompetitionInfo() {
       <BackgroundImage />
 
       {/* Main Content */}
-      <div className='relative z-10 mx-auto max-w-screen-xl px-4 pb-0 pt-8 sm:pt-10 lg:pt-12'>
+      <div className='relative z-10 mx-auto max-w-screen-xl px-4 pb-12 pt-8 sm:pb-16 sm:pt-10 lg:pb-20 lg:pt-12'>
         <div className='grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12'>
           {/* Content Section */}
           <ContentSection
@@ -115,7 +148,7 @@ export default function CompetitionInfo() {
           />
 
           {/* Sponsors Section - Right Side */}
-          <SponsorsSection isVisible={isVisible} />
+          <SponsorsSection sponsors={sponsors} isVisible={isVisible} />
         </div>
       </div>
 
@@ -219,6 +252,16 @@ function ContentSection({
           ))}
         </div>
       )}
+
+      {/* Regulations Download Button */}
+      <div
+        className={clsx(
+          'delay-800 transition-all duration-1000 ease-out',
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        )}
+      >
+        <RegulationsButton />
+      </div>
     </div>
   )
 }
@@ -260,50 +303,126 @@ function RuleItem({ children, index, isVisible }: RuleItemProps) {
   )
 }
 
-// Sponsors section component - replaces player image
-function SponsorsSection({ isVisible }: { isVisible: boolean }) {
+// Sponsors section component with 2x2 grid
+function SponsorsSection({
+  sponsors,
+  isVisible
+}: {
+  sponsors: readonly {
+    src: string
+    alt: string
+    width: number
+    height: number
+  }[]
+  isVisible: boolean
+}) {
   return (
-    <div className='lg:col-span-5'>
+    <div className='flex items-center lg:col-span-5'>
       <div
         className={clsx(
-          'sponsors-container relative z-20 mx-auto flex h-auto w-full max-w-[520px] flex-col items-center justify-center gap-8 sm:gap-10 lg:gap-12',
+          'sponsors-container relative z-20 mx-auto flex h-auto w-full max-w-[400px] flex-col items-center justify-center',
           'transition-all delay-300 duration-1000 ease-out',
           isVisible
             ? 'translate-y-0 scale-100 opacity-100'
             : 'translate-y-12 scale-95 opacity-0'
         )}
       >
-        {/* FPV Sponsor */}
-        <div className='w-full max-w-[300px]'>
-          <Image
-            src={ASSETS.fpvSponsor}
-            alt='Federação Portuguesa de Voleibol'
-            width={300}
-            height={120}
-            className='h-auto w-full object-contain drop-shadow-lg transition-transform duration-300 hover:scale-105'
-            sizes='(max-width: 1024px) 300px, 300px'
-            quality={90}
-            loading='lazy'
-            draggable={false}
-          />
+        {/* Desktop: 2x2 Grid */}
+        <div className='hidden sm:grid sm:grid-cols-2 sm:gap-10 lg:gap-16'>
+          {sponsors.map((sponsor, index) => (
+            <div
+              key={sponsor.alt}
+              className={clsx(
+                'flex items-center justify-center transition-all duration-700 ease-out',
+                isVisible
+                  ? 'translate-y-0 opacity-100'
+                  : 'translate-y-8 opacity-0'
+              )}
+              style={{
+                transitionDelay: `${500 + index * 150}ms`
+              }}
+            >
+              <Image
+                src={sponsor.src}
+                alt={sponsor.alt}
+                width={sponsor.width}
+                height={sponsor.height}
+                className='h-auto w-full max-w-[160px] object-contain drop-shadow-lg transition-transform duration-300 hover:scale-105'
+                sizes='(max-width: 1024px) 160px, 160px'
+                quality={90}
+                loading='lazy'
+                draggable={false}
+              />
+            </div>
+          ))}
         </div>
 
-        {/* Cascais Sponsor */}
-        <div className='w-full max-w-[280px]'>
-          <Image
-            src={ASSETS.cascaisSponsor}
-            alt='Câmara Municipal de Cascais'
-            width={280}
-            height={90}
-            className='h-auto w-full object-contain drop-shadow-lg transition-transform duration-300 hover:scale-105'
-            sizes='(max-width: 1024px) 280px, 280px'
-            quality={90}
-            loading='lazy'
-            draggable={false}
-          />
+        {/* Mobile: 2x2 Grid with smaller spacing */}
+        <div className='grid grid-cols-2 gap-10 sm:hidden'>
+          {sponsors.map((sponsor, index) => (
+            <div
+              key={sponsor.alt}
+              className={clsx(
+                'flex items-center justify-center transition-all duration-700 ease-out',
+                isVisible
+                  ? 'translate-y-0 opacity-100'
+                  : 'translate-y-8 opacity-0'
+              )}
+              style={{
+                transitionDelay: `${500 + index * 150}ms`
+              }}
+            >
+              <Image
+                src={sponsor.src}
+                alt={sponsor.alt}
+                width={sponsor.width}
+                height={sponsor.height}
+                className='h-auto w-full max-w-[120px] object-contain drop-shadow-lg transition-transform duration-300 hover:scale-105'
+                sizes='120px'
+                quality={90}
+                loading='lazy'
+                draggable={false}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>
+  )
+}
+
+// Regulations download button component
+function RegulationsButton() {
+  const handleDownload = () => {
+    // Create a link element and trigger download
+    const link = document.createElement('a')
+    link.href = '/documents/program-2026.pdf'
+    link.download = 'program-2026.pdf'
+    link.target = '_blank'
+    link.rel = 'noopener noreferrer'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  return (
+    <button
+      onClick={handleDownload}
+      className={clsx(
+        'group inline-flex items-center gap-3 rounded-lg px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300',
+        'bg-gradient-to-r from-sky-600 to-sky-700',
+        'hover:scale-105 hover:from-sky-700 hover:to-sky-800 hover:shadow-xl',
+        'focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2',
+        'active:scale-95'
+      )}
+      aria-label='Download tournament regulations PDF'
+    >
+      <FiDownload
+        className='h-4 w-4 transition-transform duration-300 group-hover:scale-110'
+        aria-hidden='true'
+      />
+      <span className='text-sm sm:text-base'>Regulations</span>
+    </button>
   )
 }
 

@@ -141,19 +141,6 @@ function HeroImage({ src, alt, isVisible }: HeroImageProps) {
         {/* Subtle glow effect on hover */}
         <div className='absolute inset-0 bg-gradient-to-t from-sky-100/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
       </div>
-
-      {/* Floating achievement badge */}
-      <div
-        className={clsx(
-          'absolute right-4 top-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 p-3 shadow-xl ring-4 ring-white/20 transition-all duration-700 ease-out lg:right-8',
-          'delay-800',
-          isVisible
-            ? 'translate-y-0 rotate-0 opacity-100'
-            : 'translate-y-4 -rotate-12 opacity-0'
-        )}
-      >
-        <FiAward className='h-5 w-5 text-white drop-shadow-sm' />
-      </div>
     </div>
   )
 }
@@ -354,19 +341,6 @@ export default function HallOfFameHero() {
               <p className='max-w-3xl text-sm leading-relaxed text-slate-800/90 sm:text-base lg:text-lg'>
                 {t('intro')}
               </p>
-
-              {/* Enhanced stats or highlights could go here */}
-              <div className='mt-4 flex items-center gap-4 text-xs text-sky-600 sm:text-sm'>
-                <div className='flex items-center gap-1'>
-                  <FiAward className='h-3 w-3' />
-                  <span className='font-semibold'>Hall of Fame</span>
-                </div>
-                <div className='h-1 w-1 rounded-full bg-sky-300' />
-                <div className='flex items-center gap-1'>
-                  <FiUsers className='h-3 w-3' />
-                  <span className='font-semibold'>MVP Champions</span>
-                </div>
-              </div>
 
               <CTAButton onClick={onSeeMore} isVisible={isVisible}>
                 {t('see_more')}
