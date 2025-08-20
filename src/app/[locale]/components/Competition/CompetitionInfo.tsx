@@ -167,10 +167,10 @@ function BackgroundImage() {
         alt=''
         fill
         className='object-cover'
-        quality={80}
+        quality={75}
         placeholder='blur'
         blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkbHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
-        loading='lazy'
+        loading='eager'
         draggable={false}
         aria-hidden='true'
       />
@@ -349,7 +349,7 @@ function SponsorsSection({
                 height={sponsor.height}
                 className='h-auto w-full max-w-[160px] object-contain drop-shadow-lg transition-transform duration-300 hover:scale-105'
                 sizes='(max-width: 1024px) 160px, 160px'
-                quality={90}
+                quality={80}
                 loading='lazy'
                 draggable={false}
               />
@@ -379,7 +379,7 @@ function SponsorsSection({
                 height={sponsor.height}
                 className='h-auto w-full max-w-[120px] object-contain drop-shadow-lg transition-transform duration-300 hover:scale-105'
                 sizes='120px'
-                quality={90}
+                quality={80}
                 loading='lazy'
                 draggable={false}
               />
@@ -437,7 +437,7 @@ function WaveSection({ isVisible }: { isVisible: boolean }) {
         width={2048}
         height={160}
         className='block h-[110px] w-full object-cover sm:h-[130px] lg:h-auto lg:object-contain'
-        quality={85}
+        quality={75}
         loading='lazy'
         draggable={false}
         aria-hidden='true'

@@ -157,7 +157,7 @@ export default function CompetitionFacts() {
           sizes='100vw'
           className='object-cover'
           quality={80}
-          loading='lazy'
+          loading='eager'
           draggable={false}
           aria-hidden='true'
         />
