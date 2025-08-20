@@ -69,7 +69,7 @@ export default function CompetitionHero() {
           priority
           className='object-cover'
           sizes='100vw'
-          quality={85}
+          quality={80}
           placeholder='blur'
           blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkbHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
           draggable={false}
@@ -85,6 +85,7 @@ export default function CompetitionHero() {
           fill
           className='object-contain object-center opacity-30 grayscale'
           sizes='100vw'
+          loading='lazy'
         />
       </div>
 
@@ -104,7 +105,7 @@ export default function CompetitionHero() {
                 height={PHONE_DIMENSIONS.xl.height}
                 className='h-auto w-auto max-w-none object-contain object-left drop-shadow-2xl transition-transform duration-300 hover:scale-105'
                 sizes='(max-width: 640px) 200px, (max-width: 768px) 230px, (max-width: 1024px) 260px, (max-width: 1280px) 280px, 300px'
-                priority
+                loading='lazy'
                 quality={90}
                 draggable={false}
               />
@@ -265,7 +266,7 @@ function LogoTaglineSection({
           height={150}
           className='block h-[180px] w-full object-cover sm:h-[150px] lg:h-auto lg:object-contain'
           sizes='100vw'
-          quality={85}
+          quality={75}
           loading='lazy'
           draggable={false}
           aria-hidden='true'

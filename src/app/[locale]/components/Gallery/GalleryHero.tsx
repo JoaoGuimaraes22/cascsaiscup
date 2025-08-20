@@ -383,7 +383,7 @@ export default function GalleryHeroNew() {
           sizes='100vw'
           priority
           draggable={false}
-          quality={90}
+          quality={75}
         />
         {/* Subtle overlay for better text readability */}
         <div className='absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/5' />

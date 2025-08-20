@@ -123,7 +123,7 @@ function BrandContent({
           height={LOGO_DIMENSIONS.height}
           className='h-auto w-[180px] transition-transform duration-300 hover:scale-105 sm:w-[260px] lg:w-[320px] xl:w-[340px]'
           sizes='(max-width: 640px) 180px, (max-width: 1024px) 260px, (max-width: 1280px) 320px, 340px'
-          quality={90}
+          quality={75}
           loading='eager'
           draggable={false}
           priority
@@ -139,7 +139,7 @@ function BrandContent({
           height={TAGLINE_DIMENSIONS.height}
           className='h-auto w-[240px] transition-transform duration-300 hover:scale-105 sm:w-[280px] md:w-[300px] lg:w-[330px] xl:w-[360px]'
           sizes='(max-width: 1024px) 280px, (max-width: 1280px) 330px, 360px'
-          quality={90}
+          quality={75}
           loading='eager'
           draggable={false}
         />
