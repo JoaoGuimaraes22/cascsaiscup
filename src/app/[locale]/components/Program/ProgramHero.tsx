@@ -2,9 +2,8 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { Link } from '@/src/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { FiDownload, FiExternalLink } from 'react-icons/fi'
+import { FiDownload } from 'react-icons/fi'
 import clsx from 'clsx'
 
 export default function ProgramHero() {
@@ -18,21 +17,13 @@ export default function ProgramHero() {
     background: '/img/program/program-bg.png',
     tagline: '/img/global/tagline.png',
     players: '/img/program/players.png',
-    wave: '/img/global/ondas-3.png',
-    logo: '/img/global/cascais-volley-cup-1.png'
+    wave: '/img/global/ondas-3.png'
   } as const
 
   const PROGRAM_PDF = '/docs/program-2026.pdf'
   const WAVE_HEIGHT = 135
 
-  const STATS = [
-    t('stats.teams'),
-    t('stats.athletes'),
-    t('stats.countries'),
-    t('stats.games')
-  ] as const
-
-  // Days configuration
+  // Days configuration with new design
   const DAYS = [
     {
       key: 'd1',
@@ -108,7 +99,7 @@ export default function ProgramHero() {
     <section
       ref={sectionRef}
       className='relative w-full overflow-hidden'
-      style={{ paddingBottom: `${WAVE_HEIGHT}px` }}
+      style={{ paddingBottom: `${WAVE_HEIGHT - 50}px` }}
       aria-labelledby='program-title'
     >
       {/* Enhanced Background */}
@@ -130,9 +121,9 @@ export default function ProgramHero() {
       </div>
 
       <div className='mx-auto max-w-screen-xl px-4 pt-8 sm:pt-12'>
-        {/* Top Section: Title & Tagline */}
+        {/* Title & Tagline Section */}
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
-          {/* Left: title + intro */}
+          {/* Left: Title */}
           <div
             className={clsx(
               'transition-all duration-1000 ease-out lg:col-span-7',
@@ -143,43 +134,13 @@ export default function ProgramHero() {
           >
             <h1
               id='program-title'
-              className='mb-3 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'
+              className='mb-6 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'
             >
               {t('title')}
             </h1>
-
-            <div className='space-y-3 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
-              <p
-                className={clsx(
-                  'transition-all duration-700 ease-out',
-                  isVisible
-                    ? 'translate-y-0 opacity-100'
-                    : 'translate-y-4 opacity-0'
-                )}
-                style={{ transitionDelay: '200ms' }}
-              >
-                <span className='font-extrabold uppercase tracking-wide text-sky-700'>
-                  {t('checkin.label')}
-                </span>{' '}
-                {t('checkin.text')}
-              </p>
-              <p
-                className={clsx(
-                  'transition-all duration-700 ease-out',
-                  isVisible
-                    ? 'translate-y-0 opacity-100'
-                    : 'translate-y-4 opacity-0'
-                )}
-                style={{ transitionDelay: '300ms' }}
-              >
-                <span className='font-extrabold uppercase tracking-wide text-sky-500'>
-                  {t('daysHeader')}
-                </span>
-              </p>
-            </div>
           </div>
 
-          {/* Right: tagline */}
+          {/* Right: Tagline */}
           <div
             className={clsx(
               'flex items-start justify-end transition-all duration-1000 ease-out lg:col-span-5',
@@ -187,7 +148,7 @@ export default function ProgramHero() {
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'
             )}
-            style={{ transitionDelay: '400ms' }}
+            style={{ transitionDelay: '200ms' }}
           >
             <Image
               src={ASSETS.tagline}
@@ -200,133 +161,154 @@ export default function ProgramHero() {
           </div>
         </div>
 
-        {/* Day Cards with Staggered Animation */}
-        <div className='mt-6 sm:mt-8'>
-          <div className='grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5'>
-            {DAYS.map((day, index) => (
-              <DayCard
-                key={day.key}
-                day={{ ...day, blocks: [...day.blocks] }}
-                index={index}
-                isVisible={isVisible}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Reordered Content Structure */}
+        <div className='mt-8 space-y-8'>
+          {/* 1. July 7 - Weekday */}
+          <InfoSection
+            title={t('checkin.label')}
+            content={t('checkin.text')}
+            isVisible={isVisible}
+            delay={400}
+            isWeekday={true}
+          />
 
-        {/* Bottom Content: Details & Players */}
-        <div className='mt-8 grid grid-cols-1 gap-8 lg:mt-10 lg:grid-cols-12'>
-          {/* Left: Details & Actions */}
+          {/* 3. Day Cards/Boxes */}
           <div
             className={clsx(
-              'space-y-4 text-sm leading-relaxed text-slate-800/90 transition-all duration-1000 ease-out sm:text-base lg:col-span-7',
-              isVisible
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-8 opacity-0'
-            )}
-            style={{ transitionDelay: '800ms' }}
-          >
-            <InfoSection
-              title={t('layday.title')}
-              content={t('layday.text')}
-              isVisible={isVisible}
-              delay={900}
-            />
-
-            <InfoSection
-              title={t('checkout.label')}
-              content={t('checkout.text')}
-              isVisible={isVisible}
-              delay={1000}
-              subtitle
-            />
-
-            <InfoSection
-              title={t('attention.label')}
-              content={t('attention.text')}
-              isVisible={isVisible}
-              delay={1100}
-              subtitle
-            />
-
-            {/* Action Buttons */}
-            <div
-              className={clsx(
-                'flex flex-col items-start gap-3 pt-2 transition-all duration-700 ease-out',
-                isVisible
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-4 opacity-0'
-              )}
-              style={{ transitionDelay: '1200ms' }}
-            >
-              <EnhancedButton
-                href={PROGRAM_PDF}
-                variant='primary'
-                download
-                icon={<FiDownload className='h-4 w-4' />}
-              >
-                {t('downloadPdf')}
-              </EnhancedButton>
-
-              <Link
-                href='/registration'
-                className='group inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-2 text-sm font-bold text-sky-700 shadow-sm ring-1 ring-sky-600/40 transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
-              >
-                {t('ctaContact')}
-                <FiExternalLink className='h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5' />
-              </Link>
-            </div>
-
-            {/* Logo */}
-            <div
-              className={clsx(
-                'flex justify-start pt-6 transition-all duration-700 ease-out',
-                isVisible
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-4 opacity-0'
-              )}
-              style={{ transitionDelay: '1300ms' }}
-            >
-              <Image
-                src={ASSETS.logo}
-                alt={t('logoAlt') || 'Cascais Volley Cup'}
-                width={200}
-                height={60}
-                className='h-auto w-[150px] object-contain transition-transform duration-300 hover:scale-105 sm:w-[180px] lg:w-[200px]'
-                sizes='(max-width: 640px) 150px, (max-width: 1024px) 180px, 200px'
-              />
-            </div>
-          </div>
-
-          {/* Right: Players Image */}
-          <div
-            className={clsx(
-              'relative transition-all duration-1000 ease-out lg:col-span-5',
+              'transition-all duration-1000 ease-out',
               isVisible
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'
             )}
             style={{ transitionDelay: '600ms' }}
           >
-            <div className='relative z-20 mx-auto -mt-4 h-[360px] w-full overflow-visible [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_68%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_0%,black_68%,transparent_100%)] sm:-mt-6 sm:h-[420px] lg:-mt-10 lg:h-[560px] xl:h-[640px]'>
+            <div className='grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5'>
+              {DAYS.map((day, index) => (
+                <DayCard
+                  key={day.key}
+                  day={{ ...day, blocks: [...day.blocks] }}
+                  index={index}
+                  isVisible={isVisible}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* 4-6. Side by Side: July 13, Checkout, Lay Day, Button on Left | Image on Right */}
+          <div className='grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start'>
+            {/* Left: All Text Content */}
+            <div className='space-y-6 lg:col-span-7'>
+              {/* July 13 - Weekday */}
+              <InfoSection
+                title={t('checkout.label')}
+                content=''
+                isVisible={isVisible}
+                delay={1200}
+                isWeekday={true}
+              />
+
+              {/* Checkout Text */}
+              <InfoSection
+                title=''
+                content={t('checkout.text')}
+                isVisible={isVisible}
+                delay={1400}
+              />
+
+              {/* Lay Day Section */}
+              <div
+                className={clsx(
+                  'space-y-4 transition-all duration-700 ease-out',
+                  isVisible
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-4 opacity-0'
+                )}
+                style={{ transitionDelay: '1600ms' }}
+              >
+                <InfoSection
+                  title={t('layDay.title')}
+                  content=''
+                  isVisible={isVisible}
+                  delay={0}
+                  isLayDay={true}
+                />
+                <div className='text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+                  <p className='mb-4'>{t('layDay.content')}</p>
+                  <p className='text-sm font-medium text-slate-700'>
+                    {t('layDay.note')}
+                  </p>
+                </div>
+              </div>
+
+              {/* Download Brochure Button */}
+              <div
+                className={clsx(
+                  'transition-all duration-700 ease-out',
+                  isVisible
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-4 opacity-0'
+                )}
+                style={{ transitionDelay: '1800ms' }}
+              >
+                <DownloadButton href={PROGRAM_PDF}>
+                  {t('downloadBrochure')}
+                </DownloadButton>
+              </div>
+            </div>
+
+            {/* Right: Players Image - positioned to "touch" the boxes */}
+            <div
+              className={clsx(
+                'transition-all duration-1000 ease-out lg:col-span-5 lg:-mt-16',
+                isVisible
+                  ? 'translate-y-0 opacity-100'
+                  : 'translate-y-8 opacity-0'
+              )}
+              style={{ transitionDelay: '2000ms' }}
+            >
               <Image
                 src={ASSETS.players}
                 alt={t('playersAlt')}
-                fill
-                className='object-contain object-bottom transition-transform duration-300 hover:scale-105'
-                sizes='(max-width: 1024px) 90vw, 700px'
+                width={600}
+                height={400}
+                className='h-auto w-full object-contain transition-transform duration-300 hover:scale-105'
+                sizes='(max-width:1024px) 100vw, 42vw'
               />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Wave with Stats */}
-      <WaveWithStats
-        waveHeight={WAVE_HEIGHT}
-        stats={STATS}
-        isVisible={isVisible}
-      />
+      {/* Wave positioned higher to sit above image feet */}
+      <div
+        className='pointer-events-none absolute left-1/2 w-screen -translate-x-1/2'
+        style={{ bottom: '50px' }}
+      >
+        {/* Desktop */}
+        <div className='relative hidden lg:block'>
+          <Image
+            src='/img/global/ondas-3.png'
+            alt=''
+            role='presentation'
+            width={2048}
+            height={WAVE_HEIGHT}
+            className='z-10 -mb-px block h-auto w-full'
+            sizes='100vw'
+          />
+        </div>
+
+        {/* Mobile */}
+        <div
+          className='relative block lg:hidden'
+          style={{
+            backgroundImage: 'url(/img/global/ondas-3.png)',
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            height: `${WAVE_HEIGHT}px`
+          }}
+        />
+      </div>
     </section>
   )
 }
@@ -335,7 +317,6 @@ export default function ProgramHero() {
 
 interface DayCardProps {
   day: {
-    key: string
     weekday: string
     date: string
     blocks: Array<{
@@ -353,37 +334,60 @@ function DayCard({ day, index, isVisible }: DayCardProps) {
   return (
     <article
       className={clsx(
-        'group rounded-2xl bg-sky-500 px-3 py-4 text-center text-white shadow-lg ring-1 ring-black/10 transition-all duration-300 ease-out',
-        'hover:-translate-y-2 hover:shadow-2xl hover:ring-sky-400/30',
+        'group text-center text-white transition-all duration-300 ease-out',
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
       )}
       style={{
-        transitionDelay: `${600 + index * 100}ms`
+        transitionDelay: `${800 + index * 100}ms`
       }}
     >
-      <div className='mb-3 flex flex-col items-center justify-center gap-1'>
-        <span className='text-base font-black uppercase tracking-wide text-white sm:text-lg'>
+      {/* Top Header: Weekday + Date - Outside the box */}
+      <div className='mb-3 px-3 py-2'>
+        <span className='text-sm font-bold uppercase tracking-wide text-sky-600 sm:text-base'>
           {day.weekday}
         </span>
-        <span className='text-sm font-bold text-white/90 sm:text-base'>
+        <div className='text-xs font-light text-sky-500 sm:text-sm'>
           {day.date}
-        </span>
+        </div>
       </div>
 
-      <div className='flex min-h-[160px] flex-col items-center justify-center gap-1 sm:min-h-[180px]'>
-        {day.blocks.map((block, blockIndex) => (
-          <p
-            key={blockIndex}
-            className={clsx(
-              block.title && 'text-[15px] font-extrabold uppercase',
-              block.note &&
-                'mt-1 max-w-[18ch] text-[13px] font-extrabold uppercase',
-              !block.title && !block.note && 'text-sm'
-            )}
-          >
-            {block.title ?? block.subtitle ?? block.times ?? block.note}
-          </p>
-        ))}
+      {/* Main Blue Box: Group Stage and Game Times */}
+      <div className='overflow-hidden rounded-2xl bg-sky-500 shadow-lg ring-1 ring-black/10 transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl hover:ring-sky-400/30'>
+        <div className='flex min-h-[200px] flex-col items-center justify-center gap-2 px-4 py-5 sm:min-h-[220px]'>
+          {day.blocks.map((block, blockIndex) => {
+            if (block.title) {
+              return (
+                <p
+                  key={blockIndex}
+                  className='text-base font-black uppercase tracking-wide text-white sm:text-lg'
+                >
+                  {block.title}
+                </p>
+              )
+            }
+            if (block.subtitle || block.times) {
+              return (
+                <p
+                  key={blockIndex}
+                  className='text-sm font-light text-white/95 sm:text-base'
+                >
+                  {block.subtitle || block.times}
+                </p>
+              )
+            }
+            if (block.note) {
+              return (
+                <p
+                  key={blockIndex}
+                  className='mt-2 max-w-[18ch] text-xs font-medium uppercase text-white/90 sm:text-sm'
+                >
+                  {block.note}
+                </p>
+              )
+            }
+            return null
+          })}
+        </div>
       </div>
     </article>
   )
@@ -394,7 +398,8 @@ interface InfoSectionProps {
   content: string
   isVisible: boolean
   delay: number
-  subtitle?: boolean
+  isWeekday?: boolean
+  isLayDay?: boolean
 }
 
 function InfoSection({
@@ -402,8 +407,11 @@ function InfoSection({
   content,
   isVisible,
   delay,
-  subtitle = false
+  isWeekday = false,
+  isLayDay = false
 }: InfoSectionProps) {
+  if (!title && !content) return null
+
   return (
     <div
       className={clsx(
@@ -412,169 +420,44 @@ function InfoSection({
       )}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <h3
-        className={clsx(
-          'mb-1 font-extrabold uppercase tracking-wide',
-          subtitle
-            ? 'text-[15px] text-sky-700 sm:text-base'
-            : 'text-lg text-sky-500 sm:text-xl'
-        )}
-      >
-        {title}
-      </h3>
-      <p>{content}</p>
+      {title && (
+        <h3
+          className={clsx(
+            'mb-3 font-extrabold uppercase tracking-wide',
+            isWeekday
+              ? 'text-xl text-sky-700 sm:text-2xl'
+              : isLayDay
+                ? 'text-lg text-sky-500 sm:text-xl'
+                : 'text-lg text-sky-500 sm:text-xl'
+          )}
+        >
+          {title}
+        </h3>
+      )}
+      {content && (
+        <p className='text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+          {content}
+        </p>
+      )}
     </div>
   )
 }
 
-interface EnhancedButtonProps {
-  href: string
-  variant: 'primary' | 'secondary'
-  children: React.ReactNode
-  icon?: React.ReactNode
-  download?: boolean
-}
-
-function EnhancedButton({
+function DownloadButton({
   href,
-  variant,
-  children,
-  icon,
-  download
-}: EnhancedButtonProps) {
-  const baseClasses =
-    'group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-5 py-2 text-sm font-bold shadow-lg ring-1 ring-black/10 transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus-visible:ring-2 sm:text-base'
-
-  const variantClasses =
-    variant === 'primary'
-      ? 'bg-sky-600 text-white hover:bg-sky-700 focus-visible:ring-sky-300'
-      : 'bg-white/90 text-sky-700 ring-sky-600/40 hover:bg-white focus-visible:ring-sky-300'
-
+  children
+}: {
+  href: string
+  children: React.ReactNode
+}) {
   return (
     <a
       href={href}
-      target='_blank'
-      rel='noopener noreferrer'
-      type={download ? 'application/pdf' : undefined}
-      download={download}
-      className={clsx(baseClasses, variantClasses)}
+      download
+      className='group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-sky-600 px-6 py-3 text-sm font-bold text-white shadow-lg ring-1 ring-black/10 transition-all duration-300 hover:scale-105 hover:bg-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
     >
-      <span className='relative z-10 flex items-center gap-2'>
-        {icon}
-        {children}
-      </span>
-
-      {/* Shimmer effect */}
-      <div className='absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full' />
+      <FiDownload className='h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5' />
+      <span>{children}</span>
     </a>
-  )
-}
-
-interface WaveWithStatsProps {
-  waveHeight: number
-  stats: readonly string[]
-  isVisible: boolean
-}
-
-function WaveWithStats({ waveHeight, stats, isVisible }: WaveWithStatsProps) {
-  return (
-    <div className='pointer-events-none absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
-      {/* Desktop */}
-      <div className='relative hidden lg:block'>
-        <Image
-          src='/img/global/ondas-3.png'
-          alt=''
-          role='presentation'
-          width={2048}
-          height={waveHeight}
-          className='z-10 -mb-px block h-auto w-full'
-          sizes='100vw'
-        />
-        <div className='pointer-events-none absolute inset-0 z-30'>
-          <div className='mx-auto flex h-full max-w-screen-xl translate-y-[4px] items-center justify-end px-4'>
-            <div
-              className={clsx(
-                'transition-all duration-1000 ease-out',
-                isVisible
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-4 opacity-0'
-              )}
-              style={{ transitionDelay: '1400ms' }}
-            >
-              <StatsList items={stats} />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile */}
-      <div
-        className='relative block lg:hidden'
-        style={{
-          backgroundImage: 'url(/img/global/ondas-3.png)',
-          backgroundSize: '100% 100%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          height: `${waveHeight}px`
-        }}
-      >
-        <div className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4'>
-          <div
-            className={clsx(
-              'transition-all duration-1000 ease-out',
-              isVisible
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-4 opacity-0'
-            )}
-            style={{ transitionDelay: '1400ms' }}
-          >
-            <StatsList compact items={stats} />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* --- Stats List Component --- */
-interface StatsListProps {
-  items: readonly string[]
-  compact?: boolean
-}
-
-function StatsList({ items, compact = false }: StatsListProps) {
-  return (
-    <ul
-      aria-label='Tournament statistics'
-      className={clsx(
-        'flex items-center whitespace-nowrap font-extrabold uppercase text-white',
-        compact
-          ? 'gap-2 px-2 text-[10px] tracking-tight'
-          : 'gap-3 px-3 text-[11px] tracking-normal sm:gap-4 sm:text-[13px] sm:tracking-wide lg:gap-6 lg:text-lg'
-      )}
-    >
-      {items.map((item, index) => (
-        <li
-          key={index}
-          className={clsx(
-            'flex items-center',
-            compact ? 'gap-2' : 'gap-3 sm:gap-4 lg:gap-6'
-          )}
-        >
-          <span>{item}</span>
-          {index < items.length - 1 && (
-            <span
-              className={clsx(
-                'leading-none text-white/70',
-                compact ? 'text-xs' : 'text-sm sm:text-lg lg:text-2xl'
-              )}
-              aria-hidden='true'
-            >
-              •
-            </span>
-          )}
-        </li>
-      ))}
-    </ul>
   )
 }

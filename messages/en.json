@@ -136,33 +136,18 @@
           "c": "Agrupamento de Escolas de Cascais | Cascais",
           "d": "Agrupamento de Escolas IBN Mucana | Alcabideche"
         },
-        "p2": "All matches will take place in sports halls within the municipality. Between matches and accommodation, visits to the town and its magnificent beaches are within a 15–20 minute walk. Additionally, each participant will receive a “free pass card” allowing free use of the MOBICASCAIS transport network throughout the municipality during the event. We recommend checking the official app for better use of the transport network.\n\nEach delegation will be assigned a classroom, and all participants must bring their own sleeping bag, pillow, and mattress."
+        "p2": "All matches will take place in sports halls within the municipality. Between matches and accommodation, visits to the town and its magnificent beaches are within a 15–20 minute walk. Additionally, each participant will receive a 'free pass card' allowing free use of the MOBICASCAIS transport network throughout the municipality during the event. We recommend checking the official app for better use of the transport network.\n\nEach delegation will be assigned a classroom, and all participants must bring their own sleeping bag, pillow, and mattress."
       },
       "hotel": {
         "title": "Accommodation in Hotels",
         "p1": "Teams wishing to stay in hotels in the region and/or requiring transportation to and from Lisbon Airport must indicate this need/preference during the online registration process and contact the Official Agents of the event in advance to ensure the best available prices. All information and contacts are available at: www.cascaisvolleycup.com"
       },
-      "playerAlt": "Volleyball player in action",
-      "logoAlt": "Cascais Volley Cup 2026 logo",
-      "stats": {
-        "teams": "50 Teams",
-        "athletes": "600 Athletes",
-        "countries": "3 Countries",
-        "games": "150 Games"
-      }
-    },
-    "Food": {
-      "taglineAlt": "Event tagline",
-      "title": "Food & Meals",
-      "p1": "The canteens will only be operational from July 8th, so no meals will be provided on July 7th. On the last day of the event, July 12th, dinner will not be served.",
-      "scheduleTitle": "Meals will be served in the various school canteens available according to the following schedule:",
-      "breakfast": "Packed breakfasts distributed to teams | 8:00–10:00",
-      "lunch": "Lunch | 12:00–15:00",
-      "dinner": "Dinner | 19:00–21:00",
-      "intolerances": "In case of food intolerances, team leaders must inform the organization at the time of registration so that appropriate meals can be prepared for each case.",
-      "logoAlt": "Cascais Volley Cup logo",
-      "ctaContact": "Contact us",
-      "ctaMoreInfo": "More information"
+      "food": {
+        "title": "Food & Meals",
+        "description": "The canteens will be operational from July 8th to July 12th. Meals will be served in various school canteens. For food intolerances or special dietary requirements, please contact our official agents.",
+        "contactButton": "Contact O-Sports"
+      },
+      "playerAlt": "Volleyball player in action"
     }
   },
 
@@ -172,81 +157,79 @@
       "taglineAlt": "Event tagline",
       "playersAlt": "Players in action",
       "checkin": {
-        "label": "July 7 · Tuesday",
+        "label": "7 July - Tuesday",
         "text": "The check-in for all teams must take place between 15:00 and 24:00 on this day at their assigned accommodation, which will be communicated in advance by the organization."
       },
-      "daysHeader": "Summary schedule:",
+      "checkout": {
+        "label": "13 July - Monday",
+        "text": "The check-out for all teams who request and/or need to make transfers to Lisbon Airport must be carried out by 12:00 on this day."
+      },
+      "layDay": {
+        "title": "Lay Day",
+        "content": "On July 10th, Friday, only the strictly necessary games will be held to ensure calendar compliance. This phase will be possible to enjoy everything our town has to offer, with the option of taking a trip to Lisbon. The exchange trip along the estuary is an unforgettable experience, passing through all the beaches of the Estoril Coast such as Belém Tower, Jerónimos Monastery, the Monument to the Discoveries, and the Cultural Center of Belém, the MAAT, among others. All this in an exchange of just 25 minutes.",
+        "note": "Attention: If it is in the best interest of all participants, the organization reserves the right to change the respective program. In this case, all teams will be duly notified."
+      },
+      "downloadBrochure": "Download Brochure",
       "days": {
         "d1": {
-          "weekday": "WEDNESDAY",
-          "date": "08–Jul",
+          "weekday": "Tuesday",
+          "date": "08-jul",
           "block1": {
-            "title": "1st GROUP STAGE",
-            "subtitle": "Matches",
-            "times": "9:00–22:00"
+            "title": "1st Phase Groups",
+            "subtitle": "Games",
+            "times": "9:00-22:00"
           }
         },
         "d2": {
-          "weekday": "THURSDAY",
-          "date": "09–Jul",
+          "weekday": "Wednesday",
+          "date": "09-jul",
           "block1": {
-            "title": "1st GROUP STAGE",
-            "subtitle": "Matches",
-            "times": "9:00–22:00"
+            "title": "1st Phase Groups",
+            "subtitle": "Games",
+            "times": "9:00-22:00"
           }
         },
         "d3": {
-          "weekday": "FRIDAY",
-          "date": "10–Jul",
+          "weekday": "Thursday",
+          "date": "10-jul",
           "block1": {
-            "title": "LAY DAY"
+            "title": "Lay Day"
           }
         },
         "d4": {
-          "weekday": "SAT",
-          "date": "11–Jul",
-          "block1": { "title": "2nd GROUP STAGE" },
-          "block2": { "title": "Quarter-Finals" },
+          "weekday": "Friday",
+          "date": "11-jul",
+          "block1": {
+            "title": "2nd Phase Groups"
+          },
+          "block2": {
+            "title": "1/4 Finals"
+          },
           "block3": {
-            "subtitle": "Matches",
-            "times": "9:00–22:00"
+            "subtitle": "Games",
+            "times": "9:00-22:00"
           }
         },
         "d5": {
-          "weekday": "SUN",
-          "date": "12–Jul",
-          "block1": { "title": "2nd GROUP STAGE" },
-          "block2": { "title": "Semi-Finals" },
-          "block3": { "title": "Finals" },
+          "weekday": "Saturday",
+          "date": "12-jul",
+          "block1": {
+            "title": "2nd Phase Groups"
+          },
+          "block2": {
+            "title": "1/2 Finals"
+          },
+          "block3": {
+            "title": "Finals"
+          },
           "block4": {
-            "subtitle": "Matches",
-            "times": "9:00–16:00"
+            "subtitle": "Games",
+            "times": "9:00-16:00"
           },
           "block5": {
-            "note": "Awards Ceremony · 18:00"
+            "note": "Awards Ceremony 18:00"
           }
         }
-      },
-      "checkout": {
-        "label": "July 13 · Monday",
-        "text": "The check-out for all teams requesting and/or requiring transfers to Lisbon Airport must be completed by 12:00 on this day."
-      },
-      "layday": {
-        "title": "Lay Day",
-        "text": "On July 10, Friday, only the matches strictly necessary to adjust the respective schedules will be played. On this day, delegations will have the opportunity to enjoy our town, with the option of traveling to Lisbon. The train ride along the Tagus estuary is a beautiful experience, passing by all the beaches of the Estoril Coast and offering views of tourist landmarks such as the Belém Tower, Jerónimos Monastery, Monument to the Discoveries, Belém Cultural Center, MAAT, among others. All this in just a 25-minute train journey."
-      },
-      "attention": {
-        "label": "Attention",
-        "text": "If deemed in the best interest of all participants, the organization reserves the right to change the program. In such case, all teams will be duly notified."
-      },
-      "downloadPdf": "Download full program (PDF)",
-      "ctaContact": "Contact us",
-      "logoAlt": "Cascais Volley Cup 2026 logo",
-      "stats": {
-        "teams": "50 teams",
-        "athletes": "600 athletes",
-        "countries": "3 countries",
-        "games": "150 games"
       }
     }
   },

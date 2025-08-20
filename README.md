@@ -49,6 +49,8 @@ details.
 
 ## TODO
 
-### About
-
-- Background image + Wave
+- Overall wave sizing tweaking
+- **ABOUT** Background image + Wave
+- **ACCOMODATION** mobile new image + desktop tweaking of image + button center
+  on mobile
+- **Program**
