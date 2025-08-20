@@ -20,7 +20,9 @@
       "airport_value": "30 km | 25 min",
       "location": "LOCATION",
       "location_value": "LISBON, CASCAIS",
-      "scrollDown": "Scroll Down"
+      "scrollDown": "Scroll Down",
+      "register": "Register Now",
+      "brochure": "Brochure"
     },
     "Updates": {
       "Latest_news": "LATEST NEWS",
