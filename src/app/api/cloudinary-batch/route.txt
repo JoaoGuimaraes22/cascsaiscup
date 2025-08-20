@@ -1,0 +1,90 @@
+// ===== NEW FILE: /src/app/api/cloudinary-batch/route.ts =====
+import { NextRequest, NextResponse } from 'next/server'
+import { v2 as cloudinary } from 'cloudinary'
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
+
+interface CloudinaryImage {
+  public_id: string
+  url: string
+  created_at: string
+  width: number
+  height: number
+  format: string
+}
+
+const YEARS_CONFIG = [
+  { year: 2023, folder: 'gallery/2023' },
+  { year: 2024, folder: 'gallery/2024' },
+  { year: 2025, folder: 'gallery/2025' }
+] as const
+
+const IMAGES_PER_YEAR = 4
+
+export async function GET(request: NextRequest) {
+  try {
+    // Batch fetch all years simultaneously
+    const promises = YEARS_CONFIG.map(async (config) => {
+      try {
+        const result = await cloudinary.search
+          .expression(`folder:${config.folder}`)
+          .sort_by([['created_at', 'desc']])
+          .max_results(IMAGES_PER_YEAR)
+          .execute()
+
+        return {
+          year: config.year,
+          images: result.resources || [],
+          success: true
+        }
+      } catch (error) {
+        console.error(`Error fetching images for ${config.year}:`, error)
+        return {
+          year: config.year,
+          images: [],
+          success: false,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        }
+      }
+    })
+
+    // Execute all requests in parallel
+    const results = await Promise.all(promises)
+
+    // Organize results by year
+    const imagesByYear: Record<number, CloudinaryImage[]> = {}
+    const errors: string[] = []
+
+    results.forEach((result) => {
+      if (result.success) {
+        imagesByYear[result.year] = result.images
+      } else {
+        errors.push(`Year ${result.year}: ${result.error}`)
+      }
+    })
+
+    return NextResponse.json({
+      success: true,
+      imagesByYear,
+      errors: errors.length > 0 ? errors : null,
+      timestamp: new Date().toISOString()
+    })
+
+  } catch (error) {
+    console.error('Batch Cloudinary fetch error:', error)
+    return NextResponse.json(
+      { 
+        success: false, 
+        error: 'Failed to fetch gallery images',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
+      { status: 500 }
+    )
+  }
+}
+

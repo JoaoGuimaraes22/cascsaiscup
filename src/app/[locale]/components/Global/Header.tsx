@@ -16,6 +16,7 @@ import { Link } from '@/src/navigation'
 import { useTranslations } from 'next-intl'
 import LangSwitcher from '../LangSwitcher'
 import { FiMenu, FiX } from 'react-icons/fi'
+
 import Image from 'next/image'
 import Logo from '@/public/img/global/cascais-volley-cup-1.png'
 import type { ValidPathname } from '@/src/navigation'

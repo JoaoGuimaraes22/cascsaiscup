@@ -192,6 +192,7 @@ export default function RegistrationForm() {
         sizes='100vw'
         priority
         className='absolute inset-0 -z-20 object-cover'
+        quality={75}
       />
 
       {/* Decorative players (desktop only) */}
@@ -207,7 +208,8 @@ export default function RegistrationForm() {
             width={420}
             height={640}
             className='h-auto w-auto'
-            priority
+            loading='lazy'
+            quality={75}
           />
         </div>
         {/* Right player */}
@@ -218,7 +220,8 @@ export default function RegistrationForm() {
             width={420}
             height={640}
             className='h-auto w-auto'
-            priority
+            loading='lazy'
+            quality={75}
           />
         </div>
       </div>
