@@ -47,21 +47,43 @@ interface CTAButtonProps {
   onClick: (e: MouseEvent<HTMLAnchorElement>) => void
   children: React.ReactNode
   isVisible: boolean
+  icon?: React.ComponentType<{ className?: string }>
+  href?: string
+  variant?: 'primary' | 'secondary'
+  delay?: number
 }
 
-function CTAButton({ onClick, children, isVisible }: CTAButtonProps) {
+function CTAButton({
+  onClick,
+  children,
+  isVisible,
+  icon: Icon = FiUsers,
+  href = '#hall-of-fame-teams',
+  variant = 'primary',
+  delay = 700
+}: CTAButtonProps) {
+  const baseClasses =
+    'group relative mt-6 inline-flex items-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-bold shadow-xl ring-1 ring-black/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 sm:text-base'
+
+  const variantClasses =
+    variant === 'primary'
+      ? 'bg-gradient-to-r from-sky-700 to-sky-800 text-white'
+      : 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white'
+
   return (
     <a
-      href='#hall-of-fame-teams'
+      href={href}
       onClick={onClick}
       className={clsx(
-        'group relative mt-6 inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-sky-700 to-sky-800 px-6 py-3 text-sm font-bold text-white shadow-xl ring-1 ring-black/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 sm:text-base',
-        'transition-all delay-700 duration-700 ease-out',
+        baseClasses,
+        variantClasses,
+        'transition-all duration-700 ease-out',
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
       )}
+      style={{ transitionDelay: `${delay}ms` }}
     >
       <span className='relative z-10 flex items-center gap-2'>
-        <FiUsers className='h-4 w-4' />
+        <Icon className='h-4 w-4' />
         {children}
         <FiArrowDown className='h-4 w-4 transition-transform duration-300 group-hover:translate-y-1' />
       </span>
@@ -277,13 +299,26 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
 
 export default function HallOfFameHero() {
   const t = useTranslations('HallOfFamePage.Hero')
+  const participantsT = useTranslations('HallOfFamePage.Participants')
+  const winnersT = useTranslations('HallOfFamePage.Winners')
   const { isVisible, sectionRef } = useStaggeredAnimation(0.1)
 
-  const onSeeMore = (e: MouseEvent<HTMLAnchorElement>) => {
+  const onSeeParticipants = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     const el = document.getElementById('hall-of-fame-teams')
     if (!el) {
       window.location.hash = '#hall-of-fame-teams'
+      return
+    }
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+  }
+
+  const onSeeWinners = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const el = document.getElementById('hall-of-fame-winners')
+    if (!el) {
+      window.location.hash = '#hall-of-fame-winners'
       return
     }
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -342,9 +377,30 @@ export default function HallOfFameHero() {
                 {t('intro')}
               </p>
 
-              <CTAButton onClick={onSeeMore} isVisible={isVisible}>
-                {t('see_more')}
-              </CTAButton>
+              {/* Two CTA Buttons */}
+              <div className='flex flex-col gap-3 sm:flex-row sm:gap-4'>
+                <CTAButton
+                  onClick={onSeeParticipants}
+                  isVisible={isVisible}
+                  icon={FiUsers}
+                  href='#hall-of-fame-teams'
+                  variant='primary'
+                  delay={700}
+                >
+                  See Participants
+                </CTAButton>
+
+                <CTAButton
+                  onClick={onSeeWinners}
+                  isVisible={isVisible}
+                  icon={FiAward}
+                  href='#hall-of-fame-winners'
+                  variant='primary'
+                  delay={850}
+                >
+                  See Winners
+                </CTAButton>
+              </div>
             </div>
           </div>
 

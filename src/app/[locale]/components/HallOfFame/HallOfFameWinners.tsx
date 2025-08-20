@@ -185,7 +185,7 @@ export default function HallOfFameWinners() {
       </div>
 
       {/* Main Content */}
-      <div className='mx-auto max-w-screen-xl px-4 pb-0 pt-10 lg:pt-16'>
+      <div className='mx-auto max-w-screen-xl px-4 pb-[180px] pt-10 lg:pb-[60px] lg:pt-16'>
         <div className='grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12'>
           {/* Left Column: Title, Description & Accordion */}
           <div className='flex flex-col lg:col-span-7'>
@@ -234,7 +234,7 @@ export default function HallOfFameWinners() {
                     transitionDelay: `${yearIndex * 100}ms`
                   }}
                 >
-                  {/* Year Header Button */}
+                  {/* Year Header Button - NO BLUE BALL */}
                   <button
                     onClick={() => handleYearToggle(year)}
                     className={clsx(
@@ -248,9 +248,6 @@ export default function HallOfFameWinners() {
                     disabled={animatingYear === year}
                   >
                     <div className='flex items-center gap-3'>
-                      <div className='flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-sky-600 font-bold text-white shadow-lg'>
-                        {year.slice(-2)}
-                      </div>
                       <span className='text-lg font-bold text-slate-800 sm:text-xl'>
                         {year}
                       </span>
@@ -321,24 +318,26 @@ export default function HallOfFameWinners() {
                                       className={clsx(
                                         'group flex items-center gap-3 rounded-lg p-3',
                                         'bg-gradient-to-r from-white/80 to-slate-50/80',
-                                        'ring-1 ring-slate-200/50 transition-all duration-200',
-                                        'hover:from-white hover:to-sky-50/60 hover:shadow-md hover:ring-sky-200',
-                                        teamIndex === 0 &&
-                                          'bg-gradient-to-r from-yellow-50/80 to-amber-50/60 ring-2 ring-yellow-300/50'
+                                        'border border-slate-200/60 shadow-sm backdrop-blur-sm',
+                                        'hover:border-sky-300/50 hover:shadow-md',
+                                        'transition-all duration-200'
                                       )}
                                     >
-                                      {/* Position Badge */}
+                                      {/* Position Medal */}
                                       <div
                                         className={clsx(
-                                          'flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold shadow-lg transition-transform duration-200 group-hover:scale-110',
-                                          `bg-gradient-to-br ${medal.bg} ${medal.glow} text-white`
+                                          'flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br font-bold text-white shadow-lg',
+                                          medal.bg,
+                                          medal.glow
                                         )}
                                       >
-                                        {position}
+                                        <span className='text-xs'>
+                                          {position}
+                                        </span>
                                       </div>
 
                                       {/* Flag */}
-                                      <div className='relative h-4 w-6 shrink-0 overflow-hidden rounded-sm ring-1 ring-black/10 transition-transform duration-200 group-hover:scale-110'>
+                                      <div className='relative inline-block h-[16px] w-[24px] shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/10'>
                                         <Image
                                           src={flagSrc(country)}
                                           alt={`${country} flag`}
@@ -349,17 +348,9 @@ export default function HallOfFameWinners() {
                                       </div>
 
                                       {/* Team Name */}
-                                      <span className='text-sm font-semibold text-slate-800 transition-colors duration-200 group-hover:text-sky-700'>
+                                      <span className='flex-1 text-sm font-medium text-slate-800'>
                                         {name}
                                       </span>
-
-                                      {/* Winner Badge for 1st place */}
-                                      {teamIndex === 0 && (
-                                        <div className='ml-auto flex items-center gap-1 rounded-full bg-yellow-100 px-2 py-1 text-xs font-bold text-yellow-800'>
-                                          <FaTrophy className='h-3 w-3' />
-                                          Winner
-                                        </div>
-                                      )}
                                     </div>
                                   )
                                 }
@@ -373,32 +364,13 @@ export default function HallOfFameWinners() {
                 </div>
               ))}
             </div>
-
-            {/* Tagline without background */}
-            <div
-              className={clsx(
-                'mt-8 transition-all delay-500 duration-1000 ease-out',
-                isVisible
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-8 opacity-0'
-              )}
-            >
-              <Image
-                src={ASSETS.tagline}
-                alt='Cascais Volley Cup Tagline'
-                width={300}
-                height={70}
-                className='h-auto w-auto drop-shadow-lg transition-transform duration-300 hover:scale-105'
-              />
-            </div>
           </div>
 
-          {/* Right Column: Winners Image */}
-          <div className='relative flex items-center justify-center lg:col-span-5'>
+          {/* Right Column: Winners Image - HIDDEN ON MOBILE */}
+          <div className='relative hidden lg:col-span-5 lg:flex lg:items-center lg:justify-center'>
             <div
               className={clsx(
-                'relative z-10 w-full transition-all delay-300 duration-1000 ease-out',
-                'h-[280px] sm:h-[380px] lg:h-[520px]',
+                'relative h-[420px] w-[420px] max-w-full transition-all delay-500 duration-1000 ease-out lg:h-[480px] lg:w-[480px]',
                 isVisible
                   ? 'translate-y-0 scale-100 opacity-100'
                   : 'translate-y-12 scale-95 opacity-0'

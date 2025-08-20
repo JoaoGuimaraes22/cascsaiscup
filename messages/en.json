@@ -417,33 +417,52 @@
 
   "RegistrationPage": {
     "RegistrationHero": {
-      "title": "Registrations",
-      "intro": "Registration is mandatory through the event website...",
-      "earlyBird": {
-        "label": "EARLY BIRD",
-        "text": "January 1 to March 31 — 165 euros/player..."
+      "title": "INSCRIÇÕES",
+      "schoolAccommodation": {
+        "title": "ALOJAMENTO EM ESCOLAS",
+        "description": "A inscrição tem que ser feita obrigatoriamente através do site do evento seguindo as instruções que serão fornecidas no mesmo. De uma forma geral, a inscrição no CASCAIS VOLLEY CUP 2026 tem dois momentos:"
       },
-      "regularBird": {
-        "label": "REGULAR BIRD",
-        "text": "April 1 to May 31 — 185 euros/player..."
+      "pricing": {
+        "earlyBird": {
+          "label": "EARLY BIRD",
+          "period": "I De 1 de janeiro a 31 de março",
+          "price": "165 euros/atleta",
+          "details": "inclui inscrição no torneio, estadia e alimentação de 8 a 12 de julho I Alojamento Escolar de ocupação múltipla (mín 10 pax – max 20 pax)."
+        },
+        "regularBird": {
+          "label": "REGULAR BIRD",
+          "period": "I De 1 de abril a 31 de maio",
+          "price": "185 euros/atleta",
+          "details": "inclui inscrição, estadia e alimentação de 8 a 12 de julho I Alojamento Escolar de ocupação múltipla (mín 10 pax – max 20 pax)."
+        }
       },
-      "teamMinimum": "Each team must have a minimum of 10 registered players.",
-      "coachesOffer": "The organization offers free registration for 2 coaches per team.",
-      "hotel": {
-        "title": "Accommodation in Hotels",
-        "text": "Teams wishing to stay in hotels in the region and/or requiring transportation to and from Lisbon Airport must indicate this need/preference during the online registration process and contact the",
-        "agents": "Official Agents",
-        "more": "of the event in advance to guarantee the best available prices. All information and contacts are available at:"
+      "teamRequirements": "Cada equipa deve ter um mínimo de 10 atletas inscritas, e a organização oferece a inscrição gratuita para 2 treinadores por equipa.",
+      "paymentInfo": {
+        "instruction": "Os pagamentos devem ser efetuados por transferência bancária para:",
+        "account": {
+          "name": "CASCAIS VOLLEY4ALL I Banco BPI",
+          "iban": "PT50 0010 0000 5072 8780 0018 3",
+          "bic": "BBPIPTPL",
+          "nib": "0010.0000.50728.780001.83"
+        }
       },
-      "ctaScroll": "Go to the form",
-      "playerAlt": "Player spiking during a match",
+      "registrationNotice": "As equipas só estarão formalmente inscritas após completado todo o processo de inscrição online. Informamos que, após a inscrição e pagamento, em caso de desistência, a organização do evento reserva o direito de não reembolsar as quantias já pagas.",
+      "hotelAccommodation": {
+        "title": "ALOJAMENTO EM HOTEL",
+        "description": "Equipas que desejem e/ou necessitem ficar em unidades hoteleiras da região e/ou necessitem de transporte de e para o Aeroporto de Lisboa devem comunicar com a agência de viagens oficial, a O-SPORTS. Para terem acesso aos melhores preços e a uma estadia sem percalços, todos os interessados neste serviço devem comunicar com a respetiva Agência de Viagens o mais cedo possível, preferencialmente, até final de novembro."
+      },
+      "buttons": {
+        "brochure": "BROCHURA (PDF)",
+        "registerTeams": "INSCREVER EQUIPAS",
+        "osports": "O-SPORTS"
+      },
+      "playerAlt": "Beach volleyball player",
       "stats": {
-        "teams": "50 teams",
-        "athletes": "600 athletes",
-        "countries": "3 countries",
-        "games": "150 games"
-      },
-      "taglineAlt": "feel the ACTION, enjoy the SUMMER"
+        "teams": "50 Equipas",
+        "athletes": "600 Atletas",
+        "countries": "3 Países",
+        "games": "150 Jogos"
+      }
     },
 
     "Form": {

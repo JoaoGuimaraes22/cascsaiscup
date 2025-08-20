@@ -129,7 +129,7 @@ export default function AboutVilla() {
           {/* Content paragraphs */}
           <div
             className={clsx(
-              'mt-6 space-y-4 text-white/95 drop-shadow transition-all duration-1000 ease-out',
+              'mt-6 space-y-4 text-white drop-shadow transition-all duration-1000 ease-out',
               isVisible
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'

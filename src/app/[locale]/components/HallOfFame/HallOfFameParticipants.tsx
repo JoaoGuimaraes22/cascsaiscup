@@ -106,7 +106,7 @@ function TeamItem({ team, index, isVisible }: TeamItemProps) {
   )
 }
 
-// Enhanced players image with parallax effect
+// Enhanced players image with parallax effect (Desktop only)
 interface PlayersImageProps {
   src: string
   alt: string
@@ -150,7 +150,7 @@ function PlayersImage({ src, alt, isVisible }: PlayersImageProps) {
   }, [])
 
   return (
-    <div className='relative lg:col-span-6'>
+    <div className='relative hidden lg:col-span-6 lg:block'>
       <div
         ref={imageRef}
         className={clsx(
@@ -236,31 +236,17 @@ function StatsList({ items, compact = false, isVisible }: StatsListProps) {
           key={`stat-${index}`}
           className={clsx(
             'flex items-center transition-all duration-300 hover:scale-105',
-            compact ? 'gap-2' : 'gap-3 sm:gap-4 lg:gap-6'
+            compact ? 'text-[10px]' : 'text-[11px] sm:text-[13px] lg:text-lg'
           )}
         >
-          <span className='relative'>
-            {item}
-            <span className='absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100' />
-          </span>
-          {index < items.length - 1 && (
-            <span
-              className={clsx(
-                'leading-none text-sky-300',
-                compact ? 'text-xs' : 'text-sm sm:text-lg lg:text-2xl'
-              )}
-              aria-hidden
-            >
-              •
-            </span>
-          )}
+          {item}
         </li>
       ))}
     </ul>
   )
 }
 
-// Enhanced wave section
+// Enhanced wave section with stats
 interface WaveSectionProps {
   statsItems: string[]
   isVisible: boolean
@@ -269,37 +255,9 @@ interface WaveSectionProps {
 function WaveSection({ statsItems, isVisible }: WaveSectionProps) {
   return (
     <div className='pointer-events-none absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
-      {/* Desktop */}
-      <div className='relative hidden lg:block'>
-        <div
-          className={clsx(
-            'transition-all duration-1000 ease-out',
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-          )}
-          style={{ transitionDelay: '1000ms' }}
-        >
-          <Image
-            src={ASSETS.wave}
-            alt=''
-            role='presentation'
-            width={2048}
-            height={WAVE_HEIGHT}
-            sizes='100vw'
-            className='z-10 -mb-px block h-auto w-full'
-          />
-        </div>
-
-        <div className='pointer-events-none absolute inset-0 z-30'>
-          <div className='mx-auto flex h-full max-w-screen-xl translate-y-[4px] items-center justify-end px-4'>
-            <StatsList items={statsItems} isVisible={isVisible} />
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile */}
       <div
         className={clsx(
-          'relative block transition-all duration-1000 ease-out lg:hidden',
+          'relative transition-all duration-1000 ease-out',
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
         )}
         style={{
@@ -353,8 +311,8 @@ export default function HallOfFameParticipants() {
       className='relative w-full overflow-hidden'
       aria-labelledby='participants-title'
     >
-      {/* Background */}
-      <div className='absolute inset-0 -z-10'>
+      {/* Background - Default background for desktop */}
+      <div className='absolute inset-0 -z-20 hidden lg:block'>
         <Image
           src={ASSETS.background}
           alt=''
@@ -366,20 +324,45 @@ export default function HallOfFameParticipants() {
         />
       </div>
 
+      {/* Mobile Background - Players image as background with opacity and greyscale */}
+      <div className='absolute inset-0 -z-10 lg:hidden'>
+        {/* Original background */}
+        <Image
+          src={ASSETS.background}
+          alt=''
+          role='presentation'
+          fill
+          priority
+          sizes='100vw'
+          className='object-cover'
+        />
+        {/* Players image overlay */}
+        <div className='absolute inset-0'>
+          <Image
+            src={ASSETS.players}
+            alt=''
+            role='presentation'
+            fill
+            sizes='100vw'
+            className='object-contain object-bottom opacity-30 grayscale'
+          />
+        </div>
+      </div>
+
       {/* Content */}
       <div
         className='mx-auto max-w-screen-xl px-4 pt-8 sm:pt-12 lg:pb-[135px]'
         style={{ paddingBottom: `calc(${WAVE_HEIGHT}px + 12px)` }}
       >
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
-          {/* Enhanced Left: players image */}
+          {/* Enhanced Left: players image (Desktop only) */}
           <PlayersImage
             src={ASSETS.players}
             alt={t('playersAlt')}
             isVisible={isVisible}
           />
 
-          {/* Enhanced Right: content */}
+          {/* Enhanced Content Section */}
           <div className='lg:col-span-6'>
             <header>
               <h2

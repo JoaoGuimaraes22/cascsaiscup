@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { MouseEvent } from 'react'
+import clsx from 'clsx'
 
 export default function RegistrationHero() {
   const t = useTranslations('RegistrationPage.RegistrationHero')
@@ -11,8 +12,7 @@ export default function RegistrationHero() {
   const ASSETS = {
     background: '/img/registration/hero-bg.png',
     player: '/img/registration/player.png',
-    wave: '/img/global/ondas-3.png',
-    tagline: '/img/global/tagline.png'
+    wave: '/img/global/ondas-3.png'
   } as const
 
   const WAVE_HEIGHT = 135
@@ -36,24 +36,17 @@ export default function RegistrationHero() {
     })
   }
 
-  const statsData = [
-    t('stats.teams'),
-    t('stats.athletes'),
-    t('stats.countries'),
-    t('stats.games')
-  ]
-
   return (
     <section
       className='relative w-full overflow-hidden'
       style={{
         minHeight: '89svh',
-        maxHeight: 'none' // Allow content to expand naturally
+        maxHeight: 'none'
       }}
       aria-labelledby='registration-title'
     >
-      {/* Background Image */}
-      <div className='absolute inset-0 -z-10'>
+      {/* Background Image - Default background for desktop */}
+      <div className='absolute inset-0 -z-20 hidden lg:block'>
         <Image
           src={ASSETS.background}
           alt=''
@@ -64,6 +57,32 @@ export default function RegistrationHero() {
         />
       </div>
 
+      {/* Mobile Background - Player image as background with opacity and greyscale */}
+      <div className='absolute inset-0 -z-10 lg:hidden'>
+        {/* Original background */}
+        <Image
+          src={ASSETS.background}
+          alt=''
+          fill
+          priority
+          sizes='100vw'
+          className='object-cover'
+        />
+        {/* Player image overlay - Centered and more visible */}
+        <div className='absolute inset-0 flex items-center justify-center'>
+          <div className='relative h-[500px] w-[300px] sm:h-[600px] sm:w-[400px]'>
+            <Image
+              src={ASSETS.player}
+              alt=''
+              role='presentation'
+              fill
+              sizes='(max-width: 640px) 300px, 400px'
+              className='object-contain object-center opacity-15 grayscale-[60%]'
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Main Content Container */}
       <div
         className='relative z-10 mx-auto max-w-screen-xl px-4 pt-8 sm:pt-12'
@@ -71,9 +90,10 @@ export default function RegistrationHero() {
       >
         {/* Content Grid */}
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
-          {/* Left Column: Content */}
+          {/* Left Column: Registration Content */}
           <div className='flex flex-col justify-center lg:col-span-7'>
             <div className='space-y-6'>
+              {/* Main Title */}
               <h1
                 id='registration-title'
                 className='text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl lg:text-4xl'
@@ -81,68 +101,125 @@ export default function RegistrationHero() {
                 {t('title')}
               </h1>
 
-              <div className='max-w-prose space-y-4 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
-                <p>{t('intro')}</p>
+              {/* School Accommodation Section */}
+              <div className='space-y-4'>
+                <h2 className='text-lg font-extrabold uppercase tracking-wide text-sky-600 sm:text-xl'>
+                  {t('schoolAccommodation.title')}
+                </h2>
 
-                <ul className='space-y-2 pl-5 marker:text-sky-600' role='list'>
-                  <li className='list-disc'>
-                    <span className='font-extrabold uppercase tracking-wide text-sky-700'>
-                      {t('earlyBird.label')}
-                    </span>{' '}
-                    {t('earlyBird.text')}
-                  </li>
-                  <li className='list-disc'>
-                    <span className='font-extrabold uppercase tracking-wide text-sky-700'>
-                      {t('regularBird.label')}
-                    </span>{' '}
-                    {t('regularBird.text')}
-                  </li>
-                  <li className='list-disc'>{t('teamMinimum')}</li>
-                  <li className='list-disc'>{t('coachesOffer')}</li>
-                </ul>
+                <p className='text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+                  {t('schoolAccommodation.description')}
+                </p>
 
-                {/* Hotel Information */}
-                <div>
-                  <h3 className='mb-2 font-extrabold uppercase tracking-wide text-sky-600'>
-                    {t('hotel.title')}
-                  </h3>
-                  <p>
-                    {t('hotel.text')} <strong>{t('hotel.agents')}</strong>{' '}
-                    {t('hotel.more')}{' '}
-                    <a
-                      href='https://www.cascaisvolleycup.com'
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='font-semibold text-sky-700 underline decoration-2 underline-offset-2 transition-colors hover:text-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
-                    >
-                      www.cascaisvolleycup.com
-                    </a>
-                  </p>
+                {/* Pricing Options - Tab Style */}
+                <div className='space-y-1'>
+                  {/* Early Bird Tab */}
+                  <div className='rounded-lg bg-transparent p-4 shadow-sm'>
+                    <div className='mb-2 flex flex-wrap items-baseline gap-2'>
+                      <span className='font-extrabold uppercase tracking-wide text-sky-700'>
+                        {t('pricing.earlyBird.label')}
+                      </span>
+                      <span className='text-sm text-slate-700'>
+                        {t('pricing.earlyBird.period')}
+                      </span>
+                      <span className='font-bold text-sky-800'>
+                        {t('pricing.earlyBird.price')}
+                      </span>
+                    </div>
+                    <p className='text-sm text-slate-700'>
+                      {t('pricing.earlyBird.details')}
+                    </p>
+                  </div>
+
+                  {/* Regular Bird Tab */}
+                  <div className='rounded-lg bg-transparent p-4 shadow-sm'>
+                    <div className='mb-2 flex flex-wrap items-baseline gap-2'>
+                      <span className='font-extrabold uppercase tracking-wide text-sky-700'>
+                        {t('pricing.regularBird.label')}
+                      </span>
+                      <span className='text-sm text-slate-700'>
+                        {t('pricing.regularBird.period')}
+                      </span>
+                      <span className='font-bold text-sky-800'>
+                        {t('pricing.regularBird.price')}
+                      </span>
+                    </div>
+                    <p className='text-sm text-slate-700'>
+                      {t('pricing.regularBird.details')}
+                    </p>
+                  </div>
                 </div>
 
-                {/* CTA Button */}
-                <div className='pt-2'>
+                {/* Team Requirements */}
+                <p className='text-sm text-slate-700 sm:text-base'>
+                  {t('teamRequirements')}
+                </p>
+
+                {/* Payment Information */}
+                <div className='space-y-2'>
+                  <p className='text-sm font-medium text-slate-700'>
+                    {t('paymentInfo.instruction')}
+                  </p>
+
+                  <div className='rounded-lg bg-transparent p-4 text-sm'>
+                    <p className='font-bold uppercase text-sky-700'>
+                      {t('paymentInfo.account.name')}
+                    </p>
+                    <p className='text-slate-700'>
+                      <span className='font-medium'>IBAN:</span>{' '}
+                      {t('paymentInfo.account.iban')}
+                    </p>
+                    <p className='text-slate-700'>
+                      <span className='font-medium'>BIC/Swift:</span>{' '}
+                      {t('paymentInfo.account.bic')}
+                    </p>
+                    <p className='text-slate-700'>
+                      <span className='font-medium'>NIB:</span>{' '}
+                      {t('paymentInfo.account.nib')}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Registration Notice */}
+                <p className='text-sm text-slate-700 sm:text-base'>
+                  {t('registrationNotice')}
+                </p>
+
+                {/* Action Buttons */}
+                <div className='flex flex-col gap-4 pt-4 sm:flex-row'>
+                  <a
+                    href='/documents/brochure.pdf'
+                    download
+                    className='inline-flex items-center justify-center rounded-lg bg-sky-600 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+                  >
+                    {t('buttons.brochure')}
+                  </a>
+
                   <button
                     onClick={handleScrollToForm}
-                    className='group relative overflow-hidden rounded-full bg-gradient-to-r from-sky-600 to-sky-700 px-6 py-3 text-sm font-bold text-white shadow-xl ring-1 ring-black/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
-                    aria-label={t('ctaScroll')}
+                    className='inline-flex items-center justify-center rounded-lg bg-sky-700 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-800 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
                   >
-                    <span className='relative z-10'>{t('ctaScroll')}</span>
-                    <div className='absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full' />
+                    {t('buttons.registerTeams')}
                   </button>
                 </div>
+              </div>
 
-                {/* Tagline - Desktop Only */}
-                <div className='hidden pt-6 xl:block'>
-                  <Image
-                    src={ASSETS.tagline}
-                    alt={t('taglineAlt') || 'Feel the action, enjoy the summer'}
-                    width={420}
-                    height={160}
-                    className='h-auto w-[320px] object-contain drop-shadow-lg lg:w-[380px]'
-                    sizes='(max-width: 1024px) 320px, 380px'
-                  />
-                </div>
+              {/* Hotel Accommodation Section */}
+              <div className='space-y-4 border-t border-sky-200 pt-6'>
+                <h2 className='text-lg font-extrabold uppercase tracking-wide text-sky-600 sm:text-xl'>
+                  {t('hotelAccommodation.title')}
+                </h2>
+
+                <p className='text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+                  {t('hotelAccommodation.description')}
+                </p>
+
+                <a
+                  href='#'
+                  className='inline-flex items-center justify-center rounded-lg bg-sky-600 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+                >
+                  {t('buttons.osports')}
+                </a>
               </div>
             </div>
           </div>
@@ -173,13 +250,9 @@ export default function RegistrationHero() {
         </div>
       </div>
 
-      {/* Bottom Wave with Stats */}
+      {/* Bottom Wave - No Stats */}
       <div className='relative z-0'>
-        <WaveSection
-          waveAsset={ASSETS.wave}
-          waveHeight={WAVE_HEIGHT}
-          statsData={statsData}
-        />
+        <WaveSection waveAsset={ASSETS.wave} waveHeight={WAVE_HEIGHT} />
       </div>
     </section>
   )
@@ -189,10 +262,9 @@ export default function RegistrationHero() {
 interface WaveSectionProps {
   waveAsset: string
   waveHeight: number
-  statsData: string[]
 }
 
-function WaveSection({ waveAsset, waveHeight, statsData }: WaveSectionProps) {
+function WaveSection({ waveAsset, waveHeight }: WaveSectionProps) {
   return (
     <div className='absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
       {/* Desktop Version */}
@@ -206,16 +278,11 @@ function WaveSection({ waveAsset, waveHeight, statsData }: WaveSectionProps) {
           className='-mb-px block h-auto w-full'
           style={{ height: `${waveHeight}px` }}
         />
-        <div className='absolute inset-0 flex items-center justify-end'>
-          <div className='mx-auto max-w-screen-xl px-4'>
-            <StatsList items={statsData} />
-          </div>
-        </div>
       </div>
 
       {/* Mobile Version */}
       <div
-        className='relative flex items-center justify-center lg:hidden'
+        className='relative lg:hidden'
         style={{
           backgroundImage: `url(${waveAsset})`,
           backgroundSize: '100% 100%',
@@ -223,52 +290,9 @@ function WaveSection({ waveAsset, waveHeight, statsData }: WaveSectionProps) {
           backgroundRepeat: 'no-repeat',
           height: `${waveHeight}px`
         }}
-      >
-        <StatsList compact items={statsData} />
-      </div>
+      />
     </div>
   )
 }
 
-/* -------- Stats List Component -------- */
-interface StatsListProps {
-  items: string[]
-  compact?: boolean
-}
-
-function StatsList({ items, compact = false }: StatsListProps) {
-  return (
-    <ul
-      role='list'
-      aria-label='Tournament statistics'
-      className={`flex items-center whitespace-nowrap font-extrabold uppercase text-white drop-shadow-lg ${
-        compact
-          ? 'gap-2 px-2 text-[10px] tracking-tight'
-          : 'gap-3 px-3 text-[11px] tracking-normal sm:gap-4 sm:text-[13px] sm:tracking-wide lg:gap-6 lg:text-lg'
-      }`}
-    >
-      {items.map((item, index) => (
-        <li
-          key={`stat-${index}`}
-          className={`flex items-center ${
-            compact ? 'gap-2' : 'gap-3 sm:gap-4 lg:gap-6'
-          }`}
-        >
-          <span className='transition-all duration-300 hover:scale-105'>
-            {item}
-          </span>
-          {index < items.length - 1 && (
-            <span
-              className={`leading-none text-sky-300 ${
-                compact ? 'text-xs' : 'text-sm sm:text-lg lg:text-2xl'
-              }`}
-              aria-hidden
-            >
-              •
-            </span>
-          )}
-        </li>
-      ))}
-    </ul>
-  )
-}
+/* -------- Stats List Component - REMOVED -------- */
