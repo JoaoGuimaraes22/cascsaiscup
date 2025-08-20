@@ -145,7 +145,7 @@ export default function Gallery({
               {t('title')}
             </span>
           </h1>
-          <p className='mx-auto max-w-2xl text-lg text-text-secondary sm:text-xl'>
+          <p className='text-text-secondary mx-auto max-w-2xl text-lg sm:text-xl'>
             {t('subtitle')}
           </p>
         </div>
@@ -166,13 +166,13 @@ export default function Gallery({
                   alt={`${t('image_alt')} ${image.public_id}`}
                   crop='fill'
                   gravity='auto'
-                  quality='auto'
+                  quality={75}
                   format='auto'
                   className='h-full w-full object-cover transition-transform duration-300 group-hover:scale-110'
                 />
               </div>
               <div className='p-3'>
-                <p className='text-sm text-text-secondary'>
+                <p className='text-text-secondary text-sm'>
                   {new Date(image.created_at).toLocaleDateString()}
                 </p>
               </div>
@@ -183,7 +183,7 @@ export default function Gallery({
         {/* Load More Button (optional) */}
         {images.length >= maxResults && (
           <div className='mt-12 text-center'>
-            <button className='hover:bg-primary/80 rounded bg-primary px-8 py-3 text-button-text transition'>
+            <button className='hover:bg-primary/80 text-button-text rounded bg-primary px-8 py-3 transition'>
               {t('load_more')}
             </button>
           </div>
@@ -248,7 +248,7 @@ export default function Gallery({
                   width={selectedImage.width}
                   height={selectedImage.height}
                   alt={`${t('image_alt')} ${selectedImage.public_id}`}
-                  quality='auto'
+                  quality={75}
                   format='auto'
                   className='max-h-[90vh] max-w-[90vw] object-contain'
                 />

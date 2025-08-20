@@ -278,6 +278,7 @@ export default function LandingUpdates() {
         fill
         priority
         className='absolute inset-0 -z-10 object-cover'
+        quality={75}
       />
 
       {/* Top wave - responsive height with better mobile scaling */}
@@ -288,6 +289,8 @@ export default function LandingUpdates() {
           role='presentation'
           fill
           className='object-cover object-center'
+          quality={75}
+          loading='lazy'
         />
       </div>
 
@@ -386,6 +389,8 @@ export default function LandingUpdates() {
             role='presentation'
             fill
             className='object-cover'
+            priority
+            quality={75}
           />
 
           {/* Testimonials overlay */}

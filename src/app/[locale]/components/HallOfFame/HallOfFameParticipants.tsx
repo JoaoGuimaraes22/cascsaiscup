@@ -95,6 +95,8 @@ function TeamItem({ team, index, isVisible }: TeamItemProps) {
           fill
           sizes='24px'
           className='object-cover'
+          quality={75}
+          loading='lazy'
         />
       </div>
 
@@ -171,6 +173,7 @@ function PlayersImage({ src, alt, isVisible }: PlayersImageProps) {
           sizes='(max-width: 1024px) 90vw, 760px'
           className='object-contain object-bottom transition-transform duration-500 group-hover:scale-105'
           priority
+          quality={80}
         />
 
         {/* Subtle highlight effect */}
@@ -210,42 +213,6 @@ function CTAButton({ onClick, children, isVisible }: CTAButtonProps) {
   )
 }
 
-// Enhanced stats list component
-interface StatsListProps {
-  items: string[]
-  compact?: boolean
-  isVisible: boolean
-}
-
-function StatsList({ items, compact = false, isVisible }: StatsListProps) {
-  return (
-    <ul
-      role='list'
-      aria-label='Tournament statistics'
-      className={clsx(
-        'flex items-center whitespace-nowrap font-extrabold uppercase text-white drop-shadow-lg transition-all duration-1000 ease-out',
-        compact
-          ? 'gap-2 px-2 text-[10px] tracking-tight'
-          : 'gap-3 px-3 text-[11px] tracking-normal sm:gap-4 sm:text-[13px] sm:tracking-wide lg:gap-6 lg:text-lg',
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-      )}
-      style={{ transitionDelay: '1100ms' }}
-    >
-      {items.map((item, index) => (
-        <li
-          key={`stat-${index}`}
-          className={clsx(
-            'flex items-center transition-all duration-300 hover:scale-105',
-            compact ? 'text-[10px]' : 'text-[11px] sm:text-[13px] lg:text-lg'
-          )}
-        >
-          {item}
-        </li>
-      ))}
-    </ul>
-  )
-}
-
 // Enhanced wave section with stats
 interface WaveSectionProps {
   statsItems: string[]
@@ -268,11 +235,7 @@ function WaveSection({ statsItems, isVisible }: WaveSectionProps) {
           height: `${WAVE_HEIGHT}px`,
           transitionDelay: '1000ms'
         }}
-      >
-        <div className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4'>
-          <StatsList compact items={statsItems} isVisible={isVisible} />
-        </div>
-      </div>
+      ></div>
     </div>
   )
 }
@@ -321,6 +284,7 @@ export default function HallOfFameParticipants() {
           priority
           sizes='100vw'
           className='object-cover'
+          quality={75}
         />
       </div>
 
@@ -335,6 +299,7 @@ export default function HallOfFameParticipants() {
           priority
           sizes='100vw'
           className='object-cover'
+          quality={75}
         />
         {/* Players image overlay */}
         <div className='absolute inset-0'>
@@ -345,6 +310,8 @@ export default function HallOfFameParticipants() {
             fill
             sizes='100vw'
             className='object-contain object-bottom opacity-30 grayscale'
+            loading='lazy'
+            quality={80}
           />
         </div>
       </div>

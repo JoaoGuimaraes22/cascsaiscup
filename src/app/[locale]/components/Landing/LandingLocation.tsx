@@ -71,6 +71,7 @@ export default function LandingLocation() {
           priority
           sizes='100vw'
           className='object-cover object-[50%_80%] md:object-[50%_78%] lg:object-[50%_76%]'
+          quality={80}
         />
       </div>
 
@@ -129,6 +130,7 @@ export default function LandingLocation() {
                   className='h-auto w-full object-cover'
                   priority
                   sizes='(max-width: 768px) 90vw, 512px'
+                  quality={80}
                 />
               </div>
             </div>
@@ -172,6 +174,8 @@ export default function LandingLocation() {
               height={215}
               className='h-auto w-full object-contain drop-shadow-lg'
               sizes='(max-width: 640px) 260px, 320px'
+              quality={80}
+              loading='lazy'
             />
           </div>
         </div>
@@ -225,6 +229,8 @@ export default function LandingLocation() {
                 height={215}
                 className='h-auto w-full object-contain drop-shadow-lg'
                 sizes='420px'
+                quality={80}
+                loading='lazy'
               />
             </div>
           </div>
@@ -250,6 +256,7 @@ export default function LandingLocation() {
                   className='h-auto w-full object-cover'
                   priority
                   sizes='540px'
+                  quality={80}
                 />
               </div>
             </div>
@@ -288,7 +295,8 @@ export default function LandingLocation() {
           height={WAVE_HEIGHT}
           className='-mb-px block w-full object-cover'
           style={{ height: `${WAVE_HEIGHT}px` }}
-          priority
+          loading='lazy'
+          quality={75}
         />
 
         {/* Stats Overlay */}

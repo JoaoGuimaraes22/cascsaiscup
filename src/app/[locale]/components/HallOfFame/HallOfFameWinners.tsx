@@ -181,6 +181,7 @@ export default function HallOfFameWinners() {
           sizes='100vw'
           className='object-cover object-center'
           priority
+          quality={75}
         />
       </div>
 
@@ -344,6 +345,7 @@ export default function HallOfFameWinners() {
                                           fill
                                           sizes='24px'
                                           className='object-cover'
+                                          quality={75}
                                         />
                                       </div>
 
@@ -385,6 +387,7 @@ export default function HallOfFameWinners() {
                 fill
                 sizes='(max-width: 1024px) 90vw, 600px'
                 className='object-contain object-center drop-shadow-2xl'
+                quality={80}
                 priority
               />
             </div>
@@ -404,6 +407,8 @@ export default function HallOfFameWinners() {
             sizes='100vw'
             className='block h-auto w-full'
             style={{ height: `${WAVE_HEIGHT}px` }}
+            loading='lazy'
+            quality={75}
           />
           {/* Subtle gradient overlay on wave */}
           <div className='absolute inset-0 bg-gradient-to-t from-sky-600/20 to-transparent' />

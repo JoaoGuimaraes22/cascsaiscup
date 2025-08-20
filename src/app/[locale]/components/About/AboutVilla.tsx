@@ -59,6 +59,7 @@ export default function AboutVilla() {
           role='presentation'
           fill
           priority
+          quality={80}
           className={clsx(
             'object-cover transition-opacity duration-700',
             backgroundLoaded ? 'opacity-100' : 'opacity-0'
@@ -87,6 +88,8 @@ export default function AboutVilla() {
               src={ASSETS.tagline}
               alt={t('taglineAlt')}
               width={520}
+              quality={75}
+              loading='lazy'
               height={220}
               className='h-auto w-[280px] object-contain drop-shadow transition-transform duration-300 hover:scale-105 lg:w-[320px]'
               sizes='(max-width: 1024px) 280px, 320px'
@@ -118,6 +121,8 @@ export default function AboutVilla() {
                 alt={t('eventLogoAlt')}
                 width={260}
                 height={80}
+                quality={80}
+                loading='lazy'
                 className='h-auto w-[120px] object-contain drop-shadow transition-transform duration-300 hover:scale-105'
                 sizes='120px'
                 decoding='async'
@@ -198,6 +203,8 @@ export default function AboutVilla() {
               sizes='(max-width: 1024px) 220px, 260px'
               decoding='async'
               draggable={false}
+              loading='lazy'
+              quality={80}
             />
           </div>
 
@@ -213,6 +220,8 @@ export default function AboutVilla() {
                 sizes='(max-width: 1024px) 200px, 240px'
                 decoding='async'
                 draggable={false}
+                loading='lazy'
+                quality={80}
               />
             </div>
 
@@ -237,7 +246,8 @@ export default function AboutVilla() {
           className='-mb-px block w-full object-cover'
           style={{ height: `${WAVE_HEIGHT}px` }}
           sizes='100vw'
-          priority
+          loading='lazy'
+          quality={75}
         />
       </div>
     </section>

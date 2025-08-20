@@ -101,7 +101,8 @@ const Footer: FC<Props> = ({ locale }) => {
                 width={200}
                 height={72}
                 className='h-12 w-auto md:h-14'
-                priority
+                loading='lazy'
+                quality={80}
               />
             </Link>
             <p className='mt-4 text-sm leading-relaxed text-slate-600'>
@@ -314,6 +315,7 @@ const SponsorLogo: FC<{ sponsor: Sponsor }> = ({ sponsor }) => {
       className='h-auto max-h-16 w-auto object-contain transition-all hover:scale-105'
       sizes='(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 160px'
       loading='lazy'
+      quality={80}
     />
   )
 

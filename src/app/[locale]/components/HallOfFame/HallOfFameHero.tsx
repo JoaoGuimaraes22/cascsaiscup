@@ -158,6 +158,7 @@ function HeroImage({ src, alt, isVisible }: HeroImageProps) {
           sizes='(max-width: 1024px) 90vw, 700px'
           className='object-contain object-bottom transition-transform duration-500 group-hover:scale-105'
           priority
+          quality={75}
         />
 
         {/* Subtle glow effect on hover */}
@@ -194,6 +195,8 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
             height={WAVE_HEIGHT}
             className='z-10 -mb-px block h-auto w-full'
             sizes='100vw'
+            quality={75}
+            loading='lazy'
           />
         </div>
 
@@ -215,6 +218,8 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
                 width={240}
                 height={96}
                 className='h-[60px] w-auto transition-transform duration-300 hover:scale-110 sm:h-[68px]'
+                loading='lazy'
+                quality={80}
               />
             </div>
 
@@ -234,6 +239,8 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
                 width={280}
                 height={90}
                 className='h-[54px] w-auto transition-transform duration-300 hover:scale-110 sm:h-[64px]'
+                priority
+                quality={80}
               />
             </div>
           </div>
@@ -271,6 +278,8 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
               width={150}
               height={60}
               className='h-[36px] w-auto transition-transform duration-300 hover:scale-110'
+              loading='lazy'
+              quality={80}
             />
           </div>
 
@@ -289,6 +298,8 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
               width={120}
               height={40}
               className='h-[20px] w-auto transition-transform duration-300 hover:scale-110'
+              priority
+              quality={80}
             />
           </div>
         </div>
@@ -342,6 +353,7 @@ export default function HallOfFameHero() {
           priority
           sizes='100vw'
           className='duration-[20s] object-cover opacity-40 transition-transform ease-out hover:scale-105'
+          quality={75}
         />
         {/* Subtle gradient overlay */}
         <div className='absolute inset-0 bg-gradient-to-br from-sky-50/30 via-transparent to-blue-50/20' />

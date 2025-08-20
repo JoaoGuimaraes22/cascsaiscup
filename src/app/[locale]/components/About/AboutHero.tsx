@@ -120,6 +120,7 @@ export default function AboutHero() {
           sizes='100vw'
           priority
           onLoad={() => setImageLoaded(true)}
+          quality={75}
         />
       </div>
 
@@ -133,6 +134,7 @@ export default function AboutHero() {
             'Volleyball players in action at Cascais tournament'
           }
           fill
+          quality={80}
           className='object-cover object-top'
           sizes='(max-width: 768px) 0px, 34vw'
           priority
@@ -310,6 +312,7 @@ function LogoCard({ logo, index, mobile = false }: LogoCardProps) {
         )}
         loading='lazy'
         decoding='async'
+        quality={80}
         sizes={
           mobile
             ? '(max-width: 640px) 25vw, 120px'

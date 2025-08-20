@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { MouseEvent } from 'react'
-import clsx from 'clsx'
 
 export default function RegistrationHero() {
   const t = useTranslations('RegistrationPage.RegistrationHero')
@@ -54,6 +53,7 @@ export default function RegistrationHero() {
           priority
           sizes='100vw'
           className='object-cover'
+          quality={75}
         />
       </div>
 
@@ -67,6 +67,7 @@ export default function RegistrationHero() {
           priority
           sizes='100vw'
           className='object-cover'
+          quality={75}
         />
         {/* Player image overlay - Centered and more visible */}
         <div className='absolute inset-0 flex items-center justify-center'>
@@ -78,6 +79,8 @@ export default function RegistrationHero() {
               fill
               sizes='(max-width: 640px) 300px, 400px'
               className='object-contain object-center opacity-15 grayscale-[60%]'
+              quality={75}
+              priority
             />
           </div>
         </div>
@@ -243,6 +246,7 @@ export default function RegistrationHero() {
                   sizes='(max-width: 1280px) 400px, 480px'
                   className='object-contain object-bottom'
                   priority
+                  quality={80}
                 />
               </div>
             </div>
@@ -277,6 +281,8 @@ function WaveSection({ waveAsset, waveHeight }: WaveSectionProps) {
           sizes='100vw'
           className='-mb-px block h-auto w-full'
           style={{ height: `${waveHeight}px` }}
+          quality={75}
+          loading='lazy'
         />
       </div>
 

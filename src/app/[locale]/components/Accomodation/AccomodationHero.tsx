@@ -60,6 +60,7 @@ export default function AccommodationHero() {
           )}
           sizes='100vw'
           priority
+          quality={75}
           onLoad={() => setBackgroundLoaded(true)}
         />
       </div>
@@ -71,6 +72,8 @@ export default function AccommodationHero() {
           alt=''
           role='presentation'
           fill
+          quality={80}
+          loading='lazy'
           className={clsx(
             'object-contain object-top transition-opacity duration-1000',
             isVisible ? 'opacity-20' : 'opacity-10'
@@ -170,6 +173,8 @@ export default function AccommodationHero() {
               style={{ transitionDelay: '600ms' }}
             >
               <Image
+                quality={80}
+                loading='lazy'
                 src={ASSETS.player}
                 alt={t('playerAlt')}
                 fill
@@ -252,6 +257,8 @@ function SimpleWave({ waveHeight }: SimpleWaveProps) {
           height={waveHeight}
           className='z-10 -mb-px block h-auto w-full'
           sizes='100vw'
+          loading='lazy'
+          quality={75}
         />
       </div>
 

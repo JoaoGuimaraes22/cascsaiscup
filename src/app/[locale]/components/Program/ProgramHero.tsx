@@ -158,6 +158,7 @@ export default function ProgramHero() {
           )}
           sizes='100vw'
           priority
+          quality={75}
           onLoad={() => setBackgroundLoaded(true)}
         />
       </div>
@@ -174,6 +175,8 @@ export default function ProgramHero() {
             isVisible ? 'opacity-20' : 'opacity-0'
           )}
           sizes='100vw'
+          quality={80}
+          priority
         />
       </div>
 
@@ -214,6 +217,8 @@ export default function ProgramHero() {
               height={160}
               className='h-auto w-[240px] object-contain transition-transform duration-300 hover:scale-105 sm:w-[320px] lg:w-[420px]'
               sizes='(max-width:640px) 240px, (max-width:1024px) 320px, 420px'
+              quality={80}
+              loading='lazy'
             />
           </div>
         </div>
@@ -398,6 +403,8 @@ export default function ProgramHero() {
                 height={400}
                 className='h-auto w-full object-contain transition-transform duration-300 hover:scale-105'
                 sizes='(max-width:1024px) 100vw, 42vw'
+                quality={80}
+                priority
               />
             </div>
           </div>
@@ -418,6 +425,8 @@ export default function ProgramHero() {
             height={120}
             className='h-auto w-[200px] object-contain transition-transform duration-300 hover:scale-105 sm:w-[240px]'
             sizes='(max-width:640px) 200px, 240px'
+            quality={80}
+            loading='lazy'
           />
         </div>
       </div>
@@ -434,6 +443,8 @@ export default function ProgramHero() {
             height={WAVE_HEIGHT}
             className='z-10 -mb-px block h-auto w-full'
             sizes='100vw'
+            quality={75}
+            loading='lazy'
           />
         </div>
 
