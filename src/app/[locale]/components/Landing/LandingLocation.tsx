@@ -68,7 +68,7 @@ export default function LandingLocation() {
           src={ASSETS.background}
           alt=''
           fill
-          priority
+          loading='eager'
           sizes='100vw'
           className='object-cover object-[50%_80%] md:object-[50%_78%] lg:object-[50%_76%]'
           quality={80}
@@ -128,7 +128,7 @@ export default function LandingLocation() {
                   width={768}
                   height={456}
                   className='h-auto w-full object-cover'
-                  priority
+                  loading='eager'
                   sizes='(max-width: 768px) 90vw, 512px'
                   quality={80}
                 />
@@ -254,7 +254,7 @@ export default function LandingLocation() {
                   width={768}
                   height={456}
                   className='h-auto w-full object-cover'
-                  priority
+                  loading='eager'
                   sizes='540px'
                   quality={80}
                 />

@@ -97,7 +97,7 @@ export default function LandingWelcome() {
               alt='Cascais Câmara Municipal'
               width={300}
               height={80}
-              loading='lazy'
+              loading='eager'
               quality={80}
               sizes='(max-width: 640px) 100px, (max-width: 1024px) 180px, 280px'
               className='h-auto w-[100px] drop-shadow-lg sm:w-[180px] lg:w-[280px]'
@@ -116,7 +116,7 @@ export default function LandingWelcome() {
               alt={t('tagline_alt') || 'feel the ACTION, enjoy the SUMMER'}
               width={400}
               height={100}
-              loading='lazy'
+              loading='eager'
               quality={80}
               sizes='(max-width: 640px) 120px, (max-width: 1024px) 220px, 320px'
               className='h-auto w-[120px] drop-shadow-lg sm:w-[220px] lg:w-[320px]'

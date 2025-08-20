@@ -85,7 +85,7 @@ export default function CompetitionHero() {
           fill
           className='object-contain object-center opacity-30 grayscale'
           sizes='100vw'
-          loading='lazy'
+          loading='eager'
         />
       </div>
 
@@ -105,7 +105,7 @@ export default function CompetitionHero() {
                 height={PHONE_DIMENSIONS.xl.height}
                 className='h-auto w-auto max-w-none object-contain object-left drop-shadow-2xl transition-transform duration-300 hover:scale-105'
                 sizes='(max-width: 640px) 200px, (max-width: 768px) 230px, (max-width: 1024px) 260px, (max-width: 1280px) 280px, 300px'
-                loading='lazy'
+                loading='eager'
                 quality={90}
                 draggable={false}
               />

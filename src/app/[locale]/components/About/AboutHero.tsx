@@ -310,7 +310,7 @@ function LogoCard({ logo, index, mobile = false }: LogoCardProps) {
           mobile ? 'h-10 sm:h-12' : 'h-12 lg:h-14',
           imageLoaded ? 'opacity-100' : 'opacity-0'
         )}
-        loading='lazy'
+        loading='eager'
         decoding='async'
         quality={80}
         sizes={

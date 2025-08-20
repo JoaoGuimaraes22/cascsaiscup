@@ -151,7 +151,7 @@ export const Header: FC<Props> = ({ locale }) => {
             <Image
               src={Logo}
               alt='Cascais Volley Cup 2026'
-              priority
+              loading='eager'
               quality={80}
               sizes='(max-width: 640px) 150px, (max-width: 1024px) 190px, 240px'
               className='h-8 w-auto transition-transform hover:scale-105 sm:h-10 md:h-12 lg:h-14'

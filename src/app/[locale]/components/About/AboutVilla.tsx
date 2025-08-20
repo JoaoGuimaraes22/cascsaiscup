@@ -58,7 +58,7 @@ export default function AboutVilla() {
           alt=''
           role='presentation'
           fill
-          priority
+          loading='eager'
           quality={80}
           className={clsx(
             'object-cover transition-opacity duration-700',
@@ -172,6 +172,7 @@ export default function AboutVilla() {
                 sizes='120px'
                 decoding='async'
                 draggable={false}
+                loading='lazy'
               />
             </div>
 

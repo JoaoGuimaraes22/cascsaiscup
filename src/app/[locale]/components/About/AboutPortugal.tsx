@@ -122,7 +122,7 @@ export default function AboutPortugal() {
             imageLoaded ? 'opacity-100' : 'opacity-0'
           )}
           sizes='100vw'
-          priority
+          loading='eager'
           quality={75}
           onLoad={() => setImageLoaded(true)}
         />
@@ -185,6 +185,7 @@ export default function AboutPortugal() {
                 width={260}
                 height={180}
                 quality={80}
+                loading='lazy'
                 className='h-auto w-[220px] object-contain transition-transform duration-300 hover:scale-105 lg:w-[260px]'
                 sizes='(max-width: 1024px) 220px, 260px'
               />
@@ -351,7 +352,7 @@ function SpotCard({ spot, index, t, isVisible }: SpotCardProps) {
             imageLoaded ? 'opacity-100' : 'opacity-0'
           )}
           sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'
-          loading='lazy'
+          loading='eager'
           decoding='async'
           quality={80}
           onLoad={() => setImageLoaded(true)}

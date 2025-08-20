@@ -276,7 +276,7 @@ export default function LandingUpdates() {
         alt=''
         role='presentation'
         fill
-        priority
+        loading='eager'
         className='absolute inset-0 -z-10 object-cover'
         quality={75}
       />
@@ -290,7 +290,7 @@ export default function LandingUpdates() {
           fill
           className='object-cover object-center'
           quality={75}
-          loading='lazy'
+          loading='eager'
         />
       </div>
 
@@ -389,7 +389,7 @@ export default function LandingUpdates() {
             role='presentation'
             fill
             className='object-cover'
-            priority
+            loading='eager'
             quality={75}
           />
 

@@ -73,7 +73,7 @@ export default function AccommodationHero() {
           role='presentation'
           fill
           quality={80}
-          loading='lazy'
+          loading='eager'
           className={clsx(
             'object-contain object-top transition-opacity duration-1000',
             isVisible ? 'opacity-20' : 'opacity-10'
@@ -174,7 +174,7 @@ export default function AccommodationHero() {
             >
               <Image
                 quality={80}
-                loading='lazy'
+                loading='eager'
                 src={ASSETS.player}
                 alt={t('playerAlt')}
                 fill
