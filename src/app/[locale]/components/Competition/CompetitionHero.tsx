@@ -9,7 +9,9 @@ const ASSETS = {
   BG: '/img/competition/hero-bg.png',
   PHONE: '/img/global/hand-phone.png',
   MOSAIC: '/img/competition/mosaic.png',
-  MOSAIC_MOBILE: '/img/competition/mosaic-2.png'
+  MOSAIC_MOBILE: '/img/competition/mosaic-2.png',
+  LOGO: '/img/global/cascais-volley-cup-1-w.png',
+  TAGLINE: '/img/global/tagline-w.png'
 } as const
 
 const PHONE_DIMENSIONS = {
@@ -20,15 +22,25 @@ const PHONE_DIMENSIONS = {
   xl: { width: 300, height: 340 }
 } as const
 
+const LOGO_DIMENSIONS = {
+  width: 420,
+  height: 160
+} as const
+
+const TAGLINE_DIMENSIONS = {
+  width: 400,
+  height: 140
+} as const
+
 export default function CompetitionHero() {
   const t = useTranslations('CompetitionPage.Hero')
+  const tLogo = useTranslations('CompetitionPage.LogoTaglineHero')
 
   const handleScrollToRegulations = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     const regulationsSection = document.getElementById('regulations')
 
     if (!regulationsSection) {
-      // Fallback if section doesn't exist
       window.location.hash = '#regulations'
       return
     }
@@ -64,11 +76,23 @@ export default function CompetitionHero() {
         />
       </div>
 
+      {/* Mobile: Phone Image Behind Content - Greyscaled and Opaque */}
+      <div className='pointer-events-none absolute inset-0 z-0 md:hidden'>
+        <Image
+          src={ASSETS.PHONE}
+          alt=''
+          role='presentation'
+          fill
+          className='object-contain object-center opacity-30 grayscale'
+          sizes='100vw'
+        />
+      </div>
+
       {/* Main Content Container */}
       <div className='relative z-10 mx-auto max-w-screen-xl px-4 py-10 sm:py-12 lg:py-16'>
         <div className='grid grid-cols-1 items-center gap-8 md:grid-cols-12 md:gap-10'>
-          {/* Phone Image Section */}
-          <div className='md:col-span-5'>
+          {/* Phone Image Section - Desktop Only */}
+          <div className='hidden md:col-span-5 md:block'>
             <div className='phone-container relative -ml-4 sm:-ml-6 md:-ml-14 lg:-ml-[8vw] xl:-ml-[9vw] 2xl:-ml-[10vw]'>
               <Image
                 src={ASSETS.PHONE}
@@ -106,7 +130,9 @@ export default function CompetitionHero() {
               </div>
             </div>
 
-            <div className='mt-8'>
+            {/* Buttons Section */}
+            <div className='mt-8 flex flex-wrap gap-3'>
+              {/* Regulations Button */}
               <button
                 onClick={handleScrollToRegulations}
                 className='group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-600 to-sky-700 px-6 py-3 font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-sky-700 hover:to-sky-800 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
@@ -114,7 +140,7 @@ export default function CompetitionHero() {
               >
                 <span>{t('cta') || 'Regulamento'}</span>
                 <svg
-                  className='h-4 w-4 transition-transform group-hover:translate-x-1'
+                  className='h-4 w-4 transition-transform group-hover:translate-y-1'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -128,6 +154,23 @@ export default function CompetitionHero() {
                   />
                 </svg>
               </button>
+
+              {/* APP 2025 Button - Always Visible, Lighter Sky Color */}
+              <button
+                className='group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-sky-600 px-6 py-3 font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-sky-600 hover:to-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+                aria-label='Download mobile app for 2025'
+              >
+                <span>APP 2025</span>
+                <svg
+                  className='h-4 w-4 transition-transform group-hover:-translate-y-0.5'
+                  fill='currentColor'
+                  viewBox='0 0 24 24'
+                  aria-hidden='true'
+                >
+                  <path d='M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z' />
+                </svg>
+              </button>
+
               <span id='cta-description' className='sr-only'>
                 {t('ctaDescription') ||
                   'Scroll to view detailed competition rules and regulations'}
@@ -145,6 +188,12 @@ export default function CompetitionHero() {
           t('mosaicAlt') ||
           'Photo mosaic showcasing competition highlights and participants'
         }
+      />
+
+      {/* Logo and Tagline Section - Below Mosaic - Desktop Only */}
+      <LogoTaglineSection
+        logoAlt={tLogo('logoAlt') || 'Cascais Volley Cup official logo'}
+        taglineAlt={tLogo('taglineAlt') || 'Tournament tagline and subtitle'}
       />
     </section>
   )
@@ -194,5 +243,71 @@ function MosaicStrip({
         </div>
       </div>
     </>
+  )
+}
+
+// LogoTagline section with wave but no background image - Desktop Only
+function LogoTaglineSection({
+  logoAlt,
+  taglineAlt
+}: {
+  logoAlt: string
+  taglineAlt: string
+}) {
+  return (
+    <div className='relative hidden lg:block'>
+      {/* Wave Background */}
+      <div className='relative overflow-hidden'>
+        <Image
+          src='/img/global/ondas-9.png'
+          alt=''
+          width={2048}
+          height={150}
+          className='block h-[180px] w-full object-cover sm:h-[150px] lg:h-auto lg:object-contain'
+          sizes='100vw'
+          quality={85}
+          loading='lazy'
+          draggable={false}
+          aria-hidden='true'
+        />
+
+        {/* Overlay Content */}
+        <div className='absolute inset-0 flex items-center justify-center'>
+          <div className='mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8'>
+            <div className='flex flex-col items-center justify-center gap-6 sm:flex-row sm:justify-between sm:gap-8'>
+              {/* Logo Section */}
+              <div className='flex-shrink-0'>
+                <Image
+                  src={ASSETS.LOGO}
+                  alt={logoAlt}
+                  width={LOGO_DIMENSIONS.width}
+                  height={LOGO_DIMENSIONS.height}
+                  className='h-auto w-[180px] transition-transform duration-300 hover:scale-105 sm:w-[260px] lg:w-[320px] xl:w-[340px]'
+                  sizes='(max-width: 640px) 180px, (max-width: 1024px) 260px, (max-width: 1280px) 320px, 340px'
+                  quality={90}
+                  loading='lazy'
+                  draggable={false}
+                />
+              </div>
+
+              {/* Tagline Section */}
+              <div className='hidden flex-shrink-0 sm:block'>
+                <Image
+                  src={ASSETS.TAGLINE}
+                  alt={taglineAlt}
+                  width={TAGLINE_DIMENSIONS.width}
+                  height={TAGLINE_DIMENSIONS.height}
+                  className='h-auto w-[240px] transition-transform duration-300 hover:scale-105 sm:w-[280px] md:w-[300px] lg:w-[330px] xl:w-[360px]'
+                  sizes='(max-width: 1024px) 280px, (max-width: 1280px) 330px, 360px'
+                  quality={90}
+                  loading='lazy'
+                  draggable={false}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }

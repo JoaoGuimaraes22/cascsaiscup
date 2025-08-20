@@ -53,4 +53,5 @@ details.
 - **ABOUT** Background image + Wave
 - **ACCOMODATION** mobile new image + desktop tweaking of image + button center
   on mobile
-- **Program**
+- **Program**: title spacing with text (maybe, wave size)
+- **Competiton**: Text bold competitionFacts ;

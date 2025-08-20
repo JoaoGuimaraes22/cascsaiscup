@@ -12,28 +12,23 @@ interface RuleItemProps {
   isVisible: boolean
 }
 
+// Constants for better maintainability
+const ASSETS = {
+  background: '/img/about/about-bg.png',
+  waveTop: '/img/global/ondas-5.png',
+  waveBottom: '/img/global/ondas-3.png',
+  fpvSponsor: '/img/sponsors/fpv.png',
+  cascaisSponsor: '/img/sponsors/cascais-camara.png'
+} as const
+
 export default function CompetitionInfo() {
   const t = useTranslations('CompetitionPage.Info')
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
-  // Constants for better maintainability
-  const ASSETS = {
-    background: '/img/about/about-bg.png',
-    waveTop: '/img/global/ondas-5.png',
-    waveBottom: '/img/global/ondas-3.png',
-    player: '/img/program/players.png',
-    sponsor: '/img/sponsors/cascais-camara-w.png'
-  } as const
-
   const WAVE_DIMENSIONS = {
     width: 2048,
     height: 160
-  } as const
-
-  const PLAYER_DIMENSIONS = {
-    width: 520,
-    height: 520
   } as const
 
   const SPONSOR_DIMENSIONS = {
@@ -119,19 +114,13 @@ export default function CompetitionInfo() {
             isVisible={isVisible}
           />
 
-          {/* Player Image Section */}
-          <PlayerSection
-            playerAlt={t('playerAlt') || 'Beach volleyball player in action'}
-            isVisible={isVisible}
-          />
+          {/* Sponsors Section - Right Side */}
+          <SponsorsSection isVisible={isVisible} />
         </div>
       </div>
 
-      {/* Wave Section with Sponsor */}
-      <WaveSection
-        sponsorAlt={t('sponsorAlt') || 'Câmara Municipal de Cascais'}
-        isVisible={isVisible}
-      />
+      {/* Wave Section - No sponsor overlay here now */}
+      <WaveSection isVisible={isVisible} />
     </section>
   )
 }
@@ -141,7 +130,7 @@ function BackgroundImage() {
   return (
     <div className='absolute inset-0 -z-10'>
       <Image
-        src='/img/about/about-bg.png'
+        src={ASSETS.background}
         alt=''
         fill
         className='object-cover'
@@ -271,53 +260,60 @@ function RuleItem({ children, index, isVisible }: RuleItemProps) {
   )
 }
 
-// Player section component
-function PlayerSection({
-  playerAlt,
-  isVisible
-}: {
-  playerAlt: string
-  isVisible: boolean
-}) {
+// Sponsors section component - replaces player image
+function SponsorsSection({ isVisible }: { isVisible: boolean }) {
   return (
     <div className='lg:col-span-5'>
       <div
         className={clsx(
-          'player-container relative z-20 mx-auto mb-0 h-[360px] w-full max-w-[520px] sm:mb-[-20px] sm:h-[420px] lg:mb-[-48px] lg:h-[520px]',
+          'sponsors-container relative z-20 mx-auto flex h-auto w-full max-w-[520px] flex-col items-center justify-center gap-8 sm:gap-10 lg:gap-12',
           'transition-all delay-300 duration-1000 ease-out',
           isVisible
             ? 'translate-y-0 scale-100 opacity-100'
             : 'translate-y-12 scale-95 opacity-0'
         )}
       >
-        <Image
-          src='/img/program/players.png'
-          alt={playerAlt}
-          fill
-          className='object-contain object-center drop-shadow-xl transition-transform duration-500 hover:scale-105'
-          sizes='(max-width: 1024px) 520px, 520px'
-          quality={90}
-          loading='lazy'
-          draggable={false}
-        />
+        {/* FPV Sponsor */}
+        <div className='w-full max-w-[300px]'>
+          <Image
+            src={ASSETS.fpvSponsor}
+            alt='Federação Portuguesa de Voleibol'
+            width={300}
+            height={120}
+            className='h-auto w-full object-contain drop-shadow-lg transition-transform duration-300 hover:scale-105'
+            sizes='(max-width: 1024px) 300px, 300px'
+            quality={90}
+            loading='lazy'
+            draggable={false}
+          />
+        </div>
+
+        {/* Cascais Sponsor */}
+        <div className='w-full max-w-[280px]'>
+          <Image
+            src={ASSETS.cascaisSponsor}
+            alt='Câmara Municipal de Cascais'
+            width={280}
+            height={90}
+            className='h-auto w-full object-contain drop-shadow-lg transition-transform duration-300 hover:scale-105'
+            sizes='(max-width: 1024px) 280px, 280px'
+            quality={90}
+            loading='lazy'
+            draggable={false}
+          />
+        </div>
       </div>
     </div>
   )
 }
 
-// Wave section with sponsor
-function WaveSection({
-  sponsorAlt,
-  isVisible
-}: {
-  sponsorAlt: string
-  isVisible: boolean
-}) {
+// Wave section without sponsor overlay
+function WaveSection({ isVisible }: { isVisible: boolean }) {
   return (
     <div className='relative -mt-6 sm:-mt-8 lg:-mt-10'>
       {/* Wave Image */}
       <Image
-        src='/img/global/ondas-3.png'
+        src={ASSETS.waveBottom}
         alt=''
         width={2048}
         height={160}
@@ -327,34 +323,6 @@ function WaveSection({
         draggable={false}
         aria-hidden='true'
       />
-
-      {/* Sponsor Overlay */}
-      <div className='pointer-events-none absolute inset-0'>
-        <div className='mx-auto flex h-full max-w-screen-xl items-center px-4'>
-          <div className='flex w-full items-center justify-center lg:justify-start'>
-            <div
-              className={clsx(
-                'transition-all delay-1000 duration-1000 ease-out',
-                isVisible
-                  ? 'translate-y-0 opacity-95'
-                  : 'translate-y-4 opacity-0'
-              )}
-            >
-              <Image
-                src='/img/sponsors/cascais-camara-w.png'
-                alt={sponsorAlt}
-                width={240}
-                height={80}
-                className='h-auto w-[170px] transition-transform duration-300 hover:scale-105 sm:w-[200px] lg:w-[240px]'
-                sizes='(max-width: 640px) 170px, (max-width: 1024px) 200px, 240px'
-                quality={90}
-                loading='lazy'
-                draggable={false}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }

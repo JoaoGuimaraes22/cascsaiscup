@@ -2,8 +2,10 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { useEffect, useRef, useState } from 'react'
-import { FiDownload } from 'react-icons/fi'
+import { useEffect, useRef, useState, useCallback } from 'react'
+import { useKeenSlider } from 'keen-slider/react'
+import 'keen-slider/keen-slider.min.css'
+import { FiDownload, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import clsx from 'clsx'
 
 export default function ProgramHero() {
@@ -11,6 +13,7 @@ export default function ProgramHero() {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [backgroundLoaded, setBackgroundLoaded] = useState(false)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   // ===== Constants =====
   const ASSETS = {
@@ -77,6 +80,46 @@ export default function ProgramHero() {
     }
   ] as const
 
+  // Slider setup for mobile/tablet - days boxes
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
+    loop: false,
+    defaultAnimation: { duration: 600 },
+    slides: {
+      perView: 1.2,
+      spacing: 16
+    },
+    breakpoints: {
+      '(min-width: 640px)': {
+        slides: { perView: 2.2, spacing: 20 }
+      },
+      '(min-width: 768px)': {
+        slides: { perView: 3.2, spacing: 20 }
+      },
+      '(min-width: 1024px)': {
+        disabled: true // Disable slider on desktop
+      }
+    },
+    slideChanged(s) {
+      setCurrentSlide(s.track.details.rel)
+    }
+  })
+
+  // Navigation functions
+  const goToSlide = useCallback(
+    (index: number) => {
+      instanceRef.current?.moveToIdx(index)
+    },
+    [instanceRef]
+  )
+
+  const goToPrevious = useCallback(() => {
+    instanceRef.current?.prev()
+  }, [instanceRef])
+
+  const goToNext = useCallback(() => {
+    instanceRef.current?.next()
+  }, [instanceRef])
+
   // Intersection observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -98,8 +141,7 @@ export default function ProgramHero() {
   return (
     <section
       ref={sectionRef}
-      className='relative w-full overflow-hidden'
-      style={{ paddingBottom: `${WAVE_HEIGHT - 50}px` }}
+      className='relative w-full overflow-hidden pb-[155px] lg:pb-[85px]'
       aria-labelledby='program-title'
     >
       {/* Enhanced Background */}
@@ -120,7 +162,22 @@ export default function ProgramHero() {
         />
       </div>
 
-      <div className='mx-auto max-w-screen-xl px-4 pt-8 sm:pt-12'>
+      {/* Mobile: Players Image Behind Content */}
+      <div className='pointer-events-none absolute inset-x-0 bottom-24 top-0 z-0 lg:hidden'>
+        <Image
+          src={ASSETS.players}
+          alt=''
+          role='presentation'
+          fill
+          className={clsx(
+            'object-contain object-bottom grayscale-[75%] transition-opacity duration-1000',
+            isVisible ? 'opacity-20' : 'opacity-0'
+          )}
+          sizes='100vw'
+        />
+      </div>
+
+      <div className='mx-auto max-w-screen-xl px-4 pb-16 pt-8 sm:pb-20 sm:pt-12 lg:pb-0'>
         {/* Title & Tagline Section */}
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
           {/* Left: Title */}
@@ -140,10 +197,10 @@ export default function ProgramHero() {
             </h1>
           </div>
 
-          {/* Right: Tagline */}
+          {/* Right: Tagline - Hidden on mobile, will be shown at bottom */}
           <div
             className={clsx(
-              'flex items-start justify-end transition-all duration-1000 ease-out lg:col-span-5',
+              'hidden items-start justify-end transition-all duration-1000 ease-out lg:col-span-5 lg:flex',
               isVisible
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'
@@ -173,9 +230,10 @@ export default function ProgramHero() {
           />
 
           {/* 3. Day Cards/Boxes */}
+          {/* Desktop Grid */}
           <div
             className={clsx(
-              'transition-all duration-1000 ease-out',
+              'hidden transition-all duration-1000 ease-out lg:block',
               isVisible
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-8 opacity-0'
@@ -191,6 +249,73 @@ export default function ProgramHero() {
                   isVisible={isVisible}
                 />
               ))}
+            </div>
+          </div>
+
+          {/* Mobile/Tablet Slider */}
+          <div
+            className={clsx(
+              'transition-all duration-1000 ease-out lg:hidden',
+              isVisible
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-8 opacity-0'
+            )}
+            style={{ transitionDelay: '600ms' }}
+          >
+            {/* Slider */}
+            <div className='relative'>
+              <div
+                ref={sliderRef}
+                className='keen-slider'
+                aria-labelledby='program-title'
+              >
+                {DAYS.map((day, index) => (
+                  <div key={day.key} className='keen-slider__slide px-2'>
+                    <DayCard
+                      day={{ ...day, blocks: [...day.blocks] }}
+                      index={index}
+                      isVisible={isVisible}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Navigation controls */}
+              <div className='mt-4 flex items-center justify-center gap-4'>
+                {/* Navigation arrows */}
+                <button
+                  onClick={goToPrevious}
+                  aria-label='Previous day'
+                  className='rounded-full bg-sky-500/20 p-2 backdrop-blur-sm transition-all hover:bg-sky-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50'
+                >
+                  <FiChevronLeft className='h-4 w-4 text-sky-500' />
+                </button>
+
+                {/* Dots */}
+                <div className='flex gap-2'>
+                  {DAYS.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => goToSlide(index)}
+                      aria-label={`Go to day ${index + 1}`}
+                      className={clsx(
+                        'h-2 w-2 rounded-full transition-all',
+                        currentSlide === index
+                          ? 'scale-125 bg-sky-500'
+                          : 'bg-sky-500/50 hover:bg-sky-500/80'
+                      )}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  onClick={goToNext}
+                  aria-label='Next day'
+                  className='rounded-full bg-sky-500/20 p-2 backdrop-blur-sm transition-all hover:bg-sky-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50'
+                >
+                  <FiChevronRight className='h-4 w-4 text-sky-500' />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -256,10 +381,10 @@ export default function ProgramHero() {
               </div>
             </div>
 
-            {/* Right: Players Image - positioned to "touch" the boxes */}
+            {/* Right: Players Image - Desktop Only, Hidden on Mobile */}
             <div
               className={clsx(
-                'transition-all duration-1000 ease-out lg:col-span-5 lg:-mt-16',
+                'hidden transition-all duration-1000 ease-out lg:col-span-5 lg:block',
                 isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-8 opacity-0'
@@ -277,13 +402,28 @@ export default function ProgramHero() {
             </div>
           </div>
         </div>
+
+        {/* Mobile: Tagline at bottom right */}
+        <div
+          className={clsx(
+            'mt-6 flex justify-end transition-all duration-1000 ease-out lg:hidden',
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          )}
+          style={{ transitionDelay: '2200ms' }}
+        >
+          <Image
+            src={ASSETS.tagline}
+            alt={t('taglineAlt')}
+            width={320}
+            height={120}
+            className='h-auto w-[200px] object-contain transition-transform duration-300 hover:scale-105 sm:w-[240px]'
+            sizes='(max-width:640px) 200px, 240px'
+          />
+        </div>
       </div>
 
-      {/* Wave positioned higher to sit above image feet */}
-      <div
-        className='pointer-events-none absolute left-1/2 w-screen -translate-x-1/2'
-        style={{ bottom: '50px' }}
-      >
+      {/* Wave positioned responsively */}
+      <div className='pointer-events-none absolute bottom-0 left-1/2 w-screen -translate-x-1/2 lg:bottom-[50px]'>
         {/* Desktop */}
         <div className='relative hidden lg:block'>
           <Image

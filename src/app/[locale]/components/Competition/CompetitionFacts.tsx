@@ -7,7 +7,6 @@ import { useMemo, useEffect, useRef, useState } from 'react'
 
 // Constants for better maintainability
 const ASSETS = {
-  background: '/img/landing/home-page-2.png',
   wave: '/img/global/ondas-3.png'
 } as const
 
@@ -73,7 +72,7 @@ export default function CompetitionFacts() {
         lines: [
           t('wherewhen.l1'),
           t('wherewhen.l2') && (
-            <strong key='wherewhen-emphasis' className='text-cyan-200'>
+            <strong key='wherewhen-emphasis' className='text-white'>
               {t('wherewhen.l2')}
             </strong>
           ),
@@ -86,13 +85,13 @@ export default function CompetitionFacts() {
         lines: [
           t('games.maxPrefix') && t('games.maxSuffix') && (
             <span key='games-max'>
-              <strong className='text-cyan-200'>{t('games.maxPrefix')}</strong>{' '}
+              <strong className='text-white'>{t('games.maxPrefix')}</strong>{' '}
               {t('games.maxSuffix')}
             </span>
           ),
           t('games.minPrefix') && t('games.minSuffix') && (
             <span key='games-min'>
-              <strong className='text-cyan-200'>{t('games.minPrefix')}</strong>{' '}
+              <strong className='text-white'>{t('games.minPrefix')}</strong>{' '}
               {t('games.minSuffix')}
             </span>
           )
@@ -126,25 +125,11 @@ export default function CompetitionFacts() {
         {t('sectionTitle') || 'Competition Facts and Information'}
       </h2>
 
-      {/* Background Layer */}
-      <div className='absolute inset-0 -z-10'>
-        <Image
-          src={ASSETS.background}
-          alt=''
-          fill
-          className='object-cover'
-          sizes='100vw'
-          quality={80}
-          placeholder='blur'
-          blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkbHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
-          loading='lazy'
-          draggable={false}
-          aria-hidden='true'
-        />
-      </div>
+      {/* Flowing Blue-Cyan-Green Gradient Background */}
+      <div className='absolute inset-0 -z-10 bg-gradient-to-r from-blue-600 via-cyan-400 to-emerald-300 sm:bg-gradient-to-b lg:bg-gradient-to-r' />
 
       {/* Main Content */}
-      <div className='relative z-10 mx-auto max-w-screen-xl px-4 py-10 sm:py-12 lg:py-16'>
+      <div className='relative z-10 mx-auto max-w-screen-xl px-4 py-16 sm:py-20 lg:py-24'>
         <FactsGrid items={factItems} isVisible={isVisible} />
       </div>
 
@@ -193,18 +178,18 @@ function FactCard({
   return (
     <article
       className={clsx(
-        'flex flex-col items-center gap-4 text-center transition-all duration-700 ease-out',
+        'flex flex-col items-center gap-6 text-center transition-all duration-700 ease-out',
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
       )}
       style={{ transitionDelay: `${delay}ms` }}
     >
       <header>
-        <h3 className='text-sm font-extrabold uppercase tracking-wide text-sky-600 sm:text-base lg:text-lg'>
+        <h3 className='text-sm font-extrabold uppercase tracking-wide text-white sm:text-base lg:text-lg'>
           {item.heading}
         </h3>
       </header>
 
-      <PinMarker index={index} isVisible={isVisible}>
+      <CircleMarker index={index} isVisible={isVisible}>
         <div
           className='space-y-1 text-[13px] font-bold uppercase leading-snug text-white sm:text-sm'
           role='list'
@@ -223,13 +208,13 @@ function FactCard({
             </div>
           ))}
         </div>
-      </PinMarker>
+      </CircleMarker>
     </article>
   )
 }
 
 // Enhanced pin marker with improved design and animations
-function PinMarker({
+function CircleMarker({
   children,
   index,
   isVisible
@@ -238,59 +223,58 @@ function PinMarker({
   index: number
   isVisible: boolean
 }) {
-  const gradientId = `pin-gradient-${index}`
   const delay = index * 150 + 300
 
   return (
     <div
       className={clsx(
-        'group relative mx-auto w-[180px] transition-all duration-700 ease-out sm:w-[210px]',
+        'group relative mx-auto transition-all duration-700 ease-out',
         isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
       )}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{
+        transitionDelay: `${delay}ms`,
+        width: '220px',
+        height: '280px'
+      }}
     >
+      {/* Pin Shape SVG */}
       <svg
-        viewBox='0 0 48 64'
-        xmlns='http://www.w3.org/2000/svg'
-        className='h-auto w-full drop-shadow-lg transition-transform duration-300 group-hover:scale-110'
+        viewBox='0 0 120 160'
+        className='h-full w-full drop-shadow-lg transition-transform duration-300 group-hover:scale-105'
         aria-hidden='true'
-        role='img'
       >
         <defs>
-          <linearGradient id={gradientId} x1='0%' y1='0%' x2='100%' y2='100%'>
-            <stop offset='0%' stopColor='#0891b2' />
-            <stop offset='50%' stopColor='#06b6d4' />
-            <stop offset='100%' stopColor='#67e8f9' />
-          </linearGradient>
-          <filter
-            id={`shadow-${index}`}
-            x='-20%'
-            y='-20%'
-            width='140%'
-            height='140%'
+          <linearGradient
+            id={`pin-gradient-${index}`}
+            x1='0%'
+            y1='0%'
+            x2='100%'
+            y2='100%'
           >
-            <feDropShadow dx='0' dy='2' stdDeviation='2' floodOpacity='0.15' />
-          </filter>
+            <stop offset='0%' stopColor='rgba(255, 255, 255, 0.3)' />
+            <stop offset='50%' stopColor='rgba(255, 255, 255, 0.2)' />
+            <stop offset='100%' stopColor='rgba(255, 255, 255, 0.1)' />
+          </linearGradient>
         </defs>
 
-        {/* Main pin shape with improved gradient */}
+        {/* Pin Shape Path */}
         <path
-          d='M24 0C10.745 0 0 10.745 0 24c0 17.25 24 40 24 40s24-22.75 24-40C48 10.745 37.255 0 24 0z'
-          fill={`url(#${gradientId})`}
-          filter={`url(#shadow-${index})`}
+          d='M60 0C26.863 0 0 26.863 0 60c0 45 60 100 60 100s60-55 60-100C120 26.863 93.137 0 60 0z'
+          fill={`url(#pin-gradient-${index})`}
+          stroke='rgba(255, 255, 255, 0.4)'
+          strokeWidth='2'
         />
 
         {/* Inner highlight for depth */}
         <path
-          d='M24 4c-11.046 0-20 8.954-20 20 0 14.355 16.5 31 20 31s20-16.645 20-31c0-11.046-8.954-20-20-20z'
-          fill='white'
-          opacity='0.15'
+          d='M60 8C32.386 8 10 30.386 10 58c0 35.5 50 80 50 80s50-44.5 50-80C110 30.386 87.614 8 60 8z'
+          fill='rgba(255, 255, 255, 0.15)'
         />
       </svg>
 
       {/* Content overlay */}
-      <div className='pointer-events-none absolute inset-0 flex items-center justify-center px-5'>
-        <div className='pointer-events-auto max-w-full transform transition-transform duration-300 group-hover:scale-105'>
+      <div className='absolute inset-0 flex items-center justify-center px-6 pb-12'>
+        <div className='transform text-center transition-transform duration-300 group-hover:scale-105'>
           {children}
         </div>
       </div>
