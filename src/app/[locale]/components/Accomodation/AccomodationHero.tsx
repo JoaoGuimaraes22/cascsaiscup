@@ -119,7 +119,8 @@ export default function AccommodationHero() {
                   t('schools.list.a'),
                   t('schools.list.b'),
                   t('schools.list.c'),
-                  t('schools.list.d')
+                  t('schools.list.d'),
+                  t('schools.list.e')
                 ].map((item, index) => (
                   <li
                     key={index}
@@ -154,7 +155,36 @@ export default function AccommodationHero() {
               isVisible={isVisible}
             >
               <p className='mb-4 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
-                {t('food.description')}
+                {t('food.p1')}
+              </p>
+
+              <p className='mb-4 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+                {t('food.scheduleTitle')}
+              </p>
+
+              <ul className='mb-4 space-y-3'>
+                <li className='flex items-start gap-3 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+                  <span className='mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-sky-500' />
+                  <span>
+                    <span className='font-semibold'>{t('food.breakfast')}</span>
+                  </span>
+                </li>
+                <li className='flex items-start gap-3 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+                  <span className='mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-sky-500' />
+                  <span>
+                    <span className='font-semibold'>{t('food.lunch')}</span>
+                  </span>
+                </li>
+                <li className='flex items-start gap-3 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+                  <span className='mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-sky-500' />
+                  <span>
+                    <span className='font-semibold'>{t('food.dinner')}</span>
+                  </span>
+                </li>
+              </ul>
+
+              <p className='mb-6 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+                {t('food.intolerances')}
               </p>
 
               <ContactOSportsButton />
@@ -165,7 +195,7 @@ export default function AccommodationHero() {
           <div className='relative lg:col-span-5'>
             <div
               className={clsx(
-                'absolute inset-y-0 right-[-6vw] hidden w-[65vw] max-w-[900px] transition-all duration-1000 ease-out lg:block',
+                'absolute inset-y-0 hidden w-[45vw] max-w-[900px] transition-all duration-1000 ease-out lg:block',
                 isVisible
                   ? 'translate-x-0 opacity-100'
                   : 'translate-x-8 opacity-0'
@@ -178,7 +208,7 @@ export default function AccommodationHero() {
                 src={ASSETS.player}
                 alt={t('playerAlt')}
                 fill
-                className='object-contain object-bottom transition-transform duration-300 hover:scale-105'
+                className='object-contain object-bottom'
                 sizes='(max-width: 1280px) 65vw, 900px'
               />
             </div>

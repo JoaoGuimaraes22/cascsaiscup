@@ -56,9 +56,9 @@
   "AboutPage": {
     "Hero": {
       "title": "Volley4All",
-      "p1": "Volley4All is a non-profit sports association focused on the solid development of its athletes.",
-      "p2": "Over the last years we’ve achieved important results and became a reference in the south of Portugal.",
-      "p3": "We believe in the power of sports to unite people and create positive change in society.",
+      "p1": "Cascais Volley4all is a non-profit sports association founded in 2013, focused on the competent athletic development of its athletes.",
+      "p2": "Over the past 12 years, we have achieved several significant sporting results, training various elite athletes for the different Portuguese national teams, and we have become one of the most important and technically efficient volleyball clubs in the south of the country.",
+      "p3": "Volley4all competes nationally at all available age levels and is currently a benchmark in sports training throughout southern Portugal.",
       "p4": "We are a club PLAY HARD TRAIN HARDER",
       "cta": "Visit us",
       "heroImageAlt": "Volleyball players in action at Cascais tournament",
@@ -72,10 +72,10 @@
     },
     "Portugal": {
       "title": "WHY PORTUGAL? WHY CASCAIS?",
-      "p1": "With a mild climate, over 300 days of sunshine per year, and 850 km of stunning beaches washed by the Atlantic Ocean, Portugal is the perfect place to enjoy unforgettable experiences all year round.",
-      "p2": "Recognized as one of Europe’s top tourist destinations and ranked in the Top 3 safest countries in the world, Portugal uniquely combines natural landscapes, cultural richness, and hospitality.",
+      "p1": "With a mild climate, more than 300 days of sunshine per year, and 850 km of stunning beaches bathed by the Atlantic Ocean, Portugal is the ideal place to enjoy unforgettable experiences all year round.",
+      "p2": "Recognized as one of Europe’s top tourist destinations and ranked among the Top 3 safest destinations in the world, Portugal uniquely combines diverse natural landscapes, cultural richness, award-winning gastronomy, and the traditional hospitality of the Portuguese people.",
       "p3": "Just 2 hours by plane from major European capitals, Lisbon offers fast and convenient connections for visitors from around the world.",
-      "p4": "Cascais is located on the Atlantic coast, 30 km from Lisbon Airport — charming, safe, and perfect for our tournament.",
+      "p4": "The charming town of Cascais, where our tournament takes place, is located on the Atlantic coast and just 30 km from Lisbon International Airport!",
       "logoAlt": "Cascais Volley Cup 2026",
       "taglineAlt": "Feel the action, enjoy the summer",
       "cards": {
@@ -88,19 +88,19 @@
         "cabo": {
           "title": "CABO DA ROCA",
           "subtitle": "Cascais",
-          "desc": "The westernmost point of mainland Europe, marked by cliffs and breathtaking views.",
+          "desc": "The westernmost point of continental Europe, marked by dramatic cliffs and wild scenery. Until the 15th century, these windswept cliffs were considered the “end of the world.”",
           "alt": "Cliffs and lighthouse at Cabo da Roca"
         },
         "boca": {
           "title": "BOCA DO INFERNO",
           "subtitle": "Cascais",
-          "desc": "A unique rock formation with cliffs sculpted by the force of the Atlantic, west of Cascais.",
+          "desc": "A unique rocky formation with a striking sea arch and cliffs carved by the relentless power of the Atlantic Ocean. Located just west of Cascais, it’s one of the region’s most iconic natural wonders.",
           "alt": "Arches and cliffs at Boca do Inferno"
         },
         "sec1719": {
           "title": "SEC XVII | XIX",
           "subtitle": "Cascais",
-          "desc": "Noble mansions from the 17th–19th centuries; a historic refuge of Portuguese royalty.",
+          "desc": "With numerous noble mansions from the 17th, 18th, and 19th centuries, Cascais became a luxurious seaside retreat on the outskirts of Lisbon — a timeless refuge for European and Portuguese aristocracy.",
           "alt": "Historic architecture of Cascais"
         }
       },
@@ -134,7 +134,8 @@
           "a": "Agrupamento de Escolas de Alvide | Alcabideche",
           "b": "Agrupamento de Escolas da Cidadela | Cascais",
           "c": "Agrupamento de Escolas de Cascais | Cascais",
-          "d": "Agrupamento de Escolas IBN Mucana | Alcabideche"
+          "d": "Agrupamento de Escolas IBN Mucana | Alcabideche",
+          "e": "Agrupamento de Escolas de Carcavelos"
         },
         "p2": "All matches will take place in sports halls within the municipality. Between matches and accommodation, visits to the town and its magnificent beaches are within a 15–20 minute walk. Additionally, each participant will receive a 'free pass card' allowing free use of the MOBICASCAIS transport network throughout the municipality during the event. We recommend checking the official app for better use of the transport network.\n\nEach delegation will be assigned a classroom, and all participants must bring their own sleeping bag, pillow, and mattress."
       },
@@ -144,7 +145,12 @@
       },
       "food": {
         "title": "Food & Meals",
-        "description": "The canteens will be operational from July 8th to July 12th. Meals will be served in various school canteens. For food intolerances or special dietary requirements, please contact our official agents.",
+        "p1": "The canteens will only be operational from July 8th onwards, therefore no meals will be provided on July 7th. On the last day of the event, July 12th, dinner will not be served.",
+        "scheduleTitle": "Meals will be served in various school canteens available according to the following schedule:",
+        "breakfast": "Packaged breakfasts distributed to teams | 8:00–10:00",
+        "lunch": "Lunch | 12:00–15:00",
+        "dinner": "Dinner | 19:00–21:00",
+        "intolerances": "In case of food intolerances, team managers must inform the organization at the time of registration so that appropriate meals can be prepared for each case.",
         "contactButton": "Contact O-Sports"
       },
       "playerAlt": "Volleyball player in action"

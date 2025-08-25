@@ -213,12 +213,12 @@ export default function ProgramHero() {
             <Image
               src={ASSETS.tagline}
               alt={t('taglineAlt')}
-              width={420}
-              height={160}
+              width={400}
+              height={140}
               className='h-auto w-[240px] object-contain transition-transform duration-300 hover:scale-105 sm:w-[320px] lg:w-[420px]'
               sizes='(max-width:640px) 240px, (max-width:1024px) 320px, 420px'
               quality={80}
-              loading='lazy'
+              loading='eager'
             />
           </div>
         </div>
