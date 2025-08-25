@@ -75,7 +75,7 @@ export default function AboutHero() {
     url: 'https://volley4all.com'
   }
 
-  const PARAGRAPHS = ['p1', 'p2', 'p3', 'p4'] as const
+  const PARAGRAPHS = ['p1', 'p2', 'p3'] as const
 
   // Intersection observer for animations
   useEffect(() => {
@@ -181,6 +181,9 @@ export default function AboutHero() {
                 </p>
               </div>
             ))}
+            <p>
+              {t('p4')} <strong>{t('p4Bold')} </strong>
+            </p>
           </div>
 
           {/* Mobile Layout: New arrangement */}

@@ -108,6 +108,11 @@ export default function CompetitionInfo() {
       b: chunks => (
         <strong className='font-extrabold text-sky-700'>{chunks}</strong>
       )
+    }),
+    t.rich('rules.item5', {
+      b: chunks => (
+        <strong className='font-extrabold text-sky-700'>{chunks}</strong>
+      )
     })
   ].filter(Boolean)
 
@@ -123,7 +128,11 @@ export default function CompetitionInfo() {
         <strong className='font-extrabold text-sky-700'>{chunks}</strong>
       )
     }),
-    t('notes.p4')
+    t.rich('notes.p4', {
+      b: chunks => (
+        <strong className='font-extrabold text-sky-700'>{chunks}</strong>
+      )
+    })
   ].filter(Boolean)
 
   return (

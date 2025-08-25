@@ -32,6 +32,23 @@ const TAGLINE_DIMENSIONS = {
   height: 140
 } as const
 
+// Utility function to parse text with **bold** markers
+function parseBoldText(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g)
+
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      const boldText = part.slice(2, -2)
+      return (
+        <span key={index} className='font-bold'>
+          {boldText}
+        </span>
+      )
+    }
+    return part
+  })
+}
+
 export default function CompetitionHero() {
   const t = useTranslations('CompetitionPage.Hero')
   const tLogo = useTranslations('CompetitionPage.LogoTaglineHero')
@@ -125,9 +142,9 @@ export default function CompetitionHero() {
 
             <div className='prose prose-slate mt-6 max-w-none'>
               <div className='space-y-4 text-sm leading-relaxed text-slate-700 sm:text-base lg:text-lg'>
-                {t('p1') && <p>{t('p1')}</p>}
-                {t('p2') && <p>{t('p2')}</p>}
-                {t('p3') && <p>{t('p3')}</p>}
+                {t('p1') && <p>{parseBoldText(t('p1'))}</p>}
+                {t('p2') && <p>{parseBoldText(t('p2'))}</p>}
+                {t('p3') && <p>{parseBoldText(t('p3'))}</p>}
               </div>
             </div>
 

@@ -363,7 +363,13 @@ export default function ProgramHero() {
                   isLayDay={true}
                 />
                 <div className='text-sm leading-relaxed text-slate-800/90 sm:text-base'>
-                  <p className='mb-4'>{t('layDay.content')}</p>
+                  <p className='mb-4'>
+                    {t('layDay.content1')}
+                    <strong>{t('layDay.bold1')}</strong>
+                    {t('layDay.content2')}
+                    <strong>{t('layDay.bold2')}</strong>
+                    {t('layDay.content3')}
+                  </p>
                   <p className='text-sm font-medium text-slate-700'>
                     {t('layDay.note')}
                   </p>
@@ -553,6 +559,23 @@ interface InfoSectionProps {
   isLayDay?: boolean
 }
 
+// Utility function to parse text with **bold** markers
+function parseBoldText(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g)
+
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      const boldText = part.slice(2, -2)
+      return (
+        <span key={index} className='font-bold'>
+          {boldText}
+        </span>
+      )
+    }
+    return part
+  })
+}
+
 function InfoSection({
   title,
   content,
@@ -587,13 +610,12 @@ function InfoSection({
       )}
       {content && (
         <p className='text-sm leading-relaxed text-slate-800/90 sm:text-base'>
-          {content}
+          {parseBoldText(content)}
         </p>
       )}
     </div>
   )
 }
-
 function DownloadButton({
   href,
   children
