@@ -1,4 +1,4 @@
-// gallery/[year]/page.tsx
+// /gallery/[year]/page.tsx
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import OptimizedGallery from '../../components/Gallery/Gallery'
