@@ -332,7 +332,9 @@
       "see_more": "Voir plus",
       "hero_alt": "MVP du tournoi",
       "logoAlt": "Logo Cascais Volley Cup",
-      "mvpAlt": "MVP 2025"
+      "mvpAlt": "MVP 2025",
+      "see_participants": "Voir les Participants",
+      "see_winners": "Voir les Gagnants"
     },
     "Participants": {
       "title": "Équipes Participantes",

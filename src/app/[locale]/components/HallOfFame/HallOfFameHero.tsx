@@ -357,7 +357,7 @@ export default function HallOfFameHero() {
                   variant='primary'
                   delay={700}
                 >
-                  See Participants
+                  {t('see_participants') || 'see_participants'}
                 </CTAButton>
 
                 <CTAButton
@@ -368,7 +368,7 @@ export default function HallOfFameHero() {
                   variant='primary'
                   delay={850}
                 >
-                  See Winners
+                  {t('see_winners') || 'see_winners'}
                 </CTAButton>
               </div>
             </div>
