@@ -2,23 +2,14 @@
 
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
-import {
-  FiGrid,
-  FiList,
-  FiDownload,
-  FiShare2,
-  FiX,
-  FiChevronLeft,
-  FiChevronRight,
-  FiLoader
-} from 'react-icons/fi'
+import { FiX, FiChevronLeft, FiChevronRight, FiLoader } from 'react-icons/fi'
 import clsx from 'clsx'
 
 // Import our optimized components
 import {
   useOptimizedGallery,
   ProcessedImage
-} from '@/hooks/useOptimizedGallery'
+} from '@/src/hooks/useOptimizedGallery'
 import OptimizedCloudinaryImage from './OptimizedCloudinaryImage'
 
 interface OptimizedGalleryProps {
@@ -29,7 +20,6 @@ interface OptimizedGalleryProps {
   description?: string
 }
 
-type ViewMode = 'grid' | 'masonry'
 type GridSize = 'small' | 'medium' | 'large'
 
 // Virtual scrolling configuration
@@ -43,6 +33,7 @@ interface LightboxProps {
   onClose: () => void
   onNext: () => void
   onPrevious: () => void
+  t: (key: string) => string
 }
 
 function Lightbox({
@@ -51,7 +42,8 @@ function Lightbox({
   isOpen,
   onClose,
   onNext,
-  onPrevious
+  onPrevious,
+  t
 }: LightboxProps) {
   const [imageLoaded, setImageLoaded] = useState(false)
 
@@ -101,7 +93,7 @@ function Lightbox({
       <button
         onClick={onClose}
         className='absolute right-4 top-4 z-10 rounded-full p-2 text-white transition-colors hover:bg-white/20'
-        aria-label='Close lightbox'
+        aria-label={t('close_lightbox') || 'Close lightbox'}
       >
         <FiX className='h-6 w-6' />
       </button>
@@ -111,7 +103,7 @@ function Lightbox({
         <button
           onClick={onPrevious}
           className='absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full p-3 text-white transition-colors hover:bg-white/20'
-          aria-label='Previous image'
+          aria-label={t('previous_image') || 'Previous image'}
         >
           <FiChevronLeft className='h-6 w-6' />
         </button>
@@ -121,7 +113,7 @@ function Lightbox({
         <button
           onClick={onNext}
           className='absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full p-3 text-white transition-colors hover:bg-white/20'
-          aria-label='Next image'
+          aria-label={t('next_image') || 'Next image'}
         >
           <FiChevronRight className='h-6 w-6' />
         </button>
@@ -156,7 +148,7 @@ function Lightbox({
       {/* Image info */}
       <div className='absolute bottom-4 left-4 right-4 text-center text-white'>
         <p className='text-sm opacity-80'>
-          {currentIndex + 1} of {images.length}
+          {currentIndex + 1} {t('image_of') || 'of'} {images.length}
         </p>
         <p className='mt-1 text-xs opacity-60'>
           {image.format?.toUpperCase()} • {image.width} × {image.height}
@@ -258,10 +250,9 @@ export default function OptimizedGallery({
   title,
   description
 }: OptimizedGalleryProps) {
-  const t = useTranslations('GalleryPage')
+  const t = useTranslations('GalleryPage.Main')
 
   // Gallery state
-  const [viewMode, setViewMode] = useState<ViewMode>('grid')
   const [gridSize, setGridSize] = useState<GridSize>('medium')
   const [selectedImage, setSelectedImage] = useState<ProcessedImage | null>(
     null
@@ -270,15 +261,8 @@ export default function OptimizedGallery({
   const [currentPage, setCurrentPage] = useState(1)
 
   // Use our optimized gallery hook
-  const {
-    data,
-    imagesByYear,
-    loading,
-    error,
-    fromCache,
-    refresh,
-    getImagesForYear
-  } = useOptimizedGallery(maxResults)
+  const { data, imagesByYear, loading, error, refresh, getImagesForYear } =
+    useOptimizedGallery(maxResults)
 
   // Get images based on folder or year
   const images = useMemo(() => {
@@ -345,7 +329,9 @@ export default function OptimizedGallery({
       <div className='flex min-h-screen items-center justify-center'>
         <div className='text-center'>
           <FiLoader className='mx-auto mb-4 h-8 w-8 animate-spin text-sky-500' />
-          <p className='text-slate-600'>Loading gallery...</p>
+          <p className='text-slate-600'>
+            {t('loading') || 'Loading gallery...'}
+          </p>
         </div>
       </div>
     )
@@ -359,14 +345,16 @@ export default function OptimizedGallery({
             <FiX className='h-8 w-8 text-red-500' />
           </div>
           <h3 className='mb-2 text-xl font-bold text-slate-900'>
-            Failed to load gallery
+            {t('failed_title') || 'Failed to load gallery'}
           </h3>
-          <p className='mb-4 text-slate-600'>{error}</p>
+          <p className='mb-4 text-slate-600'>
+            {t('failed_description') || error}
+          </p>
           <button
             onClick={refresh}
             className='rounded-lg bg-sky-500 px-6 py-2 text-white transition-colors hover:bg-sky-600'
           >
-            Try again
+            {t('try_again') || 'Try again'}
           </button>
         </div>
       </div>
@@ -381,20 +369,23 @@ export default function OptimizedGallery({
           <div className='flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between'>
             <div>
               <h1 className='text-3xl font-bold text-slate-900'>
-                {title || (year ? `Gallery ${year}` : 'Photo Gallery')}
+                {title ||
+                  (year
+                    ? `${t('title') || 'Gallery'} ${year}`
+                    : t('title') || 'Photo Gallery')}
               </h1>
               {description && (
                 <p className='mt-2 text-slate-600'>{description}</p>
               )}
               <p className='mt-1 text-sm text-slate-500'>
-                {images.length} {images.length === 1 ? 'image' : 'images'}
-                {fromCache && (
-                  <span className='ml-2 text-sky-600'>• Cached</span>
-                )}
+                {images.length}{' '}
+                {images.length === 1
+                  ? t('image') || 'image'
+                  : t('images') || 'images'}
               </p>
             </div>
 
-            {/* Controls */}
+            {/* Controls - Grid size only */}
             <div className='flex items-center gap-4'>
               {/* Grid size controls */}
               <div className='flex items-center gap-1 rounded-lg border border-slate-200 bg-white p-1'>
@@ -409,37 +400,10 @@ export default function OptimizedGallery({
                         : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                     )}
                   >
-                    {size.charAt(0).toUpperCase() + size.slice(1)}
+                    {t(`grid_sizes.${size}`) ||
+                      size.charAt(0).toUpperCase() + size.slice(1)}
                   </button>
                 ))}
-              </div>
-
-              {/* View mode toggle */}
-              <div className='flex items-center gap-1 rounded-lg border border-slate-200 bg-white p-1'>
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={clsx(
-                    'rounded-md p-2 transition-colors',
-                    viewMode === 'grid'
-                      ? 'bg-sky-500 text-white'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-                  )}
-                  aria-label='Grid view'
-                >
-                  <FiGrid className='h-4 w-4' />
-                </button>
-                <button
-                  onClick={() => setViewMode('masonry')}
-                  className={clsx(
-                    'rounded-md p-2 transition-colors',
-                    viewMode === 'masonry'
-                      ? 'bg-sky-500 text-white'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-                  )}
-                  aria-label='Masonry view'
-                >
-                  <FiList className='h-4 w-4' />
-                </button>
               </div>
 
               {/* Refresh button */}
@@ -447,7 +411,7 @@ export default function OptimizedGallery({
                 onClick={refresh}
                 className='rounded-lg border border-slate-200 bg-white p-2 text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900'
                 disabled={loading}
-                aria-label='Refresh gallery'
+                aria-label={t('refresh') || 'Refresh gallery'}
               >
                 <FiLoader
                   className={clsx('h-4 w-4', loading && 'animate-spin')}
@@ -483,7 +447,7 @@ export default function OptimizedGallery({
                   className='px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50'
                 >
                   <FiChevronLeft className='mr-1 inline h-4 w-4' />
-                  Previous
+                  {t('previous') || 'Previous'}
                 </button>
 
                 <div className='flex items-center gap-2'>
@@ -521,7 +485,7 @@ export default function OptimizedGallery({
                   disabled={currentPage === totalPages}
                   className='px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50'
                 >
-                  Next
+                  {t('next') || 'Next'}
                   <FiChevronRight className='ml-1 inline h-4 w-4' />
                 </button>
               </div>
@@ -530,15 +494,15 @@ export default function OptimizedGallery({
         ) : (
           <div className='py-24 text-center'>
             <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100'>
-              <FiGrid className='h-8 w-8 text-slate-400' />
+              <FiX className='h-8 w-8 text-slate-400' />
             </div>
             <h3 className='mb-2 text-xl font-semibold text-slate-900'>
-              No images found
+              {t('no_images_title') || 'No images found'}
             </h3>
             <p className='text-slate-600'>
               {year
-                ? `No images available for ${year}`
-                : 'This gallery is empty'}
+                ? `${t('no_images_year') || 'No images available for'} ${year}`
+                : t('no_images_description') || 'This gallery is empty'}
             </p>
           </div>
         )}
@@ -552,6 +516,7 @@ export default function OptimizedGallery({
         onClose={closeLightbox}
         onNext={nextImage}
         onPrevious={previousImage}
+        t={t}
       />
     </div>
   )

@@ -18,7 +18,7 @@ import clsx from 'clsx'
 import {
   useOptimizedGallery,
   ProcessedImage
-} from '@/hooks/useOptimizedGallery'
+} from '@/src/hooks/useOptimizedGallery'
 import OptimizedCloudinaryImage from './OptimizedCloudinaryImage'
 
 // Assets constant for better maintainability
@@ -27,7 +27,7 @@ const ASSETS = {
   tagline: '/img/global/tagline-w.png'
 } as const
 
-const IMAGES_PER_YEAR = 4
+const IMAGES_PER_YEAR = 6 // Increased for better grid fill
 
 // Custom hook for intersection observer with staggered animations
 function useStaggeredAnimation(threshold = 0.2) {
@@ -54,25 +54,39 @@ function useStaggeredAnimation(threshold = 0.2) {
   return { isVisible, sectionRef }
 }
 
-// Loading skeleton component
-function ImageSkeleton() {
+// Loading skeleton component for year cards
+function YearCardSkeleton() {
   return (
-    <div className='grid grid-cols-2 gap-2 sm:gap-3'>
-      {Array.from({ length: IMAGES_PER_YEAR }).map((_, index) => (
-        <div
-          key={index}
-          className='aspect-[4/3] animate-pulse rounded-lg bg-slate-200'
-          style={{
-            animationDelay: `${index * 100}ms`
-          }}
-        />
-      ))}
+    <div className='h-full rounded-2xl bg-white/10 p-6 backdrop-blur-sm'>
+      <div className='flex h-full flex-col'>
+        {/* Header skeleton */}
+        <div className='mb-6 flex items-center justify-between'>
+          <div className='h-8 w-16 animate-pulse rounded bg-white/20' />
+          <div className='h-8 w-20 animate-pulse rounded-full bg-white/20' />
+        </div>
+
+        {/* Images grid skeleton */}
+        <div className='mb-4 grid flex-1 grid-cols-3 gap-3'>
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div
+              key={index}
+              className='aspect-square animate-pulse rounded-lg bg-white/20'
+              style={{
+                animationDelay: `${index * 100}ms`
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Footer skeleton */}
+        <div className='mx-auto h-4 w-32 animate-pulse rounded bg-white/20' />
+      </div>
     </div>
   )
 }
 
-// Enhanced image grid component with hover effects
-interface ImageGridProps {
+// Compact image grid for each year
+interface CompactImageGridProps {
   images: ProcessedImage[]
   year: number
   altTextPrefix: string
@@ -80,48 +94,48 @@ interface ImageGridProps {
   onImageClick?: (image: ProcessedImage) => void
 }
 
-function ImageGrid({
+function CompactImageGrid({
   images,
   year,
   altTextPrefix,
   isVisible,
   onImageClick
-}: ImageGridProps) {
+}: CompactImageGridProps) {
   return (
-    <div className='grid grid-cols-2 gap-2 sm:gap-3'>
+    <div className='grid flex-1 grid-cols-3 gap-2 sm:gap-3'>
       {images.slice(0, IMAGES_PER_YEAR).map((img, index) => (
         <div
           key={img.public_id}
           className={clsx(
-            'group relative aspect-[4/3] overflow-hidden rounded-lg ring-1 ring-black/5 transition-all duration-500 ease-out',
-            'hover:-translate-y-1 hover:shadow-lg hover:ring-2 hover:ring-sky-300/50',
+            'group relative aspect-square overflow-hidden rounded-lg ring-1 ring-white/20 transition-all duration-500 ease-out',
+            'hover:-translate-y-1 hover:shadow-lg hover:shadow-black/25 hover:ring-2 hover:ring-white/50',
             onImageClick && 'cursor-pointer',
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
           )}
           style={{
-            transitionDelay: `${600 + index * 100}ms`
+            transitionDelay: `${400 + index * 50}ms`
           }}
           onClick={() => onImageClick?.(img)}
         >
           <OptimizedCloudinaryImage
             publicId={img.public_id}
             alt={`${altTextPrefix} ${year} - ${img.public_id.split('/').pop()}`}
-            width={400}
-            height={300}
-            quality={70}
+            width={200}
+            height={200}
+            quality={60}
             className='h-full w-full object-cover transition-all duration-500 group-hover:scale-110'
             loading='lazy'
-            sizes='(max-width: 768px) 50vw, 25vw'
+            sizes='(max-width: 768px) 33vw, (max-width: 1024px) 16vw, 12vw'
             crop='fill'
             gravity='auto'
           />
 
-          {/* Hover overlay with subtle gradient */}
-          <div className='absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
+          {/* Hover overlay */}
+          <div className='absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
 
           {/* Image indicator icon */}
-          <div className='absolute bottom-2 right-2 rounded-full bg-white/90 p-1.5 opacity-0 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:opacity-100'>
-            <FiImage className='h-3 w-3 text-sky-600' />
+          <div className='absolute bottom-1 right-1 rounded-full bg-white/90 p-1 opacity-0 shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:opacity-100'>
+            <FiImage className='h-2.5 w-2.5 text-sky-600' />
           </div>
         </div>
       ))}
@@ -147,17 +161,17 @@ function StatusIndicator({
 }: StatusIndicatorProps) {
   if (loading) {
     return (
-      <div className='flex items-center gap-2 text-sm text-slate-500'>
-        <div className='h-4 w-4 animate-spin rounded-full border-2 border-slate-300 border-t-slate-500' />
-        <span>Loading gallery...</span>
+      <div className='flex items-center gap-2 text-sm text-white/80'>
+        <div className='h-3 w-3 animate-spin rounded-full border border-white/30 border-t-white' />
+        <span>Loading...</span>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className='flex items-center gap-2 text-sm text-red-500'>
-        <FiWifiOff className='h-4 w-4' />
+      <div className='flex items-center gap-2 text-sm text-red-300'>
+        <FiWifiOff className='h-3 w-3' />
         <span>Connection error</span>
       </div>
     )
@@ -165,8 +179,8 @@ function StatusIndicator({
 
   if (fromCache) {
     return (
-      <div className='flex items-center gap-2 text-sm text-sky-500'>
-        <FiClock className='h-4 w-4' />
+      <div className='flex items-center gap-2 text-sm text-blue-300'>
+        <FiClock className='h-3 w-3' />
         <span>{isStale ? 'Cached (stale)' : 'Cached'}</span>
       </div>
     )
@@ -174,9 +188,9 @@ function StatusIndicator({
 
   if (lastFetch) {
     return (
-      <div className='flex items-center gap-2 text-sm text-green-500'>
-        <FiWifi className='h-4 w-4' />
-        <span>Live data</span>
+      <div className='flex items-center gap-2 text-sm text-green-300'>
+        <FiWifi className='h-3 w-3' />
+        <span>Live</span>
       </div>
     )
   }
@@ -184,7 +198,7 @@ function StatusIndicator({
   return null
 }
 
-// Enhanced year card component
+// Enhanced year card component for single viewport
 interface YearCardProps {
   year: number
   images: ProcessedImage[]
@@ -211,25 +225,21 @@ function YearCard({
   onRetry
 }: YearCardProps) {
   const renderContent = () => {
-    if (loading) {
-      return <ImageSkeleton />
-    }
-
     if (error) {
       return (
-        <div className='grid aspect-[4/3] place-items-center text-slate-400'>
+        <div className='flex flex-1 items-center justify-center'>
           <div className='space-y-3 text-center'>
-            <div className='mx-auto grid h-12 w-12 place-items-center rounded-full bg-red-50'>
-              <FiWifiOff className='h-5 w-5 text-red-400' />
+            <div className='mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-500/20'>
+              <FiWifiOff className='h-5 w-5 text-red-300' />
             </div>
-            <p className='text-sm text-slate-600'>Failed to load images</p>
+            <p className='text-sm text-white/80'>Failed to load</p>
             {onRetry && (
               <button
                 onClick={onRetry}
-                className='group inline-flex items-center gap-2 rounded-full bg-red-50 px-3 py-1.5 text-xs font-medium text-red-600 transition-all hover:bg-red-100'
+                className='inline-flex items-center gap-2 rounded-full bg-red-500/20 px-3 py-1.5 text-xs font-medium text-red-300 transition-colors hover:bg-red-500/30'
               >
-                <FiRefreshCw className='h-3 w-3 transition-transform group-hover:rotate-180' />
-                {t('try_again') || 'Try again'}
+                <FiRefreshCw className='h-3 w-3' />
+                Retry
               </button>
             )}
           </div>
@@ -239,19 +249,19 @@ function YearCard({
 
     if (!images.length) {
       return (
-        <div className='grid aspect-[4/3] place-items-center text-slate-400'>
+        <div className='flex flex-1 items-center justify-center'>
           <div className='space-y-2 text-center'>
-            <div className='mx-auto grid h-12 w-12 place-items-center rounded-full bg-slate-100'>
-              <FiImage className='h-5 w-5 text-slate-400' />
+            <div className='mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white/10'>
+              <FiImage className='h-5 w-5 text-white/60' />
             </div>
-            <p className='text-sm text-slate-500'>No images found</p>
+            <p className='text-sm text-white/60'>No images</p>
           </div>
         </div>
       )
     }
 
     return (
-      <ImageGrid
+      <CompactImageGrid
         images={images}
         year={year}
         altTextPrefix={t('gallery_image') || 'Gallery image'}
@@ -264,36 +274,60 @@ function YearCard({
   return (
     <div
       className={clsx(
-        'group space-y-4 transition-all duration-700 ease-out',
+        'h-full transition-all duration-700 ease-out',
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
       )}
       style={{
-        transitionDelay: `${400 + cardIndex * 200}ms`
+        transitionDelay: `${200 + cardIndex * 150}ms`
       }}
     >
-      {/* Year header with link */}
-      <div className='flex items-center justify-between'>
-        <h3 className='text-2xl font-extrabold text-white drop-shadow-lg'>
-          {year}
-        </h3>
-        <Link
-          href={{ pathname: '/gallery/[year]', params: { year: String(year) } }}
-          className='group/link inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50'
-        >
-          {t('view_all') || 'View all'}
-          <FiArrowRight className='h-4 w-4 transition-transform group-hover/link:translate-x-1' />
-        </Link>
+      <div className='flex h-full flex-col rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm transition-all duration-300 hover:bg-white/15 sm:p-6'>
+        {/* Year header with link */}
+        <div className='mb-4 flex items-center justify-between sm:mb-6'>
+          <h3 className='text-2xl font-extrabold text-white drop-shadow-lg sm:text-3xl'>
+            {year}
+          </h3>
+          <Link
+            href={{
+              pathname: '/gallery/[year]',
+              params: { year: String(year) }
+            }}
+            className='group inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-2 text-xs font-medium text-white backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:px-4 sm:text-sm'
+          >
+            {t('view_all') || 'View all'}
+            <FiArrowRight className='h-3 w-3 transition-transform group-hover:translate-x-1 sm:h-4 sm:w-4' />
+          </Link>
+        </div>
+
+        {/* Image content */}
+        {loading ? (
+          <div className='mb-4 grid flex-1 grid-cols-3 gap-2 sm:gap-3'>
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={index}
+                className='aspect-square animate-pulse rounded-lg bg-white/20'
+                style={{
+                  animationDelay: `${index * 100}ms`
+                }}
+              />
+            ))}
+          </div>
+        ) : (
+          renderContent()
+        )}
+
+        {/* Image count only */}
+        <div className='flex items-center justify-center border-t border-white/10 pt-3 sm:pt-4'>
+          {images.length > 0 && (
+            <p className='text-xs text-white/80 sm:text-sm'>
+              {images.length}{' '}
+              {images.length === 1
+                ? t('image') || 'image'
+                : t('images') || 'images'}
+            </p>
+          )}
+        </div>
       </div>
-
-      {/* Image content */}
-      {renderContent()}
-
-      {/* Image count */}
-      {images.length > 0 && (
-        <p className='text-center text-sm text-white/80'>
-          {images.length} {images.length === 1 ? 'image' : 'images'} available
-        </p>
-      )}
     </div>
   )
 }
@@ -302,7 +336,7 @@ function YearCard({
 export default function OptimizedGalleryHero() {
   const t = useTranslations('GalleryPage.Hero')
   const locale = useLocale()
-  const { isVisible, sectionRef } = useStaggeredAnimation(0.2)
+  const { isVisible, sectionRef } = useStaggeredAnimation(0.1)
 
   // Use our optimized gallery hook
   const {
@@ -321,7 +355,6 @@ export default function OptimizedGalleryHero() {
 
   // Handle image click (could open lightbox, navigate, etc.)
   const handleImageClick = useCallback((image: ProcessedImage) => {
-    // For now, just log - you can implement lightbox or navigation here
     console.log('Image clicked:', image)
     // Could open lightbox modal or navigate to full gallery
   }, [])
@@ -329,7 +362,7 @@ export default function OptimizedGalleryHero() {
   return (
     <section
       ref={sectionRef}
-      className='relative isolate overflow-hidden py-16 sm:py-24'
+      className='relative flex min-h-screen items-center justify-center overflow-hidden'
       aria-labelledby='gallery-heading'
     >
       {/* Background image */}
@@ -344,61 +377,45 @@ export default function OptimizedGalleryHero() {
           quality={60}
           sizes='100vw'
         />
-        {/* Overlay for better text readability */}
-        <div className='absolute inset-0 bg-black/40' />
+        {/* Overlay for better contrast */}
+        <div className='absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60' />
       </div>
 
-      <div className='mx-auto max-w-screen-xl px-4'>
-        {/* Hero content */}
+      <div className='mx-auto w-full max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8'>
+        {/* Header content */}
         <div
           className={clsx(
-            'mb-12 text-center transition-all duration-1000 ease-out sm:mb-16',
+            'mb-8 text-center transition-all duration-1000 ease-out sm:mb-12',
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           )}
         >
           {/* Tagline image */}
-          <div className='mb-8 flex justify-center'>
+          <div className='mb-6 flex justify-center sm:mb-8'>
             <Image
               src={ASSETS.tagline}
               alt='Cascais Cup'
-              width={300}
-              height={80}
+              width={280}
+              height={70}
               priority
-              className='h-auto max-w-[280px] drop-shadow-2xl sm:max-w-[320px]'
+              className='h-auto max-w-[240px] drop-shadow-2xl sm:max-w-[280px]'
             />
           </div>
 
           <h1
             id='gallery-heading'
-            className='mb-4 text-4xl font-extrabold uppercase tracking-wide text-white drop-shadow-lg sm:text-5xl lg:text-6xl'
+            className='mb-4 text-3xl font-extrabold uppercase tracking-wide text-white drop-shadow-lg sm:text-4xl lg:text-5xl'
           >
             {t('title') || 'Gallery'}
           </h1>
 
-          <p className='mx-auto max-w-2xl text-lg text-white/90 drop-shadow sm:text-xl'>
+          <p className='mx-auto mb-6 max-w-2xl text-base text-white/90 drop-shadow sm:text-lg'>
             {t('subtitle') ||
               'Relive the best moments from Cascais Cup through the years'}
           </p>
 
-          {/* Status and controls */}
-          <div className='mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-center'>
-            <StatusIndicator
-              loading={loading}
-              error={error}
-              fromCache={fromCache}
-              isStale={isStale}
-              lastFetch={lastFetch}
-            />
-
-            {/* Total images count */}
-            {!loading && !error && (
-              <div className='text-sm text-white/80'>
-                {getTotalImagesCount()} total images
-              </div>
-            )}
-
-            {/* Refresh button */}
-            {(error || isStale) && (
+          {/* Hidden refresh button for errors only */}
+          {error && (
+            <div className='flex justify-center'>
               <button
                 onClick={refresh}
                 className='inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50'
@@ -406,15 +423,17 @@ export default function OptimizedGalleryHero() {
                 <FiRefreshCw
                   className={clsx('h-4 w-4', loading && 'animate-spin')}
                 />
-                {loading ? 'Refreshing...' : 'Refresh'}
+                {loading
+                  ? t('refreshing') || 'Refreshing...'
+                  : t('refresh') || 'Refresh'}
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
-        {/* Gallery by year */}
-        {!isEmpty && (
-          <div className='grid gap-12 lg:gap-16'>
+        {/* Three-column gallery grid */}
+        {!isEmpty ? (
+          <div className='grid max-h-[60vh] grid-cols-1 gap-4 sm:gap-6 lg:max-h-[65vh] lg:grid-cols-3 lg:gap-8'>
             {availableYears
               .sort((a, b) => b - a) // Latest year first
               .map((year, index) => (
@@ -433,10 +452,15 @@ export default function OptimizedGalleryHero() {
                 />
               ))}
           </div>
-        )}
-
-        {/* Empty state */}
-        {isEmpty && !loading && (
+        ) : loading ? (
+          // Loading state with skeletons
+          <div className='grid max-h-[60vh] grid-cols-1 gap-4 sm:gap-6 lg:max-h-[65vh] lg:grid-cols-3 lg:gap-8'>
+            {[2025, 2024, 2023].map((year, index) => (
+              <YearCardSkeleton key={year} />
+            ))}
+          </div>
+        ) : (
+          // Empty state
           <div
             className={clsx(
               'mx-auto max-w-md text-center transition-all duration-1000 ease-out',
@@ -445,19 +469,19 @@ export default function OptimizedGalleryHero() {
                 : 'translate-y-8 opacity-0'
             )}
           >
-            <div className='mx-auto mb-6 grid h-20 w-20 place-items-center rounded-full bg-white/20 backdrop-blur-sm'>
-              <FiImage className='h-8 w-8 text-white' />
+            <div className='mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm'>
+              <FiImage className='h-8 w-8 text-white/60' />
             </div>
             <h3 className='mb-3 text-xl font-bold text-white'>
               {t('empty_title') || 'No images available'}
             </h3>
-            <p className='text-white/80'>
+            <p className='mb-6 text-white/80'>
               {t('empty_description') ||
                 'Gallery images will appear here soon. Check back later!'}
             </p>
             <button
               onClick={refresh}
-              className='mt-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-6 py-3 font-medium text-white backdrop-blur-sm transition-all hover:bg-white/30'
+              className='inline-flex items-center gap-2 rounded-full bg-white/20 px-6 py-3 font-medium text-white backdrop-blur-sm transition-all hover:bg-white/30'
             >
               <FiRefreshCw className='h-4 w-4' />
               {t('check_again') || 'Check again'}

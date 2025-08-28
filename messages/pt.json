@@ -313,15 +313,52 @@
   },
 
   "GalleryPage": {
+    "title": "Galeria",
+    "description": "Galeria de fotos dos torneios de voleibol Cascais Cup",
+    "yearDescription": "Fotos e destaques do Cascais Cup",
+    "yearSubtitle": "Galeria oficial de fotos do",
+    "metaDescription": "Explore galerias de fotos dos torneios de voleibol Cascais Cup ao longo dos anos. Reviva os melhores momentos e destaques.",
     "Hero": {
-      "see_more": "Ver mais",
-      "image_alt": "Imagem",
-      "loading": "Carregando…",
-      "empty_message": "Ainda não há imagens",
-      "error_message": "Falha ao carregar",
-      "taglineAlt": "sinta a AÇÃO, desfrute do VERÃO",
       "title": "Galeria",
-      "subtitle": "Descarregue os melhores momentos da sua equipa."
+      "subtitle": "Reviva os melhores momentos do Cascais Cup ao longo dos anos",
+      "view_all": "Ver todas",
+      "gallery_image": "Imagem da galeria",
+      "image": "imagem",
+      "images": "imagens",
+      "empty_title": "Nenhuma imagem disponível",
+      "empty_description": "As imagens da galeria aparecerão aqui em breve. Volte mais tarde!",
+      "check_again": "Verificar novamente",
+      "refresh": "Atualizar",
+      "refreshing": "Atualizando...",
+      "try_again": "Tentar novamente"
+    },
+    "Main": {
+      "loading": "Carregando galeria...",
+      "failed_title": "Falha ao carregar galeria",
+      "failed_description": "Não foi possível carregar as imagens da galeria. Tente novamente.",
+      "try_again": "Tentar novamente",
+      "images": "imagens",
+      "no_images_title": "Nenhuma imagem encontrada",
+      "no_images_description": "Esta galeria está vazia",
+      "no_images_year": "Nenhuma imagem disponível para",
+      "view_modes": {
+        "grid": "Vista em grade",
+        "masonry": "Vista em mosaico"
+      },
+      "grid_sizes": {
+        "small": "Pequena",
+        "medium": "Média",
+        "large": "Grande"
+      },
+      "refresh": "Atualizar galeria",
+      "previous": "Anterior",
+      "next": "Próximo",
+      "close_lightbox": "Fechar lightbox",
+      "previous_image": "Imagem anterior",
+      "next_image": "Próxima imagem",
+      "image_of": "de",
+      "cached": "Cache",
+      "live_data": "Dados ao vivo"
     }
   },
 

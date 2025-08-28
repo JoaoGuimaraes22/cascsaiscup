@@ -313,15 +313,52 @@
   },
 
   "GalleryPage": {
+    "title": "Gallery",
+    "description": "Photo gallery from Cascais Cup volleyball tournaments",
+    "yearDescription": "Photos and highlights from Cascais Cup",
+    "yearSubtitle": "Official photo gallery of the",
+    "metaDescription": "Explore photo galleries from Cascais Cup volleyball tournaments through the years. Relive the best moments and highlights.",
     "Hero": {
-      "see_more": "See more",
-      "image_alt": "Image",
-      "loading": "Loading…",
-      "empty_message": "No images yet",
-      "error_message": "Failed to load",
-      "taglineAlt": "feel the ACTION, enjoy the SUMMER",
       "title": "Gallery",
-      "subtitle": "Download your team’s best moments."
+      "subtitle": "Relive the best moments from Cascais Cup through the years",
+      "view_all": "View all",
+      "gallery_image": "Gallery image",
+      "image": "image",
+      "images": "images",
+      "empty_title": "No images available",
+      "empty_description": "Gallery images will appear here soon. Check back later!",
+      "check_again": "Check again",
+      "refresh": "Refresh",
+      "refreshing": "Refreshing...",
+      "try_again": "Try again"
+    },
+    "Main": {
+      "loading": "Loading gallery...",
+      "failed_title": "Failed to load gallery",
+      "failed_description": "Unable to load gallery images. Please try again.",
+      "try_again": "Try again",
+      "images": "images",
+      "no_images_title": "No images found",
+      "no_images_description": "This gallery is empty",
+      "no_images_year": "No images available for",
+      "view_modes": {
+        "grid": "Grid view",
+        "masonry": "Masonry view"
+      },
+      "grid_sizes": {
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
+      },
+      "refresh": "Refresh gallery",
+      "previous": "Previous",
+      "next": "Next",
+      "close_lightbox": "Close lightbox",
+      "previous_image": "Previous image",
+      "next_image": "Next image",
+      "image_of": "of",
+      "cached": "Cached",
+      "live_data": "Live data"
     }
   },
 

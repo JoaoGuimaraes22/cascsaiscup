@@ -313,15 +313,52 @@
   },
 
   "GalleryPage": {
+    "title": "Galerie",
+    "description": "Galerie de photos des tournois de volley-ball Cascais Cup",
+    "yearDescription": "Photos et moments forts de la Cascais Cup",
+    "yearSubtitle": "Galerie officielle de photos du",
+    "metaDescription": "Explorez les galeries de photos des tournois de volley-ball Cascais Cup au fil des années. Revivez les meilleurs moments et faits saillants.",
     "Hero": {
-      "see_more": "Voir plus",
-      "image_alt": "Image",
-      "loading": "Chargement…",
-      "empty_message": "Pas encore d'images",
-      "error_message": "Échec du chargement",
-      "taglineAlt": "ressentez l'ACTION, profitez de l'ÉTÉ",
       "title": "Galerie",
-      "subtitle": "Téléchargez les meilleurs moments de votre équipe."
+      "subtitle": "Revivez les meilleurs moments de la Cascais Cup au fil des années",
+      "view_all": "Voir tout",
+      "gallery_image": "Image de galerie",
+      "image": "image",
+      "images": "images",
+      "empty_title": "Aucune image disponible",
+      "empty_description": "Les images de la galerie apparaîtront ici bientôt. Revenez plus tard!",
+      "check_again": "Vérifier à nouveau",
+      "refresh": "Actualiser",
+      "refreshing": "Actualisation...",
+      "try_again": "Réessayer"
+    },
+    "Main": {
+      "loading": "Chargement de la galerie...",
+      "failed_title": "Échec du chargement de la galerie",
+      "failed_description": "Impossible de charger les images de la galerie. Veuillez réessayer.",
+      "try_again": "Réessayer",
+      "images": "images",
+      "no_images_title": "Aucune image trouvée",
+      "no_images_description": "Cette galerie est vide",
+      "no_images_year": "Aucune image disponible pour",
+      "view_modes": {
+        "grid": "Vue grille",
+        "masonry": "Vue mosaïque"
+      },
+      "grid_sizes": {
+        "small": "Petite",
+        "medium": "Moyenne",
+        "large": "Grande"
+      },
+      "refresh": "Actualiser la galerie",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "close_lightbox": "Fermer la lightbox",
+      "previous_image": "Image précédente",
+      "next_image": "Image suivante",
+      "image_of": "de",
+      "cached": "Cache",
+      "live_data": "Données en direct"
     }
   },
 
