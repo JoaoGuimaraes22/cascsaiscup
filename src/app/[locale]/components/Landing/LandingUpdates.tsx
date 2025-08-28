@@ -146,6 +146,7 @@ export default function LandingUpdates() {
   const [currentNewsSlide, setCurrentNewsSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [isVisible, setIsVisible] = useState(false)
+  const [imagesLoaded, setImagesLoaded] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const intervalRef = useRef<ReturnType<typeof setInterval>>()
 
@@ -278,22 +279,57 @@ export default function LandingUpdates() {
     return () => observer.disconnect()
   }, [])
 
+  // Preload critical images
+  useEffect(() => {
+    const criticalImages = [
+      ASSETS.images.backgroundMain,
+      ASSETS.images.waveTop,
+      ASSETS.images.waveTestimonials
+    ]
+
+    Promise.all(
+      criticalImages.map(
+        src =>
+          new Promise((resolve, reject) => {
+            const img = new window.Image()
+            img.onload = resolve
+            img.onerror = reject
+            img.src = src
+          })
+      )
+    )
+      .then(() => {
+        setImagesLoaded(true)
+      })
+      .catch(() => {
+        // Still show content even if preload fails
+        setImagesLoaded(true)
+      })
+  }, [])
+
   return (
     <section
       ref={sectionRef}
       className='relative isolate overflow-hidden pb-6 sm:pb-8'
       aria-labelledby='updates-heading'
     >
-      {/* Background for whole section */}
-      <Image
-        src={ASSETS.images.backgroundMain}
-        alt=''
-        role='presentation'
-        fill
-        loading='eager'
-        className='absolute inset-0 -z-10 object-cover'
-        quality={75}
-      />
+      {/* Background for whole section - lazy load with blur placeholder */}
+      <div
+        className={`absolute inset-0 -z-10 transition-opacity duration-500 ${imagesLoaded ? 'opacity-100' : 'opacity-0'}`}
+      >
+        <Image
+          src={ASSETS.images.backgroundMain}
+          alt=''
+          role='presentation'
+          fill
+          priority={false}
+          className='object-cover'
+          quality={60} // Reduced from 75
+          sizes='100vw'
+          placeholder='blur'
+          blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
+        />
+      </div>
 
       {/* Top wave - responsive height with better mobile scaling */}
       <div className='absolute inset-x-0 top-0 z-0 h-[60px] sm:h-[80px] lg:h-[120px]'>
@@ -303,8 +339,9 @@ export default function LandingUpdates() {
           role='presentation'
           fill
           className='object-cover object-center'
-          quality={75}
-          loading='eager'
+          quality={60}
+          priority={false}
+          sizes='100vw'
         />
       </div>
 
@@ -333,7 +370,7 @@ export default function LandingUpdates() {
             >
               {newsItems.map((item, index) => (
                 <div key={index} className='keen-slider__slide px-2'>
-                  <NewsCard {...item} />
+                  <NewsCard {...item} priority={index === 0} />
                 </div>
               ))}
             </div>
@@ -380,7 +417,7 @@ export default function LandingUpdates() {
         {/* Testimonials Section Title */}
         <div
           className={clsx(
-            `delay-[${ASSETS.animations.fadeIn.delay}ms] transition-all duration-${ASSETS.animations.fadeIn.duration} ease-out`,
+            'delay-[600ms] transition-all duration-1000 ease-out',
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           )}
         >
@@ -403,8 +440,9 @@ export default function LandingUpdates() {
             role='presentation'
             fill
             className='object-cover'
-            loading='eager'
-            quality={75}
+            priority={false}
+            quality={60}
+            sizes='100vw'
           />
 
           {/* Testimonials overlay */}
