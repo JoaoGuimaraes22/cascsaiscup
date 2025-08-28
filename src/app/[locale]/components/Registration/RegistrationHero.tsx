@@ -1,11 +1,12 @@
 'use client'
 
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { MouseEvent } from 'react'
 
 export default function RegistrationHero() {
   const t = useTranslations('RegistrationPage.RegistrationHero')
+  const locale = useLocale()
 
   // Assets
   const ASSETS = {
@@ -13,6 +14,23 @@ export default function RegistrationHero() {
     player: '/img/registration/player.png',
     wave: '/img/global/ondas-3.png'
   } as const
+
+  // Language mapping for brochure files
+  const getLanguageCode = (locale: string) => {
+    const languageMap = {
+      en: 'ENG',
+      es: 'ESP',
+      pt: 'PT',
+      fr: 'FR'
+    } as const
+
+    return languageMap[locale as keyof typeof languageMap] || 'ENG'
+  }
+
+  const getBrochureFileName = () => {
+    const langCode = getLanguageCode(locale)
+    return `CVCUP-2026-CONVITE-${langCode}.pdf`
+  }
 
   const WAVE_HEIGHT = 135
 
@@ -191,8 +209,8 @@ export default function RegistrationHero() {
                 {/* Action Buttons */}
                 <div className='flex flex-col gap-4 pt-4 sm:flex-row'>
                   <a
-                    href='/documents/brochure.pdf'
-                    download
+                    href={`/docs/${getBrochureFileName()}`}
+                    download={getBrochureFileName()}
                     className='inline-flex items-center justify-center rounded-lg bg-sky-600 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
                   >
                     {t('buttons.brochure')}
@@ -300,5 +318,3 @@ function WaveSection({ waveAsset, waveHeight }: WaveSectionProps) {
     </div>
   )
 }
-
-/* -------- Stats List Component - REMOVED -------- */

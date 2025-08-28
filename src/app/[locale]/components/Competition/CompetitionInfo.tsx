@@ -400,23 +400,12 @@ function SponsorsSection({
   )
 }
 
-// Regulations download button component
+// Simplified Regulations download button component
 function RegulationsButton() {
-  const handleDownload = () => {
-    // Create a link element and trigger download
-    const link = document.createElement('a')
-    link.href = '/documents/program-2026.pdf'
-    link.download = 'program-2026.pdf'
-    link.target = '_blank'
-    link.rel = 'noopener noreferrer'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-
   return (
-    <button
-      onClick={handleDownload}
+    <a
+      href='/docs/CVCUP-2026-Regulamento-PT.pdf'
+      download='CVCUP-2026-Regulamento-PT.pdf'
       className={clsx(
         'group inline-flex items-center gap-3 rounded-lg px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300',
         'bg-gradient-to-r from-sky-600 to-sky-700',
@@ -431,7 +420,7 @@ function RegulationsButton() {
         aria-hidden='true'
       />
       <span className='text-sm sm:text-base'>Regulations</span>
-    </button>
+    </a>
   )
 }
 

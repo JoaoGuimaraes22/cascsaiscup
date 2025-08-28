@@ -517,13 +517,13 @@
     "phone": "Appelez-nous",
     "location": "Notre emplacement",
     "followUs": "Suivez-nous",
-    "facebook": "Visitez notre page Facebook",
+    "website": "Visitez notre site Web",
     "instagram": "Visitez notre profil Instagram",
     "registrationCTA": "Inscrivez-vous au tournoi",
     "registration": "Inscription",
     "sponsors": "Nos Partenaires et Sponsors",
     "allRightsReserved": "Tous droits réservés.",
-    "privacy": "Politique de Confidentialité",
-    "terms": "Conditions d'Utilisation"
+    "brochure": "Brochure",
+    "regulations": "Règlement"
   }
 }

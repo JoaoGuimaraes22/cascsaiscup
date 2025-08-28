@@ -23,22 +23,40 @@ interface Team {
 
 // Sample teams data - all Portuguese teams
 const SAMPLE_TEAMS: Team[] = [
-  { name: 'Lisboa Spikers', country: 'PT' },
-  { name: 'Porto Power', country: 'PT' },
-  { name: 'Algarve Waves', country: 'PT' },
-  { name: 'Madeira Volley Stars', country: 'PT' },
-  { name: 'Cascais Crushers', country: 'PT' },
-  { name: 'Braga Blockers', country: 'PT' },
-  { name: 'Oeiras Thunder', country: 'PT' },
-  { name: 'Estoril Eagles', country: 'PT' },
-  { name: 'Sintra Smash', country: 'PT' },
-  { name: 'Coimbra Titans', country: 'PT' },
-  { name: 'Funchal Flames', country: 'PT' },
-  { name: 'Viana Sea Storm', country: 'PT' },
-  { name: 'Setúbal Sharks', country: 'PT' },
-  { name: 'Aveiro Ace Queens', country: 'PT' },
-  { name: 'Faro Flyers', country: 'PT' },
-  { name: 'Leiria Lightning', country: 'PT' }
+  // ESPANHA
+  { name: 'CV Madrid', country: 'ES' },
+  { name: 'Dompa Ourense Volei', country: 'ES' },
+
+  // MÓNACO
+  { name: 'AS Monaco', country: 'MC' },
+  // PORTUGAL
+  { name: 'CF “Os Belenenses”', country: 'PT' },
+  { name: 'Lusófona VC', country: 'PT' },
+  { name: 'Cascais Volley4all', country: 'PT' },
+  { name: 'PEL Amora SC', country: 'PT' },
+  { name: 'CJS Arouca', country: 'PT' },
+  { name: 'Santiago V4A', country: 'PT' },
+  { name: 'AR Canidelo', country: 'PT' },
+  { name: 'AV Atlântico', country: 'PT' },
+  { name: 'SC Vila Real', country: 'PT' },
+  { name: 'CV Aveiro', country: 'PT' },
+  { name: 'RC Santarém', country: 'PT' },
+  { name: 'SC Arcozelo', country: 'PT' },
+  { name: 'Madeira Torres', country: 'PT' },
+  { name: 'São Francisco AD', country: 'PT' },
+  { name: 'GDC Gueifães', country: 'PT' },
+  { name: 'TC Alcochete', country: 'PT' },
+  { name: 'AA Coimbra', country: 'PT' },
+  { name: 'Lousada VC', country: 'PT' },
+  { name: 'CA Madalena', country: 'PT' },
+  { name: 'CV Póvoa', country: 'PT' },
+  { name: 'AD Esposende', country: 'PT' },
+  { name: 'Frei Gil VC', country: 'PT' },
+  { name: 'CD Foz Porto', country: 'PT' },
+  { name: 'Col. Julio Dinis', country: 'PT' },
+  { name: 'Juventude SC', country: 'PT' },
+  { name: 'CRCD Luzense', country: 'PT' },
+  { name: 'Sporting CT', country: 'PT' }
 ] as const
 
 // Custom hook for intersection observer with staggered animations

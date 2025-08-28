@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import clsx from 'clsx'
 
 export default function LandingWelcome() {
   const t = useTranslations('LandingPage.Welcome')
+  const locale = useLocale()
   const [isLoaded, setIsLoaded] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
@@ -16,6 +17,23 @@ export default function LandingWelcome() {
   const TAGLINE = '/img/global/tagline-w.png'
   const LOGO = '/img/global/logo-white.png'
   const SPONSOR = '/img/sponsors/cascais-camara-w.png'
+
+  // Language mapping for brochure files
+  const getLanguageCode = (locale: string) => {
+    const languageMap = {
+      en: 'ENG',
+      es: 'ESP',
+      pt: 'PT',
+      fr: 'FR'
+    } as const
+
+    return languageMap[locale as keyof typeof languageMap] || 'ENG'
+  }
+
+  const getBrochureFileName = () => {
+    const langCode = getLanguageCode(locale)
+    return `CVCUP-2026-CONVITE-${langCode}.pdf`
+  }
 
   // Check if device is mobile
   useEffect(() => {
@@ -186,9 +204,14 @@ export default function LandingWelcome() {
             {t('register') || 'REGISTRATION'}
           </button>
 
-          <button className='rounded-full bg-white px-6 py-3 text-sm font-bold uppercase tracking-wide text-sky-500 drop-shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gray-100 hover:shadow-xl sm:px-8 sm:py-4 sm:text-lg'>
+          {/* Brochure download button with locale-based filename */}
+          <a
+            href={`/docs/${getBrochureFileName()}`}
+            download={getBrochureFileName()}
+            className='rounded-full bg-white px-6 py-3 text-center text-sm font-bold uppercase tracking-wide text-sky-500 drop-shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gray-100 hover:shadow-xl sm:px-8 sm:py-4 sm:text-lg'
+          >
             {t('brochure') || 'BROCHURES'}
-          </button>
+          </a>
         </div>
       </div>
 

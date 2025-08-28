@@ -516,13 +516,13 @@
     "phone": "Llámanos",
     "location": "Nuestra ubicación",
     "followUs": "Síguenos",
-    "facebook": "Visita nuestra página de Facebook",
+    "website": "Visita nuestra página web",
     "instagram": "Visita nuestro perfil de Instagram",
     "registrationCTA": "Regístrate para el torneo",
     "registration": "Inscripción",
     "sponsors": "Nuestros Socios y Patrocinadores",
     "allRightsReserved": "Todos los derechos reservados.",
-    "privacy": "Política de Privacidad",
-    "terms": "Términos de Servicio"
+    "brochure": "Folleto",
+    "regulations": "Reglamento"
   }
 }

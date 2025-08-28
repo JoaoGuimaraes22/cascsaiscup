@@ -3,9 +3,9 @@
 import { FC, useMemo } from 'react'
 import Image from 'next/image'
 import { Link } from '@/src/navigation'
-import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
-import { FaFacebookF, FaInstagram } from 'react-icons/fa'
-import { useTranslations } from 'next-intl'
+import { FiMail, FiPhone, FiMapPin, FiGlobe } from 'react-icons/fi'
+import { FaInstagram } from 'react-icons/fa'
+import { useTranslations, useLocale } from 'next-intl'
 import clsx from 'clsx'
 
 interface Props {
@@ -22,12 +22,30 @@ interface Sponsor {
 
 const Footer: FC<Props> = ({ locale }) => {
   const t = useTranslations('Footer')
+  const currentLocale = useLocale()
 
   const LOGO = '/img/global/cascais-volley-cup-1.png'
-  const EMAIL = 'info@cascaisvolleycup.com'
-  const PHONE = '+351 123 456 789'
-  const FACEBOOK_URL = 'https://www.facebook.com/cascaisvolleycup'
+  const EMAIL = 'info@volley4all.com'
+  const PHONE = '(00351) 96 441 56 32'
+  const WEBSITE_URL = 'https://www.volley4all.com'
   const INSTAGRAM_URL = 'https://www.instagram.com/cascaisvolleycup'
+
+  // Language mapping for brochure files
+  const getLanguageCode = (locale: string) => {
+    const languageMap = {
+      en: 'ENG',
+      es: 'ESP',
+      pt: 'PT',
+      fr: 'FR'
+    } as const
+
+    return languageMap[locale as keyof typeof languageMap] || 'ENG'
+  }
+
+  const getBrochureFileName = () => {
+    const langCode = getLanguageCode(currentLocale)
+    return `CVCUP-2026-CONVITE-${langCode}.pdf`
+  }
 
   // Memoized sponsors data with potential links
   const sponsors: Sponsor[] = useMemo(
@@ -185,10 +203,10 @@ const Footer: FC<Props> = ({ locale }) => {
             {/* Social Icons */}
             <div className='mb-6 flex items-center gap-3'>
               <SocialIcon
-                href={FACEBOOK_URL}
-                ariaLabel={t('facebook') || 'Visit our Facebook page'}
-                title='Facebook'
-                icon={<FaFacebookF className='h-4 w-4' />}
+                href={WEBSITE_URL}
+                ariaLabel={t('website') || 'Visit our website'}
+                title='Website'
+                icon={<FiGlobe className='h-4 w-4' />}
               />
               <SocialIcon
                 href={INSTAGRAM_URL}
@@ -233,20 +251,20 @@ const Footer: FC<Props> = ({ locale }) => {
               {t('allRightsReserved') || 'All rights reserved.'}
             </div>
             <div className='flex gap-4 text-xs'>
-              <Link
-                lang={locale}
-                href='/privacy'
+              <a
+                href={`/docs/${getBrochureFileName()}`}
+                download={getBrochureFileName()}
                 className='text-sky-700 transition-colors sm:text-slate-500 sm:hover:text-slate-700'
               >
-                {t('privacy') || 'Privacy Policy'}
-              </Link>
-              <Link
-                lang={locale}
-                href='/terms'
+                {t('brochure') || 'Brochure'}
+              </a>
+              <a
+                href='/docs/CVCUP-2026-Regulamento-PT.pdf'
+                download='CVCUP-2026-Regulamento-PT.pdf'
                 className='text-sky-700 transition-colors sm:text-slate-500 sm:hover:text-slate-700'
               >
-                {t('terms') || 'Terms of Service'}
-              </Link>
+                {t('regulations') || 'Regulations'}
+              </a>
             </div>
           </div>
         </div>

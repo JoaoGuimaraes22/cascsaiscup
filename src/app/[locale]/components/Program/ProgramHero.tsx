@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
@@ -10,6 +10,7 @@ import clsx from 'clsx'
 
 export default function ProgramHero() {
   const t = useTranslations('ProgramPage.Hero')
+  const locale = useLocale()
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [backgroundLoaded, setBackgroundLoaded] = useState(false)
@@ -23,7 +24,23 @@ export default function ProgramHero() {
     wave: '/img/global/ondas-3.png'
   } as const
 
-  const PROGRAM_PDF = '/docs/program-2026.pdf'
+  // Language mapping for brochure files
+  const getLanguageCode = (locale: string) => {
+    const languageMap = {
+      en: 'ENG',
+      es: 'ESP',
+      pt: 'PT',
+      fr: 'FR'
+    } as const
+
+    return languageMap[locale as keyof typeof languageMap] || 'ENG'
+  }
+
+  const getBrochureFileName = () => {
+    const langCode = getLanguageCode(locale)
+    return `CVCUP-2026-CONVITE-${langCode}.pdf`
+  }
+
   const WAVE_HEIGHT = 135
 
   // Days configuration with new design
@@ -386,7 +403,7 @@ export default function ProgramHero() {
                 )}
                 style={{ transitionDelay: '1800ms' }}
               >
-                <DownloadButton href={PROGRAM_PDF}>
+                <DownloadButton filename={getBrochureFileName()}>
                   {t('downloadBrochure')}
                 </DownloadButton>
               </div>
@@ -616,17 +633,18 @@ function InfoSection({
     </div>
   )
 }
+
 function DownloadButton({
-  href,
+  filename,
   children
 }: {
-  href: string
+  filename: string
   children: React.ReactNode
 }) {
   return (
     <a
-      href={href}
-      download
+      href={`/docs/${filename}`}
+      download={filename}
       className='group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-sky-600 px-6 py-3 text-sm font-bold text-white shadow-lg ring-1 ring-black/10 transition-all duration-300 hover:scale-105 hover:bg-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
     >
       <FiDownload className='h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5' />

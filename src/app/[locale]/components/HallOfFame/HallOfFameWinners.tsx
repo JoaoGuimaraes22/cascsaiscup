@@ -7,73 +7,56 @@ import { FaMedal, FaChevronDown, FaTrophy } from 'react-icons/fa'
 import { BiAward } from 'react-icons/bi'
 import clsx from 'clsx'
 
-type DivisionKey = 'Sub21' | 'Sub17' | 'Sub15'
-const DIVISIONS: DivisionKey[] = ['Sub21', 'Sub17', 'Sub15']
+type DivisionKey = 'Sub15' | 'Sub17' | 'Open'
+const DIVISIONS: DivisionKey[] = ['Sub15', 'Sub17', 'Open']
 
-// Portuguese teams only with PT flags
+// Updated winners data with the new structure
 const WINNERS: Record<
   string,
   Record<DivisionKey, { name: string; country: string }[]>
 > = {
   '2025': {
-    Sub21: [
-      { name: 'Lisboa Spikers', country: 'PT' },
-      { name: 'Porto Power', country: 'PT' },
-      { name: 'Algarve Waves', country: 'PT' },
-      { name: 'Cascais Crushers', country: 'PT' }
+    Sub15: [
+      { name: 'PEL Amora SC A', country: 'PT' },
+      { name: 'Cascais Volley4all', country: 'PT' },
+      { name: 'PEL Amora SC B', country: 'PT' }
     ],
     Sub17: [
-      { name: 'Madeira Volley Stars', country: 'PT' },
-      { name: 'Braga Blockers', country: 'PT' },
-      { name: 'Oeiras Thunder', country: 'PT' },
-      { name: 'Estoril Eagles', country: 'PT' }
+      { name: 'SC Arcozelo', country: 'PT' },
+      { name: 'PEL Amora SC', country: 'PT' },
+      { name: 'São Francisco AD', country: 'PT' }
     ],
-    Sub15: [
-      { name: 'Sintra Smash', country: 'PT' },
-      { name: 'Coimbra Titans', country: 'PT' },
-      { name: 'Funchal Flames', country: 'PT' },
-      { name: 'Viana Sea Storm', country: 'PT' }
+    Open: [
+      { name: 'Cascais Volley4all', country: 'PT' },
+      { name: 'CV Madrid', country: 'ES' },
+      { name: 'AS Mónaco', country: 'MC' }
     ]
   },
   '2024': {
-    Sub21: [
-      { name: 'Setúbal Sharks', country: 'PT' },
-      { name: 'Aveiro Ace Queens', country: 'PT' },
-      { name: 'Faro Flyers', country: 'PT' },
-      { name: 'Leiria Lightning', country: 'PT' }
+    Sub15: [
+      { name: 'SC Arcozelo A', country: 'PT' },
+      { name: 'SC Arcozelo B', country: 'PT' },
+      { name: 'GDC Gueifães', country: 'PT' }
     ],
     Sub17: [
-      { name: 'Cascais Crushers', country: 'PT' },
-      { name: 'Lisboa Spikers', country: 'PT' },
-      { name: 'Porto Power', country: 'PT' },
-      { name: 'Algarve Waves', country: 'PT' }
+      { name: 'SC Arcozelo', country: 'PT' },
+      { name: 'SC Vila Real', country: 'PT' },
+      { name: 'Cascais Volley4all', country: 'PT' }
     ],
-    Sub15: [
-      { name: 'Braga Blockers', country: 'PT' },
-      { name: 'Oeiras Thunder', country: 'PT' },
-      { name: 'Estoril Eagles', country: 'PT' },
-      { name: 'Madeira Volley Stars', country: 'PT' }
-    ]
+    Open: []
   },
   '2023': {
-    Sub21: [
-      { name: 'Aveiro Arrows', country: 'PT' },
-      { name: 'Guimarães Giants', country: 'PT' },
-      { name: 'Viseu Vipers', country: 'PT' },
-      { name: 'Santarém Smashers', country: 'PT' }
+    Sub15: [
+      { name: 'CF "Os Belenenses"', country: 'PT' },
+      { name: 'CJS Arouca', country: 'PT' },
+      { name: 'Cascais Volley4all', country: 'PT' }
     ],
     Sub17: [
-      { name: 'Coimbra Comets', country: 'PT' },
-      { name: 'Évora Eagles', country: 'PT' },
-      { name: 'Beja Bombers', country: 'PT' },
-      { name: 'Vila Real Volleyball', country: 'PT' }
+      { name: 'Madeira Torres', country: 'PT' },
+      { name: 'Cascais Volley4all', country: 'PT' },
+      { name: 'Lusófona VC', country: 'PT' }
     ],
-    Sub15: [
-      { name: 'Peniche Panthers', country: 'PT' },
-      { name: 'Caldas Crushers', country: 'PT' },
-      { name: 'Torres Vedras Titans', country: 'PT' },
-      { name: 'Sesimbra Spikers', country: 'PT' }
-    ]
+    Open: []
   }
 }
 
@@ -153,7 +136,7 @@ export default function HallOfFameWinners() {
 
   const getDivisionIcon = (division: DivisionKey) => {
     switch (division) {
-      case 'Sub21':
+      case 'Open':
         return <FaTrophy className='h-3 w-3' />
       case 'Sub17':
         return <BiAward className='h-3 w-3' />
@@ -161,6 +144,19 @@ export default function HallOfFameWinners() {
         return <FaMedal className='h-3 w-3' />
       default:
         return <FaMedal className='h-3 w-3' />
+    }
+  }
+
+  const getDivisionLabel = (division: DivisionKey) => {
+    switch (division) {
+      case 'Open':
+        return 'OPEN'
+      case 'Sub17':
+        return 'SUB17'
+      case 'Sub15':
+        return 'SUB15'
+      default:
+        return division
     }
   }
 
@@ -235,7 +231,7 @@ export default function HallOfFameWinners() {
                     transitionDelay: `${yearIndex * 100}ms`
                   }}
                 >
-                  {/* Year Header Button - NO BLUE BALL */}
+                  {/* Year Header Button */}
                   <button
                     onClick={() => handleYearToggle(year)}
                     className={clsx(
@@ -278,88 +274,100 @@ export default function HallOfFameWinners() {
                   >
                     <div className='overflow-hidden'>
                       <div className='px-5 pb-4'>
-                        {DIVISIONS.map((divKey, divIndex) => (
-                          <div
-                            key={divKey}
-                            className={clsx(
-                              'border-t border-slate-100 py-4 first:border-t-0',
-                              'transition-all duration-300 ease-out',
-                              openYear === year
-                                ? 'translate-x-0 opacity-100'
-                                : 'translate-x-4 opacity-0'
-                            )}
-                            style={{
-                              transitionDelay:
+                        {DIVISIONS.map((divKey, divIndex) => {
+                          const divisionWinners = WINNERS[year][divKey]
+
+                          // Skip divisions with no winners
+                          if (
+                            !divisionWinners ||
+                            divisionWinners.length === 0
+                          ) {
+                            return null
+                          }
+
+                          return (
+                            <div
+                              key={divKey}
+                              className={clsx(
+                                'border-t border-slate-100 py-4 first:border-t-0',
+                                'transition-all duration-300 ease-out',
                                 openYear === year
-                                  ? `${divIndex * 150}ms`
-                                  : '0ms'
-                            }}
-                          >
-                            {/* Division Header */}
-                            <div className='mb-3 flex items-center gap-2'>
-                              <div className='flex h-6 w-6 items-center justify-center rounded-md bg-gradient-to-br from-sky-400 to-sky-600 text-white'>
-                                {getDivisionIcon(divKey)}
+                                  ? 'translate-x-0 opacity-100'
+                                  : 'translate-x-4 opacity-0'
+                              )}
+                              style={{
+                                transitionDelay:
+                                  openYear === year
+                                    ? `${divIndex * 150}ms`
+                                    : '0ms'
+                              }}
+                            >
+                              {/* Division Header */}
+                              <div className='mb-3 flex items-center gap-2'>
+                                <div className='flex h-6 w-6 items-center justify-center rounded-md bg-gradient-to-br from-sky-400 to-sky-600 text-white'>
+                                  {getDivisionIcon(divKey)}
+                                </div>
+                                <h3 className='text-sm font-bold uppercase tracking-wide text-sky-700'>
+                                  {getDivisionLabel(divKey)}
+                                </h3>
                               </div>
-                              <h3 className='text-sm font-bold uppercase tracking-wide text-sky-700'>
-                                {t(`labels.${divKey.toLowerCase()}`)}
-                              </h3>
-                            </div>
 
-                            {/* Teams List */}
-                            <div className='grid gap-2 sm:grid-cols-2'>
-                              {WINNERS[year][divKey].map(
-                                ({ name, country }, teamIndex) => {
-                                  const medal =
-                                    medalStyles[teamIndex] || medalStyles[3]
-                                  const position = teamIndex + 1
+                              {/* Teams List */}
+                              <div className='grid gap-2 sm:grid-cols-2'>
+                                {divisionWinners.map(
+                                  ({ name, country }, teamIndex) => {
+                                    const medal =
+                                      medalStyles[teamIndex] || medalStyles[3]
+                                    const position = teamIndex + 1
 
-                                  return (
-                                    <div
-                                      key={`${name}-${teamIndex}`}
-                                      className={clsx(
-                                        'group flex items-center gap-3 rounded-lg p-3',
-                                        'bg-gradient-to-r from-white/80 to-slate-50/80',
-                                        'border border-slate-200/60 shadow-sm backdrop-blur-sm',
-                                        'hover:border-sky-300/50 hover:shadow-md',
-                                        'transition-all duration-200'
-                                      )}
-                                    >
-                                      {/* Position Medal */}
+                                    return (
                                       <div
+                                        key={`${name}-${teamIndex}`}
                                         className={clsx(
-                                          'flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br font-bold text-white shadow-lg',
-                                          medal.bg,
-                                          medal.glow
+                                          'group flex items-center gap-3 rounded-lg p-3',
+                                          'bg-gradient-to-r from-white/80 to-slate-50/80',
+                                          'border border-slate-200/60 shadow-sm backdrop-blur-sm',
+                                          'hover:border-sky-300/50 hover:shadow-md',
+                                          'transition-all duration-200'
                                         )}
                                       >
-                                        <span className='text-xs'>
-                                          {position}
+                                        {/* Position Medal */}
+                                        <div
+                                          className={clsx(
+                                            'flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br font-bold text-white shadow-lg',
+                                            medal.bg,
+                                            medal.glow
+                                          )}
+                                        >
+                                          <span className='text-xs'>
+                                            {position}
+                                          </span>
+                                        </div>
+
+                                        {/* Flag */}
+                                        <div className='relative inline-block h-[16px] w-[24px] shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/10'>
+                                          <Image
+                                            src={flagSrc(country)}
+                                            alt={`${country} flag`}
+                                            fill
+                                            sizes='24px'
+                                            className='object-cover'
+                                            quality={75}
+                                          />
+                                        </div>
+
+                                        {/* Team Name */}
+                                        <span className='flex-1 text-sm font-medium text-slate-800'>
+                                          {name}
                                         </span>
                                       </div>
-
-                                      {/* Flag */}
-                                      <div className='relative inline-block h-[16px] w-[24px] shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/10'>
-                                        <Image
-                                          src={flagSrc(country)}
-                                          alt={`${country} flag`}
-                                          fill
-                                          sizes='24px'
-                                          className='object-cover'
-                                          quality={75}
-                                        />
-                                      </div>
-
-                                      {/* Team Name */}
-                                      <span className='flex-1 text-sm font-medium text-slate-800'>
-                                        {name}
-                                      </span>
-                                    </div>
-                                  )
-                                }
-                              )}
+                                    )
+                                  }
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          )
+                        })}
                       </div>
                     </div>
                   </div>
@@ -410,8 +418,6 @@ export default function HallOfFameWinners() {
             loading='lazy'
             quality={75}
           />
-          {/* Subtle gradient overlay on wave */}
-          <div className='absolute inset-0 bg-gradient-to-t from-sky-600/20 to-transparent' />
         </div>
       </div>
     </section>
