@@ -17,7 +17,7 @@ export default function AboutPortugal() {
 
   // ===== Constants =====
   const ASSETS = {
-    background: '/img/about/portugal-bg.png',
+    background: '/img/about/portugal-bg.webp',
     logo: '/img/global/cascais-volley-cup-2.png',
     wave: '/img/global/ondas-3.png'
   } as const
@@ -25,22 +25,22 @@ export default function AboutPortugal() {
   const SPOTS = [
     {
       key: 'portugal',
-      img: '/img/about/portugal.png',
+      img: '/img/about/portugal.webp',
       alt: t('cards.portugal.alt')
     },
     {
       key: 'cabo',
-      img: '/img/about/cabo-da-roca.png',
+      img: '/img/about/cabo-da-roca.webp',
       alt: t('cards.cabo.alt')
     },
     {
       key: 'boca',
-      img: '/img/about/boca-do-inferno.png',
+      img: '/img/about/boca-do-inferno.webp',
       alt: t('cards.boca.alt')
     },
     {
       key: 'sec1719',
-      img: '/img/about/sec-xvii-xix.png',
+      img: '/img/about/sec-xvii-xix.webp',
       alt: t('cards.sec1719.alt')
     }
   ] as const

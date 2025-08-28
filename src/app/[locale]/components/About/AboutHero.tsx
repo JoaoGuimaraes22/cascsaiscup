@@ -31,8 +31,8 @@ export default function AboutHero() {
 
   // Constants for better maintainability
   const ASSETS = {
-    background: '/img/about/about-bg.png',
-    hero: '/img/about/about-hero.png',
+    background: '/img/about/about-bg.webp',
+    hero: '/img/about/about-hero.webp',
     club: '/img/sponsors/volley4all.png'
   } as const
 
