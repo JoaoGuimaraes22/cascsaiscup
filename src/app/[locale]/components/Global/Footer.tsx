@@ -85,7 +85,7 @@ const Footer: FC<Props> = ({ locale }) => {
         h: 80
       },
       {
-        src: '/img/global/tagline.png',
+        src: '/img/sponsors/o-sports.png',
         alt: 'Feel the summer',
         w: 220,
         h: 80,
