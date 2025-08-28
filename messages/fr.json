@@ -6,7 +6,7 @@
     "Competition": "Compétition",
     "Gallery": "Galerie",
     "Registration": "Inscription",
-    "Hall_of_Fame": "Temple de la Renommée"
+    "Hall_of_Fame": "Hall of Fame"
   },
 
   "LandingPage": {
@@ -327,7 +327,7 @@
 
   "HallOfFamePage": {
     "Hero": {
-      "title": "Temple de la Renommée",
+      "title": "Hall of Fame",
       "intro": "Au cours des trois dernières années, à la Cascais Volley Cup, nous avons eu l'honneur d'accueillir de nombreuses équipes de volleyball féminin de tout le Portugal. En 2025, nous avons atteint la représentation nationale tant attendue et ajouté le titre \"international\" en accueillant des équipes de divers pays. À tous, un énorme MERCI d'avoir cru et d'avoir fait partie de la famille CASCAIS VOLLEY CUP.",
       "see_more": "Voir plus",
       "hero_alt": "MVP du tournoi",
@@ -511,7 +511,7 @@
     "competition": "Compétition",
     "accommodation": "Hébergement",
     "gallery": "Galerie",
-    "hallOfFame": "Temple de la Renommée",
+    "hallOfFame": "Hall of Fame",
     "contact": "Contact",
     "email": "Envoyez-nous un email",
     "phone": "Appelez-nous",

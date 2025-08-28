@@ -28,7 +28,7 @@ const Footer: FC<Props> = ({ locale }) => {
   const EMAIL = 'info@volley4all.com'
   const PHONE = '(00351) 96 441 56 32'
   const WEBSITE_URL = 'https://www.volley4all.com'
-  const INSTAGRAM_URL = 'https://www.instagram.com/cascaisvolleycup'
+  const INSTAGRAM_URL = 'https://www.instagram.com/cascais_volley_cup'
 
   // Language mapping for brochure files
   const getLanguageCode = (locale: string) => {

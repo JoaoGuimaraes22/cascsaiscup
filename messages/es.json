@@ -6,7 +6,7 @@
     "Competition": "Competición",
     "Gallery": "Galería",
     "Registration": "Inscripción",
-    "Hall_of_Fame": "Salón de la Fama"
+    "Hall_of_Fame": "Hall of Fame"
   },
 
   "LandingPage": {
@@ -327,7 +327,7 @@
 
   "HallOfFamePage": {
     "Hero": {
-      "title": "Salón de la Fama",
+      "title": "Hall of Fame",
       "intro": "En los últimos tres años, en la Copa de Voleibol Cascais hemos tenido el honor de dar la bienvenida a numerosos equipos de voleibol femenino de todo Portugal. En 2025, logramos la ansiada representación nacional y agregamos el título de \"internacional\" al recibir equipos de varios países. A todos, un enorme GRACIAS por creer y por ser parte de la familia de la COPA DE VOLEIBOL CASCAIS.",
       "see_more": "Ver más",
       "hero_alt": "MVPs del torneo",
@@ -510,7 +510,7 @@
     "competition": "Competición",
     "accommodation": "Alojamiento",
     "gallery": "Galería",
-    "hallOfFame": "Salón de la Fama",
+    "hallOfFame": "Hall of Fame",
     "contact": "Contacto",
     "email": "Envíanos un email",
     "phone": "Llámanos",

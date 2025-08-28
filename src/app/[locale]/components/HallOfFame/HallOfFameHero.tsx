@@ -93,7 +93,7 @@ function CTAButton({
   )
 }
 
-// Enhanced hero image component with parallax effect
+// Simplified hero image component without parallax or hover effects
 interface HeroImageProps {
   src: string
   alt: string
@@ -101,68 +101,26 @@ interface HeroImageProps {
 }
 
 function HeroImage({ src, alt, isVisible }: HeroImageProps) {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const imageRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!imageRef.current) return
-
-      const rect = imageRef.current.getBoundingClientRect()
-      const centerX = rect.left + rect.width / 2
-      const centerY = rect.top + rect.height / 2
-
-      setMousePosition({
-        x: (e.clientX - centerX) * 0.02,
-        y: (e.clientY - centerY) * 0.02
-      })
-    }
-
-    const handleMouseLeave = () => {
-      setMousePosition({ x: 0, y: 0 })
-    }
-
-    const element = imageRef.current
-    if (element) {
-      element.addEventListener('mousemove', handleMouseMove as any)
-      element.addEventListener('mouseleave', handleMouseLeave)
-    }
-
-    return () => {
-      if (element) {
-        element.removeEventListener('mousemove', handleMouseMove as any)
-        element.removeEventListener('mouseleave', handleMouseLeave)
-      }
-    }
-  }, [])
-
   return (
     <div className='relative lg:col-span-5'>
       <div
-        ref={imageRef}
         className={clsx(
-          'group relative z-10 mx-auto -mt-2 h-[320px] w-full cursor-pointer overflow-visible transition-all duration-1000 ease-out sm:-mt-4 sm:h-[380px] lg:-mt-6 lg:h-[460px] xl:h-[520px]',
+          'relative z-10 mx-auto -mt-2 h-[320px] w-full overflow-visible transition-all duration-1000 ease-out sm:-mt-4 sm:h-[380px] lg:-mt-6 lg:h-[460px] xl:h-[520px]',
           '[-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_70%,transparent_100%)]',
           '[mask-image:linear-gradient(to_bottom,black_0%,black_70%,transparent_100%)]',
           'delay-500',
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         )}
-        style={{
-          transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`
-        }}
       >
         <Image
           src={src}
           alt={alt}
           fill
           sizes='(max-width: 1024px) 90vw, 700px'
-          className='object-contain object-bottom transition-transform duration-500 group-hover:scale-105'
+          className='object-contain object-bottom'
           priority
           quality={75}
         />
-
-        {/* Subtle glow effect on hover */}
-        <div className='absolute inset-0 bg-gradient-to-t from-sky-100/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
       </div>
     </div>
   )
@@ -217,7 +175,7 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
                 alt={logoAlt}
                 width={240}
                 height={96}
-                className='h-[60px] w-auto transition-transform duration-300 hover:scale-110 sm:h-[68px]'
+                className='h-[60px] w-auto sm:h-[68px]'
                 loading='lazy'
                 quality={80}
               />
@@ -238,7 +196,7 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
                 alt={mvpAlt}
                 width={280}
                 height={90}
-                className='h-[54px] w-auto transition-transform duration-300 hover:scale-110 sm:h-[64px]'
+                className='h-[54px] w-auto sm:h-[64px]'
                 priority
                 quality={80}
               />
@@ -277,7 +235,7 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
               alt={logoAlt}
               width={150}
               height={60}
-              className='h-[36px] w-auto transition-transform duration-300 hover:scale-110'
+              className='h-[36px] w-auto'
               loading='lazy'
               quality={80}
             />
@@ -297,7 +255,7 @@ function WaveSection({ logoAlt, mvpAlt, isVisible }: WaveSectionProps) {
               alt={mvpAlt}
               width={120}
               height={40}
-              className='h-[20px] w-auto transition-transform duration-300 hover:scale-110'
+              className='h-[20px] w-auto'
               priority
               quality={80}
             />
@@ -352,7 +310,7 @@ export default function HallOfFameHero() {
           fill
           priority
           sizes='100vw'
-          className='duration-[20s] object-cover opacity-40 transition-transform ease-out hover:scale-105'
+          className='object-cover opacity-40'
           quality={75}
         />
         {/* Subtle gradient overlay */}
