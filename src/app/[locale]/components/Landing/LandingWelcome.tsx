@@ -13,7 +13,7 @@ export default function LandingWelcome() {
   const [isMobile, setIsMobile] = useState(false)
 
   // Assets
-  const BG = '/img/landing/hero-bg-new.png'
+  const BG = '/img/landing/hero-bg-new.webp'
   const TAGLINE = '/img/global/tagline-w.png'
   const LOGO = '/img/global/logo-white.png'
   const SPONSOR = '/img/sponsors/cascais-camara-w.png'

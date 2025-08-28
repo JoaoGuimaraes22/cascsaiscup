@@ -9,6 +9,51 @@ import { FiChevronLeft, FiChevronRight, FiPlay, FiPause } from 'react-icons/fi'
 import NewsCard from './NewsCard'
 import clsx from 'clsx'
 
+// --- ASSETS ---
+const ASSETS = {
+  images: {
+    backgroundMain: '/img/landing/home-page-2.webp',
+    waveTop: '/img/global/ondas-4.png',
+    waveTestimonials: '/img/global/ondas-9.png',
+    news: {
+      news1: '/img/news/news1.webp',
+      news2: '/img/news/news2.webp',
+      news3: '/img/news/news3.webp',
+      news4: '/img/news/news4.webp'
+    }
+  },
+  links: {
+    news: {
+      cornacchia2025: '/news/cornacchia-2025',
+      nationsCup9: '/news/nations-cup-9',
+      streamingScamWarning: '/news/streaming-scam-warning',
+      mvpAwards: '/news/mvp-awards'
+    }
+  },
+  animations: {
+    testimonials: {
+      duration: 800,
+      autoPlayInterval: 4000
+    },
+    news: {
+      duration: 600
+    },
+    fadeIn: {
+      duration: 1000,
+      delay: 600
+    }
+  },
+  breakpoints: {
+    mobile: '(min-width: 768px)',
+    desktop: '(min-width: 1024px)'
+  },
+  spacing: {
+    mobile: 16,
+    tablet: 20,
+    desktop: 24
+  }
+} as const
+
 // --- TYPES ---
 interface Testimonial {
   team: string
@@ -67,30 +112,30 @@ const newsItems: NewsItem[] = [
     date: 'April 23, 2025',
     excerpt:
       'Ranking and Pictures of Cascais Volley Cup 2025, the volleyball tournament of Cascais',
-    image: '/img/news/news1.jpg',
-    link: '/news/cornacchia-2025'
+    image: ASSETS.images.news.news1,
+    link: ASSETS.links.news.cornacchia2025
   },
   {
     title: 'Under 21 – Rankings & Pictures',
     date: 'March 6, 2025',
     excerpt:
       'Check out pictures, video and rankings of the Under 21 tournament.',
-    image: '/img/news/news2.jpg',
-    link: '/news/nations-cup-9'
+    image: ASSETS.images.news.news2,
+    link: ASSETS.links.news.nationsCup9
   },
   {
     title: 'New Arrivals: Pelamora SC',
     date: 'February 20, 2025',
     excerpt: 'Official Statement: Pelamora is coming with Under-15, 17 and 21',
-    image: '/img/news/news3.png',
-    link: '/news/streaming-scam-warning'
+    image: ASSETS.images.news.news3,
+    link: ASSETS.links.news.streamingScamWarning
   },
   {
     title: 'MVP Awards',
     date: 'February 10, 2025',
     excerpt: 'MVP awards given to the athletes who stood out during the event.',
-    image: '/img/news/news4.jpg',
-    link: '/news/mvp-awards'
+    image: ASSETS.images.news.news4,
+    link: ASSETS.links.news.mvpAwards
   }
 ]
 
@@ -107,17 +152,17 @@ export default function LandingUpdates() {
   // Testimonials slider
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
-    defaultAnimation: { duration: 800 },
+    defaultAnimation: { duration: ASSETS.animations.testimonials.duration },
     slides: {
       perView: 1,
-      spacing: 16
+      spacing: ASSETS.spacing.mobile
     },
     breakpoints: {
-      '(min-width: 768px)': {
-        slides: { perView: 2, spacing: 20 }
+      [ASSETS.breakpoints.mobile]: {
+        slides: { perView: 2, spacing: ASSETS.spacing.tablet }
       },
-      '(min-width: 1024px)': {
-        slides: { perView: 4, spacing: 24 }
+      [ASSETS.breakpoints.desktop]: {
+        slides: { perView: 4, spacing: ASSETS.spacing.desktop }
       }
     },
     slideChanged(s) {
@@ -131,17 +176,17 @@ export default function LandingUpdates() {
   // News slider - same structure as testimonials
   const [newsSliderRef, newsInstanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
-    defaultAnimation: { duration: 600 },
+    defaultAnimation: { duration: ASSETS.animations.news.duration },
     slides: {
       perView: 1,
-      spacing: 16
+      spacing: ASSETS.spacing.mobile
     },
     breakpoints: {
-      '(min-width: 768px)': {
-        slides: { perView: 2, spacing: 20 }
+      [ASSETS.breakpoints.mobile]: {
+        slides: { perView: 2, spacing: ASSETS.spacing.tablet }
       },
-      '(min-width: 1024px)': {
-        slides: { perView: 4, spacing: 24 }
+      [ASSETS.breakpoints.desktop]: {
+        slides: { perView: 4, spacing: ASSETS.spacing.desktop }
       }
     },
     slideChanged(s) {
@@ -156,7 +201,7 @@ export default function LandingUpdates() {
       if (isAutoPlaying && instanceRef.current) {
         instanceRef.current.next()
       }
-    }, 4000)
+    }, ASSETS.animations.testimonials.autoPlayInterval)
   }, [isAutoPlaying, instanceRef])
 
   const stopAutoPlay = useCallback(() => {
@@ -241,7 +286,7 @@ export default function LandingUpdates() {
     >
       {/* Background for whole section */}
       <Image
-        src='/img/landing/home-page-2.png'
+        src={ASSETS.images.backgroundMain}
         alt=''
         role='presentation'
         fill
@@ -253,7 +298,7 @@ export default function LandingUpdates() {
       {/* Top wave - responsive height with better mobile scaling */}
       <div className='absolute inset-x-0 top-0 z-0 h-[60px] sm:h-[80px] lg:h-[120px]'>
         <Image
-          src='/img/global/ondas-4.png'
+          src={ASSETS.images.waveTop}
           alt=''
           role='presentation'
           fill
@@ -335,7 +380,7 @@ export default function LandingUpdates() {
         {/* Testimonials Section Title */}
         <div
           className={clsx(
-            'delay-600 transition-all duration-1000 ease-out',
+            `delay-[${ASSETS.animations.fadeIn.delay}ms] transition-all duration-${ASSETS.animations.fadeIn.duration} ease-out`,
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           )}
         >
@@ -353,7 +398,7 @@ export default function LandingUpdates() {
         <div className='relative min-h-[50vh] sm:min-h-[360px]'>
           {/* Wave background */}
           <Image
-            src='/img/global/ondas-9.png'
+            src={ASSETS.images.waveTestimonials}
             alt=''
             role='presentation'
             fill

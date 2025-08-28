@@ -18,8 +18,8 @@ export default function LandingLocation() {
 
   // Constants for better maintainability
   const ASSETS = {
-    background: '/img/landing/home-page-2-2.png',
-    map: '/img/landing/mapa.png',
+    background: '/img/landing/home-page-2-2.webp',
+    map: '/img/landing/mapa.webp',
     tagline: '/img/global/tagline.png',
     wave: '/img/global/ondas-3.png'
   } as const
