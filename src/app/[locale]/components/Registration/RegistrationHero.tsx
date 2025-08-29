@@ -3,11 +3,13 @@
 import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 import { MouseEvent, useState } from 'react'
-import { FiMail, FiX, FiCopy, FiCheck } from 'react-icons/fi'
+import { FiMail } from 'react-icons/fi'
+import ContactToast from '../Global/ContactToast'
 
 export default function RegistrationHero() {
   const t = useTranslations('RegistrationPage.RegistrationHero')
   const locale = useLocale()
+  const [showContactToast, setShowContactToast] = useState(false)
 
   // Assets
   const ASSETS = {
@@ -236,7 +238,9 @@ export default function RegistrationHero() {
                   {t('hotelAccommodation.description')}
                 </p>
 
-                <ContactOSportsButton />
+                <ContactOSportsButton
+                  onOpenModal={() => setShowContactToast(true)}
+                />
               </div>
             </div>
           </div>
@@ -272,6 +276,12 @@ export default function RegistrationHero() {
       <div className='relative z-0'>
         <WaveSection waveAsset={ASSETS.wave} waveHeight={WAVE_HEIGHT} />
       </div>
+
+      {/* ContactToast Modal - Outside of content containers */}
+      <ContactToast
+        isOpen={showContactToast}
+        onClose={() => setShowContactToast(false)}
+      />
     </section>
   )
 }
@@ -317,173 +327,21 @@ function WaveSection({ waveAsset, waveHeight }: WaveSectionProps) {
 
 /* -------- Contact O-Sports Components -------- */
 
-// Toast/Modal Component
-interface ContactToastProps {
-  isOpen: boolean
-  onClose: () => void
+// Updated Contact Button using Global ContactToast
+interface ContactOSportsButtonProps {
+  onOpenModal: () => void
 }
 
-function ContactToast({ isOpen, onClose }: ContactToastProps) {
-  const t = useTranslations('AccommodationPage.ContactModal')
-  const [emailCopied, setEmailCopied] = useState(false)
-  const [subjectCopied, setSubjectCopied] = useState(false)
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText('info@o-sports.pt')
-      setEmailCopied(true)
-      setTimeout(() => setEmailCopied(false), 2000)
-    } catch (err) {
-      console.error('Failed to copy email')
-    }
-  }
-
-  const copySubject = async () => {
-    try {
-      await navigator.clipboard.writeText(t('subjectValue'))
-      setSubjectCopied(true)
-      setTimeout(() => setSubjectCopied(false), 2000)
-    } catch (err) {
-      console.error('Failed to copy subject')
-    }
-  }
-
-  if (!isOpen) return null
-
-  return (
-    <>
-      {/* Backdrop */}
-      <div
-        className='fixed inset-0 z-50 bg-black/10 transition-opacity'
-        onClick={onClose}
-      />
-
-      {/* Toast/Modal */}
-      <div className='fixed left-1/2 top-1/2 z-50 mx-4 w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform'>
-        <div className='rounded-lg border border-gray-200 bg-white p-6 shadow-2xl'>
-          {/* Header */}
-          <div className='mb-4 flex items-center justify-between'>
-            <h3 className='text-lg font-bold text-gray-900'>{t('title')}</h3>
-            <button
-              onClick={onClose}
-              className='rounded-full p-1 transition-colors hover:bg-gray-100'
-              aria-label={t('closeButton')}
-            >
-              <FiX className='h-5 w-5 text-gray-500' />
-            </button>
-          </div>
-
-          {/* Content */}
-          <div className='space-y-4'>
-            {/* Email */}
-            <div>
-              <label className='mb-2 block text-sm font-medium text-gray-700'>
-                {t('emailLabel')}
-              </label>
-              <div className='flex items-center gap-2'>
-                <div className='flex-1 rounded-md border border-gray-300 bg-gray-50 px-3 py-2 font-mono text-sm'>
-                  info@o-sports.pt
-                </div>
-                <button
-                  onClick={copyEmail}
-                  className='flex items-center gap-1 rounded-md bg-sky-500 px-3 py-2 text-white transition-colors hover:bg-sky-600'
-                >
-                  {emailCopied ? (
-                    <FiCheck className='h-4 w-4' />
-                  ) : (
-                    <FiCopy className='h-4 w-4' />
-                  )}
-                  {emailCopied ? t('copied') : t('copy')}
-                </button>
-              </div>
-            </div>
-
-            {/* Subject */}
-            <div>
-              <label className='mb-2 block text-sm font-medium text-gray-700'>
-                {t('subjectLabel')}
-              </label>
-              <div className='flex items-center gap-2'>
-                <div className='flex-1 rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-sm'>
-                  {t('subjectValue')}
-                </div>
-                <button
-                  onClick={copySubject}
-                  className='flex items-center gap-1 rounded-md bg-sky-500 px-3 py-2 text-white transition-colors hover:bg-sky-600'
-                >
-                  {subjectCopied ? (
-                    <FiCheck className='h-4 w-4' />
-                  ) : (
-                    <FiCopy className='h-4 w-4' />
-                  )}
-                  {subjectCopied ? t('copied') : t('copy')}
-                </button>
-              </div>
-            </div>
-
-            {/* Instructions */}
-            <div className='rounded-md border border-blue-200 bg-blue-50 p-4'>
-              <h4 className='mb-2 font-medium text-blue-900'>
-                {t('guidelinesTitle')}
-              </h4>
-              <p className='text-sm leading-relaxed text-blue-800'>
-                {t('guidelinesText')}
-              </p>
-            </div>
-
-            {/* Example */}
-            <div className='rounded-md border border-gray-200 bg-gray-50 p-4'>
-              <h4 className='mb-2 font-medium text-gray-700'>
-                {t('exampleTitle')}
-              </h4>
-              <p className='text-sm italic leading-relaxed text-gray-600'>
-                {t('exampleText')}
-              </p>
-            </div>
-          </div>
-
-          {/* Footer with O-Sports logo and Close Button */}
-          <div className='mt-6 flex items-center justify-between'>
-            <div className='flex-shrink-0'>
-              <Image
-                src='/img/sponsors/o-sports.png'
-                alt='O-Sports'
-                width={80}
-                height={40}
-                className='h-auto w-[60px] opacity-80'
-                loading='lazy'
-                quality={80}
-              />
-            </div>
-            <button
-              onClick={onClose}
-              className='rounded-md bg-gray-100 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-200'
-            >
-              {t('gotItButton')}
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
-  )
-}
-
-// Updated Contact Button
-function ContactOSportsButton() {
+function ContactOSportsButton({ onOpenModal }: ContactOSportsButtonProps) {
   const t = useTranslations('RegistrationPage.RegistrationHero')
-  const [showToast, setShowToast] = useState(false)
 
   return (
-    <>
-      <button
-        onClick={() => setShowToast(true)}
-        className='group inline-flex items-center gap-2 rounded-lg bg-sky-600 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
-      >
-        <FiMail className='h-4 w-4 transition-transform duration-300 group-hover:rotate-12' />
-        <span>{t('buttons.osports')}</span>
-      </button>
-
-      <ContactToast isOpen={showToast} onClose={() => setShowToast(false)} />
-    </>
+    <button
+      onClick={onOpenModal}
+      className='group inline-flex items-center gap-2 rounded-lg bg-sky-600 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
+    >
+      <FiMail className='h-4 w-4 transition-transform duration-300 group-hover:rotate-12' />
+      <span>{t('buttons.osports')}</span>
+    </button>
   )
 }

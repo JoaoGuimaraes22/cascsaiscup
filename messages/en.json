@@ -574,6 +574,50 @@
     }
   },
 
+  "ContactModal": {
+    "title": "Contact O-Sports",
+    "closeButton": "Close modal",
+    "submit": "Send Accommodation Request",
+    "submitting": "Sending...",
+    "successMessage": "Your accommodation request has been sent successfully!",
+    "errorMessage": "Something went wrong. Please try again.",
+
+    "fields": {
+      "teamName": "Team Name",
+      "country": "Country",
+      "teamManagerName": "Team Manager Name",
+      "phone": "Phone",
+      "email": "Email",
+      "ageGroup": "Age Group",
+      "numberOfPeople": "Number of People",
+      "message": "Message"
+    },
+
+    "placeholders": {
+      "teamName": "Enter your team name",
+      "country": "Enter your country",
+      "teamManagerName": "Enter team manager name",
+      "phone": "Enter phone number",
+      "email": "Enter email address",
+      "ageGroup": "Select age group",
+      "numberOfPeople": "Enter total number of people",
+      "message": "Enter your message"
+    },
+
+    "validation": {
+      "teamNameRequired": "Team name is required",
+      "countryRequired": "Country is required",
+      "managerNameRequired": "Team manager name is required",
+      "managerNameMinLength": "Name must be at least 2 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "phoneInvalid": "Please enter a valid phone number",
+      "ageGroupRequired": "Age group is required",
+      "numberOfPeopleRequired": "Number of people is required",
+      "numberOfPeopleInvalid": "Please enter a valid number"
+    }
+  },
+
   "Footer": {
     "logoAria": "Cascais Volley Cup - Home",
     "description": "The largest international volleyball tournament in southern Portugal. Join us for an unforgettable sporting experience by the Atlantic coast.",
