@@ -262,7 +262,7 @@ export default function RegistrationHero() {
                   alt={t('playerAlt') || 'Beach volleyball player'}
                   fill
                   sizes='(max-width: 1280px) 400px, 480px'
-                  className='object-contain object-bottom'
+                  className='object-contain object-bottom transition-transform duration-300 hover:scale-105'
                   priority
                   quality={80}
                 />

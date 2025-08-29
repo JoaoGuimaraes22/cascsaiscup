@@ -176,7 +176,7 @@ export default function CompetitionHero() {
               {/* APP 2025 Button - Always Visible, Lighter Sky Color */}
               <button
                 className='group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-sky-600 px-6 py-3 font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-sky-600 hover:to-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
-                aria-label='Download mobile app for 2025'
+                aria-label='Go to Cascais Volley Cup website 2025'
               >
                 <span>APP 2025</span>
                 <svg

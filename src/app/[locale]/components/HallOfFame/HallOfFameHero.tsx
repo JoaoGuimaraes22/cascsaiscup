@@ -93,7 +93,7 @@ function CTAButton({
   )
 }
 
-// Simplified hero image component without parallax or hover effects
+// Hero image component with hover animation
 interface HeroImageProps {
   src: string
   alt: string
@@ -117,7 +117,7 @@ function HeroImage({ src, alt, isVisible }: HeroImageProps) {
           alt={alt}
           fill
           sizes='(max-width: 1024px) 90vw, 700px'
-          className='object-contain object-bottom'
+          className='object-contain object-bottom transition-transform duration-300 hover:scale-105'
           priority
           quality={75}
         />
@@ -310,7 +310,7 @@ export default function HallOfFameHero() {
           fill
           priority
           sizes='100vw'
-          className='object-cover opacity-40'
+          className='object-cover opacity-40 '
           quality={75}
         />
         {/* Subtle gradient overlay */}

@@ -30,7 +30,7 @@ const SAMPLE_TEAMS: Team[] = [
   // MÓNACO
   { name: 'AS Monaco', country: 'MC' },
   // PORTUGAL
-  { name: 'CF “Os Belenenses”', country: 'PT' },
+  { name: 'CF "Os Belenenses"', country: 'PT' },
   { name: 'Lusófona VC', country: 'PT' },
   { name: 'Cascais Volley4all', country: 'PT' },
   { name: 'PEL Amora SC', country: 'PT' },
@@ -126,7 +126,7 @@ function TeamItem({ team, index, isVisible }: TeamItemProps) {
   )
 }
 
-// Enhanced players image with parallax effect (Desktop only)
+// Simplified players image with only hover animation
 interface PlayersImageProps {
   src: string
   alt: string
@@ -134,53 +134,16 @@ interface PlayersImageProps {
 }
 
 function PlayersImage({ src, alt, isVisible }: PlayersImageProps) {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const imageRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!imageRef.current) return
-
-      const rect = imageRef.current.getBoundingClientRect()
-      const centerX = rect.left + rect.width / 2
-      const centerY = rect.top + rect.height / 2
-
-      setMousePosition({
-        x: (e.clientX - centerX) * 0.015,
-        y: (e.clientY - centerY) * 0.015
-      })
-    }
-
-    const handleMouseLeave = () => {
-      setMousePosition({ x: 0, y: 0 })
-    }
-
-    const element = imageRef.current
-    if (element) {
-      element.addEventListener('mousemove', handleMouseMove as any)
-      element.addEventListener('mouseleave', handleMouseLeave)
-    }
-
-    return () => {
-      if (element) {
-        element.removeEventListener('mousemove', handleMouseMove as any)
-        element.removeEventListener('mouseleave', handleMouseLeave)
-      }
-    }
-  }, [])
-
   return (
     <div className='relative hidden lg:col-span-6 lg:block'>
       <div
-        ref={imageRef}
         className={clsx(
-          'group relative z-10 mx-auto -mt-2 h-[340px] w-full cursor-pointer overflow-visible transition-all duration-1000 ease-out sm:-mt-4 sm:h-[420px] lg:-mt-6 lg:h-[520px]',
+          'relative z-10 mx-auto -mt-2 h-[340px] w-full overflow-visible transition-all duration-1000 ease-out sm:-mt-4 sm:h-[420px] lg:-mt-6 lg:h-[520px]',
           '[-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_75%,transparent_100%)]',
           '[mask-image:linear-gradient(to_bottom,black_0%,black_75%,transparent_100%)]',
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         )}
         style={{
-          transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
           transitionDelay: '200ms'
         }}
       >
@@ -189,13 +152,10 @@ function PlayersImage({ src, alt, isVisible }: PlayersImageProps) {
           alt={alt}
           fill
           sizes='(max-width: 1024px) 90vw, 760px'
-          className='object-contain object-bottom transition-transform duration-500 group-hover:scale-105'
+          className='object-contain object-bottom transition-transform duration-300 hover:scale-105'
           priority
           quality={80}
         />
-
-        {/* Subtle highlight effect */}
-        <div className='absolute inset-0 bg-gradient-to-t from-sky-100/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
       </div>
     </div>
   )

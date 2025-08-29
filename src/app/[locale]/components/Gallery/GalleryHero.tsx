@@ -274,14 +274,14 @@ function YearCard({
   return (
     <div
       className={clsx(
-        'h-full transition-all duration-700 ease-out',
+        'w-full transition-all duration-700 ease-out',
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
       )}
       style={{
         transitionDelay: `${200 + cardIndex * 150}ms`
       }}
     >
-      <div className='flex h-full flex-col rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm transition-all duration-300 hover:bg-white/15 sm:p-6'>
+      <div className='flex min-h-[300px] w-full flex-col rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm transition-all duration-300 hover:bg-white/15 sm:min-h-[350px] sm:p-6 lg:min-h-[400px]'>
         {/* Year header with link */}
         <div className='mb-4 flex items-center justify-between sm:mb-6'>
           <h3 className='text-2xl font-extrabold text-white drop-shadow-lg sm:text-3xl'>
@@ -362,7 +362,7 @@ export default function OptimizedGalleryHero() {
   return (
     <section
       ref={sectionRef}
-      className='relative flex min-h-screen items-center justify-center overflow-hidden'
+      className='relative flex min-h-screen items-center justify-center overflow-hidden py-8 sm:py-12'
       aria-labelledby='gallery-heading'
     >
       {/* Background image */}
@@ -385,7 +385,7 @@ export default function OptimizedGalleryHero() {
         {/* Header content */}
         <div
           className={clsx(
-            'mb-8 text-center transition-all duration-1000 ease-out sm:mb-12',
+            'mb-6 text-center transition-all duration-1000 ease-out sm:mb-8 lg:mb-12',
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           )}
         >
@@ -431,32 +431,38 @@ export default function OptimizedGalleryHero() {
           )}
         </div>
 
-        {/* Three-column gallery grid */}
+        {/* Three-column gallery grid - Mobile responsive */}
         {!isEmpty ? (
-          <div className='grid max-h-[60vh] grid-cols-1 gap-4 sm:gap-6 lg:max-h-[65vh] lg:grid-cols-3 lg:gap-8'>
+          <div className='grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8'>
             {availableYears
               .sort((a, b) => b - a) // Latest year first
               .map((year, index) => (
-                <YearCard
+                <div
                   key={year}
-                  year={year}
-                  images={getImagesForYear(year)}
-                  loading={loading}
-                  error={error}
-                  locale={locale}
-                  t={t}
-                  isVisible={isVisible}
-                  cardIndex={index}
-                  onImageClick={handleImageClick}
-                  onRetry={refresh}
-                />
+                  className='w-full' // Ensure full width on mobile
+                >
+                  <YearCard
+                    year={year}
+                    images={getImagesForYear(year)}
+                    loading={loading}
+                    error={error}
+                    locale={locale}
+                    t={t}
+                    isVisible={isVisible}
+                    cardIndex={index}
+                    onImageClick={handleImageClick}
+                    onRetry={refresh}
+                  />
+                </div>
               ))}
           </div>
         ) : loading ? (
           // Loading state with skeletons
-          <div className='grid max-h-[60vh] grid-cols-1 gap-4 sm:gap-6 lg:max-h-[65vh] lg:grid-cols-3 lg:gap-8'>
+          <div className='grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8'>
             {[2025, 2024, 2023].map((year, index) => (
-              <YearCardSkeleton key={year} />
+              <div key={year} className='w-full'>
+                <YearCardSkeleton />
+              </div>
             ))}
           </div>
         ) : (

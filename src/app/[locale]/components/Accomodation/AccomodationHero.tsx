@@ -208,7 +208,7 @@ export default function AccommodationHero() {
                 src={ASSETS.player}
                 alt={t('playerAlt')}
                 fill
-                className='object-contain object-bottom'
+                className='object-contain object-bottom transition-transform duration-300 hover:scale-105'
                 sizes='(max-width: 1280px) 65vw, 900px'
               />
             </div>
