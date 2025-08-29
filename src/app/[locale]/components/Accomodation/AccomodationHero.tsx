@@ -290,7 +290,7 @@ function ContactToast({ isOpen, onClose }: ContactToastProps) {
     <>
       {/* Backdrop */}
       <div
-        className='fixed inset-0 z-50 bg-black/5 transition-opacity'
+        className='fixed inset-0 z-50 bg-black/20 transition-opacity'
         onClick={onClose}
       />
 
@@ -378,8 +378,19 @@ function ContactToast({ isOpen, onClose }: ContactToastProps) {
             </div>
           </div>
 
-          {/* Close Button */}
-          <div className='mt-6 flex justify-end'>
+          {/* Footer with O-Sports logo and Close Button */}
+          <div className='mt-6 flex items-center justify-between'>
+            <div className='flex-shrink-0'>
+              <Image
+                src='/img/sponsors/o-sports.png'
+                alt='O-Sports'
+                width={80}
+                height={40}
+                className='h-auto w-[60px] opacity-80'
+                loading='lazy'
+                quality={80}
+              />
+            </div>
             <button
               onClick={onClose}
               className='rounded-md bg-gray-100 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-200'

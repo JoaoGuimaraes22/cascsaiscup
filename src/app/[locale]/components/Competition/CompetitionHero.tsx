@@ -173,7 +173,6 @@ export default function CompetitionHero() {
                 </svg>
               </button>
 
-              {/* APP 2025 Button - Always Visible, Lighter Sky Color */}
               {/* APP 2025 Button - Link Version */}
               <a
                 href='https://volleyball-addict.com/tournament/1/3/'

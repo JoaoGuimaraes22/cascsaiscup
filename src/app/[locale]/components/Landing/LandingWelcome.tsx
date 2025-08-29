@@ -17,6 +17,7 @@ export default function LandingWelcome() {
   const TAGLINE = '/img/global/tagline-w.png'
   const LOGO = '/img/global/logo-white.png'
   const SPONSOR = '/img/sponsors/cascais-camara-w.png'
+  const OSPORTS = '/img/sponsors/o-sports-w.png'
 
   // Language mapping for brochure files
   const getLanguageCode = (locale: string) => {
@@ -228,6 +229,38 @@ export default function LandingWelcome() {
           </span>
           <div className='h-8 w-px animate-pulse bg-white/60' />
         </div>
+      </div>
+
+      <div
+        className={clsx(
+          'absolute bottom-8 left-1/2 -translate-x-1/2 text-white transition-all delay-1000 duration-1000 ease-out',
+          isLoaded ? 'translate-y-0 opacity-70' : 'translate-y-4 opacity-0'
+        )}
+      >
+        <div className='flex flex-col items-center gap-2'>
+          <span className='text-xs font-medium uppercase tracking-wider'>
+            {t('scrollDown') || 'SCROLL DOWN'}
+          </span>
+          <div className='h-8 w-px animate-pulse bg-white/60' />
+        </div>
+      </div>
+
+      {/* O-Sports logo - bottom right of section */}
+      <div
+        className={clsx(
+          'delay-1200 absolute bottom-4 right-4 z-30 transition-all duration-700 ease-out',
+          isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+        )}
+      >
+        <Image
+          src={OSPORTS}
+          alt='O-Sports'
+          width={120}
+          height={60}
+          className='h-auto w-[80px] drop-shadow-lg sm:w-[100px] lg:w-[120px]'
+          loading='lazy'
+          quality={80}
+        />
       </div>
     </section>
   )
