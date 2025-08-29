@@ -21,13 +21,13 @@ export default function LandingWelcome() {
   // Language mapping for brochure files
   const getLanguageCode = (locale: string) => {
     const languageMap = {
-      en: 'ENG',
+      en: 'UK',
       es: 'ESP',
       pt: 'PT',
-      fr: 'FR'
+      fr: 'FRAN'
     } as const
 
-    return languageMap[locale as keyof typeof languageMap] || 'ENG'
+    return languageMap[locale as keyof typeof languageMap] || 'UK'
   }
 
   const getBrochureFileName = () => {

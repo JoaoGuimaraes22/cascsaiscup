@@ -174,20 +174,30 @@ export default function CompetitionHero() {
               </button>
 
               {/* APP 2025 Button - Always Visible, Lighter Sky Color */}
-              <button
+              {/* APP 2025 Button - Link Version */}
+              <a
+                href='https://volleyball-addict.com/tournament/1/3/'
+                target='_blank'
+                rel='noopener noreferrer'
                 className='group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-sky-600 px-6 py-3 font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-sky-600 hover:to-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2'
-                aria-label='Go to Cascais Volley Cup website 2025'
+                aria-label='Open Cascais Volley Cup 2025 tournament app in new tab'
               >
                 <span>APP 2025</span>
                 <svg
                   className='h-4 w-4 transition-transform group-hover:-translate-y-0.5'
-                  fill='currentColor'
+                  fill='none'
+                  stroke='currentColor'
                   viewBox='0 0 24 24'
                   aria-hidden='true'
                 >
-                  <path d='M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z' />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
+                  />
                 </svg>
-              </button>
+              </a>
 
               <span id='cta-description' className='sr-only'>
                 {t('ctaDescription') ||
