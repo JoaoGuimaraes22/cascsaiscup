@@ -562,7 +562,7 @@
   "ContactModal": {
     "title": "Contactar O-Sports",
     "closeButton": "Fechar modal",
-    "submit": "Enviar Pedido de Alojamento",
+    "submit": "Enviar",
     "submitting": "A enviar...",
     "successMessage": "O seu pedido de alojamento foi enviado com sucesso!",
     "errorMessage": "Ocorreu um erro. Por favor, tente novamente.",

@@ -576,7 +576,7 @@
   "ContactModal": {
     "title": "Contacter O-Sports",
     "closeButton": "Fermer la fenêtre",
-    "submit": "Envoyer la Demande d’Hébergement",
+    "submit": "Envoyer",
     "submitting": "Envoi...",
     "successMessage": "Votre demande d’hébergement a été envoyée avec succès !",
     "errorMessage": "Une erreur est survenue. Veuillez réessayer.",

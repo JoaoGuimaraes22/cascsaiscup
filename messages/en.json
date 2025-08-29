@@ -577,7 +577,7 @@
   "ContactModal": {
     "title": "Contact O-Sports",
     "closeButton": "Close modal",
-    "submit": "Send Accommodation Request",
+    "submit": "Send",
     "submitting": "Sending...",
     "successMessage": "Your accommodation request has been sent successfully!",
     "errorMessage": "Something went wrong. Please try again.",
