@@ -140,6 +140,7 @@ function Lightbox({
             )}
             onLoad={() => setImageLoaded(true)}
             priority
+            loading='eager' // Add this line to override the default 'lazy'
             sizes='100vw'
           />
         </div>
