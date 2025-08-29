@@ -1,17 +1,13 @@
+// Updated GalleryHero component to use static routes instead of dynamic ones
+// src/app/[locale]/components/Gallery/GalleryHero.tsx
+
 'use client'
 
 import { useEffect, useState, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/src/navigation'
-import {
-  FiRefreshCw,
-  FiImage,
-  FiArrowRight,
-  FiWifi,
-  FiWifiOff,
-  FiClock
-} from 'react-icons/fi'
+import { FiImage, FiArrowRight, FiWifiOff } from 'react-icons/fi'
 import clsx from 'clsx'
 
 // Import our optimized components
@@ -27,7 +23,14 @@ const ASSETS = {
   tagline: '/img/global/tagline-w.png'
 } as const
 
-const IMAGES_PER_YEAR = 6 // Increased for better grid fill
+const IMAGES_PER_YEAR = 6
+
+// Map years to static routes - this is the key change!
+const YEAR_ROUTES = {
+  2025: '/gallery/2025',
+  2024: '/gallery/2024',
+  2023: '/gallery/2023'
+} as const
 
 // Custom hook for intersection observer with staggered animations
 function useStaggeredAnimation(threshold = 0.2) {
@@ -143,60 +146,7 @@ function CompactImageGrid({
   )
 }
 
-// Status indicator component
-interface StatusIndicatorProps {
-  loading: boolean
-  error: string | null
-  fromCache: boolean
-  isStale: boolean
-  lastFetch: number | null
-}
-
-function StatusIndicator({
-  loading,
-  error,
-  fromCache,
-  isStale,
-  lastFetch
-}: StatusIndicatorProps) {
-  if (loading) {
-    return (
-      <div className='flex items-center gap-2 text-sm text-white/80'>
-        <div className='h-3 w-3 animate-spin rounded-full border border-white/30 border-t-white' />
-        <span>Loading...</span>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className='flex items-center gap-2 text-sm text-red-300'>
-        <FiWifiOff className='h-3 w-3' />
-        <span>Connection error</span>
-      </div>
-    )
-  }
-
-  if (fromCache) {
-    return (
-      <div className='flex items-center gap-2 text-sm text-blue-300'>
-        <FiClock className='h-3 w-3' />
-        <span>{isStale ? 'Cached (stale)' : 'Cached'}</span>
-      </div>
-    )
-  }
-
-  if (lastFetch) {
-    return (
-      <div className='flex items-center gap-2 text-sm text-green-300'>
-        <FiWifi className='h-3 w-3' />
-        <span>Live</span>
-      </div>
-    )
-  }
-
-  return null
-}
+// Removed status indicator component
 
 // Enhanced year card component for single viewport
 interface YearCardProps {
@@ -209,7 +159,6 @@ interface YearCardProps {
   isVisible: boolean
   cardIndex: number
   onImageClick?: (image: ProcessedImage) => void
-  onRetry?: () => void
 }
 
 function YearCard({
@@ -221,8 +170,7 @@ function YearCard({
   t,
   isVisible,
   cardIndex,
-  onImageClick,
-  onRetry
+  onImageClick
 }: YearCardProps) {
   const renderContent = () => {
     if (error) {
@@ -233,15 +181,6 @@ function YearCard({
               <FiWifiOff className='h-5 w-5 text-red-300' />
             </div>
             <p className='text-sm text-white/80'>Failed to load</p>
-            {onRetry && (
-              <button
-                onClick={onRetry}
-                className='inline-flex items-center gap-2 rounded-full bg-red-500/20 px-3 py-1.5 text-xs font-medium text-red-300 transition-colors hover:bg-red-500/30'
-              >
-                <FiRefreshCw className='h-3 w-3' />
-                Retry
-              </button>
-            )}
           </div>
         </div>
       )
@@ -271,6 +210,9 @@ function YearCard({
     )
   }
 
+  // Get static route for this year
+  const yearRoute = YEAR_ROUTES[year as keyof typeof YEAR_ROUTES]
+
   return (
     <div
       className={clsx(
@@ -282,21 +224,20 @@ function YearCard({
       }}
     >
       <div className='flex min-h-[300px] w-full flex-col rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm transition-all duration-300 hover:bg-white/15 sm:min-h-[350px] sm:p-6 lg:min-h-[400px]'>
-        {/* Year header with link */}
+        {/* Year header with link - Using static route */}
         <div className='mb-4 flex items-center justify-between sm:mb-6'>
           <h3 className='text-2xl font-extrabold text-white drop-shadow-lg sm:text-3xl'>
             {year}
           </h3>
-          <Link
-            href={{
-              pathname: '/gallery/[year]',
-              params: { year: String(year) }
-            }}
-            className='group inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-2 text-xs font-medium text-white backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:px-4 sm:text-sm'
-          >
-            {t('view_all') || 'View all'}
-            <FiArrowRight className='h-3 w-3 transition-transform group-hover:translate-x-1 sm:h-4 sm:w-4' />
-          </Link>
+          {yearRoute && (
+            <Link
+              href={yearRoute}
+              className='group inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-2 text-xs font-medium text-white backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:px-4 sm:text-sm'
+            >
+              {t('view_all') || 'View all'}
+              <FiArrowRight className='h-3 w-3 transition-transform group-hover:translate-x-1 sm:h-4 sm:w-4' />
+            </Link>
+          )}
         </div>
 
         {/* Image content */}
@@ -338,162 +279,138 @@ export default function OptimizedGalleryHero() {
   const locale = useLocale()
   const { isVisible, sectionRef } = useStaggeredAnimation(0.1)
 
-  // Use our optimized gallery hook
+  // Use our optimized gallery hook - only destructure what we need
   const {
     imagesByYear,
     availableYears,
     loading,
     error,
-    fromCache,
-    isStale,
-    lastFetch,
-    refresh,
     getImagesForYear,
-    getTotalImagesCount,
     isEmpty
   } = useOptimizedGallery(IMAGES_PER_YEAR)
 
   // Handle image click (could open lightbox, navigate, etc.)
   const handleImageClick = useCallback((image: ProcessedImage) => {
-    console.log('Image clicked:', image)
-    // Could open lightbox modal or navigate to full gallery
+    // Could implement lightbox or other actions here
+    console.log('Image clicked:', image.public_id)
   }, [])
 
   return (
     <section
       ref={sectionRef}
-      className='relative flex min-h-screen items-center justify-center overflow-hidden py-8 sm:py-12'
-      aria-labelledby='gallery-heading'
+      className='relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-sky-900 to-slate-900'
     >
-      {/* Background image */}
-      <div className='absolute inset-0 -z-10'>
+      {/* Background image with overlay */}
+      <div className='absolute inset-0'>
         <Image
           src={ASSETS.background}
-          alt=''
-          role='presentation'
+          alt='Gallery background'
           fill
+          quality={85}
           priority
-          className='object-cover'
-          quality={60}
+          className='object-cover object-center'
           sizes='100vw'
         />
-        {/* Overlay for better contrast */}
-        <div className='absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60' />
+        {/* Gradient overlay */}
+        <div className='absolute inset-0 bg-gradient-to-r from-slate-900/80 via-sky-900/60 to-slate-900/80' />
+        {/* Additional bottom gradient for better text readability */}
+        <div className='absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent' />
       </div>
 
-      <div className='mx-auto w-full max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8'>
-        {/* Header content */}
-        <div
-          className={clsx(
-            'mb-6 text-center transition-all duration-1000 ease-out sm:mb-8 lg:mb-12',
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          )}
-        >
-          {/* Tagline image */}
-          <div className='mb-6 flex justify-center sm:mb-8'>
-            <Image
-              src={ASSETS.tagline}
-              alt='Cascais Cup'
-              width={280}
-              height={70}
-              priority
-              className='h-auto max-w-[240px] drop-shadow-2xl sm:max-w-[280px]'
-            />
-          </div>
-
-          <h1
-            id='gallery-heading'
-            className='mb-4 text-3xl font-extrabold uppercase tracking-wide text-white drop-shadow-lg sm:text-4xl lg:text-5xl'
-          >
-            {t('title') || 'Gallery'}
-          </h1>
-
-          <p className='mx-auto mb-6 max-w-2xl text-base text-white/90 drop-shadow sm:text-lg'>
-            {t('subtitle') ||
-              'Relive the best moments from Cascais Cup through the years'}
-          </p>
-
-          {/* Hidden refresh button for errors only */}
-          {error && (
-            <div className='flex justify-center'>
-              <button
-                onClick={refresh}
-                className='inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50'
-              >
-                <FiRefreshCw
-                  className={clsx('h-4 w-4', loading && 'animate-spin')}
-                />
-                {loading
-                  ? t('refreshing') || 'Refreshing...'
-                  : t('refresh') || 'Refresh'}
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Three-column gallery grid - Mobile responsive */}
-        {!isEmpty ? (
-          <div className='grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8'>
-            {availableYears
-              .sort((a, b) => b - a) // Latest year first
-              .map((year, index) => (
-                <div
-                  key={year}
-                  className='w-full' // Ensure full width on mobile
-                >
-                  <YearCard
-                    year={year}
-                    images={getImagesForYear(year)}
-                    loading={loading}
-                    error={error}
-                    locale={locale}
-                    t={t}
-                    isVisible={isVisible}
-                    cardIndex={index}
-                    onImageClick={handleImageClick}
-                    onRetry={refresh}
-                  />
-                </div>
-              ))}
-          </div>
-        ) : loading ? (
-          // Loading state with skeletons
-          <div className='grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8'>
-            {[2025, 2024, 2023].map((year, index) => (
-              <div key={year} className='w-full'>
-                <YearCardSkeleton />
-              </div>
-            ))}
-          </div>
-        ) : (
-          // Empty state
-          <div
-            className={clsx(
-              'mx-auto max-w-md text-center transition-all duration-1000 ease-out',
-              isVisible
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-8 opacity-0'
-            )}
-          >
-            <div className='mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm'>
-              <FiImage className='h-8 w-8 text-white/60' />
-            </div>
-            <h3 className='mb-3 text-xl font-bold text-white'>
-              {t('empty_title') || 'No images available'}
-            </h3>
-            <p className='mb-6 text-white/80'>
-              {t('empty_description') ||
-                'Gallery images will appear here soon. Check back later!'}
-            </p>
-            <button
-              onClick={refresh}
-              className='inline-flex items-center gap-2 rounded-full bg-white/20 px-6 py-3 font-medium text-white backdrop-blur-sm transition-all hover:bg-white/30'
+      {/* Content */}
+      <div className='relative z-10 flex min-h-screen flex-col'>
+        {/* Hero header */}
+        <div className='flex flex-1 items-center justify-center px-4 py-16 sm:px-6 lg:px-8'>
+          <div className='mx-auto max-w-screen-2xl text-center'>
+            {/* Main title */}
+            <div
+              className={clsx(
+                'mb-8 transition-all duration-1000 ease-out',
+                isVisible
+                  ? 'translate-y-0 opacity-100'
+                  : 'translate-y-12 opacity-0'
+              )}
             >
-              <FiRefreshCw className='h-4 w-4' />
-              {t('check_again') || 'Check again'}
-            </button>
+              <h1 className='mb-4 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-4xl font-extrabold text-transparent drop-shadow-2xl sm:text-5xl lg:text-6xl'>
+                {t('title') || 'Gallery'}
+              </h1>
+
+              {/* Tagline image */}
+              <div className='mx-auto mb-6 h-8 w-auto max-w-xs'>
+                <Image
+                  src={ASSETS.tagline}
+                  alt='Cascais Cup tagline'
+                  width={300}
+                  height={32}
+                  quality={90}
+                  priority
+                  className='h-full w-full object-contain'
+                />
+              </div>
+
+              <p className='mx-auto max-w-2xl text-lg text-white/90 sm:text-xl'>
+                {t('subtitle') ||
+                  'Relive the best moments from Cascais Cup through the years'}
+              </p>
+            </div>
+
+            {/* Remove status indicator section completely */}
+
+            {/* Year cards grid */}
+            <div className='mx-auto max-w-7xl'>
+              {loading && availableYears.length === 0 ? (
+                // Loading skeletons
+                <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+                  {Array.from({ length: 3 }).map((_, index) => (
+                    <YearCardSkeleton key={index} />
+                  ))}
+                </div>
+              ) : isEmpty ? (
+                // Empty state
+                <div
+                  className={clsx(
+                    'mx-auto max-w-md rounded-2xl bg-white/10 p-12 text-center backdrop-blur-sm transition-all duration-1000 ease-out',
+                    isVisible
+                      ? 'translate-y-0 opacity-100'
+                      : 'translate-y-8 opacity-0'
+                  )}
+                  style={{ transitionDelay: '200ms' }}
+                >
+                  <div className='mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white/10'>
+                    <FiImage className='h-8 w-8 text-white/60' />
+                  </div>
+                  <h3 className='mb-2 text-xl font-semibold text-white'>
+                    {t('empty_title') || 'No images available'}
+                  </h3>
+                  <p className='text-white/80'>
+                    {t('empty_description') ||
+                      'Gallery images will appear here soon. Check back later!'}
+                  </p>
+                </div>
+              ) : (
+                // Year cards
+                <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+                  {availableYears
+                    .sort((a, b) => b - a) // Sort descending (newest first)
+                    .map((year, index) => (
+                      <YearCard
+                        key={year}
+                        year={year}
+                        images={getImagesForYear(year)}
+                        loading={loading}
+                        error={error}
+                        locale={locale}
+                        t={t}
+                        isVisible={isVisible}
+                        cardIndex={index}
+                        onImageClick={handleImageClick}
+                      />
+                    ))}
+                </div>
+              )}
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </section>
   )
