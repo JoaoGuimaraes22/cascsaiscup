@@ -302,11 +302,9 @@ function ContactToast({ isOpen, onClose }: ContactToastProps) {
                     <option value=''>
                       {t('placeholders.ageGroup') || 'Select age group'}
                     </option>
-                    <option value='U16'>U16</option>
-                    <option value='U18'>U18</option>
-                    <option value='U20'>U20</option>
-                    <option value='Senior'>Senior</option>
-                    <option value='Mixed'>Mixed</option>
+                    <option value='U15'>U15</option>
+                    <option value='U17'>U17</option>
+                    <option value='Open'>Open</option>
                   </select>
                 </FormField>
               </div>

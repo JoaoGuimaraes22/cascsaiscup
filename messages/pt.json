@@ -558,6 +558,51 @@
       }
     }
   },
+
+  "ContactModal": {
+    "title": "Contactar O-Sports",
+    "closeButton": "Fechar modal",
+    "submit": "Enviar Pedido de Alojamento",
+    "submitting": "A enviar...",
+    "successMessage": "O seu pedido de alojamento foi enviado com sucesso!",
+    "errorMessage": "Ocorreu um erro. Por favor, tente novamente.",
+
+    "fields": {
+      "teamName": "Nome da Equipa",
+      "country": "País",
+      "teamManagerName": "Nome do Treinador/Responsável",
+      "phone": "Telefone",
+      "email": "Email",
+      "ageGroup": "Escalão Etário",
+      "numberOfPeople": "Número de Pessoas",
+      "message": "Mensagem"
+    },
+
+    "placeholders": {
+      "teamName": "Insira o nome da equipa",
+      "country": "Insira o seu país",
+      "teamManagerName": "Insira o nome do treinador/responsável",
+      "phone": "Insira o número de telefone",
+      "email": "Insira o endereço de email",
+      "ageGroup": "Selecione o escalão etário",
+      "numberOfPeople": "Insira o número total de pessoas",
+      "message": "Escreva a sua mensagem"
+    },
+
+    "validation": {
+      "teamNameRequired": "O nome da equipa é obrigatório",
+      "countryRequired": "O país é obrigatório",
+      "managerNameRequired": "O nome do treinador/responsável é obrigatório",
+      "managerNameMinLength": "O nome deve ter pelo menos 2 caracteres",
+      "emailRequired": "O email é obrigatório",
+      "emailInvalid": "Por favor, insira um email válido",
+      "phoneInvalid": "Por favor, insira um número de telefone válido",
+      "ageGroupRequired": "O escalão etário é obrigatório",
+      "numberOfPeopleRequired": "O número de pessoas é obrigatório",
+      "numberOfPeopleInvalid": "Por favor, insira um número válido"
+    }
+  },
+
   "Footer": {
     "logoAria": "Cascais Volley Cup - Início",
     "description": "O maior torneio internacional de voleibol do sul de Portugal. Junte-se a nós para uma experiência desportiva inesquecível junto à costa atlântica.",

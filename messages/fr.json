@@ -573,6 +573,50 @@
     }
   },
 
+  "ContactModal": {
+    "title": "Contacter O-Sports",
+    "closeButton": "Fermer la fenêtre",
+    "submit": "Envoyer la Demande d’Hébergement",
+    "submitting": "Envoi...",
+    "successMessage": "Votre demande d’hébergement a été envoyée avec succès !",
+    "errorMessage": "Une erreur est survenue. Veuillez réessayer.",
+
+    "fields": {
+      "teamName": "Nom de l’Équipe",
+      "country": "Pays",
+      "teamManagerName": "Nom de l’Entraîneur/Responsable",
+      "phone": "Téléphone",
+      "email": "Email",
+      "ageGroup": "Catégorie d’Âge",
+      "numberOfPeople": "Nombre de Personnes",
+      "message": "Message"
+    },
+
+    "placeholders": {
+      "teamName": "Entrez le nom de votre équipe",
+      "country": "Entrez votre pays",
+      "teamManagerName": "Entrez le nom de l’entraîneur/responsable",
+      "phone": "Entrez le numéro de téléphone",
+      "email": "Entrez l’adresse email",
+      "ageGroup": "Sélectionnez la catégorie d’âge",
+      "numberOfPeople": "Entrez le nombre total de personnes",
+      "message": "Entrez votre message"
+    },
+
+    "validation": {
+      "teamNameRequired": "Le nom de l’équipe est obligatoire",
+      "countryRequired": "Le pays est obligatoire",
+      "managerNameRequired": "Le nom de l’entraîneur/responsable est obligatoire",
+      "managerNameMinLength": "Le nom doit comporter au moins 2 caractères",
+      "emailRequired": "L’email est obligatoire",
+      "emailInvalid": "Veuillez entrer un email valide",
+      "phoneInvalid": "Veuillez entrer un numéro de téléphone valide",
+      "ageGroupRequired": "La catégorie d’âge est obligatoire",
+      "numberOfPeopleRequired": "Le nombre de personnes est obligatoire",
+      "numberOfPeopleInvalid": "Veuillez entrer un nombre valide"
+    }
+  },
+
   "Footer": {
     "logoAria": "Cascais Volley Cup - Accueil",
     "description": "Le plus grand tournoi international de volley-ball du sud du Portugal. Rejoignez-nous pour une expérience sportive inoubliable sur la côte atlantique.",
