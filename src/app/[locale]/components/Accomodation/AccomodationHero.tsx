@@ -133,18 +133,8 @@ export default function AccommodationHero() {
               </ul>
 
               <p className='whitespace-pre-line text-sm leading-relaxed text-slate-800/90 sm:text-base'>
-                {t('schools.p2')}
-              </p>
-            </AccommodationSection>
-
-            {/* Hotel Section */}
-            <AccommodationSection
-              title={t('hotel.title')}
-              delay={400}
-              isVisible={isVisible}
-            >
-              <p className='mb-6 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
-                {t('hotel.p1')}
+                {t('schools.p2')} <strong>{t('schools.p2Bold')}</strong>{' '}
+                {t('schools.p2_cont')}
               </p>
             </AccommodationSection>
 
@@ -185,6 +175,19 @@ export default function AccommodationHero() {
 
               <p className='mb-6 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
                 {t('food.intolerances')}
+              </p>
+            </AccommodationSection>
+
+            {/* Hotel Section */}
+            <AccommodationSection
+              title={t('hotel.title')}
+              delay={400}
+              isVisible={isVisible}
+            >
+              <p className='mb-6 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+                {t('hotel.p1')}
+                <strong>{t('hotel.pBold')}</strong>
+                {t('hotel.p1_cont')}
               </p>
 
               <ContactOSportsButton />
@@ -290,7 +293,7 @@ function ContactToast({ isOpen, onClose }: ContactToastProps) {
     <>
       {/* Backdrop */}
       <div
-        className='fixed inset-0 z-50 bg-black/20 transition-opacity'
+        className='fixed inset-0 z-50 bg-black/10 transition-opacity'
         onClick={onClose}
       />
 

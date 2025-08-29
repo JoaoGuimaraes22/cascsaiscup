@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 import clsx from 'clsx'
+import { Link } from '@/src/navigation'
 
 export default function LandingWelcome() {
   const t = useTranslations('LandingPage.Welcome')
@@ -201,9 +202,12 @@ export default function LandingWelcome() {
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           )}
         >
-          <button className='rounded-full bg-white px-6 py-3 text-sm font-bold uppercase tracking-wide text-sky-500 drop-shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gray-100 hover:shadow-xl sm:px-8 sm:py-4 sm:text-lg'>
+          <Link
+            href='/registration'
+            className='rounded-full bg-white px-6 py-3 text-center text-sm font-bold uppercase tracking-wide text-sky-500 drop-shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gray-100 hover:shadow-xl sm:px-8 sm:py-4 sm:text-lg'
+          >
             {t('register') || 'REGISTRATION'}
-          </button>
+          </Link>
 
           {/* Brochure download button with locale-based filename */}
           <a

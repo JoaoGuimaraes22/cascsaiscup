@@ -60,7 +60,7 @@
       "p2": "Durante los últimos 12 años, hemos logrado varios resultados deportivos significativos, entrenando varios atletas de élite para las diferentes selecciones nacionales portuguesas, y nos hemos convertido en uno de los clubes de voleibol más importantes y técnicamente eficientes del sur del país.",
       "p3": "Volley4all compite a nivel nacional en todos los niveles de edad disponibles y actualmente es un referente en la formación deportiva en todo el sur de Portugal.",
       "p4": "Somos un club",
-      "p4Bold": "JUEGA DURO ENTRENA MÁS DURO",
+      "p4Bold": "PLAY HARD TRAIN HARDER",
       "cta": "Visítanos",
       "heroImageAlt": "Jugadores de voleibol en acción en el torneo de Cascais",
       "club": { "logoAlt": "Gorriones Volley4All" },
@@ -138,11 +138,15 @@
           "d": "Agrupamento de Escolas IBN Mucana | Alcabideche",
           "e": "Agrupamento de Escolas de Carcavelos"
         },
-        "p2": "Todos los partidos tendrán lugar en pabellones deportivos dentro del municipio. Entre partidos y alojamiento, las visitas a la ciudad y sus magníficas playas están a 15-20 minutos caminando. Además, cada participante recibirá una 'tarjeta de pase gratuito' que permite el uso gratuito de la red de transporte MOBICASCAIS en todo el municipio durante el evento. Recomendamos consultar la aplicación oficial para un mejor uso de la red de transporte.\n\nCada delegación tendrá asignada un aula, y todos los participantes deben traer su propio saco de dormir, almohada y colchoneta."
+        "p2": "Todos los partidos se celebrarán en pabellones deportivos del municipio. Entre los partidos y el alojamiento, las visitas a la ciudad y sus magníficas playas están a 15–20 minutos a pie. Además, cada participante recibirá una 'free pass card' que permitirá el uso gratuito de la red de transportes ",
+        "p2Bold": "MOBICASCAIS",
+        "p2_cont": "en todo el municipio durante el evento. Recomendamos consultar la aplicación oficial para un mejor uso de la red de transportes.\n\nA cada delegación se le asignará un aula, y todos los participantes deberán traer su propio saco de dormir, almohada y colchón."
       },
       "hotel": {
         "title": "Alojamiento en Hoteles",
-        "p1": "Los equipos que deseen alojarse en hoteles de la región y/o requieran transporte desde y hacia el Aeropuerto de Lisboa deben indicar esta necesidad/preferencia durante el proceso de inscripción en línea y contactar con los Agentes Oficiales del evento con antelación para asegurar los mejores precios disponibles. Toda la información y contactos están disponibles en: www.cascaisvolleycup.com"
+        "p1": "Los equipos que deseen y/o necesiten alojarse en hoteles de la región y/o requieran transporte desde y hacia el Aeropuerto de Lisboa deben ponerse en contacto con la agencia de viajes oficial, ",
+        "pBold": "O-SPORTS.",
+        "p1_cont": " Para acceder a los mejores precios y disfrutar de una estancia sin inconvenientes, todos los interesados en este servicio deben comunicarse con su respectiva Agencia de Viajes lo antes posible, preferiblemente antes de finales de noviembre."
       },
       "food": {
         "title": "Comida y Comidas",
@@ -155,6 +159,20 @@
         "contactButton": "Contactar O-Sports"
       },
       "playerAlt": "Jugador de voleibol en acción"
+    },
+    "ContactModal": {
+      "title": "Contactar O-Sports",
+      "closeButton": "Cerrar modal",
+      "emailLabel": "Dirección de correo:",
+      "subjectLabel": "Asunto:",
+      "subjectValue": "Cascais Volley Cup",
+      "copy": "Copiar",
+      "copied": "¡Copiado!",
+      "guidelinesTitle": "Directrices del Mensaje:",
+      "guidelinesText": "Preferiblemente, incluya en su mensaje el **país y club**, seguido de su pregunta o comentario sobre el alojamiento.",
+      "exampleTitle": "Mensaje de Ejemplo:",
+      "exampleText": "\"Hola, escribo desde [País] en nombre de [Nombre del Club]. Nos gustaría consultar sobre opciones de alojamiento para nuestro equipo de 12 jugadores para la Cascais Volley Cup 2026...\"",
+      "gotItButton": "¡Entendido!"
     }
   },
 
@@ -506,6 +524,20 @@
         "athletes": "600 Atletas",
         "countries": "3 Países",
         "games": "150 Partidos"
+      },
+      "ContactModal": {
+        "title": "Contactar O-Sports",
+        "closeButton": "Cerrar modal",
+        "emailLabel": "Dirección de correo:",
+        "subjectLabel": "Asunto:",
+        "subjectValue": "Cascais Volley Cup",
+        "copy": "Copiar",
+        "copied": "¡Copiado!",
+        "guidelinesTitle": "Directrices del Mensaje:",
+        "guidelinesText": "Preferiblemente, incluya en su mensaje el **país y club**, seguido de su pregunta o comentario sobre el alojamiento.",
+        "exampleTitle": "Mensaje de Ejemplo:",
+        "exampleText": "\"Hola, escribo desde [País] en nombre de [Nombre del Club]. Nos gustaría consultar sobre opciones de alojamiento para nuestro equipo de 12 jugadores para la Cascais Volley Cup 2026...\"",
+        "gotItButton": "¡Entendido!"
       }
     },
 
@@ -542,7 +574,7 @@
   },
   "Footer": {
     "logoAria": "Copa de Voleibol Cascais - Inicio",
-    "description": "El torneo de voleibol premier en la hermosa Cascais, Portugal. Únete a nosotros para una experiencia deportiva inolvidable junto a la costa atlántica.",
+    "description": "El mayor torneo internacional de voleibol del sur de Portugal. Únete a nosotros para una experiencia deportiva inolvidable junto a la costa atlántica.",
     "quickLinks": "Enlaces Rápidos",
     "about": "Acerca de",
     "program": "Programa",

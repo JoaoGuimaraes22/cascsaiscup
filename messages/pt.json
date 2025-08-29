@@ -138,11 +138,15 @@
           "d": "Agrupamento de Escolas IBN Mucana | Alcabideche",
           "e": "Agrupamento de Escolas de Carcavelos"
         },
-        "p2": "Todos os jogos terão lugar em pavilhões desportivos dentro do município. Entre jogos e alojamento, visitas à vila e às suas magníficas praias estão a 15–20 minutos a pé. Além disso, cada participante receberá um 'cartão de passe livre' permitindo o uso gratuito da rede de transportes MOBICASCAIS em todo o município durante o evento. Recomendamos verificar a aplicação oficial para melhor uso da rede de transportes.\n\nCada delegação será atribuída a uma sala de aula, e todos os participantes devem trazer o seu próprio saco de dormir, almofada e colchão."
+        "p2": "Todos os jogos decorrerão em pavilhões desportivos do concelho. Entre os jogos e o alojamento, as visitas à vila e às suas magníficas praias ficam a 15–20 minutos a pé. Além disso, cada participante receberá um 'free pass card' que permite a utilização gratuita da rede de transportes ",
+        "p2Bold": "MOBICASCAIS",
+        "p2_cont": "em todo o concelho durante o evento. Recomendamos verificar a aplicação oficial para melhor utilização da rede de transportes.\n\nA cada delegação será atribuída uma sala de aula, e todos os participantes devem trazer o seu próprio saco-cama, almofada e colchão."
       },
       "hotel": {
         "title": "Alojamento em Hotéis",
-        "p1": "Equipas que desejem ficar em hotéis na região e/ou necessitem de transporte de e para o Aeroporto de Lisboa devem indicar esta necessidade/preferência durante o processo de inscrição online e contactar os Agentes Oficiais do evento com antecedência para garantir os melhores preços disponíveis. Todas as informações e contactos estão disponíveis em: www.cascaisvolleycup.com"
+        "p1": "Equipas que desejem e/ou necessitem ficar em unidades hoteleiras da região e/ou necessitem de transporte de e para o Aeroporto de Lisboa devem comunicar com a agência de viagens oficial, a ",
+        "pBold": "O-SPORTS.",
+        "p1_cont": " Para terem acesso aos melhores preços e uma estadia sem percalços, todos os interessados neste serviço devem comunicar com a respetiva Agência de Viagens o mais cedo possível, preferencialmente, até final de novembro."
       },
       "food": {
         "title": "Comida e Refeições",
@@ -155,6 +159,20 @@
         "contactButton": "Contactar O-Sports"
       },
       "playerAlt": "Jogador de voleibol em ação"
+    },
+    "ContactModal": {
+      "title": "Contactar O-Sports",
+      "closeButton": "Fechar modal",
+      "emailLabel": "Endereço de Email:",
+      "subjectLabel": "Assunto:",
+      "subjectValue": "Cascais Volley Cup",
+      "copy": "Copiar",
+      "copied": "Copiado!",
+      "guidelinesTitle": "Orientações para a Mensagem:",
+      "guidelinesText": "De preferência, inclua na sua mensagem o **país e clube**, seguido da sua questão ou comentário sobre alojamento.",
+      "exampleTitle": "Mensagem de Exemplo:",
+      "exampleText": "\"Olá, estou a escrever de [País] em nome do [Nome do Clube]. Gostaríamos de saber informações sobre opções de alojamento para a nossa equipa de 12 jogadores para a Cascais Volley Cup 2026...\"",
+      "gotItButton": "Entendido!"
     }
   },
 
@@ -542,7 +560,7 @@
   },
   "Footer": {
     "logoAria": "Cascais Volley Cup - Início",
-    "description": "O principal torneio de voleibol na bela Cascais, Portugal. Junte-se a nós para uma experiência desportiva inesquecível junto à costa atlântica.",
+    "description": "O maior torneio internacional de voleibol do sul de Portugal. Junte-se a nós para uma experiência desportiva inesquecível junto à costa atlântica.",
     "quickLinks": "Links Rápidos",
     "about": "Sobre",
     "program": "Programa",

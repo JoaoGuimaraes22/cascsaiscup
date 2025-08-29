@@ -138,11 +138,15 @@
           "d": "Agrupamento de Escolas IBN Mucana | Alcabideche",
           "e": "Agrupamento de Escolas de Carcavelos"
         },
-        "p2": "All matches will take place in sports halls within the municipality. Between matches and accommodation, visits to the town and its magnificent beaches are within a 15–20 minute walk. Additionally, each participant will receive a 'free pass card' allowing free use of the MOBICASCAIS transport network throughout the municipality during the event. We recommend checking the official app for better use of the transport network.\n\nEach delegation will be assigned a classroom, and all participants must bring their own sleeping bag, pillow, and mattress."
+        "p2": "All matches will take place in sports halls within the municipality. Between matches and accommodation, visits to the town and its magnificent beaches are within a 15–20 minute walk. Additionally, each participant will receive a 'free pass card' allowing free use of the ",
+        "p2Bold": "MOBICASCAIS",
+        "p2_cont": "transport network throughout the municipality during the event. We recommend checking the official app for better use of the transport network.\n\nEach delegation will be assigned a classroom, and all participants must bring their own sleeping bag, pillow, and mattress."
       },
       "hotel": {
         "title": "Accommodation in Hotels",
-        "p1": "Teams wishing to stay in hotels in the region and/or requiring transportation to and from Lisbon Airport must indicate this need/preference during the online registration process and contact the Official Agents of the event in advance to ensure the best available prices. All information and contacts are available at: www.cascaisvolleycup.com"
+        "p1": "Teams that wish and/or need to stay in hotels in the region and/or require transport to and from Lisbon Airport must contact the official travel agency, ",
+        "pBold": "O-SPORTS.",
+        "p1_cont": " To access the best prices and enjoy a hassle-free stay, all those interested in this service must contact their respective Travel Agency as soon as possible, preferably by the end of November."
       },
       "food": {
         "title": "Food & Meals",
@@ -476,28 +480,28 @@
 
   "RegistrationPage": {
     "RegistrationHero": {
-      "title": "INSCRIÇÕES",
+      "title": "REGISTRATION",
       "schoolAccommodation": {
-        "title": "ALOJAMENTO EM ESCOLAS",
-        "description": "A inscrição tem que ser feita obrigatoriamente através do site do evento seguindo as instruções que serão fornecidas no mesmo. De uma forma geral, a inscrição no CASCAIS VOLLEY CUP 2026 tem dois momentos:"
+        "title": "SCHOOL ACCOMMODATION",
+        "description": "Registration must be done exclusively through the event website following the instructions provided there. In general, registration for CASCAIS VOLLEY CUP 2026 has two phases:"
       },
       "pricing": {
         "earlyBird": {
           "label": "EARLY BIRD",
-          "period": "I De 1 de janeiro a 31 de março",
-          "price": "165 euros/atleta",
-          "details": "inclui inscrição no torneio, estadia e alimentação de 8 a 12 de julho I Alojamento Escolar de ocupação múltipla (mín 10 pax – max 20 pax)."
+          "period": "I From January 1 to March 31",
+          "price": "165 euros/player",
+          "details": "includes tournament registration, accommodation and meals from July 8 to 12 I Shared school lodging (min 10 pax – max 20 pax)."
         },
         "regularBird": {
           "label": "REGULAR BIRD",
-          "period": "I De 1 de abril a 31 de maio",
-          "price": "185 euros/atleta",
-          "details": "inclui inscrição, estadia e alimentação de 8 a 12 de julho I Alojamento Escolar de ocupação múltipla (mín 10 pax – max 20 pax)."
+          "period": "I From April 1 to May 31",
+          "price": "185 euros/player",
+          "details": "includes registration, accommodation and meals from July 8 to 12 I Shared school lodging (min 10 pax – max 20 pax)."
         }
       },
-      "teamRequirements": "Cada equipa deve ter um mínimo de 10 atletas inscritas, e a organização oferece a inscrição gratuita para 2 treinadores por equipa.",
+      "teamRequirements": "Each team must have a minimum of 10 registered players, and the organization offers free registration for 2 coaches per team.",
       "paymentInfo": {
-        "instruction": "Os pagamentos devem ser efetuados por transferência bancária para:",
+        "instruction": "Payments must be made by bank transfer to:",
         "account": {
           "name": "CASCAIS VOLLEY4ALL I Banco BPI",
           "iban": "PT50 0010 0000 5072 8780 0018 3",
@@ -505,22 +509,36 @@
           "nib": "0010.0000.50728.780001.83"
         }
       },
-      "registrationNotice": "As equipas só estarão formalmente inscritas após completado todo o processo de inscrição online. Informamos que, após a inscrição e pagamento, em caso de desistência, a organização do evento reserva o direito de não reembolsar as quantias já pagas.",
+      "registrationNotice": "Teams will only be formally registered after completing the entire online registration process. Please note that after registration and payment, in case of withdrawal, the organization reserves the right not to refund the amounts already paid.",
       "hotelAccommodation": {
-        "title": "ALOJAMENTO EM HOTEL",
-        "description": "Equipas que desejem e/ou necessitem ficar em unidades hoteleiras da região e/ou necessitem de transporte de e para o Aeroporto de Lisboa devem comunicar com a agência de viagens oficial, a O-SPORTS. Para terem acesso aos melhores preços e a uma estadia sem percalços, todos os interessados neste serviço devem comunicar com a respetiva Agência de Viagens o mais cedo possível, preferencialmente, até final de novembro."
+        "title": "HOTEL ACCOMMODATION",
+        "description": "Teams that wish and/or need to stay in hotels in the region and/or require transport to and from Lisbon Airport must contact the official travel agency, O-SPORTS. To access the best prices and a hassle-free stay, all those interested in this service must contact their respective Travel Agency as soon as possible, preferably by the end of November."
       },
       "buttons": {
-        "brochure": "BROCHURA (PDF)",
-        "registerTeams": "INSCREVER EQUIPAS",
+        "brochure": "BROCHURE (PDF)",
+        "registerTeams": "REGISTER TEAMS",
         "osports": "O-SPORTS"
       },
       "playerAlt": "Beach volleyball player",
       "stats": {
-        "teams": "50 Equipas",
-        "athletes": "600 Atletas",
-        "countries": "3 Países",
-        "games": "150 Jogos"
+        "teams": "50 Teams",
+        "athletes": "600 Athletes",
+        "countries": "3 Countries",
+        "games": "150 Games"
+      },
+      "ContactModal": {
+        "title": "Contact O-Sports",
+        "closeButton": "Close modal",
+        "emailLabel": "Email Address:",
+        "subjectLabel": "Subject:",
+        "subjectValue": "Cascais Volley Cup",
+        "copy": "Copy",
+        "copied": "Copied!",
+        "guidelinesTitle": "Message Guidelines:",
+        "guidelinesText": "Preferably, have your message contain your **country and club**, followed by your question or comment about accommodation.",
+        "exampleTitle": "Example Message:",
+        "exampleText": "\"Hello, I'm writing from [Country] on behalf of [Club Name]. We would like to inquire about accommodation options for our team of 12 players for Cascais Volley Cup 2026...\"",
+        "gotItButton": "Got it!"
       }
     },
 
@@ -558,7 +576,7 @@
 
   "Footer": {
     "logoAria": "Cascais Volley Cup - Home",
-    "description": "The premier volleyball tournament in beautiful Cascais, Portugal. Join us for an unforgettable sporting experience by the Atlantic coast.",
+    "description": "The largest international volleyball tournament in southern Portugal. Join us for an unforgettable sporting experience by the Atlantic coast.",
     "quickLinks": "Quick Links",
     "about": "About",
     "program": "Program",

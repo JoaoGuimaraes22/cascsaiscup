@@ -138,9 +138,9 @@ export const Header: FC<Props> = ({ locale }) => {
         backgroundPosition: 'center'
       }}
     >
-      <div className='mx-auto flex max-w-screen-2xl flex-col items-center justify-between px-3 py-2 sm:flex-row sm:px-5 sm:py-4'>
+      <div className='mx-auto flex max-w-screen-2xl flex-col items-center justify-between px-3 py-2 sm:px-5 sm:py-4 lg:flex-row'>
         {/* Logo */}
-        <div className='ml-1 flex w-full items-center justify-between sm:ml-3 sm:w-auto md:ml-6'>
+        <div className='ml-1 flex w-full items-center justify-between sm:ml-3 lg:ml-6 lg:w-auto'>
           <Link
             lang={locale}
             href='/'
@@ -158,8 +158,8 @@ export const Header: FC<Props> = ({ locale }) => {
             />
           </Link>
 
-          {/* Lang + Mobile menu button */}
-          <div className='flex items-center gap-3 sm:hidden'>
+          {/* Lang + Mobile/Tablet menu button */}
+          <div className='flex items-center gap-3 lg:hidden'>
             <LangButton />
             <button
               onClick={toggleMenu}
@@ -182,22 +182,22 @@ export const Header: FC<Props> = ({ locale }) => {
           </div>
         </div>
 
-        {/* Desktop nav */}
+        {/* Desktop nav (only on lg+ screens) */}
         <nav
           aria-label='Primary navigation'
-          className='hidden items-center gap-7 sm:inline-flex md:gap-8'
+          className='hidden items-center gap-7 lg:inline-flex xl:gap-8'
         >
           <NavLinks locale={locale} />
           <LangButton />
         </nav>
 
-        {/* Mobile dropdown */}
+        {/* Mobile/Tablet dropdown */}
         <nav
           id='mobile-nav'
           aria-label='Mobile navigation'
           aria-hidden={!menuOpen}
           className={clsx(
-            'w-full flex-col items-start gap-4 overflow-hidden transition-all ease-in-out motion-safe:duration-300 sm:hidden',
+            'w-full flex-col items-start gap-4 overflow-hidden transition-all ease-in-out motion-safe:duration-300 lg:hidden',
             menuOpen
               ? 'mt-3 flex max-h-[65vh] translate-y-0 opacity-100'
               : 'pointer-events-none max-h-0 -translate-y-2 opacity-0'
@@ -260,7 +260,7 @@ const NavLinks: FC<{
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2',
                 isMobile
                   ? 'w-full justify-center rounded-md px-3 py-2 text-sm'
-                  : 'rounded-full px-4 py-1.5 text-xs md:text-sm',
+                  : 'rounded-full px-4 py-1.5 text-xs xl:text-sm',
                 active
                   ? 'bg-sky-800 text-white'
                   : 'bg-sky-700 text-white hover:scale-105 hover:bg-sky-800 hover:shadow-md focus-visible:bg-sky-800'
@@ -280,7 +280,7 @@ const NavLinks: FC<{
               'group relative pb-0.5 font-medium transition-colors hover:text-sky-700',
               'rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2',
               active ? 'text-sky-700' : 'text-slate-600',
-              isMobile ? 'block w-full py-1 text-sm' : 'text-xs md:text-sm'
+              isMobile ? 'block w-full py-1 text-sm' : 'text-xs xl:text-sm'
             )}
             aria-current={active ? 'page' : undefined}
           >
