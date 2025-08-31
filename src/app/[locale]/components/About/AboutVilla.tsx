@@ -19,7 +19,7 @@ export default function AboutVilla() {
     bottomWave: '/img/global/ondas-3.png',
     tagline: '/img/global/tagline-w.png',
     logo: '/img/global/cascais-volley-cup-1-w.png',
-    sponsor: '/img/sponsors/cascais-camara-w.png'
+    sponsor: '/img/sponsors/cascais-camara-w.webp'
   } as const
 
   const PARAGRAPHS = ['p1', 'p2', 'p3', 'p4'] as const

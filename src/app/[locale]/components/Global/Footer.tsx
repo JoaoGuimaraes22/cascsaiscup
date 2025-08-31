@@ -51,42 +51,42 @@ const Footer: FC<Props> = ({ locale }) => {
   const sponsors: Sponsor[] = useMemo(
     () => [
       {
-        src: '/img/sponsors/cam-ford.png',
+        src: '/img/sponsors/cam-ford.webp',
         alt: 'C.A.M. Ford',
         w: 220,
         h: 80,
         url: 'https://www.cam.pt'
       },
       {
-        src: '/img/sponsors/cascais-camara.png',
+        src: '/img/sponsors/cascais-camara.webp',
         alt: 'Cascais Câmara Municipal',
         w: 220,
         h: 80,
         url: 'https://www.visitcascais.com'
       },
       {
-        src: '/img/sponsors/fpv.png',
+        src: '/img/sponsors/fpv.webp',
         alt: 'Federação Portuguesa de Voleibol',
         w: 220,
         h: 80,
         url: 'https://www.fpvoleibol.pt'
       },
       {
-        src: '/img/sponsors/cascais-estoril.png',
+        src: '/img/sponsors/cascais-estoril.webp',
         alt: 'Cascais Estoril',
         w: 220,
         h: 80,
         url: 'https://www.jf-cascaisestoril.pt'
       },
       {
-        src: '/img/sponsors/volley4all.png',
+        src: '/img/sponsors/volley4all.webp',
         alt: 'Volley4All Sparrows',
         w: 220,
         h: 80,
         url: 'https://www.volley4all.com'
       },
       {
-        src: '/img/sponsors/o-sports.png',
+        src: '/img/sponsors/o-sports.webp',
         alt: 'Feel the summer',
         w: 220,
         h: 80,

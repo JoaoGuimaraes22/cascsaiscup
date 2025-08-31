@@ -409,10 +409,13 @@ export default function ProgramHero() {
               </div>
             </div>
 
-            {/* Right: Players Image - Desktop Only, Hidden on Mobile */}
+            {/* Right: Players Image - Desktop Only, Hidden on Mobile WITH FADE EFFECT */}
             <div
               className={clsx(
                 'hidden transition-all duration-1000 ease-out lg:col-span-5 lg:block',
+                // Add the fade mask effect here
+                '[-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_75%,transparent_100%)]',
+                '[mask-image:linear-gradient(to_bottom,black_0%,black_75%,transparent_100%)]',
                 isVisible
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-8 opacity-0'

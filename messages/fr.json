@@ -406,72 +406,10 @@
     "Winners": {
       "title": "Équipes Gagnantes",
       "description": "Découvrez les équipes qui ont atteint le podium ces dernières années, dans chaque catégorie.",
-      "years": {
-        "2025": {
-          "Sub21": [
-            "Lisboa Spikers",
-            "Porto Power",
-            "Cascais Crushers",
-            "Oeiras Thunder"
-          ],
-          "Sub17": [
-            "Algarve Waves",
-            "Braga Blockers",
-            "Estoril Eagles",
-            "Sintra Smash"
-          ],
-          "Sub15": [
-            "Coimbra Titans",
-            "Funchal Flames",
-            "Viana Sea Storm",
-            "Setúbal Sharks"
-          ]
-        },
-        "2024": {
-          "Sub21": [
-            "Aveiro Ace Queens",
-            "Faro Flyers",
-            "Leiria Lightning",
-            "Madeira Volley Stars"
-          ],
-          "Sub17": [
-            "Porto Power",
-            "Lisboa Spikers",
-            "Braga Blockers",
-            "Oeiras Thunder"
-          ],
-          "Sub15": [
-            "Cascais Crushers",
-            "Sintra Smash",
-            "Estoril Eagles",
-            "Setúbal Sharks"
-          ]
-        },
-        "2023": {
-          "Sub21": [
-            "Madeira Volley Stars",
-            "Oeiras Thunder",
-            "Braga Blockers",
-            "Lisboa Spikers"
-          ],
-          "Sub17": [
-            "Coimbra Titans",
-            "Setúbal Sharks",
-            "Porto Power",
-            "Cascais Crushers"
-          ],
-          "Sub15": [
-            "Algarve Waves",
-            "Sintra Smash",
-            "Funchal Flames",
-            "Viana Sea Storm"
-          ]
-        }
-      },
-      "labels": {
-        "sub21": "Moins de 21 ans",
-        "sub17": "Moins de 17 ans",
-        "sub15": "Moins de 15 ans",
+      "divisions": {
+        "Open": "Ouvert",
+        "Sub17": "Moins de 17 ans",
+        "Sub15": "Moins de 15 ans",
         "seeMore": "Voir plus"
       }
     }

@@ -33,34 +33,34 @@ export default function AboutHero() {
   const ASSETS = {
     background: '/img/about/about-bg.webp',
     hero: '/img/about/about-hero.webp',
-    club: '/img/sponsors/volley4all.png'
+    club: '/img/sponsors/volley4all.webp'
   } as const
 
   const SPONSOR_LOGOS: SponsorLogo[] = [
     {
       id: 'cascais-estoril',
-      src: '/img/sponsors/cascais-estoril.png',
+      src: '/img/sponsors/cascais-estoril.webp',
       alt: t('sponsors.cascaisEstorilAlt'),
       w: 140,
       h: 56
     },
     {
       id: 'camara',
-      src: '/img/sponsors/cascais-camara.png',
+      src: '/img/sponsors/cascais-camara.webp',
       alt: t('sponsors.camaraAlt'),
       w: 160,
       h: 56
     },
     {
       id: 'cam-ford',
-      src: '/img/sponsors/cam-ford.png',
+      src: '/img/sponsors/cam-ford.webp',
       alt: t('sponsors.camFordAlt'),
       w: 150,
       h: 56
     },
     {
       id: 'fpv',
-      src: '/img/sponsors/fpv.png',
+      src: '/img/sponsors/fpv.webp',
       alt: t('sponsors.fpvAlt'),
       w: 140,
       h: 56

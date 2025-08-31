@@ -17,8 +17,8 @@ export default function LandingWelcome() {
   const BG = '/img/landing/hero-bg-new.webp'
   const TAGLINE = '/img/global/tagline-w.png'
   const LOGO = '/img/global/logo-white.png'
-  const SPONSOR = '/img/sponsors/cascais-camara-w.png'
-  const OSPORTS = '/img/sponsors/o-sports-w.png'
+  const SPONSOR = '/img/sponsors/cascais-camara-w.webp'
+  const OSPORTS = '/img/sponsors/o-sports-w.webp'
 
   // Language mapping for brochure files
   const getLanguageCode = (locale: string) => {

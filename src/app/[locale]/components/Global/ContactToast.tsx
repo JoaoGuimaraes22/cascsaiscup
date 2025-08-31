@@ -224,7 +224,7 @@ function ContactToast({ isOpen, onClose }: ContactToastProps) {
           <div className='mb-4 flex items-center justify-between'>
             <div className='flex items-center gap-2 sm:gap-3'>
               <Image
-                src='/img/sponsors/o-sports.png'
+                src='/img/sponsors/o-sports.webp'
                 alt='O-Sports'
                 width={60}
                 height={30}

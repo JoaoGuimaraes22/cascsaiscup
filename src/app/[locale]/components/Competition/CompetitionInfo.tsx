@@ -19,10 +19,10 @@ const ASSETS = {
   waveTop: '/img/global/ondas-5.png',
   waveBottom: '/img/global/ondas-3.png',
   sponsors: {
-    fpv: '/img/sponsors/fpv.png',
-    cascais: '/img/sponsors/cascais-camara.png',
-    camFord: '/img/sponsors/cam-ford.png',
-    cascaisEstoril: '/img/sponsors/cascais-estoril.png'
+    fpv: '/img/sponsors/fpv.webp',
+    cascais: '/img/sponsors/cascais-camara.webp',
+    camFord: '/img/sponsors/cam-ford.webp',
+    cascaisEstoril: '/img/sponsors/cascais-estoril.webp'
   }
 } as const
 
@@ -30,16 +30,6 @@ export default function CompetitionInfo() {
   const t = useTranslations('CompetitionPage.Info')
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
-
-  const WAVE_DIMENSIONS = {
-    width: 2048,
-    height: 160
-  } as const
-
-  const SPONSOR_DIMENSIONS = {
-    width: 160,
-    height: 64
-  } as const
 
   // Sponsor data for the 2x2 grid
   const sponsors = [

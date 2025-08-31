@@ -78,31 +78,59 @@ export default function HallOfFameWinners() {
   const [openYear, setOpenYear] = useState(years[0])
   const [animatingYear, setAnimatingYear] = useState<string | null>(null)
 
-  // Enhanced medal styling with gradients
-  const medalStyles = [
-    {
-      color: 'text-yellow-400',
-      bg: 'from-yellow-400 to-yellow-600',
-      glow: 'shadow-yellow-400/30'
-    }, // 1st Gold
-    {
-      color: 'text-gray-300',
-      bg: 'from-gray-300 to-gray-500',
-      glow: 'shadow-gray-400/30'
-    }, // 2nd Silver
-    {
-      color: 'text-amber-600',
-      bg: 'from-amber-600 to-amber-800',
-      glow: 'shadow-amber-600/30'
-    }, // 3rd Bronze
-    {
-      color: 'text-sky-500',
-      bg: 'from-sky-400 to-sky-600',
-      glow: 'shadow-sky-400/30'
-    } // 4th
-  ] as const
+  // Helper functions for icons and labels
+  const getDivisionIcon = (division: DivisionKey) => {
+    switch (division) {
+      case 'Sub15':
+        return <span className='text-[9px] font-bold'>15</span>
+      case 'Sub17':
+        return <span className='text-[9px] font-bold'>17</span>
+      case 'Open':
+        return <FaTrophy className='h-2.5 w-2.5' />
+    }
+  }
 
-  // Intersection Observer for scroll animations
+  const getDivisionLabel = (division: DivisionKey) => {
+    return t(`divisions.${division}`)
+  }
+
+  const flagSrc = (code: string) =>
+    `/img/hall-of-fame/${code.toLowerCase()}.svg`
+
+  // Toggle year with animation
+  const toggleYear = (year: string) => {
+    if (animatingYear) return
+
+    if (openYear === year) {
+      setAnimatingYear(year)
+      setTimeout(() => {
+        setOpenYear('')
+        setAnimatingYear(null)
+      }, 10)
+    } else {
+      setAnimatingYear(year)
+      setOpenYear(year)
+      setTimeout(() => {
+        setAnimatingYear(null)
+      }, 350)
+    }
+  }
+
+  // Medal component for winners
+  const getMedalColor = (position: number) => {
+    switch (position) {
+      case 0:
+        return 'from-yellow-400 to-amber-500 shadow-amber-200'
+      case 1:
+        return 'from-gray-300 to-gray-400 shadow-gray-200'
+      case 2:
+        return 'from-orange-400 to-orange-500 shadow-orange-200'
+      default:
+        return 'from-gray-200 to-gray-300'
+    }
+  }
+
+  // Intersection observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -110,7 +138,7 @@ export default function HallOfFameWinners() {
           setIsVisible(true)
         }
       },
-      { threshold: 0.15, rootMargin: '50px' }
+      { threshold: 0.1, rootMargin: '50px' }
     )
 
     if (sectionRef.current) {
@@ -120,297 +148,99 @@ export default function HallOfFameWinners() {
     return () => observer.disconnect()
   }, [])
 
-  const handleYearToggle = (year: string) => {
-    if (animatingYear) return // Prevent multiple clicks during animation
-
-    setAnimatingYear(year)
-    const newOpenYear = openYear === year ? '' : year
-    setOpenYear(newOpenYear)
-
-    // Clear animation state after transition
-    setTimeout(() => setAnimatingYear(null), 350)
-  }
-
-  const flagSrc = (code: string) =>
-    `/img/hall-of-fame/${code.toLowerCase()}.svg`
-
-  const getDivisionIcon = (division: DivisionKey) => {
-    switch (division) {
-      case 'Open':
-        return <FaTrophy className='h-3 w-3' />
-      case 'Sub17':
-        return <BiAward className='h-3 w-3' />
-      case 'Sub15':
-        return <FaMedal className='h-3 w-3' />
-      default:
-        return <FaMedal className='h-3 w-3' />
-    }
-  }
-
-  const getDivisionLabel = (division: DivisionKey) => {
-    switch (division) {
-      case 'Open':
-        return 'OPEN'
-      case 'Sub17':
-        return 'SUB17'
-      case 'Sub15':
-        return 'SUB15'
-      default:
-        return division
-    }
-  }
-
   return (
     <section
       ref={sectionRef}
-      className='relative w-full overflow-hidden'
       id='hall-of-fame-winners'
-      aria-labelledby='hall-of-fame-title'
+      className='relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100'
+      aria-labelledby='winners-title'
     >
-      {/* Background image - full visibility */}
-      <div className='absolute inset-0 -z-10'>
+      {/* Background */}
+      <div className='absolute inset-0 -z-20'>
         <Image
           src={ASSETS.background}
           alt=''
           role='presentation'
           fill
-          sizes='100vw'
-          className='object-cover object-center'
-          priority
+          className='object-cover opacity-40'
           quality={75}
         />
       </div>
 
       {/* Main Content */}
-      <div className='mx-auto max-w-screen-xl px-4 pb-[200px] pt-8 sm:pb-[180px] sm:pt-12 lg:pb-[240px] lg:pt-16'>
-        {/* Mobile/Tablet Layout: Single Column */}
-        <div className='block lg:hidden'>
-          {/* Header */}
-          <div
-            className={clsx(
-              'mb-8 text-center transition-all duration-1000 ease-out',
-              isVisible
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-8 opacity-0'
-            )}
-          >
-            <h2
-              id='hall-of-fame-title'
-              className='mb-4 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'
-            >
-              {t('title')}
-            </h2>
-            <p className='mx-auto max-w-2xl text-sm leading-relaxed text-slate-700 sm:text-base'>
-              {t('description')}
-            </p>
-          </div>
-
-          {/* Compact Accordion for Mobile */}
-          <div
-            className={clsx(
-              'space-y-4 transition-all delay-200 duration-1000 ease-out',
-              isVisible
-                ? 'translate-y-0 opacity-100'
-                : 'translate-y-8 opacity-0'
-            )}
-          >
-            {years.map((year, yearIndex) => (
-              <div
-                key={year}
-                className={clsx(
-                  'group rounded-lg transition-all duration-300',
-                  'bg-white/90 shadow-md backdrop-blur-sm',
-                  'ring-1 ring-slate-200/50',
-                  openYear === year && 'shadow-sky-100/50 ring-sky-300'
-                )}
-              >
-                {/* Year Header Button */}
-                <button
-                  onClick={() => handleYearToggle(year)}
+      <div className='relative z-10'>
+        {/* Content Container */}
+        <div className='mx-auto max-w-screen-xl px-4 pb-4 pt-8 sm:pt-12'>
+          <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
+            {/* Left Column: Winners List */}
+            <div className='lg:col-span-7'>
+              <header className='mb-8'>
+                <h2
+                  id='winners-title'
                   className={clsx(
-                    'flex w-full items-center justify-between px-4 py-3 text-left',
-                    'rounded-lg transition-all duration-200',
-                    'hover:bg-sky-50',
-                    'focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
+                    'mb-2 text-xl font-extrabold uppercase tracking-wide text-sky-500 transition-all duration-1000 ease-out sm:text-2xl',
+                    isVisible
+                      ? 'translate-y-0 opacity-100'
+                      : 'translate-y-8 opacity-0'
                   )}
-                  aria-expanded={openYear === year}
-                  aria-controls={`winners-${year}`}
+                  style={{ transitionDelay: '200ms' }}
                 >
-                  <span className='text-lg font-bold text-slate-800'>
-                    {year}
-                  </span>
-                  <FaChevronDown
-                    className={clsx(
-                      'h-4 w-4 text-sky-500 transition-transform duration-300',
-                      openYear === year ? 'rotate-180' : 'rotate-0'
-                    )}
-                  />
-                </button>
-
-                {/* Collapsible Content */}
-                <div
-                  className={clsx(
-                    'duration-350 grid overflow-hidden transition-all ease-out',
-                    openYear === year
-                      ? 'grid-rows-[1fr] opacity-100'
-                      : 'grid-rows-[0fr] opacity-0'
-                  )}
-                >
-                  <div className='overflow-hidden'>
-                    <div className='px-4 pb-4'>
-                      {DIVISIONS.map(divKey => {
-                        const divisionWinners = WINNERS[year][divKey]
-
-                        if (!divisionWinners || divisionWinners.length === 0) {
-                          return null
-                        }
-
-                        return (
-                          <div
-                            key={divKey}
-                            className='border-t border-slate-100 py-3 first:border-t-0'
-                          >
-                            {/* Division Header */}
-                            <div className='mb-2 flex items-center gap-2'>
-                              <div className='flex h-5 w-5 items-center justify-center rounded bg-sky-500 text-white'>
-                                {getDivisionIcon(divKey)}
-                              </div>
-                              <h3 className='text-sm font-bold uppercase text-sky-700'>
-                                {getDivisionLabel(divKey)}
-                              </h3>
-                            </div>
-
-                            {/* Teams List - Stacked for mobile */}
-                            <div className='space-y-2'>
-                              {divisionWinners.map(
-                                ({ name, country }, teamIndex) => {
-                                  const medal =
-                                    medalStyles[teamIndex] || medalStyles[3]
-                                  const position = teamIndex + 1
-
-                                  return (
-                                    <div
-                                      key={`${name}-${teamIndex}`}
-                                      className='flex items-center gap-2 rounded-md bg-white/80 p-2 shadow-sm'
-                                    >
-                                      {/* Position */}
-                                      <div
-                                        className={clsx(
-                                          'flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-xs font-bold text-white',
-                                          medal.bg
-                                        )}
-                                      >
-                                        {position}
-                                      </div>
-
-                                      {/* Flag */}
-                                      <div className='relative h-[14px] w-[20px] shrink-0 overflow-hidden rounded-sm'>
-                                        <Image
-                                          src={flagSrc(country)}
-                                          alt={`${country} flag`}
-                                          fill
-                                          sizes='20px'
-                                          className='object-cover'
-                                        />
-                                      </div>
-
-                                      {/* Team Name */}
-                                      <span className='flex-1 text-xs font-medium text-slate-800'>
-                                        {name}
-                                      </span>
-                                    </div>
-                                  )
-                                }
-                              )}
-                            </div>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Desktop Layout: Two Columns */}
-        <div className='hidden lg:block'>
-          <div className='grid grid-cols-12 gap-12'>
-            {/* Left Column: Content */}
-            <div className='col-span-7'>
-              {/* Header */}
-              <div
-                className={clsx(
-                  'mb-8 transition-all duration-1000 ease-out',
-                  isVisible
-                    ? 'translate-y-0 opacity-100'
-                    : 'translate-y-8 opacity-0'
-                )}
-              >
-                <h2 className='mb-4 text-3xl font-extrabold uppercase tracking-wide text-sky-500'>
                   {t('title')}
                 </h2>
-                <p className='max-w-2xl text-base leading-relaxed text-slate-700'>
-                  {t('description')}
-                </p>
-              </div>
+              </header>
 
-              {/* Desktop Accordion - Fixed Height Container */}
+              {/* Minimalist Winners by Year */}
               <div
                 className={clsx(
-                  'transition-all delay-200 duration-1000 ease-out',
+                  'space-y-3 transition-all duration-1000 ease-out',
                   isVisible
                     ? 'translate-y-0 opacity-100'
-                    : 'translate-y-8 opacity-0'
+                    : 'translate-y-6 opacity-0'
                 )}
+                style={{ transitionDelay: '400ms' }}
               >
-                <div
-                  className='relative rounded-xl bg-white/5 p-2'
-                  style={{ height: '480px' }}
-                >
-                  <div
-                    className='h-full space-y-3 overflow-y-auto pr-2'
-                    style={{
-                      scrollbarWidth: 'thin',
-                      scrollbarColor: '#7dd3fc transparent'
-                    }}
-                  >
+                <div className='overflow-hidden rounded-xl bg-white/80 shadow-xl ring-1 ring-black/5 backdrop-blur-sm'>
+                  <div className='divide-y divide-slate-100'>
                     {years.map((year, yearIndex) => (
                       <div
                         key={year}
                         className={clsx(
-                          'group rounded-xl transition-all duration-300',
-                          'bg-white/80 shadow-lg backdrop-blur-sm hover:shadow-xl',
-                          'ring-1 ring-slate-200/50 hover:ring-sky-200',
-                          openYear === year && 'shadow-sky-100/50 ring-sky-300'
+                          'transition-all duration-500 ease-out',
+                          isVisible
+                            ? 'translate-x-0 opacity-100'
+                            : '-translate-x-8 opacity-0'
                         )}
+                        style={{
+                          transitionDelay: `${500 + yearIndex * 100}ms`
+                        }}
                       >
-                        {/* Year Header Button */}
+                        {/* Year Header - Clickable */}
                         <button
-                          onClick={() => handleYearToggle(year)}
+                          type='button'
+                          onClick={() => toggleYear(year)}
                           className={clsx(
-                            'flex w-full items-center justify-between px-5 py-4 text-left',
-                            'rounded-xl transition-all duration-200',
-                            'hover:bg-gradient-to-r hover:from-sky-50 hover:to-blue-50',
-                            'focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300'
+                            'flex w-full items-center justify-between px-4 py-3 text-left transition-all duration-200',
+                            openYear === year
+                              ? 'bg-gradient-to-r from-sky-50 to-blue-50'
+                              : 'hover:bg-slate-50'
                           )}
-                          aria-expanded={openYear === year}
-                          aria-controls={`winners-${year}`}
                         >
                           <div className='flex items-center gap-3'>
-                            <span className='text-xl font-bold text-slate-800'>
+                            <BiAward
+                              className={clsx(
+                                'h-5 w-5 transition-colors duration-200',
+                                openYear === year
+                                  ? 'text-sky-600'
+                                  : 'text-slate-400'
+                              )}
+                            />
+                            <span className='text-lg font-bold text-slate-800'>
                               {year}
                             </span>
-                            {openYear === year && (
-                              <span className='rounded-full bg-sky-100 px-2 py-1 text-xs font-semibold text-sky-700'>
-                                Active
-                              </span>
-                            )}
                           </div>
                           <FaChevronDown
                             className={clsx(
-                              'h-4 w-4 text-sky-500 transition-transform duration-300',
+                              'h-4 w-4 text-slate-400 transition-transform duration-300',
                               openYear === year ? 'rotate-180' : 'rotate-0'
                             )}
                           />
@@ -426,8 +256,8 @@ export default function HallOfFameWinners() {
                           )}
                         >
                           <div className='overflow-hidden'>
-                            <div className='px-5 pb-4'>
-                              {DIVISIONS.map((divKey, divIndex) => {
+                            <div className='px-4 pb-4'>
+                              {DIVISIONS.map(divKey => {
                                 const divisionWinners = WINNERS[year][divKey]
 
                                 if (
@@ -440,63 +270,43 @@ export default function HallOfFameWinners() {
                                 return (
                                   <div
                                     key={divKey}
-                                    className={clsx(
-                                      'border-t border-slate-100 py-4 first:border-t-0',
-                                      'transition-all duration-300 ease-out',
-                                      openYear === year
-                                        ? 'translate-x-0 opacity-100'
-                                        : 'translate-x-4 opacity-0'
-                                    )}
-                                    style={{
-                                      transitionDelay:
-                                        openYear === year
-                                          ? `${divIndex * 150}ms`
-                                          : '0ms'
-                                    }}
+                                    className='border-t border-slate-100 py-3 first:border-t-0'
                                   >
                                     {/* Division Header */}
-                                    <div className='mb-3 flex items-center gap-2'>
-                                      <div className='flex h-6 w-6 items-center justify-center rounded-md bg-gradient-to-br from-sky-400 to-sky-600 text-white'>
+                                    <div className='mb-2 flex items-center gap-2'>
+                                      <div className='flex h-5 w-5 items-center justify-center rounded bg-sky-500 text-white'>
                                         {getDivisionIcon(divKey)}
                                       </div>
-                                      <h3 className='text-sm font-bold uppercase tracking-wide text-sky-700'>
+                                      <h3 className='text-sm font-bold uppercase text-sky-700'>
                                         {getDivisionLabel(divKey)}
                                       </h3>
                                     </div>
 
-                                    {/* Teams List */}
-                                    <div className='grid gap-2 sm:grid-cols-2'>
-                                      {divisionWinners.map(
-                                        ({ name, country }, teamIndex) => {
-                                          const medal =
-                                            medalStyles[teamIndex] ||
-                                            medalStyles[3]
-                                          const position = teamIndex + 1
-
-                                          return (
+                                    {/* Teams List - Stacked for mobile */}
+                                    <div className='space-y-2'>
+                                      {divisionWinners.map((team, idx) => {
+                                        const { name, country } = team
+                                        return (
+                                          <div
+                                            key={`${name}-${idx}`}
+                                            className='flex items-center gap-3'
+                                          >
+                                            {/* Medal */}
                                             <div
-                                              key={`${name}-${teamIndex}`}
                                               className={clsx(
-                                                'group flex items-center gap-3 rounded-lg p-3',
-                                                'bg-gradient-to-r from-white/80 to-slate-50/80',
-                                                'border border-slate-200/60 shadow-sm backdrop-blur-sm',
-                                                'hover:border-sky-300/50 hover:shadow-md',
-                                                'transition-all duration-200'
+                                                'flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-xs font-bold text-white shadow-md',
+                                                getMedalColor(idx)
                                               )}
                                             >
-                                              {/* Position Medal */}
-                                              <div
-                                                className={clsx(
-                                                  'flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br font-bold text-white shadow-lg',
-                                                  medal.bg,
-                                                  medal.glow
-                                                )}
-                                              >
-                                                <span className='text-xs'>
-                                                  {position}
-                                                </span>
-                                              </div>
+                                              {idx === 0 ? (
+                                                <FaMedal className='h-3 w-3' />
+                                              ) : (
+                                                idx + 1
+                                              )}
+                                            </div>
 
+                                            {/* Team info */}
+                                            <div className='flex flex-1 items-center gap-2'>
                                               {/* Flag */}
                                               <div className='relative inline-block h-[16px] w-[24px] shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/10'>
                                                 <Image
@@ -514,9 +324,9 @@ export default function HallOfFameWinners() {
                                                 {name}
                                               </span>
                                             </div>
-                                          )
-                                        }
-                                      )}
+                                          </div>
+                                        )
+                                      })}
                                     </div>
                                   </div>
                                 )
@@ -539,11 +349,14 @@ export default function HallOfFameWinners() {
         </div>
       </div>
 
-      {/* Players Image - Positioned Above Wave (Tablet & Desktop Only) */}
+      {/* Players Image - Positioned Above Wave (Tablet & Desktop Only) with FADE EFFECT */}
       <div className='absolute bottom-[105px] right-4 z-10 hidden sm:block lg:right-[10%]'>
         <div
           className={clsx(
             'relative h-[240px] w-[240px] transition-all delay-700 duration-1000 ease-out lg:h-[520px] lg:w-[520px]',
+            // Add the fade mask effect here
+            '[-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_75%,transparent_100%)]',
+            '[mask-image:linear-gradient(to_bottom,black_0%,black_75%,transparent_100%)]',
             isVisible
               ? 'translate-y-0 scale-100 opacity-100'
               : 'translate-y-8 scale-95 opacity-0'

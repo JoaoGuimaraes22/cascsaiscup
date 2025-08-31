@@ -406,72 +406,10 @@
     "Winners": {
       "title": "Equipos Ganadores",
       "description": "Descubre los equipos que alcanzaron el podio en años recientes, en cada categoría.",
-      "years": {
-        "2025": {
-          "Sub21": [
-            "Lisboa Spikers",
-            "Porto Power",
-            "Cascais Crushers",
-            "Oeiras Thunder"
-          ],
-          "Sub17": [
-            "Algarve Waves",
-            "Braga Blockers",
-            "Estoril Eagles",
-            "Sintra Smash"
-          ],
-          "Sub15": [
-            "Coimbra Titans",
-            "Funchal Flames",
-            "Viana Sea Storm",
-            "Setúbal Sharks"
-          ]
-        },
-        "2024": {
-          "Sub21": [
-            "Aveiro Ace Queens",
-            "Faro Flyers",
-            "Leiria Lightning",
-            "Madeira Volley Stars"
-          ],
-          "Sub17": [
-            "Porto Power",
-            "Lisboa Spikers",
-            "Braga Blockers",
-            "Oeiras Thunder"
-          ],
-          "Sub15": [
-            "Cascais Crushers",
-            "Sintra Smash",
-            "Estoril Eagles",
-            "Setúbal Sharks"
-          ]
-        },
-        "2023": {
-          "Sub21": [
-            "Madeira Volley Stars",
-            "Oeiras Thunder",
-            "Braga Blockers",
-            "Lisboa Spikers"
-          ],
-          "Sub17": [
-            "Coimbra Titans",
-            "Setúbal Sharks",
-            "Porto Power",
-            "Cascais Crushers"
-          ],
-          "Sub15": [
-            "Algarve Waves",
-            "Sintra Smash",
-            "Funchal Flames",
-            "Viana Sea Storm"
-          ]
-        }
-      },
-      "labels": {
-        "sub21": "Sub-21",
-        "sub17": "Sub-17",
-        "sub15": "Sub-15",
+      "divisions": {
+        "Open": "Abierto",
+        "Sub17": "Sub-17",
+        "Sub15": "Sub-15",
         "seeMore": "Ver más"
       }
     }

@@ -100,7 +100,7 @@ export default function AccommodationHero() {
             >
               <h1
                 id='accommodation-title'
-                className='mb-2 text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl'
+                className='text-2xl font-extrabold uppercase tracking-wide text-sky-500 sm:text-3xl lg:text-4xl'
               >
                 {t('title')}
               </h1>
@@ -115,26 +115,7 @@ export default function AccommodationHero() {
               <p className='mb-4 text-sm leading-relaxed text-slate-800/90 sm:text-base'>
                 {t('schools.p1')}
               </p>
-
-              <ul className='mb-4 space-y-2'>
-                {[
-                  t('schools.list.a'),
-                  t('schools.list.b'),
-                  t('schools.list.c'),
-                  t('schools.list.d'),
-                  t('schools.list.e')
-                ].map((item, index) => (
-                  <li
-                    key={index}
-                    className='flex items-start gap-3 text-sm leading-relaxed text-slate-800/90 sm:text-base'
-                  >
-                    <span className='mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-sky-500' />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <p className='whitespace-pre-line text-sm leading-relaxed text-slate-800/90 sm:text-base'>
+              <p className='text-sm leading-relaxed text-slate-800/90 sm:text-base'>
                 {t('schools.p2')} <strong>{t('schools.p2Bold')}</strong>{' '}
                 {t('schools.p2_cont')}
               </p>
@@ -198,11 +179,14 @@ export default function AccommodationHero() {
             </AccommodationSection>
           </div>
 
-          {/* RIGHT CONTENT - Player Image */}
+          {/* RIGHT CONTENT - Player Image WITH FADE EFFECT */}
           <div className='relative lg:col-span-5'>
             <div
               className={clsx(
                 'absolute inset-y-0 hidden w-[45vw] max-w-[900px] transition-all duration-1000 ease-out lg:block',
+                // Add the fade mask effect here
+                '[-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_75%,transparent_100%)]',
+                '[mask-image:linear-gradient(to_bottom,black_0%,black_75%,transparent_100%)]',
                 isVisible
                   ? 'translate-x-0 opacity-100'
                   : 'translate-x-8 opacity-0'
@@ -254,70 +238,47 @@ function AccommodationSection({
     <section
       className={clsx(
         'mb-8 space-y-4 transition-all duration-700 ease-out',
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
       )}
       style={{ transitionDelay: `${delay}ms` }}
     >
       <h2 className='text-lg font-extrabold uppercase tracking-wide text-sky-600 sm:text-xl'>
         {title}
       </h2>
-      <div>{children}</div>
+      {children}
     </section>
   )
 }
 
-// Updated Contact Button using Global ContactToast
-interface ContactOSportsButtonProps {
-  onOpenModal: () => void
-}
-
-function ContactOSportsButton({ onOpenModal }: ContactOSportsButtonProps) {
-  const t = useTranslations('AccommodationPage.Hero')
-
+function ContactOSportsButton({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <button
       onClick={onOpenModal}
-      className='group inline-flex items-center gap-2 rounded-full bg-sky-600 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
+      className='group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-sky-600 px-6 py-3 text-sm font-bold text-white shadow-lg ring-1 ring-black/10 transition-all duration-300 hover:scale-105 hover:bg-sky-700 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:text-base'
     >
-      <FiMail className='h-4 w-4 transition-transform duration-300 group-hover:rotate-12' />
-      <span>{t('food.contactButton') || 'Contact O-Sports'}</span>
+      <FiMail className='h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5' />
+      <span>Contact O&apos;Sports</span>
     </button>
   )
 }
 
-interface SimpleWaveProps {
-  waveHeight: number
-}
-
-function SimpleWave({ waveHeight }: SimpleWaveProps) {
+function SimpleWave({ waveHeight }: { waveHeight: number }) {
   return (
     <div className='pointer-events-none absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
-      {/* Desktop */}
-      <div className='relative hidden lg:block'>
+      <div className='relative'>
         <Image
           src='/img/global/ondas-3.png'
           alt=''
           role='presentation'
           width={2048}
           height={waveHeight}
-          className='z-10 -mb-px block h-auto w-full'
           sizes='100vw'
+          className='block h-auto w-full'
+          style={{ height: `${waveHeight}px` }}
           loading='lazy'
           quality={75}
         />
       </div>
-
-      {/* Mobile */}
-      <div
-        className='relative block lg:hidden'
-        style={{
-          backgroundImage: 'url(/img/global/ondas-3.png)',
-          backgroundSize: '100% 100%',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          height: `${waveHeight}px`
-        }}
-      />
     </div>
   )
 }
