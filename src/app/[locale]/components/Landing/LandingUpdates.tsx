@@ -11,7 +11,7 @@ import LandingTestimonials from './LandingTestimonials'
 // Shared assets
 const SHARED_ASSETS = {
   background: '/img/landing/home-page-2.webp',
-  waveTop: '/img/global/ondas-4.png'
+  waveTop: '/img/global/ondas-4.webp'
 } as const
 
 export default function LandingUpdates() {

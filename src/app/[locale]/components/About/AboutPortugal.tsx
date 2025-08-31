@@ -19,7 +19,7 @@ export default function AboutPortugal() {
   const ASSETS = {
     background: '/img/about/portugal-bg.webp',
     logo: '/img/global/cascais-volley-cup-2.png',
-    wave: '/img/global/ondas-3.png'
+    wave: '/img/global/ondas-3.webp'
   } as const
 
   const SPOTS = [

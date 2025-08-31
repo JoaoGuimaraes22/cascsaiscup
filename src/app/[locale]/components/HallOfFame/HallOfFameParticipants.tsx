@@ -10,7 +10,7 @@ import clsx from 'clsx'
 const ASSETS = {
   background: '/img/hall-of-fame/hero-bg.png',
   players: '/img/hall-of-fame/players-2.png',
-  wave: '/img/global/ondas-7.png'
+  wave: '/img/global/ondas-7.webp'
 } as const
 
 const WAVE_HEIGHT = 135

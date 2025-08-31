@@ -10,7 +10,7 @@ import clsx from 'clsx'
 const ASSETS = {
   background: '/img/hall-of-fame/hero-bg.png',
   heroImage: '/img/hall-of-fame/players.png',
-  wave: '/img/global/ondas-10.png',
+  wave: '/img/global/ondas-10.webp',
   logo: '/img/global/cascais-volley-cup-1-w.png',
   mvpLogo: '/img/hall-of-fame/mvp-logo.png'
 } as const

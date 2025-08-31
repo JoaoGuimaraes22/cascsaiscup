@@ -21,7 +21,7 @@ export default function ProgramHero() {
     background: '/img/program/program-bg.png',
     tagline: '/img/global/tagline.png',
     players: '/img/program/players.png',
-    wave: '/img/global/ondas-3.png'
+    wave: '/img/global/ondas-3.webp'
   } as const
 
   // Language mapping for brochure files
@@ -462,7 +462,7 @@ export default function ProgramHero() {
         {/* Desktop */}
         <div className='relative hidden lg:block'>
           <Image
-            src='/img/global/ondas-3.png'
+            src='/img/global/ondas-3.webp'
             alt=''
             role='presentation'
             width={2048}
@@ -478,7 +478,7 @@ export default function ProgramHero() {
         <div
           className='relative block lg:hidden'
           style={{
-            backgroundImage: 'url(/img/global/ondas-3.png)',
+            backgroundImage: 'url(/img/global/ondas-3.webp)',
             backgroundSize: '100% 100%',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',

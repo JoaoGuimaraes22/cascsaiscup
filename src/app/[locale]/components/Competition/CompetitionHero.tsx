@@ -286,7 +286,7 @@ function LogoTaglineSection({
       {/* Wave Background */}
       <div className='relative overflow-hidden'>
         <Image
-          src='/img/global/ondas-9.png'
+          src='/img/global/ondas-9.webp'
           alt=''
           width={2048}
           height={150}

@@ -15,7 +15,7 @@ export default function RegistrationHero() {
   const ASSETS = {
     background: '/img/registration/hero-bg.png',
     player: '/img/global/players-1.png',
-    wave: '/img/global/ondas-3.png'
+    wave: '/img/global/ondas-3.webp'
   } as const
 
   // Language mapping for brochure files

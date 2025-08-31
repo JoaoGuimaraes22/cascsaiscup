@@ -21,7 +21,7 @@ export default function LandingLocation() {
     background: '/img/landing/home-page-2-2.webp',
     map: '/img/landing/mapa.webp',
     tagline: '/img/global/tagline.png',
-    wave: '/img/global/ondas-3.png'
+    wave: '/img/global/ondas-3.webp'
   } as const
 
   const WAVE_HEIGHT = 135

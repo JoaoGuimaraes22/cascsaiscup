@@ -13,7 +13,7 @@ import clsx from 'clsx'
 
 // Testimonials-specific assets
 const TESTIMONIALS_ASSETS = {
-  waveTestimonials: '/img/global/ondas-9.png',
+  waveTestimonials: '/img/global/ondas-9.webp',
   animations: {
     duration: 800,
     autoPlayInterval: 4000

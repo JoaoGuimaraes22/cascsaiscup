@@ -16,8 +16,8 @@ interface RuleItemProps {
 // Constants for better maintainability
 const ASSETS = {
   background: '/img/about/about-bg.webp',
-  waveTop: '/img/global/ondas-5.png',
-  waveBottom: '/img/global/ondas-3.png',
+  waveTop: '/img/global/ondas-5.webp',
+  waveBottom: '/img/global/ondas-3.webp',
   sponsors: {
     fpv: '/img/sponsors/fpv.webp',
     cascais: '/img/sponsors/cascais-camara.webp',

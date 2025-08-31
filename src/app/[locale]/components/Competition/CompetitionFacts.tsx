@@ -7,8 +7,8 @@ import { useMemo, useEffect, useRef, useState } from 'react'
 
 // Constants for better maintainability
 const ASSETS = {
-  background: '/img/competition/hero-bg.png',
-  wave: '/img/global/ondas-3.png'
+  background: '/img/competition/rulles-bg.png',
+  wave: '/img/global/ondas-3.webp'
 } as const
 
 const WAVE_HEIGHT = 135

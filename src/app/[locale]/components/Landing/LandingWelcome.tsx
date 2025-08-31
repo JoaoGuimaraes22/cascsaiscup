@@ -16,7 +16,7 @@ export default function LandingWelcome() {
   // Assets
   const BG = '/img/landing/hero-bg-new.webp'
   const TAGLINE = '/img/global/tagline-w.png'
-  const LOGO = '/img/global/logo-white.png'
+  const LOGO = '/img/global/cascais-volley-cup-1-w.png'
   const SPONSOR = '/img/sponsors/cascais-camara-w.webp'
   const OSPORTS = '/img/sponsors/o-sports-w.webp'
 

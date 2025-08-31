@@ -17,7 +17,7 @@ export default function AccommodationHero() {
   // ===== Constants =====
   const ASSETS = {
     background: '/img/accommodation/hero-bg.png',
-    wave: '/img/global/ondas-3.png',
+    wave: '/img/global/ondas-3.webp',
     player: '/img/accommodation/ac-player.png'
   } as const
 
@@ -267,7 +267,7 @@ function SimpleWave({ waveHeight }: { waveHeight: number }) {
     <div className='pointer-events-none absolute bottom-0 left-1/2 w-screen -translate-x-1/2'>
       <div className='relative'>
         <Image
-          src='/img/global/ondas-3.png'
+          src='/img/global/ondas-3.webp'
           alt=''
           role='presentation'
           width={2048}

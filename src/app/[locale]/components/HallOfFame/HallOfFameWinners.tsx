@@ -70,7 +70,7 @@ export default function HallOfFameWinners() {
     background: '/img/hall-of-fame/hero-bg.png',
     winnersImg: '/img/program/players.png',
     tagline: '/img/global/tagline.png',
-    wave: '/img/global/ondas-3.png'
+    wave: '/img/global/ondas-3.webp'
   } as const
 
   const WAVE_HEIGHT = 135

@@ -16,7 +16,7 @@ export default function AboutVilla() {
   // ===== Constants =====
   const ASSETS = {
     background: '/img/about/villa-bg.webp',
-    bottomWave: '/img/global/ondas-3.png',
+    bottomWave: '/img/global/ondas-3.webp',
     tagline: '/img/global/tagline-w.png',
     logo: '/img/global/cascais-volley-cup-1-w.png',
     sponsor: '/img/sponsors/cascais-camara-w.webp'
