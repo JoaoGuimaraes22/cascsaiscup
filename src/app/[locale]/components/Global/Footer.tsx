@@ -4,7 +4,7 @@ import { FC, useMemo } from 'react'
 import Image from 'next/image'
 import { Link } from '@/src/navigation'
 import { FiMail, FiPhone, FiMapPin, FiGlobe } from 'react-icons/fi'
-import { FaInstagram } from 'react-icons/fa'
+import { FaInstagram, FaYoutube } from 'react-icons/fa'
 import { useTranslations, useLocale } from 'next-intl'
 import clsx from 'clsx'
 
@@ -29,6 +29,7 @@ const Footer: FC<Props> = ({ locale }) => {
   const PHONE = '(00351) 964 415 632'
   const WEBSITE_URL = 'https://www.volley4all.com'
   const INSTAGRAM_URL = 'https://www.instagram.com/cascais_volley_cup'
+  const YOUTUBE_URL = 'https://www.youtube.com/@cascais_volley4all/'
 
   // Language mapping for brochure files
   const getLanguageCode = (locale: string) => {
@@ -214,6 +215,12 @@ const Footer: FC<Props> = ({ locale }) => {
                 ariaLabel={t('instagram') || 'Visit our Instagram profile'}
                 title='Instagram'
                 icon={<FaInstagram className='h-4 w-4' />}
+              />
+              <SocialIcon
+                href={YOUTUBE_URL}
+                ariaLabel={t('youtube') || 'Visit our YouTube channel'}
+                title='YouTube'
+                icon={<FaYoutube className='h-4 w-4' />}
               />
             </div>
 
