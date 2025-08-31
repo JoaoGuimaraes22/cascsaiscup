@@ -55,14 +55,14 @@ const Footer: FC<Props> = ({ locale }) => {
         alt: 'C.A.M. Ford',
         w: 220,
         h: 80,
-        url: 'https://camford.pt'
+        url: 'https://www.cam.pt'
       },
       {
         src: '/img/sponsors/cascais-camara.png',
         alt: 'Cascais Câmara Municipal',
         w: 220,
         h: 80,
-        url: 'https://www.cascais.pt'
+        url: 'https://www.visitcascais.com'
       },
       {
         src: '/img/sponsors/fpv.png',
@@ -76,20 +76,21 @@ const Footer: FC<Props> = ({ locale }) => {
         alt: 'Cascais Estoril',
         w: 220,
         h: 80,
-        url: 'https://www.cascaisestoril.com'
+        url: 'https://www.jf-cascaisestoril.pt'
       },
       {
         src: '/img/sponsors/volley4all.png',
         alt: 'Volley4All Sparrows',
         w: 220,
-        h: 80
+        h: 80,
+        url: 'https://www.volley4all.com'
       },
       {
         src: '/img/sponsors/o-sports.png',
         alt: 'Feel the summer',
         w: 220,
         h: 80,
-        url: '/'
+        url: 'https://www.o-sports.pt'
       }
     ],
     []
