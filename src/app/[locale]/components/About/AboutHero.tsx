@@ -182,7 +182,7 @@ export default function AboutHero() {
               </div>
             ))}
             <p>
-              {t('p4')} <strong>{t('p4Bold')} </strong>
+              {t('p4')} <strong>{t('p4Bold')} </strong> {t('p4Rest')}
             </p>
           </div>
 
