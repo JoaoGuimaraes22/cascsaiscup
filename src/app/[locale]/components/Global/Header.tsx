@@ -18,7 +18,7 @@ import LangSwitcher from '../LangSwitcher'
 import { FiMenu, FiX } from 'react-icons/fi'
 
 import Image from 'next/image'
-import Logo from '@/public/img/global/cascais-volley-cup-1.png'
+import Logo from '@/public/img/global/cascais-volley-cup-1.webp'
 import type { ValidPathname } from '@/src/navigation'
 import clsx from 'clsx'
 

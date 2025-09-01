@@ -16,9 +16,9 @@ export default function AccommodationHero() {
 
   // ===== Constants =====
   const ASSETS = {
-    background: '/img/accommodation/hero-bg.png',
+    background: '/img/accommodation/hero-bg.webp',
     wave: '/img/global/ondas-3.webp',
-    player: '/img/accommodation/ac-player.png'
+    player: '/img/accommodation/ac-player.webp'
   } as const
 
   const WAVE_HEIGHT = 135

@@ -24,7 +24,7 @@ const Footer: FC<Props> = ({ locale }) => {
   const t = useTranslations('Footer')
   const currentLocale = useLocale()
 
-  const LOGO = '/img/global/cascais-volley-cup-1.png'
+  const LOGO = '/img/global/cascais-volley-cup-1.webp'
   const EMAIL = 'info@volley4all.com'
   const PHONE = '(00351) 964 415 632'
   const WEBSITE_URL = 'https://www.volley4all.com'

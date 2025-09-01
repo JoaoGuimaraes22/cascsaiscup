@@ -14,7 +14,7 @@ export default function RegistrationHero() {
   // Assets
   const ASSETS = {
     background: '/img/registration/hero-bg.png',
-    player: '/img/global/players-1.png',
+    player: '/img/global/players-1.webp',
     wave: '/img/global/ondas-3.webp'
   } as const
 

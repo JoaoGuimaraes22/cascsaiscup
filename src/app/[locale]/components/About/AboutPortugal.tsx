@@ -18,7 +18,7 @@ export default function AboutPortugal() {
   // ===== Constants =====
   const ASSETS = {
     background: '/img/about/portugal-bg.webp',
-    logo: '/img/global/cascais-volley-cup-2.png',
+    logo: '/img/global/cascais-volley-cup-2.webp',
     wave: '/img/global/ondas-3.webp'
   } as const
 

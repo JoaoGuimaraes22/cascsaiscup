@@ -7,7 +7,7 @@ import { useMemo, useEffect, useRef, useState } from 'react'
 
 // Constants for better maintainability
 const ASSETS = {
-  background: '/img/competition/rulles-bg.png',
+  background: '/img/competition/rulles-bg.webp',
   wave: '/img/global/ondas-3.webp'
 } as const
 

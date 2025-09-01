@@ -6,12 +6,12 @@ import { MouseEvent } from 'react'
 
 // Constants for better maintainability
 const ASSETS = {
-  BG: '/img/competition/hero-bg.png',
-  PHONE: '/img/global/hand-phone.png',
-  MOSAIC: '/img/competition/mosaic.png',
-  MOSAIC_MOBILE: '/img/competition/mosaic-2.png',
-  LOGO: '/img/global/cascais-volley-cup-1-w.png',
-  TAGLINE: '/img/global/tagline-w.png'
+  BG: '/img/competition/hero-bg.webp',
+  PHONE: '/img/global/hand-phone.webp',
+  MOSAIC: '/img/competition/mosaic.webp',
+  MOSAIC_MOBILE: '/img/competition/mosaic-2.webp',
+  LOGO: '/img/global/cascais-volley-cup-1-w.webp',
+  TAGLINE: '/img/global/tagline-w.webp'
 } as const
 
 const PHONE_DIMENSIONS = {

@@ -19,7 +19,7 @@ export default function ProgramHero() {
   // ===== Constants =====
   const ASSETS = {
     background: '/img/program/program-bg.png',
-    tagline: '/img/global/tagline.png',
+    tagline: '/img/global/tagline.webp',
     players: '/img/program/players.png',
     wave: '/img/global/ondas-3.webp'
   } as const
