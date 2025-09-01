@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import { FiMapPin } from 'react-icons/fi'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
+import RegistrationToast from './RegistrationToast'
 
 interface StatsListProps {
   items: string[]
@@ -15,6 +16,7 @@ export default function LandingLocation() {
   const t = useTranslations('LandingPage.Location')
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [showRegistrationToast, setShowRegistrationToast] = useState(false)
 
   // Constants for better maintainability
   const ASSETS = {
@@ -51,8 +53,7 @@ export default function LandingLocation() {
   }, [])
 
   const handlePlanTripClick = () => {
-    // Add analytics or navigation logic here
-    console.log('Plan trip clicked')
+    setShowRegistrationToast(true)
   }
 
   return (
@@ -322,6 +323,12 @@ export default function LandingLocation() {
           </div>
         </div>
       </div>
+
+      {/* Registration Toast Modal */}
+      <RegistrationToast
+        isOpen={showRegistrationToast}
+        onClose={() => setShowRegistrationToast(false)}
+      />
     </section>
   )
 }
