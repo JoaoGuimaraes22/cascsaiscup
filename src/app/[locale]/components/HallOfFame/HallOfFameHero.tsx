@@ -8,11 +8,11 @@ import clsx from 'clsx'
 
 // Assets constant for better maintainability
 const ASSETS = {
-  background: '/img/hall-of-fame/hero-bg.png',
-  heroImage: '/img/hall-of-fame/players.png',
+  background: '/img/hall-of-fame/hero-bg.webp',
+  heroImage: '/img/hall-of-fame/players.webp',
   wave: '/img/global/ondas-10.webp',
   logo: '/img/global/cascais-volley-cup-1-w.webp',
-  mvpLogo: '/img/hall-of-fame/mvp-logo.png'
+  mvpLogo: '/img/hall-of-fame/mvp-logo.webp'
 } as const
 
 const WAVE_HEIGHT = 150

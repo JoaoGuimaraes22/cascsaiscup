@@ -19,7 +19,7 @@ import OptimizedCloudinaryImage from './OptimizedCloudinaryImage'
 
 // Assets constant for better maintainability
 const ASSETS = {
-  background: '/img/gallery/hero-bg.png',
+  background: '/img/gallery/hero-bg.webp',
   tagline: '/img/global/tagline-w.webp'
 } as const
 

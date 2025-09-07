@@ -102,7 +102,7 @@ const Footer: FC<Props> = ({ locale }) => {
   return (
     <footer
       role='contentinfo'
-      className="relative w-full border-t border-slate-200/60 bg-slate-100/95 bg-[url('/img/footer/footer-bg.png')] bg-cover bg-center backdrop-blur"
+      className="relative w-full border-t border-slate-200/60 bg-slate-100/95 bg-[url('/img/footer/footer-bg.webp')] bg-cover bg-center backdrop-blur"
     >
       <div className='mx-auto max-w-screen-lg px-4 py-8 sm:py-10'>
         {/* Main Footer Content */}

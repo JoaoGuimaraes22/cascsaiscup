@@ -26,9 +26,9 @@ export default function RegistrationForm() {
   const t = useTranslations('RegistrationPage.Form')
 
   // Assets
-  const BG = '/img/registration/hero-bg.png'
-  const PLAYER_LEFT = '/img/registration/player-left.png'
-  const PLAYER_RIGHT = '/img/registration/player.png'
+  const BG = '/img/registration/hero-bg.webp'
+  const PLAYER_LEFT = '/img/registration/player-left.webp'
+  const PLAYER_RIGHT = '/img/registration/player.webp'
 
   const [formData, setFormData] = useState<FormData>({
     name: '',

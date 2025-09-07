@@ -8,8 +8,8 @@ import clsx from 'clsx'
 
 // Assets constant for better maintainability
 const ASSETS = {
-  background: '/img/hall-of-fame/hero-bg.png',
-  players: '/img/hall-of-fame/players-2.png',
+  background: '/img/hall-of-fame/hero-bg.webp',
+  players: '/img/hall-of-fame/players-2.webp',
   wave: '/img/global/ondas-7.webp'
 } as const
 

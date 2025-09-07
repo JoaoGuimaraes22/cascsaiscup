@@ -27,7 +27,7 @@ interface Props {
 }
 
 type StaticPathname = Exclude<ValidPathname, '/gallery/[year]'>
-const HEADER_BG = '/img/footer/footer-bg.png'
+const HEADER_BG = '/img/footer/footer-bg.webp'
 
 // Custom hook for header height management
 const useHeaderHeight = (

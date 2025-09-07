@@ -67,8 +67,8 @@ export default function HallOfFameWinners() {
 
   // Assets with better organization
   const ASSETS = {
-    background: '/img/hall-of-fame/hero-bg.png',
-    winnersImg: '/img/program/players.png',
+    background: '/img/hall-of-fame/hero-bg.webp',
+    winnersImg: '/img/program/players.webp',
     tagline: '/img/global/tagline.webp',
     wave: '/img/global/ondas-3.webp'
   } as const
