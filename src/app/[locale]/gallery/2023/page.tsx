@@ -92,7 +92,6 @@ export default async function Gallery2023Page({
       <main>
         <OptimizedGallery
           year={2023}
-          maxResults={100}
           title={`${t('title')} 2023`}
           description={`${t('yearDescription')} 2023 - ${t('yearSubtitle')} volleyball tournament in Cascais, Portugal.`}
         />

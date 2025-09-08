@@ -1,59 +1,59 @@
-// ===== src/app/[locale]/gallery/2024/page.tsx =====
+// ===== src/app/[locale]/gallery/2023/page.tsx =====
 import { getTranslations } from 'next-intl/server'
 import OptimizedGallery from '../../components/Gallery/Gallery'
 
-interface Gallery2024PageProps {
+interface Gallery2023PageProps {
   params: {
     locale: string
   }
 }
 
-// Generate metadata for 2024 gallery
-export async function generateMetadata({ params }: Gallery2024PageProps) {
+// Generate metadata for 2023 gallery
+export async function generateMetadata({ params }: Gallery2023PageProps) {
   const t = await getTranslations('GalleryPage')
 
   return {
-    title: `${t('title')} 2024 | Cascais Cup`,
-    description: `${t('description')} 2024. View photos and highlights from the Cascais Cup 2024 volleyball tournament.`,
-    keywords: `Cascais Cup 2024, volleyball tournament, beach volleyball, Portugal, photo gallery`,
+    title: `${t('title')} 2023 | Cascais Cup`,
+    description: `${t('description')} 2023. View photos and highlights from the Cascais Cup 2023 volleyball tournament.`,
+    keywords: `Cascais Cup 2023, volleyball tournament, beach volleyball, Portugal, photo gallery`,
     openGraph: {
-      title: `Cascais Cup 2024 Gallery`,
-      description: `Photo gallery from Cascais Cup 2024 volleyball tournament`,
+      title: `Cascais Cup 2023 Gallery`,
+      description: `Photo gallery from Cascais Cup 2023 volleyball tournament`,
       type: 'website',
       images: [
         {
           url: '/img/gallery/hero-bg.png',
           width: 1200,
           height: 600,
-          alt: `Cascais Cup 2024 Gallery`
+          alt: `Cascais Cup 2023 Gallery`
         }
       ]
     },
     twitter: {
       card: 'summary_large_image',
-      title: `Cascais Cup 2024 Gallery`,
-      description: `Photo gallery from Cascais Cup 2024 volleyball tournament`
+      title: `Cascais Cup 2023 Gallery`,
+      description: `Photo gallery from Cascais Cup 2023 volleyball tournament`
     },
     alternates: {
-      canonical: `/${params.locale}/gallery/2024`
+      canonical: `/${params.locale}/gallery/2023`
     }
   }
 }
 
-// JSON-LD structured data for 2024
-function generateStructuredData2024(locale: string) {
+// JSON-LD structured data for 2023
+function generateStructuredData2023(locale: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'ImageGallery',
-    name: `Cascais Cup 2024 Photo Gallery`,
-    description: `Official photo gallery of Cascais Cup 2024 volleyball tournament`,
-    url: `https://yourdomain.com/${locale}/gallery/2024`,
-    dateCreated: `2024-01-01`,
+    name: `Cascais Cup 2023 Photo Gallery`,
+    description: `Official photo gallery of Cascais Cup 2023 volleyball tournament`,
+    url: `https://yourdomain.com/${locale}/gallery/2023`,
+    dateCreated: `2023-01-01`,
     about: {
       '@type': 'SportsEvent',
-      name: `Cascais Cup 2024`,
+      name: `Cascais Cup 2023`,
       sport: 'Volleyball',
-      startDate: `2024-01-01`,
+      startDate: `2023-01-01`,
       location: {
         '@type': 'Place',
         name: 'Cascais, Portugal',
@@ -72,11 +72,11 @@ function generateStructuredData2024(locale: string) {
   }
 }
 
-export default async function Gallery2024Page({
+export default async function Gallery2023Page({
   params
-}: Gallery2024PageProps) {
+}: Gallery2023PageProps) {
   const t = await getTranslations('GalleryPage')
-  const structuredData = generateStructuredData2024(params.locale)
+  const structuredData = generateStructuredData2023(params.locale)
 
   return (
     <>
@@ -91,10 +91,9 @@ export default async function Gallery2024Page({
       {/* Main gallery component */}
       <main>
         <OptimizedGallery
-          year={2024}
-          maxResults={100}
-          title={`${t('title')} 2024`}
-          description={`${t('yearDescription')} 2024 - ${t('yearSubtitle')} volleyball tournament in Cascais, Portugal.`}
+          year={2023}
+          title={`${t('title')} 2023`}
+          description={`${t('yearDescription')} 2023 - ${t('yearSubtitle')} volleyball tournament in Cascais, Portugal.`}
         />
       </main>
     </>
