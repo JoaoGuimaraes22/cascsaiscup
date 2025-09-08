@@ -39,7 +39,7 @@ const YEARS_CONFIG = [
 
 // Updated default to match GalleryHero usage
 const DEFAULT_IMAGES_PER_YEAR = 6
-const MAX_IMAGES_PER_YEAR = 50 // Increased for "Load More" functionality
+const MAX_IMAGES_PER_YEAR = 1000 // Increased to handle large galleries (e.g., 511 images)
 const API_TIMEOUT = 8000 // 8 seconds per request
 
 // Helper function to process and optimize image data
