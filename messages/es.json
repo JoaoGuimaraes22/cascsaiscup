@@ -344,6 +344,7 @@
       "gallery_image": "Imagen de galería",
       "image": "imagen",
       "images": "imágenes",
+      "check_all_images": "Ve todas las imágenes de {year} aquí",
       "empty_title": "No hay imágenes disponibles",
       "empty_description": "Las imágenes de la galería aparecerán aquí pronto. ¡Vuelve más tarde!",
       "check_again": "Verificar nuevamente",

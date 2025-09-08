@@ -345,6 +345,7 @@
       "gallery_image": "Gallery image",
       "image": "image",
       "images": "images",
+      "check_all_images": "Check all of the {year} images here",
       "empty_title": "No images available",
       "empty_description": "Gallery images will appear here soon. Check back later!",
       "check_again": "Check again",
@@ -353,32 +354,23 @@
       "try_again": "Try again"
     },
     "Main": {
-      "loading": "Loading gallery...",
-      "failed_title": "Failed to load gallery",
-      "failed_description": "Unable to load gallery images. Please try again.",
-      "try_again": "Try again",
-      "images": "images",
-      "no_images_title": "No images found",
-      "no_images_description": "This gallery is empty",
-      "no_images_year": "No images available for",
-      "view_modes": {
-        "grid": "Grid view",
-        "masonry": "Masonry view"
-      },
+      "loading": "Cargando galería...",
+      "failed_title": "Error al cargar galería",
+      "try_again": "Intentar Nuevamente",
+      "image": "imagen",
+      "images": "imágenes",
+      "more_available": "más disponibles",
+      "all_loaded": "Todas las imágenes cargadas",
+      "load_more": "Cargar Más Imágenes",
+      "loading_more": "Cargando más...",
+      "grid_size": "Tamaño de cuadrícula",
       "grid_sizes": {
-        "small": "Small",
-        "medium": "Medium",
-        "large": "Large"
+        "small": "Pequeño",
+        "medium": "Mediano",
+        "large": "Grande"
       },
-      "refresh": "Refresh gallery",
-      "previous": "Previous",
-      "next": "Next",
-      "close_lightbox": "Close lightbox",
-      "previous_image": "Previous image",
-      "next_image": "Next image",
-      "image_of": "of",
-      "cached": "Cached",
-      "live_data": "Live data"
+      "gallery_image": "Imagen de galería",
+      "close_lightbox": "Cerrar lightbox"
     }
   },
 

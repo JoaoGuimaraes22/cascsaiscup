@@ -1,222 +1,167 @@
+// src/app/[locale]/components/Gallery/Gallery.tsx
 'use client'
 
-import { useEffect, useState, useCallback, useRef, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
-import { FiX, FiChevronLeft, FiChevronRight, FiLoader } from 'react-icons/fi'
 import clsx from 'clsx'
+import { FiGrid, FiList, FiRefreshCw, FiPlus } from 'react-icons/fi'
 
-// Import our optimized components
-import {
-  useOptimizedGallery,
-  ProcessedImage
-} from '@/src/hooks/useOptimizedGallery'
+// Import optimized components
 import OptimizedCloudinaryImage from './OptimizedCloudinaryImage'
+import { ProcessedImage } from '@/src/hooks/useOptimizedGallery'
+
+// Grid size configurations
+type GridSize = 'small' | 'medium' | 'large'
+
+interface GridDimensions {
+  small: { width: number; height: number; cols: string }
+  medium: { width: number; height: number; cols: string }
+  large: { width: number; height: number; cols: string }
+}
+
+const dimensions: GridDimensions = {
+  small: {
+    width: 300,
+    height: 225,
+    cols: 'grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'
+  },
+  medium: {
+    width: 400,
+    height: 300,
+    cols: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+  },
+  large: {
+    width: 600,
+    height: 450,
+    cols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+  }
+}
+
+const IMAGES_PER_LOAD = 30
 
 interface OptimizedGalleryProps {
   folder?: string
   year?: number
-  maxResults?: number
   title?: string
   description?: string
 }
 
-type GridSize = 'small' | 'medium' | 'large'
+// Custom hook for progressive image loading
+function useProgressiveGallery(year?: number, folder?: string) {
+  const [images, setImages] = useState<ProcessedImage[]>([])
+  const [loading, setLoading] = useState(false)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [hasMore, setHasMore] = useState(true)
+  const [offset, setOffset] = useState(0)
 
-// Virtual scrolling configuration
-const ITEMS_PER_PAGE = 20
-
-// Lightbox component
-interface LightboxProps {
-  image: ProcessedImage | null
-  images: ProcessedImage[]
-  isOpen: boolean
-  onClose: () => void
-  onNext: () => void
-  onPrevious: () => void
-  t: (key: string) => string
-}
-
-function Lightbox({
-  image,
-  images,
-  isOpen,
-  onClose,
-  onNext,
-  onPrevious,
-  t
-}: LightboxProps) {
-  const [imageLoaded, setImageLoaded] = useState(false)
-
-  // Handle keyboard navigation
-  useEffect(() => {
-    if (!isOpen) return
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case 'Escape':
-          onClose()
-          break
-        case 'ArrowLeft':
-          onPrevious()
-          break
-        case 'ArrowRight':
-          onNext()
-          break
+  const loadImages = useCallback(
+    async (isLoadMore = false) => {
+      if (isLoadMore) {
+        setLoadingMore(true)
+      } else {
+        setLoading(true)
+        setImages([])
+        setOffset(0)
+        setHasMore(true)
       }
-    }
 
-    document.addEventListener('keydown', handleKeyDown)
-    document.body.style.overflow = 'hidden'
+      try {
+        let url = `/api/cloudinary?max=${IMAGES_PER_LOAD}&offset=${isLoadMore ? offset : 0}`
 
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen, onClose, onNext, onPrevious])
-
-  // Reset image loaded state when image changes
-  useEffect(() => {
-    setImageLoaded(false)
-  }, [image?.public_id])
-
-  if (!isOpen || !image) return null
-
-  const currentIndex = images.findIndex(
-    img => img.public_id === image.public_id
-  )
-  const hasNext = currentIndex < images.length - 1
-  const hasPrevious = currentIndex > 0
-
-  return (
-    <div className='fixed inset-0 z-50 bg-black/95 backdrop-blur-sm'>
-      {/* Close button */}
-      <button
-        onClick={onClose}
-        className='absolute right-4 top-4 z-10 rounded-full p-2 text-white transition-colors hover:bg-white/20'
-        aria-label={t('close_lightbox') || 'Close lightbox'}
-      >
-        <FiX className='h-6 w-6' />
-      </button>
-
-      {/* Navigation */}
-      {hasPrevious && (
-        <button
-          onClick={onPrevious}
-          className='absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full p-3 text-white transition-colors hover:bg-white/20'
-          aria-label={t('previous_image') || 'Previous image'}
-        >
-          <FiChevronLeft className='h-6 w-6' />
-        </button>
-      )}
-
-      {hasNext && (
-        <button
-          onClick={onNext}
-          className='absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full p-3 text-white transition-colors hover:bg-white/20'
-          aria-label={t('next_image') || 'Next image'}
-        >
-          <FiChevronRight className='h-6 w-6' />
-        </button>
-      )}
-
-      {/* Image container */}
-      <div className='flex h-full items-center justify-center p-4'>
-        <div className='relative max-h-full max-w-full'>
-          {!imageLoaded && (
-            <div className='absolute inset-0 flex items-center justify-center'>
-              <FiLoader className='h-8 w-8 animate-spin text-white' />
-            </div>
-          )}
-
-          <OptimizedCloudinaryImage
-            publicId={image.public_id}
-            alt={`Gallery image ${currentIndex + 1}`}
-            width={1200}
-            height={900}
-            quality={85}
-            className={clsx(
-              'max-h-full max-w-full object-contain transition-opacity duration-300',
-              imageLoaded ? 'opacity-100' : 'opacity-0'
-            )}
-            onLoad={() => setImageLoaded(true)}
-            priority
-            loading='eager' // Add this line to override the default 'lazy'
-            sizes='100vw'
-          />
-        </div>
-      </div>
-
-      {/* Image info */}
-      <div className='absolute bottom-4 left-4 right-4 text-center text-white'>
-        <p className='text-sm opacity-80'>
-          {currentIndex + 1} {t('image_of') || 'of'} {images.length}
-        </p>
-        <p className='mt-1 text-xs opacity-60'>
-          {image.format?.toUpperCase()} • {image.width} × {image.height}
-        </p>
-      </div>
-    </div>
-  )
-}
-
-// Grid item component with lazy loading
-interface GridItemProps {
-  image: ProcessedImage
-  size: GridSize
-  onClick: (image: ProcessedImage) => void
-  index: number
-}
-
-function GridItem({ image, size, onClick, index }: GridItemProps) {
-  const [inView, setInView] = useState(false)
-  const itemRef = useRef<HTMLDivElement>(null)
-
-  // Intersection observer for lazy loading
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          observer.unobserve(entry.target)
+        if (folder) {
+          url += `&folder=${folder}`
+        } else if (year) {
+          // For year-based requests, we'll need to map to folder
+          url += `&folder=cascaiscup/${year}`
         }
-      },
-      { rootMargin: '100px' }
-    )
 
-    if (itemRef.current) {
-      observer.observe(itemRef.current)
+        const response = await fetch(url)
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+        }
+
+        const result = await response.json()
+
+        if (!result.success) {
+          throw new Error(result.error || 'Failed to fetch images')
+        }
+
+        const newImages = result.images || []
+
+        if (isLoadMore) {
+          setImages(prev => [...prev, ...newImages])
+          setOffset(prev => prev + IMAGES_PER_LOAD)
+        } else {
+          setImages(newImages)
+          setOffset(IMAGES_PER_LOAD)
+        }
+
+        // Check if there are more images to load
+        setHasMore(newImages.length === IMAGES_PER_LOAD)
+        setError(null)
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : 'Unknown error'
+        setError(errorMessage)
+        console.error('❌ Gallery fetch error:', err)
+      } finally {
+        setLoading(false)
+        setLoadingMore(false)
+      }
+    },
+    [year, folder, offset]
+  )
+
+  const loadMore = useCallback(() => {
+    if (!loadingMore && hasMore) {
+      loadImages(true)
     }
+  }, [loadImages, loadingMore, hasMore])
 
-    return () => observer.disconnect()
-  }, [])
+  const refresh = useCallback(() => {
+    loadImages(false)
+  }, [loadImages])
 
-  const sizeClasses = {
-    small: 'aspect-square',
-    medium: 'aspect-[4/3]',
-    large: 'aspect-[3/2]'
+  useEffect(() => {
+    loadImages(false)
+  }, [year, folder]) // Re-load when year or folder changes
+
+  return {
+    images,
+    loading,
+    loadingMore,
+    error,
+    hasMore,
+    loadMore,
+    refresh,
+    totalLoaded: images.length
   }
+}
 
-  const dimensions = {
-    small: { width: 300, height: 300 },
-    medium: { width: 400, height: 300 },
-    large: { width: 500, height: 333 }
-  }
-
+// Individual image item component
+function GalleryImageItem({
+  image,
+  index,
+  size,
+  onImageClick
+}: {
+  image: ProcessedImage
+  index: number
+  size: GridSize
+  onImageClick?: (image: ProcessedImage) => void
+}) {
   return (
     <div
-      ref={itemRef}
       className={clsx(
-        'group relative cursor-pointer overflow-hidden rounded-lg',
-        'ring-1 ring-black/5 transition-all duration-300',
-        'hover:-translate-y-1 hover:shadow-lg hover:ring-2 hover:ring-sky-300/50',
-        sizeClasses[size]
+        'group relative aspect-[4/3] overflow-hidden rounded-lg bg-slate-100 ring-1 ring-slate-200 transition-all duration-300',
+        'hover:-translate-y-1 hover:shadow-lg hover:shadow-black/25 hover:ring-2 hover:ring-sky-300',
+        onImageClick && 'cursor-pointer'
       )}
-      onClick={() => onClick(image)}
-      style={{
-        animationDelay: `${(index % 20) * 50}ms`
-      }}
+      onClick={() => onImageClick?.(image)}
     >
-      {inView ? (
+      {image ? (
         <OptimizedCloudinaryImage
           publicId={image.public_id}
           alt={`Gallery image ${index + 1}`}
@@ -244,10 +189,73 @@ function GridItem({ image, size, onClick, index }: GridItemProps) {
   )
 }
 
+// Load More button component interface
+interface LoadMoreButtonProps {
+  onLoadMore: () => void
+  loading: boolean
+  hasMore: boolean
+  totalLoaded: number
+  allLoadedText: string
+  loadMoreText: string
+  loadingMoreText: string
+  imageText: string
+  imagesText: string
+}
+
+function LoadMoreButton({
+  onLoadMore,
+  loading,
+  hasMore,
+  totalLoaded,
+  allLoadedText,
+  loadMoreText,
+  loadingMoreText,
+  imageText,
+  imagesText
+}: LoadMoreButtonProps) {
+  if (!hasMore) {
+    return (
+      <div className='py-8 text-center'>
+        <p className='text-slate-600'>
+          {allLoadedText} ({totalLoaded}{' '}
+          {totalLoaded === 1 ? imageText : imagesText})
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <div className='flex justify-center py-8'>
+      <button
+        onClick={onLoadMore}
+        disabled={loading}
+        className={clsx(
+          'inline-flex items-center gap-3 rounded-full px-8 py-4 font-medium transition-all duration-200',
+          'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg',
+          'hover:-translate-y-0.5 hover:from-sky-600 hover:to-blue-700 hover:shadow-xl',
+          'focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2',
+          'disabled:transform-none disabled:cursor-not-allowed disabled:opacity-50'
+        )}
+      >
+        {loading ? (
+          <>
+            <div className='h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent' />
+            {loadingMoreText}
+          </>
+        ) : (
+          <>
+            <FiPlus className='h-5 w-5' />
+            {loadMoreText}
+          </>
+        )}
+      </button>
+    </div>
+  )
+}
+
 export default function OptimizedGallery({
   folder,
   year,
-  maxResults = 50,
   title,
   description
 }: OptimizedGalleryProps) {
@@ -259,35 +267,18 @@ export default function OptimizedGallery({
     null
   )
   const [lightboxOpen, setLightboxOpen] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1)
 
-  // Use our optimized gallery hook
-  const { data, imagesByYear, loading, error, refresh, getImagesForYear } =
-    useOptimizedGallery(maxResults)
-
-  // Get images based on folder or year
-  const images = useMemo(() => {
-    if (year && imagesByYear[year]) {
-      return imagesByYear[year]
-    }
-
-    // If specific folder requested, would need separate API call
-    if (folder) {
-      // For now, return empty array - would implement separate hook for folder-specific queries
-      return []
-    }
-
-    // Return all images from all years
-    return Object.values(imagesByYear).flat()
-  }, [imagesByYear, year, folder])
-
-  // Paginated images
-  const paginatedImages = useMemo(() => {
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-    return images.slice(startIndex, startIndex + ITEMS_PER_PAGE)
-  }, [images, currentPage])
-
-  const totalPages = Math.ceil(images.length / ITEMS_PER_PAGE)
+  // Use progressive loading hook
+  const {
+    images,
+    loading,
+    loadingMore,
+    error,
+    hasMore,
+    loadMore,
+    refresh,
+    totalLoaded
+  } = useProgressiveGallery(year, folder)
 
   // Lightbox handlers
   const openLightbox = useCallback((image: ProcessedImage) => {
@@ -309,7 +300,7 @@ export default function OptimizedGallery({
     setSelectedImage(images[nextIndex])
   }, [selectedImage, images])
 
-  const previousImage = useCallback(() => {
+  const prevImage = useCallback(() => {
     if (!selectedImage) return
     const currentIndex = images.findIndex(
       img => img.public_id === selectedImage.public_id
@@ -318,21 +309,19 @@ export default function OptimizedGallery({
     setSelectedImage(images[prevIndex])
   }, [selectedImage, images])
 
-  // Grid size classes
-  const gridClasses = {
-    small: 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5',
-    medium: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
-    large: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-  }
+  // Grid size options
+  const gridSizeOptions: { value: GridSize; icon: any; label: string }[] = [
+    { value: 'small', icon: FiGrid, label: t('grid_sizes.small') },
+    { value: 'medium', icon: FiGrid, label: t('grid_sizes.medium') },
+    { value: 'large', icon: FiList, label: t('grid_sizes.large') }
+  ]
 
   if (loading && images.length === 0) {
     return (
-      <div className='flex min-h-screen items-center justify-center'>
+      <div className='container mx-auto px-4 py-12'>
         <div className='text-center'>
-          <FiLoader className='mx-auto mb-4 h-8 w-8 animate-spin text-sky-500' />
-          <p className='text-slate-600'>
-            {t('loading') || 'Loading gallery...'}
-          </p>
+          <div className='mx-auto h-12 w-12 animate-spin rounded-full border-4 border-sky-500 border-t-transparent' />
+          <p className='mt-4 text-slate-600'>{t('loading')}</p>
         </div>
       </div>
     )
@@ -340,22 +329,21 @@ export default function OptimizedGallery({
 
   if (error && images.length === 0) {
     return (
-      <div className='flex min-h-screen items-center justify-center'>
-        <div className='max-w-md text-center'>
+      <div className='container mx-auto px-4 py-12'>
+        <div className='text-center'>
           <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100'>
-            <FiX className='h-8 w-8 text-red-500' />
+            <FiRefreshCw className='h-8 w-8 text-red-600' />
           </div>
-          <h3 className='mb-2 text-xl font-bold text-slate-900'>
-            {t('failed_title') || 'Failed to load gallery'}
+          <h3 className='mb-2 text-lg font-semibold text-slate-900'>
+            {t('failed_title')}
           </h3>
-          <p className='mb-4 text-slate-600'>
-            {t('failed_description') || error}
-          </p>
+          <p className='mb-4 text-slate-600'>{error}</p>
           <button
             onClick={refresh}
-            className='rounded-lg bg-sky-500 px-6 py-2 text-white transition-colors hover:bg-sky-600'
+            className='inline-flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-white hover:bg-sky-600'
           >
-            {t('try_again') || 'Try again'}
+            <FiRefreshCw className='h-4 w-4' />
+            {t('try_again')}
           </button>
         </div>
       </div>
@@ -363,162 +351,96 @@ export default function OptimizedGallery({
   }
 
   return (
-    <div className='min-h-screen bg-white'>
+    <div className='container mx-auto px-4 py-8'>
       {/* Header */}
-      <div className='border-b border-slate-200 bg-slate-50'>
-        <div className='mx-auto max-w-screen-xl px-4 py-8'>
-          <div className='flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between'>
-            <div>
-              <h1 className='text-3xl font-bold text-slate-900'>
-                {title ||
-                  (year
-                    ? `${t('title') || 'Gallery'} ${year}`
-                    : t('title') || 'Photo Gallery')}
-              </h1>
-              {description && (
-                <p className='mt-2 text-slate-600'>{description}</p>
+      {(title || description) && (
+        <div className='mb-8 text-center'>
+          {title && (
+            <h1 className='mb-4 text-3xl font-bold text-slate-900'>{title}</h1>
+          )}
+          {description && (
+            <p className='mx-auto max-w-2xl text-slate-600'>{description}</p>
+          )}
+        </div>
+      )}
+
+      {/* Controls */}
+      <div className='mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
+        <div className='flex items-center gap-4'>
+          <span className='text-sm text-slate-600'>
+            {totalLoaded} {totalLoaded === 1 ? t('image') : t('images')}
+            {hasMore && ` (${t('more_available')})`}
+          </span>
+        </div>
+
+        <div className='flex items-center gap-2'>
+          <span className='text-sm text-slate-600'>{t('grid_size')}:</span>
+          {gridSizeOptions.map(({ value, icon: Icon, label }) => (
+            <button
+              key={value}
+              onClick={() => setGridSize(value)}
+              className={clsx(
+                'rounded-lg p-2 text-sm transition-colors',
+                gridSize === value
+                  ? 'bg-sky-500 text-white'
+                  : 'bg-slate-200 text-slate-600 hover:bg-slate-300'
               )}
-              <p className='mt-1 text-sm text-slate-500'>
-                {images.length}{' '}
-                {images.length === 1
-                  ? t('image') || 'image'
-                  : t('images') || 'images'}
-              </p>
-            </div>
-
-            {/* Controls - Grid size only */}
-            <div className='flex items-center gap-4'>
-              {/* Grid size controls */}
-              <div className='flex items-center gap-1 rounded-lg border border-slate-200 bg-white p-1'>
-                {(['small', 'medium', 'large'] as GridSize[]).map(size => (
-                  <button
-                    key={size}
-                    onClick={() => setGridSize(size)}
-                    className={clsx(
-                      'rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                      gridSize === size
-                        ? 'bg-sky-500 text-white'
-                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-                    )}
-                  >
-                    {t(`grid_sizes.${size}`) ||
-                      size.charAt(0).toUpperCase() + size.slice(1)}
-                  </button>
-                ))}
-              </div>
-
-              {/* Refresh button */}
-              <button
-                onClick={refresh}
-                className='rounded-lg border border-slate-200 bg-white p-2 text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900'
-                disabled={loading}
-                aria-label={t('refresh') || 'Refresh gallery'}
-              >
-                <FiLoader
-                  className={clsx('h-4 w-4', loading && 'animate-spin')}
-                />
-              </button>
-            </div>
-          </div>
+              title={label}
+            >
+              <Icon className='h-4 w-4' />
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Gallery grid */}
-      <div className='mx-auto max-w-screen-xl px-4 py-8'>
-        {images.length > 0 ? (
-          <>
-            <div className={clsx('grid gap-4', gridClasses[gridSize])}>
-              {paginatedImages.map((image, index) => (
-                <GridItem
-                  key={image.public_id}
-                  image={image}
-                  size={gridSize}
-                  onClick={openLightbox}
-                  index={index}
-                />
-              ))}
-            </div>
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className='mt-12 flex items-center justify-center gap-4'>
-                <button
-                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                  disabled={currentPage === 1}
-                  className='px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50'
-                >
-                  <FiChevronLeft className='mr-1 inline h-4 w-4' />
-                  {t('previous') || 'Previous'}
-                </button>
-
-                <div className='flex items-center gap-2'>
-                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                    const page =
-                      currentPage <= 3
-                        ? i + 1
-                        : currentPage >= totalPages - 2
-                          ? totalPages - 4 + i
-                          : currentPage - 2 + i
-
-                    if (page < 1 || page > totalPages) return null
-
-                    return (
-                      <button
-                        key={page}
-                        onClick={() => setCurrentPage(page)}
-                        className={clsx(
-                          'h-8 w-8 rounded-md text-sm font-medium transition-colors',
-                          currentPage === page
-                            ? 'bg-sky-500 text-white'
-                            : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-                        )}
-                      >
-                        {page}
-                      </button>
-                    )
-                  })}
-                </div>
-
-                <button
-                  onClick={() =>
-                    setCurrentPage(prev => Math.min(totalPages, prev + 1))
-                  }
-                  disabled={currentPage === totalPages}
-                  className='px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-50'
-                >
-                  {t('next') || 'Next'}
-                  <FiChevronRight className='ml-1 inline h-4 w-4' />
-                </button>
-              </div>
-            )}
-          </>
-        ) : (
-          <div className='py-24 text-center'>
-            <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100'>
-              <FiX className='h-8 w-8 text-slate-400' />
-            </div>
-            <h3 className='mb-2 text-xl font-semibold text-slate-900'>
-              {t('no_images_title') || 'No images found'}
-            </h3>
-            <p className='text-slate-600'>
-              {year
-                ? `${t('no_images_year') || 'No images available for'} ${year}`
-                : t('no_images_description') || 'This gallery is empty'}
-            </p>
-          </div>
-        )}
+      {/* Gallery Grid */}
+      <div className={clsx('grid gap-4', dimensions[gridSize].cols)}>
+        {images.map((image, index) => (
+          <GalleryImageItem
+            key={image.public_id}
+            image={image}
+            index={index}
+            size={gridSize}
+            onImageClick={openLightbox}
+          />
+        ))}
       </div>
 
-      {/* Lightbox */}
-      <Lightbox
-        image={selectedImage}
-        images={images}
-        isOpen={lightboxOpen}
-        onClose={closeLightbox}
-        onNext={nextImage}
-        onPrevious={previousImage}
-        t={t}
+      {/* Load More Button */}
+      <LoadMoreButton
+        onLoadMore={loadMore}
+        loading={loadingMore}
+        hasMore={hasMore}
+        totalLoaded={totalLoaded}
+        allLoadedText={t('all_loaded')}
+        loadMoreText={t('load_more')}
+        loadingMoreText={t('loading_more')}
+        imageText={t('image')}
+        imagesText={t('images')}
       />
+
+      {/* Lightbox */}
+      {lightboxOpen && selectedImage && (
+        <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4'>
+          <div className='relative max-h-full max-w-4xl'>
+            <OptimizedCloudinaryImage
+              publicId={selectedImage.public_id}
+              alt={t('gallery_image')}
+              width={1200}
+              height={800}
+              quality={90}
+              className='max-h-full max-w-full object-contain'
+            />
+            <button
+              onClick={closeLightbox}
+              className='absolute right-4 top-4 rounded-full p-2 text-white hover:bg-white/20'
+              aria-label={t('close_lightbox')}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -1,3 +1,4 @@
+// src/app/api/cloudinary/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
 
@@ -36,8 +37,9 @@ const YEARS_CONFIG = [
   { year: 2025, folder: 'cascaiscup/2025' }
 ] as const
 
-const DEFAULT_IMAGES_PER_YEAR = 8
-const MAX_IMAGES_PER_YEAR = 20
+// Updated default to match GalleryHero usage
+const DEFAULT_IMAGES_PER_YEAR = 6
+const MAX_IMAGES_PER_YEAR = 50 // Increased for "Load More" functionality
 const API_TIMEOUT = 8000 // 8 seconds per request
 
 // Helper function to process and optimize image data
@@ -56,22 +58,31 @@ function processImage(image: CloudinaryImage): ProcessedImage {
 // Single folder fetch with timeout and error handling
 async function fetchImagesFromFolder(
   folder: string,
-  maxResults: number = DEFAULT_IMAGES_PER_YEAR
+  maxResults: number = DEFAULT_IMAGES_PER_YEAR,
+  offset: number = 0 // Add offset parameter for pagination
 ): Promise<ProcessedImage[]> {
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT)
 
   try {
+    // Note: Cloudinary Search API doesn't directly support offset
+    // We'll fetch more than needed and slice client-side for now
+    // For true pagination, we'd need to use cursor-based pagination with next_cursor
+    const fetchLimit = Math.min(maxResults + offset, MAX_IMAGES_PER_YEAR)
+
     const result = await cloudinary.search
       .expression(`folder:${folder}`)
       .sort_by('created_at', 'desc')
-      .max_results(Math.min(maxResults, MAX_IMAGES_PER_YEAR))
+      .max_results(fetchLimit)
       .with_field('context')
       .execute()
 
     clearTimeout(timeoutId)
 
-    return (result.resources || []).map(processImage)
+    const allImages = (result.resources || []).map(processImage)
+
+    // Apply client-side offset and limit
+    return allImages.slice(offset, offset + maxResults)
   } catch (error) {
     clearTimeout(timeoutId)
 
@@ -143,16 +154,18 @@ export async function GET(request: NextRequest) {
     const maxResults = parseInt(
       searchParams.get('max') || String(DEFAULT_IMAGES_PER_YEAR)
     )
+    const offset = parseInt(searchParams.get('offset') || '0') // Add offset support
 
     if (folder) {
-      // Single folder request
-      const images = await fetchImagesFromFolder(folder, maxResults)
+      // Single folder request with offset support
+      const images = await fetchImagesFromFolder(folder, maxResults, offset)
 
       return NextResponse.json({
         success: true,
         images,
         count: images.length,
         folder,
+        offset,
         processingTime: Date.now() - startTime,
         timestamp: new Date().toISOString()
       })

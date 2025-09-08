@@ -344,6 +344,7 @@
       "gallery_image": "Imagem da galeria",
       "image": "imagem",
       "images": "imagens",
+      "check_all_images": "Veja todas as imagens de {year} aqui",
       "empty_title": "Nenhuma imagem disponível",
       "empty_description": "As imagens da galeria aparecerão aqui em breve. Volte mais tarde!",
       "check_again": "Verificar novamente",
@@ -354,30 +355,22 @@
     "Main": {
       "loading": "Carregando galeria...",
       "failed_title": "Falha ao carregar galeria",
-      "failed_description": "Não foi possível carregar as imagens da galeria. Tente novamente.",
-      "try_again": "Tentar novamente",
+      "try_again": "Tentar Novamente",
+      "image": "imagem",
       "images": "imagens",
-      "no_images_title": "Nenhuma imagem encontrada",
-      "no_images_description": "Esta galeria está vazia",
-      "no_images_year": "Nenhuma imagem disponível para",
-      "view_modes": {
-        "grid": "Vista em grade",
-        "masonry": "Vista em mosaico"
-      },
+
+      "more_available": "mais disponíveis",
+      "all_loaded": "Todas as imagens carregadas",
+      "load_more": "Carregar Mais Imagens",
+      "loading_more": "Carregando mais...",
+      "grid_size": "Tamanho da grade",
       "grid_sizes": {
-        "small": "Pequena",
-        "medium": "Média",
+        "small": "Pequeno",
+        "medium": "Médio",
         "large": "Grande"
       },
-      "refresh": "Atualizar galeria",
-      "previous": "Anterior",
-      "next": "Próximo",
-      "close_lightbox": "Fechar lightbox",
-      "previous_image": "Imagem anterior",
-      "next_image": "Próxima imagem",
-      "image_of": "de",
-      "cached": "Cache",
-      "live_data": "Dados ao vivo"
+      "gallery_image": "Imagem da galeria",
+      "close_lightbox": "Fechar lightbox"
     }
   },
 

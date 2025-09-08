@@ -161,6 +161,7 @@ interface YearCardProps {
   onImageClick?: (image: ProcessedImage) => void
 }
 
+// Updated YearCard component without image count
 function YearCard({
   year,
   images,
@@ -224,7 +225,7 @@ function YearCard({
       }}
     >
       <div className='flex min-h-[300px] w-full flex-col rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm transition-all duration-300 hover:bg-white/15 sm:min-h-[350px] sm:p-6 lg:min-h-[400px]'>
-        {/* Year header with link - Using static route */}
+        {/* Year header with link */}
         <div className='mb-4 flex items-center justify-between sm:mb-6'>
           <h3 className='text-2xl font-extrabold text-white drop-shadow-lg sm:text-3xl'>
             {year}
@@ -254,20 +255,15 @@ function YearCard({
             ))}
           </div>
         ) : (
-          renderContent()
+          <div className='mb-4 flex flex-1 flex-col'>{renderContent()}</div>
         )}
 
-        {/* Image count only */}
-        <div className='flex items-center justify-center border-t border-white/10 pt-3 sm:pt-4'>
-          {images.length > 0 && (
-            <p className='text-xs text-white/80 sm:text-sm'>
-              {images.length}{' '}
-              {images.length === 1
-                ? t('image') || 'image'
-                : t('images') || 'images'}
-            </p>
-          )}
-        </div>
+        {/* Call to action text */}
+        {/* <div className='flex items-center justify-center border-t border-white/10 pt-3 sm:pt-4'>
+          <p className='text-xs text-white/70 sm:text-sm'>
+            {t('check_all_images') || `Check all of the ${year} images here`}
+          </p>
+        </div> */}
       </div>
     </div>
   )
